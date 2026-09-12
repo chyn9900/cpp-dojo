@@ -1,0 +1,488 @@
+{
+  "id": "g08",
+  "num": 8,
+  "group": "문법",
+  "title": "조건문 if",
+  "srcFile": "08. If.cpp",
+  "questions": [
+    {
+      "q": "수업 자료의 분류에 따르면, '조건에 따라 코드의 흐름을 제어하는 문법'을 부르는 이름은 무엇인가?",
+      "code": null,
+      "choices": [
+        "Iteration Statement(반복문)",
+        "Selection Statement(조건문)",
+        "Jump Statement(분기문)",
+        "Expression Statement(표현문)"
+      ],
+      "answer": 1,
+      "explain": "제어문(Control Statement)은 코드의 실행 흐름을 제어하는 문법으로, 그중 조건에 따라 흐름을 '제어'하는 것이 Selection Statement(조건문)이다. if ~ else, switch ~ case, 삼항 연산자가 여기에 속하며 Conditional Statement라고도 부른다. 반복문(Iteration)은 조건에 따라 흐름을 '반복'하는 문법이고, 분기문(Jump)은 흐름을 특정 위치로 '이동'시키는 문법이므로 정의가 다르다. 세 종류의 이름과 역할을 짝지어 기억해 두자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 중 조건문(Selection Statement)에 속하지 않는 것은?",
+      "code": null,
+      "choices": [
+        "if ~ else",
+        "switch ~ case",
+        "for",
+        "삼항 연산자(ternary operator)"
+      ],
+      "answer": 2,
+      "explain": "for는 조건에 따라 코드를 반복 실행하는 반복문(Iteration Statement)에 속한다. 조건문에는 if ~ else, switch ~ case, 삼항 연산자 세 가지가 있다. for도 조건식을 가지고 있어서 조건문으로 착각하기 쉽지만, 목적이 '분기'가 아니라 '반복'이라는 점이 다르다. 반복문에는 for 외에도 while, do ~ while, 범위 기반 for가 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 중 분기문(Jump Statement)에 해당하는 키워드로만 묶인 것은?",
+      "code": null,
+      "choices": [
+        "break, continue, goto, return",
+        "if, else, switch, case",
+        "for, while, do",
+        "true, false, bool"
+      ],
+      "answer": 0,
+      "explain": "분기문(Jump Statement)은 코드의 흐름을 특정 위치로 이동시키는 문법으로 break, continue, goto, return이 있다. if/else/switch/case는 조건문이고, for/while/do는 반복문이므로 분기문이 아니다. true/false/bool은 제어문이 아니라 논리값과 관련된 자료형/리터럴이다. break와 continue는 나중에 반복문 단원에서 실제로 사용하게 된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "if문의 기본 형식으로 올바른 것은?",
+      "code": null,
+      "choices": [
+        "if 조건식 then { 실행문; }",
+        "if { 조건식 } (실행문;)",
+        "if (실행문) { 조건식; }",
+        "if (조건식) { 실행문; }"
+      ],
+      "answer": 3,
+      "explain": "if문은 소괄호 안에 조건식을 쓰고, 중괄호 블록 안에 조건이 참일 때 실행할 문장을 쓴다. then 키워드는 파스칼 같은 다른 언어의 문법이지 C++에는 존재하지 않는다. 소괄호와 중괄호의 역할을 바꿔 쓰면 컴파일 에러가 난다. 실행문이 한 줄이면 중괄호를 생략할 수도 있지만, 조건식을 감싸는 소괄호는 생략할 수 없다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드를 실행하면 무엇이 출력되는가?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    if (\"Hello World\")\n    {\n        cout << \"참\" << endl;\n    }\n    else\n    {\n        cout << \"거짓\" << endl;\n    }\n    return 0;\n}",
+      "choices": [
+        "참",
+        "거짓",
+        "Hello World",
+        "컴파일 에러"
+      ],
+      "answer": 0,
+      "explain": "조건식에 문자열 리터럴 \"Hello World\"를 넣으면 0이 아닌 값으로 취급되어 참으로 평가된다. 수업 예제에서도 이 코드로 \"조건식의 조건이 '참' 입니다.\"가 출력되는 것을 확인했다. 문자열이 조건식에 있으면 거짓이거나 에러라고 생각하기 쉽지만, C++의 조건 판별 기준은 오직 '0이냐 아니냐'이다. Hello World 자체가 출력되려면 cout으로 직접 출력해야 한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "C++의 if문에서 조건식이 '참'으로 판별되는 기준으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "값이 정확히 1일 때만 참이다",
+        "양수일 때만 참이다",
+        "true 키워드를 직접 쓸 때만 참이다",
+        "0이 아닌 모든 값이 참이다"
+      ],
+      "answer": 3,
+      "explain": "C++에서 조건식은 참과 거짓(명제)으로 판별되는데, 0은 거짓이고 0이 아닌 모든 값은 참이다. 따라서 1뿐 아니라 7, -5 같은 값도 조건식에서는 모두 참으로 취급된다. '양수만 참'이라고 생각하면 음수가 조건식에 왔을 때 동작을 잘못 예측하게 된다. 이 규칙 때문에 비트 연산 결과(iBuff & iStrength)처럼 1이 아닌 값도 if 조건으로 바로 쓸 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "if ~ else 구조에서 else 블록이 실행되는 경우는 언제인가?",
+      "code": null,
+      "choices": [
+        "if의 조건식이 거짓일 때",
+        "if의 조건식이 참일 때",
+        "조건과 무관하게 항상 실행된다",
+        "조건식의 값이 0이 아닐 때"
+      ],
+      "answer": 0,
+      "explain": "else는 '그 외에', 즉 'if문의 조건이 맞지 않다면'이라는 뜻으로, if의 조건식이 거짓일 때 실행된다. 조건식이 참이면 if 블록이 실행되고 else 블록은 건너뛴다. if와 else 중 정확히 하나만 실행되므로 둘 다 실행되는 경우는 없다. 조건식의 값이 0이 아니라는 것은 참이라는 뜻이므로 그때는 if 블록이 실행된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드에서 출력되는 iBuff의 값(10진수)은?",
+      "code": "const int iStrength  = 0x00000001;\nconst int iDefense   = 0x00000002;\nconst int iSpeed     = 0x00000004;\nconst int iParalysis = 0x00000008;\nconst int iPoisoning = 0x00000010;\n\nint iBuff = iStrength | iSpeed | iPoisoning;\ncout << iBuff << endl;",
+      "choices": [
+        "7",
+        "13",
+        "21",
+        "32"
+      ],
+      "answer": 2,
+      "explain": "비트 OR(|)로 결합하면 각 상수의 비트가 그대로 합쳐진다. 2진수로 iStrength는 00001, iSpeed는 00100, iPoisoning은 10000이므로 결합하면 10101, 즉 1 + 4 + 16 = 21이 된다. 1+2+4=7이나 1+4+8=13으로 계산했다면 어떤 상수가 결합되었는지 다시 확인해야 한다. iPoisoning이 0x10이라서 10진수 10으로 착각하기 쉬운데, 0x10은 16진수이므로 10진수로는 16이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드에서 if문의 실행 결과로 옳은 것은?",
+      "code": "const int iStrength  = 0x00000001;\nconst int iDefense   = 0x00000002;\nconst int iSpeed     = 0x00000004;\nconst int iPoisoning = 0x00000010;\n\nint iBuff = iStrength | iSpeed | iPoisoning;\n\nif (iBuff & iDefense)\n    cout << \"Armor 버프가 존재합니다.\" << endl;",
+      "choices": [
+        "Armor 버프가 존재합니다. 가 출력된다",
+        "아무것도 출력되지 않는다",
+        "컴파일 에러가 발생한다",
+        "iBuff가 0이 아니므로 무조건 출력된다"
+      ],
+      "answer": 1,
+      "explain": "iBuff는 2진수로 10101인데 iDefense는 00010이라 서로 겹치는 비트가 없다. 따라서 iBuff & iDefense의 결과는 0이고, 0은 거짓이므로 출력문이 실행되지 않는다. iBuff 자체는 0이 아니지만, 조건식은 iBuff가 아니라 & 연산의 '결과'로 판별된다는 점이 핵심이다. &는 두 값에서 둘 다 1인 비트만 남기므로, 해당 버프 비트가 켜져 있는지를 정확히 검사할 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "버프 상수를 0x01, 0x02, 0x04, 0x08, 0x10처럼 정한 이유로 가장 적절한 것은?",
+      "code": null,
+      "choices": [
+        "값이 커질수록 버프 효과가 강력하기 때문",
+        "16진수가 10진수보다 메모리를 적게 차지하기 때문",
+        "컴파일러가 2의 거듭제곱 값만 상수로 허용하기 때문",
+        "각 상수가 서로 다른 비트 하나만 사용해서 |로 결합하고 &로 개별 검사할 수 있기 때문"
+      ],
+      "answer": 3,
+      "explain": "0x01, 0x02, 0x04, 0x08, 0x10은 2진수로 각각 1, 10, 100, 1000, 10000이라 켜진 비트가 하나씩이고 서로 겹치지 않는다. 그래서 |로 여러 버프를 한 변수에 담아도 정보가 섞이지 않고, &로 특정 버프만 골라 검사할 수 있다. 값의 크기는 버프의 강함과 아무 관련이 없고, 16진수든 10진수든 저장되는 메모리 크기는 같다. 컴파일러는 어떤 정수 값이든 상수로 허용하므로 문법 제약도 아니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "비트 플래그를 다룰 때 | 연산자와 & 연산자의 역할을 올바르게 설명한 것은?",
+      "code": null,
+      "choices": [
+        "|는 플래그 보유 여부 검사, &는 플래그 결합에 쓴다",
+        "| 와 & 모두 플래그를 결합할 때 쓴다",
+        "| 와 & 모두 플래그를 검사할 때 쓴다",
+        "|는 플래그 결합(버프 켜기), &는 플래그 보유 여부 검사에 쓴다"
+      ],
+      "answer": 3,
+      "explain": "예제에서 iBuff = iStrength | iSpeed | iPoisoning처럼 |로 여러 버프를 하나의 변수에 결합했고, if (iBuff & iStrength)처럼 &로 특정 버프가 있는지 검사했다. |는 둘 중 하나라도 1인 비트를 1로 만들어 비트를 '켜는' 역할이고, &는 둘 다 1인 비트만 남겨 특정 비트를 '골라내는' 역할이다. 역할을 반대로 기억하면 if (iBuff | iStrength)처럼 써서 항상 참이 되는 버그를 만들게 된다. 결합은 |, 검사는 &라고 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "if ~ else if ~ else 체인의 동작에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "위에서부터 차례로 검사해 처음 참이 된 블록 하나만 실행된다",
+        "모든 조건을 검사해 참인 블록을 전부 실행한다",
+        "아래에서부터 거꾸로 검사한다",
+        "else 블록은 조건과 무관하게 항상 실행된다"
+      ],
+      "answer": 0,
+      "explain": "else if 체인은 위에서부터 조건을 차례로 검사하다가 처음 참이 되는 블록을 실행하고, 나머지는 모두 건너뛴다. 참인 조건이 여러 개여도 실행되는 블록은 하나뿐이라는 점이 독립된 if문 여러 개와의 결정적 차이다. 마지막 else는 위의 모든 조건이 거짓일 때만 실행되는 '나머지 전부' 처리 블록이다. 이 성질 덕분에 숫자 범위 판별처럼 서로 배타적인 경우를 깔끔하게 나눌 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드를 실행하면 무엇이 출력되는가?",
+      "code": "const int iParalysis = 0x00000008;\nconst int iPoisoning = 0x00000010;\n\nint iBuff = 0x00000001 | 0x00000004 | 0x00000010;\n\nif (iBuff & iParalysis)\n    cout << \"Paralysis 버프가 존재합니다.\" << endl;\nelse if (iBuff & iPoisoning)\n    cout << \"Paralysis 버프가 없지만 Poisoning 버프가 존재합니다.\" << endl;\nelse\n    cout << \"Paralysis 버프가 없고 Poisoning 버프도 존재하지 않습니다.\" << endl;",
+      "choices": [
+        "Paralysis 버프가 존재합니다.",
+        "Paralysis 버프가 없지만 Poisoning 버프가 존재합니다.",
+        "Paralysis 버프가 없고 Poisoning 버프도 존재하지 않습니다.",
+        "아무것도 출력되지 않는다"
+      ],
+      "answer": 1,
+      "explain": "iBuff는 2진수로 10101이라 iParalysis(01000) 비트는 없고 iPoisoning(10000) 비트는 있다. 첫 조건 iBuff & iParalysis는 0(거짓)이므로 다음으로 넘어가고, iBuff & iPoisoning은 0x10(참)이므로 두 번째 블록이 실행된다. 첫 조건이 거짓이어야만 else if를 검사한다는 흐름을 따라가면 된다. else if 체인에는 항상 정확히 하나의 블록만 실행되므로 아무것도 출력되지 않는 경우는 없다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 자료에서는 같은 버프 검사 로직을 'else 블록 안에 if ~ else를 중첩'한 형태와 'else if' 형태 두 가지로 작성했다. 두 형태의 관계로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "동작이 완전히 동일하다 — else if는 else 블록 안의 if를 펼쳐 쓴 것이다",
+        "else if 형태가 실행 속도가 훨씬 빠르다",
+        "중첩 if 형태만 세 가지 이상의 경우를 처리할 수 있다",
+        "else if 형태는 모든 조건을 빠짐없이 검사한다"
+      ],
+      "answer": 0,
+      "explain": "else { if (...) { } else { } }와 else if (...) { } else { }는 완전히 같은 코드다. else 뒤에 오는 문장이 if문 하나뿐이면 중괄호를 생략할 수 있는데, 그렇게 쓴 것이 바로 else if이다. 두 형태는 컴파일 결과가 같으므로 속도 차이도 없다. else if도 앞 조건이 거짓일 때만 다음 조건을 검사하므로, 모든 조건을 빠짐없이 검사한다는 설명도 틀렸다. 가독성 때문에 보통 else if 형태를 쓴다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "C언어에서 scanf로 int 변수에 값을 입력받을 때 사용하는 서식 지정자는?",
+      "code": null,
+      "choices": [
+        "%f",
+        "%c",
+        "%d",
+        "%s"
+      ],
+      "answer": 2,
+      "explain": "int는 %d(또는 %i)로 입력받는다. %f는 float, %c는 char, %s는 C 문자열(char 배열)에 쓰는 서식 지정자다. 수업 자료 정리에 따르면 unsigned int는 %u, long은 %ld, long long은 %lld, double은 %lf를 쓴다. scanf는 서식 지정자에 따라 입력받은 공간을 해당 자료형 크기만큼 취급해 쓰기 처리하므로, 자료형과 서식 지정자를 정확히 맞춰야 한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드에서 사용자가 7을 입력하면 어떻게 출력되는가?",
+      "code": "int iNumber;\nstd::cin >> iNumber;\n\nif (0 <= iNumber && iNumber <= 9)\n{\n    cout << \"0 ~ 9 사이의 숫자입니다.\" << endl;\n\n    if (7 == iNumber)\n        cout << \"행운의 숫자입니다.\" << endl;\n}\nelse if (10 <= iNumber && iNumber <= 19)\n    cout << \"10 ~ 19 사이의 숫자입니다.\" << endl;\nelse\n    cout << \"그 외의 숫자입니다.\" << endl;",
+      "choices": [
+        "0 ~ 9 사이의 숫자입니다. 만 출력된다",
+        "행운의 숫자입니다. 만 출력된다",
+        "그 외의 숫자입니다. 가 출력된다",
+        "0 ~ 9 사이의 숫자입니다. 와 행운의 숫자입니다. 가 모두 출력된다"
+      ],
+      "answer": 3,
+      "explain": "7은 0 이상 9 이하이므로 첫 번째 조건이 참이 되어 \"0 ~ 9 사이의 숫자입니다.\"가 출력된다. 그 블록 '안'에 중첩된 if (7 == iNumber)도 참이므로 \"행운의 숫자입니다.\"까지 이어서 출력된다. 중첩 if는 바깥 if가 참일 때만 검사되는 추가 조건이므로, 안쪽 메시지만 단독으로 출력될 수는 없다. 이렇게 if 안에 if를 넣으면 '범위 안에서 다시 세분화'하는 조건을 표현할 수 있다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "위와 같은 숫자 판별 코드에서 사용자가 30을 입력하면 어떻게 출력되는가?",
+      "code": "int iNumber;\nstd::cin >> iNumber;   // 30 입력\n\nif (0 <= iNumber && iNumber <= 9)\n    cout << \"0 ~ 9 사이의 숫자입니다.\" << endl;\nelse if (10 <= iNumber && iNumber <= 19)\n    cout << \"10 ~ 19 사이의 숫자입니다.\" << endl;\nelse if (20 <= iNumber && iNumber <= 29)\n    cout << \"20 ~ 29 사이의 숫자입니다.\" << endl;\nelse\n    cout << \"그 외의 숫자입니다.\" << endl;",
+      "choices": [
+        "20 ~ 29 사이의 숫자입니다.",
+        "10 ~ 19 사이의 숫자입니다.",
+        "그 외의 숫자입니다.",
+        "아무것도 출력되지 않는다"
+      ],
+      "answer": 2,
+      "explain": "30은 20 <= 30이 참이지만 30 <= 29가 거짓이라 && 전체가 거짓이 된다. 앞의 조건들도 모두 거짓이므로 마지막 else 블록이 실행되어 \"그 외의 숫자입니다.\"가 출력된다. 20 이상이니까 '20대'로 분류될 것 같지만, &&는 양쪽 조건이 모두 참이어야 참이므로 경계값을 넘으면 걸러진다. else 블록이 있으므로 어떤 값을 입력해도 반드시 한 줄은 출력된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 문제점을 올바르게 지적한 것은?",
+      "code": "int iNumber;\nstd::cin >> iNumber;\n\nif (iNumber = 7)\n{\n    cout << \"행운의 숫자입니다.\" << endl;\n}",
+      "choices": [
+        "비교 연산자 == 대신 대입 연산자 =를 써서, iNumber에 7이 대입되고 조건이 항상 참이 된다",
+        "컴파일 에러가 발생해 실행할 수 없다",
+        "iNumber가 7일 때만 실행되므로 아무 문제 없다",
+        "조건이 항상 거짓이 되어 절대 실행되지 않는다"
+      ],
+      "answer": 0,
+      "explain": "iNumber = 7은 비교가 아니라 대입이고, 대입식의 값은 대입된 값인 7이다. 7은 0이 아니므로 조건은 입력값과 무관하게 항상 참이 되어, 어떤 숫자를 입력해도 \"행운의 숫자입니다.\"가 출력된다. 문법적으로는 올바른 코드라 컴파일 에러는 나지 않고 경고만 뜰 수 있어서 더 찾기 어려운 버그다. 수업 예제처럼 7 == iNumber로 상수를 왼쪽에 쓰면, 실수로 =를 써도 7 = iNumber는 컴파일 에러가 나서 즉시 발견할 수 있다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드를 실행하면 어떻게 되는가?",
+      "code": "int iScore = 30;\n\nif (iScore >= 90);\n{\n    cout << \"합격\" << endl;\n}",
+      "choices": [
+        "iScore가 90 미만이라 아무것도 출력되지 않는다",
+        "컴파일 에러가 발생한다",
+        "세미콜론은 컴파일러가 무시하므로 의도대로 동작한다",
+        "if 뒤의 세미콜론이 빈 문장으로 처리되어, 아래 블록은 조건과 무관하게 항상 실행되고 합격이 출력된다"
+      ],
+      "answer": 3,
+      "explain": "if (iScore >= 90); 에서 세미콜론은 '아무것도 하지 않는 빈 문장'으로, if의 본문이 되어 버린다. 그 아래 중괄호 블록은 if와 무관한 독립된 블록이라 조건과 상관없이 항상 실행되어 \"합격\"이 출력된다. 문법적으로는 올바른 코드이므로 컴파일 에러가 나지 않아서 발견하기 어렵다. 조건이 거짓이니 출력되지 않을 것이라는 예상은 세미콜론이 if를 끝내버렸다는 사실을 놓친 것이다. if 뒤에 습관적으로 세미콜론을 붙이지 않도록 주의하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "iBuff에 iParalysis 버프가 있는지 검사하려고 한다. 빈칸에 들어갈 연산자는?",
+      "code": "const int iSpeed     = 0x00000004;\nconst int iParalysis = 0x00000008;\n\nint iBuff = iSpeed | iParalysis;\n\nif (iBuff ___ iParalysis)\n{\n    cout << \"Paralysis 버프가 존재합니다.\" << endl;\n}",
+      "choices": [
+        "|",
+        "&&",
+        "&",
+        "=="
+      ],
+      "answer": 2,
+      "explain": "특정 비트가 켜져 있는지 검사할 때는 비트 AND(&)를 쓴다. iBuff & iParalysis는 iParalysis 비트가 켜져 있으면 0이 아닌 값(참), 꺼져 있으면 0(거짓)이 된다. |를 쓰면 결합 연산이라 결과가 항상 0이 아니므로 조건이 무조건 참이 되고, ==는 iBuff에 다른 버프가 함께 있으면 값이 달라 거짓이 되어 버린다. &&는 양쪽이 각각 0이 아니기만 하면 참이므로 특정 비트를 골라 검사하지 못한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "기존 버프 상수 0x01, 0x02, 0x04, 0x08, 0x10에 이어 새로운 버프 iRegen을 추가하려 한다. 가장 적절한 값은?",
+      "code": null,
+      "choices": [
+        "0x00000011",
+        "0x00000015",
+        "0x00000020",
+        "0x00000012"
+      ],
+      "answer": 2,
+      "explain": "비트 플래그 상수는 다른 플래그와 겹치지 않는 '단독 비트' 하나만 켜진 값이어야 한다. 0x20은 2진수로 100000(십진수 32)이라 기존 다섯 플래그 어느 것과도 겹치지 않는 다음 비트다. 0x11(10001)은 iStrength와 iPoisoning 비트가, 0x12(10010)는 iDefense와 iPoisoning 비트가 겹쳐서 &로 검사할 때 다른 버프와 혼동된다. 0x15(10101)는 세 비트가 켜진 값이라 하나의 플래그로 쓸 수 없다. 플래그는 1, 2, 4, 8, 16, 32처럼 2의 거듭제곱으로 이어간다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "iBuff에 iStrength와 iSpeed 두 버프가 '모두' 있는지 검사하는 올바른 조건식은? (iStrength = 0x01, iSpeed = 0x04)",
+      "code": null,
+      "choices": [
+        "if (iBuff & iStrength & iSpeed)",
+        "if ((iBuff & iStrength) && (iBuff & iSpeed))",
+        "if (iBuff == iStrength)",
+        "if (iBuff | iStrength | iSpeed)"
+      ],
+      "answer": 1,
+      "explain": "각 버프를 &로 따로 검사한 뒤 논리 AND(&&)로 묶으면 두 결과가 모두 참일 때만 전체가 참이 된다. iBuff & iStrength & iSpeed는 왼쪽부터 계산되는데 iStrength(00001)와 iSpeed(00100)는 겹치는 비트가 없어서 중간 결과와 iSpeed의 & 결과가 항상 0, 즉 항상 거짓이 된다. iBuff == iStrength는 다른 버프가 하나라도 더 있으면 거짓이고, |를 쓴 조건은 결과가 항상 0이 아니라서 무조건 참이다. 비트 검사(&)와 논리 결합(&&)의 역할을 구분하는 것이 핵심이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드를 실행하면 출력되는 단어를 순서대로 나열한 것은?",
+      "code": "const int iStrength  = 0x00000001;\nconst int iDefense   = 0x00000002;\nconst int iSpeed     = 0x00000004;\nconst int iParalysis = 0x00000008;\nconst int iPoisoning = 0x00000010;\n\nint iBuff = iStrength | iSpeed | iPoisoning;\n\nif (iBuff & iStrength)  cout << \"Attack\" << endl;\nif (iBuff & iDefense)   cout << \"Armor\" << endl;\nif (iBuff & iSpeed)     cout << \"HP\" << endl;\nif (iBuff & iParalysis) cout << \"MP\" << endl;\nif (iBuff & iPoisoning) cout << \"Critical\" << endl;",
+      "choices": [
+        "Attack, Armor, HP",
+        "Attack, HP, Critical",
+        "Attack, MP, Critical",
+        "Attack, Armor, HP, MP, Critical"
+      ],
+      "answer": 1,
+      "explain": "iBuff는 iStrength, iSpeed, iPoisoning을 결합한 2진수 10101이다. 다섯 개의 독립된 if문이 각 비트를 검사하므로, 켜져 있는 비트에 해당하는 Attack(iStrength), HP(iSpeed), Critical(iPoisoning) 세 줄이 출력된다. iDefense(00010)와 iParalysis(01000) 비트는 꺼져 있어 Armor와 MP는 출력되지 않는다. else if 체인과 달리 독립된 if문들은 각각 따로 검사되므로 여러 개가 동시에 실행될 수 있다는 점도 함께 기억하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "수업 자료의 설명에 따르면, scanf(\"%d\", &iNumber); 처럼 변수 앞에 &를 붙이는 이유는?",
+      "code": null,
+      "choices": [
+        "입력받을 변수의 주소를 전달해서, 그 위치에 입력값을 써 넣게 하기 위해",
+        "두 값의 논리 AND 연산을 하기 위해",
+        "변수를 상수로 만들어 보호하기 위해",
+        "printf와 출력 형식을 맞추기 위해"
+      ],
+      "answer": 0,
+      "explain": "scanf는 printf와 달리 '입력받을 곳의 주소'에 값을 써 넣는 방식으로 동작한다. 변수 앞에 &를 붙이면 그 변수의 주소가 되고, scanf는 %d의 경우 그 주소부터 int 크기(32비트)만큼을 int 데이터 공간으로 취급해 입력값을 기록한다. 논리 AND는 &&이고, 값을 읽기만 하는 printf에는 &가 필요 없다는 점이 두 함수의 큰 차이다. &를 빼먹으면 주소가 아닌 값이 전달되어 프로그램이 오작동한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "printf로 화면에 %d 라는 글자 자체를 출력하려면 어떻게 써야 하는가?",
+      "code": null,
+      "choices": [
+        "printf(\"%d\");",
+        "printf(\"\\%d\");",
+        "printf(\"%%d\");",
+        "printf(\"'%d'\");"
+      ],
+      "answer": 2,
+      "explain": "%는 printf에서 서식 지정자의 시작을 알리는 특수 문자이므로, % 문자 자체를 출력하려면 %%처럼 두 번 써야 한다. 따라서 %%d 라고 쓰면 화면에는 %d가 출력된다. %d만 쓰면 정수 인자를 기대하는 서식 지정자로 해석되어 엉뚱한 값이 출력될 수 있다. 백슬래시(\\)는 개행(\\n) 같은 이스케이프 문자에 쓰는 것이지 %를 이스케이프하는 용도가 아니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "중괄호 없이 if문이 중첩되어 있을 때, else는 어느 if에 붙는가? (dangling else 문제)",
+      "code": null,
+      "choices": [
+        "들여쓰기 수준이 같은 if에 붙는다",
+        "가장 바깥쪽 if에 붙는다",
+        "가장 가까운, 아직 else와 짝이 없는 if에 붙는다",
+        "컴파일러가 상황에 따라 임의로 결정한다"
+      ],
+      "answer": 2,
+      "explain": "C++ 문법 규칙상 else는 자신과 가장 가까운(아직 else 짝이 없는) if에 붙는다. 들여쓰기는 사람 눈에 보이는 표시일 뿐 컴파일러는 완전히 무시하므로, 들여쓰기만 보고 else의 짝을 판단하면 안 된다. 바깥쪽 if에 붙는다고 생각하는 것이 가장 흔한 오해이며, 이것이 바로 dangling else 함정이다. else를 바깥 if에 붙이고 싶다면 중괄호로 안쪽 if를 감싸서 의도를 명확히 표현해야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드를 실행하면 무엇이 출력되는가?",
+      "code": "if (false)\n    if (true)\n        cout << \"First\" << endl;\nelse if (true)\n    if (true)\n        cout << \"Second\" << endl;",
+      "choices": [
+        "First",
+        "Second",
+        "First와 Second 모두",
+        "아무것도 출력되지 않는다"
+      ],
+      "answer": 3,
+      "explain": "들여쓰기와 달리 else는 가장 가까운 if인 안쪽 if (true)에 붙는다. 즉 'if (true) First 출력, else if (true) Second 출력' 전체가 바깥 if (false)의 본문이 된다. 바깥 조건이 false라서 그 본문 전체가 실행되지 않으므로 아무것도 출력되지 않는다. 들여쓰기만 보면 else if가 바깥 if (false)의 짝처럼 보여 Second가 출력될 것 같지만, 컴파일러는 들여쓰기를 무시한다는 것이 dangling else의 함정이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드를 실행하면 무엇이 출력되는가?",
+      "code": "if (true)\n    if (true)\n        cout << \"Third\" << endl;\nelse if (true)\n    if (true)\n        cout << \"Fourth\" << endl;",
+      "choices": [
+        "Third",
+        "Fourth",
+        "Third와 Fourth 모두",
+        "아무것도 출력되지 않는다"
+      ],
+      "answer": 0,
+      "explain": "else는 가장 가까운 안쪽 if (true)에 붙으므로, 바깥 if (true)의 본문은 'if (true) Third 출력, else ...' 전체다. 바깥 조건이 참이라 본문이 실행되고, 안쪽 조건도 참이라 \"Third\"가 출력된다. 안쪽 if가 참으로 끝났으니 그에 붙은 else 부분(Fourth)은 실행되지 않는다. Third와 Fourth가 둘 다 나온다고 생각했다면 else if가 별개의 독립된 검사라고 착각한 것이다. 이런 혼란을 피하려면 처음부터 중괄호를 쓰는 습관이 좋다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드를 실행하면 어떻게 되는가?",
+      "code": "int iNumber = 100;\n\nif (0 <= iNumber <= 9)\n{\n    cout << \"한 자리 숫자입니다.\" << endl;\n}",
+      "choices": [
+        "아무것도 출력되지 않는다",
+        "한 자리 숫자입니다. 가 출력된다 — (0 <= iNumber)의 결과 1이 다시 <= 9와 비교되어 항상 참이기 때문",
+        "컴파일 에러가 발생한다",
+        "iNumber가 100이라 조건이 거짓으로 판별된다"
+      ],
+      "answer": 1,
+      "explain": "0 <= iNumber <= 9는 수학처럼 한 번에 계산되지 않고 왼쪽부터 차례로 계산된다. 먼저 0 <= 100이 참(1)이 되고, 그 결과 1 <= 9를 검사하니 또 참이라 100인데도 조건이 참이 된다. 비교 결과가 항상 0 또는 1이고 둘 다 9 이하이므로 이 조건식은 어떤 값에도 항상 참이다. 문법적으로 올바른 식이라 컴파일 에러도 나지 않아 찾기 어려운 버그다. 범위 검사는 반드시 0 <= iNumber && iNumber <= 9처럼 &&로 두 조건을 나눠 써야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드를 실행하면 무엇이 출력되는가?",
+      "code": "const int iStrength = 0x00000001;\nconst int iSpeed    = 0x00000004;\n\nint iBuff = iStrength | iSpeed;\n\nif (iBuff & iStrength & iSpeed)\n    cout << \"A\" << endl;\nelse\n    cout << \"B\" << endl;",
+      "choices": [
+        "A",
+        "B",
+        "A와 B 모두",
+        "컴파일 에러"
+      ],
+      "answer": 1,
+      "explain": "&는 왼쪽부터 차례로 계산된다. iBuff(00101) & iStrength(00001)의 결과는 00001인데, 여기에 다시 iSpeed(00100)를 &하면 겹치는 비트가 없어 결과가 0이 된다. 0은 거짓이므로 else 블록의 \"B\"가 출력된다. iBuff에 두 버프가 모두 들어 있으니 참일 것이라고 생각하기 쉽지만, 두 버프를 모두 검사하려면 (iBuff & iStrength) && (iBuff & iSpeed)처럼 각각 검사해서 &&로 묶어야 한다. if와 else 중 하나만 실행되므로 둘 다 출력되는 경우는 없다.",
+      "difficulty": "심화"
+    }
+  ],
+  "coding": [
+    {
+      "title": "양수 / 0 / 음수 판별기",
+      "prompt": "정수를 하나 입력받아 if ~ else if ~ else를 사용해 판별하는 프로그램을 작성하세요.\n\n요구사항:\n1. cin으로 정수를 입력받는다.\n2. 입력값이 0보다 크면 \"양수입니다.\"를 출력한다.\n3. 입력값이 0이면 \"0입니다.\"를 출력한다.\n4. 입력값이 0보다 작으면 \"음수입니다.\"를 출력한다.\n5. 세 경우 중 정확히 하나의 메시지만 출력되어야 한다 (if ~ else if ~ else 사용).\n\n실행 예시 1)\n정수를 입력하세요: 5\n양수입니다.\n\n실행 예시 2)\n정수를 입력하세요: -3\n음수입니다.",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    int iNumber;\n\n    cout << \"정수를 입력하세요: \";\n    cin >> iNumber;\n\n    // TODO: if ~ else if ~ else를 사용해\n    // 양수면 \"양수입니다.\", 0이면 \"0입니다.\", 음수면 \"음수입니다.\"를 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "cin\\s*>>\\s*\\w+",
+          "desc": "cin으로 정수를 입력받는지 확인"
+        },
+        {
+          "pattern": "if\\s*\\(",
+          "desc": "if문을 사용했는지 확인"
+        },
+        {
+          "pattern": "else\\s+if",
+          "desc": "else if로 조건을 나눠 검사하는지 확인"
+        },
+        {
+          "pattern": "양수입니다",
+          "desc": "양수일 때의 출력 메시지 확인"
+        },
+        {
+          "pattern": "음수입니다",
+          "desc": "음수일 때의 출력 메시지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    int iNumber;\n\n    cout << \"정수를 입력하세요: \";\n    cin >> iNumber;\n\n    if (0 < iNumber)\n    {\n        cout << \"양수입니다.\" << endl;\n    }\n    else if (0 == iNumber)\n    {\n        cout << \"0입니다.\" << endl;\n    }\n    else\n    {\n        cout << \"음수입니다.\" << endl;\n    }\n\n    return 0;\n}",
+      "explain": "서로 배타적인 세 가지 경우(양수, 0, 음수)는 독립된 if문 세 개가 아니라 if ~ else if ~ else 체인으로 처리하는 것이 정석이다. 위에서부터 조건을 검사해 처음 참이 되는 블록 하나만 실행되므로, 마지막 else는 조건 없이 '나머지 경우(음수)'를 자연스럽게 담당한다. 0 == iNumber처럼 상수를 왼쪽에 쓰면 ==를 =로 잘못 쓰는 실수를 컴파일 단계에서 잡을 수 있다."
+    },
+    {
+      "title": "점수 등급 판정기",
+      "prompt": "0~100 사이의 점수를 입력받아 등급을 출력하는 프로그램을 작성하세요.\n\n요구사항:\n1. cin으로 점수를 입력받는다.\n2. 점수가 0보다 작거나 100보다 크면 \"잘못된 점수입니다.\"를 출력한다.\n3. 90~100점은 \"A\", 80~89점은 \"B\", 70~79점은 \"C\", 그 외(0~69점)는 \"F\"를 출력한다.\n4. 범위 검사에는 반드시 && 논리 연산자를 사용한다 (예: 80 <= iScore && iScore <= 89).\n5. A 등급 중에서도 정확히 100점이면 등급 출력 후 중첩 if로 \"만점입니다!\"를 추가로 출력한다.\n\n실행 예시 1)\n점수를 입력하세요(0~100): 85\nB\n\n실행 예시 2)\n점수를 입력하세요(0~100): 100\nA\n만점입니다!\n\n실행 예시 3)\n점수를 입력하세요(0~100): 120\n잘못된 점수입니다.",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    int iScore;\n\n    cout << \"점수를 입력하세요(0~100): \";\n    cin >> iScore;\n\n    // TODO: 잘못된 점수(0 미만 또는 100 초과)를 먼저 걸러내고,\n    // if ~ else if ~ else로 A / B / C / F 등급을 출력하세요.\n    // 100점이면 A 출력 후 중첩 if로 \"만점입니다!\"도 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "cin\\s*>>\\s*\\w+",
+          "desc": "cin으로 점수를 입력받는지 확인"
+        },
+        {
+          "pattern": "&&",
+          "desc": "&& 논리 연산자로 범위를 검사하는지 확인"
+        },
+        {
+          "pattern": "else\\s+if",
+          "desc": "else if 체인으로 등급을 나누는지 확인"
+        },
+        {
+          "pattern": "잘못된 점수",
+          "desc": "범위 밖 점수 처리 메시지 확인"
+        },
+        {
+          "pattern": "만점입니다",
+          "desc": "100점일 때의 중첩 if 추가 메시지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    int iScore;\n\n    cout << \"점수를 입력하세요(0~100): \";\n    cin >> iScore;\n\n    if (iScore < 0 || 100 < iScore)\n    {\n        cout << \"잘못된 점수입니다.\" << endl;\n    }\n    else if (90 <= iScore && iScore <= 100)\n    {\n        cout << \"A\" << endl;\n\n        if (100 == iScore)\n        {\n            cout << \"만점입니다!\" << endl;\n        }\n    }\n    else if (80 <= iScore && iScore <= 89)\n    {\n        cout << \"B\" << endl;\n    }\n    else if (70 <= iScore && iScore <= 79)\n    {\n        cout << \"C\" << endl;\n    }\n    else\n    {\n        cout << \"F\" << endl;\n    }\n\n    return 0;\n}",
+      "explain": "잘못된 입력을 체인의 맨 앞에서 먼저 걸러내면 뒤의 등급 조건들은 유효한 점수라고 가정하고 안심하고 작성할 수 있다. 범위 검사는 반드시 90 <= iScore && iScore <= 100처럼 &&로 두 조건을 나눠 써야 하며, 90 <= iScore <= 100처럼 쓰면 비교 결과(0 또는 1)가 다시 비교되어 항상 참이 되는 버그가 생긴다. 만점 검사는 A 등급 블록 '안'에 중첩 if로 넣어, 수업 예제의 행운의 숫자 7 검사처럼 큰 범위 안에서 세부 조건을 다시 확인하는 구조를 연습한다."
+    },
+    {
+      "title": "비트 플래그 버프 검사기",
+      "prompt": "수업에서 배운 비트 플래그를 사용해 캐릭터의 버프 상태를 검사하는 프로그램을 작성하세요.\n\n요구사항:\n1. 다음 5개의 버프 상수를 const int로 16진수 리터럴을 사용해 정의한다.\n   iStrength = 0x01, iDefense = 0x02, iSpeed = 0x04, iParalysis = 0x08, iPoisoning = 0x10\n2. cin으로 정수 하나를 입력받아 버프 상태 변수 iBuff에 저장한다.\n3. 5개의 독립된 if문에서 & 연산자로 각 버프를 검사해, 보유한 버프마다 \"XXX 버프가 존재합니다.\" 형식으로 출력한다. (예: \"Strength 버프가 존재합니다.\")\n4. 마지막에 if ~ else if ~ else 체인으로 상태이상을 판정한다.\n   - Paralysis 버프가 있으면: \"상태이상: Paralysis 상태입니다.\"\n   - Paralysis는 없고 Poisoning이 있으면: \"상태이상: Poisoning 상태입니다.\"\n   - 둘 다 없으면: \"상태이상이 없습니다.\"\n\n실행 예시) 21 입력 시 (21 = 1 + 4 + 16)\n버프 상태를 입력하세요: 21\nStrength 버프가 존재합니다.\nSpeed 버프가 존재합니다.\nPoisoning 버프가 존재합니다.\n상태이상: Poisoning 상태입니다.",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    // TODO: 5개의 버프 상수를 const int로 정의하세요. (0x01 ~ 0x10)\n\n    int iBuff;\n\n    cout << \"버프 상태를 입력하세요: \";\n    cin >> iBuff;\n\n    // TODO: 독립된 if문 5개와 & 연산자로 각 버프 보유 여부를 출력하세요.\n\n    // TODO: if ~ else if ~ else 체인으로 상태이상(Paralysis / Poisoning / 없음)을 판정하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "const\\s+int",
+          "desc": "버프 상수를 const int로 정의했는지 확인"
+        },
+        {
+          "pattern": "0x",
+          "desc": "16진수 리터럴을 사용했는지 확인"
+        },
+        {
+          "pattern": "cin\\s*>>\\s*\\w+",
+          "desc": "cin으로 버프 상태를 입력받는지 확인"
+        },
+        {
+          "pattern": "if\\s*\\(\\s*\\w+\\s*&\\s*\\w+\\s*\\)",
+          "desc": "& 연산자로 비트 플래그를 검사하는지 확인"
+        },
+        {
+          "pattern": "else\\s+if",
+          "desc": "else if 체인으로 상태이상을 판정하는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    const int iStrength  = 0x00000001;\n    const int iDefense   = 0x00000002;\n    const int iSpeed     = 0x00000004;\n    const int iParalysis = 0x00000008;\n    const int iPoisoning = 0x00000010;\n\n    int iBuff;\n\n    cout << \"버프 상태를 입력하세요: \";\n    cin >> iBuff;\n\n    if (iBuff & iStrength)\n        cout << \"Strength 버프가 존재합니다.\" << endl;\n\n    if (iBuff & iDefense)\n        cout << \"Defense 버프가 존재합니다.\" << endl;\n\n    if (iBuff & iSpeed)\n        cout << \"Speed 버프가 존재합니다.\" << endl;\n\n    if (iBuff & iParalysis)\n        cout << \"Paralysis 버프가 존재합니다.\" << endl;\n\n    if (iBuff & iPoisoning)\n        cout << \"Poisoning 버프가 존재합니다.\" << endl;\n\n    if (iBuff & iParalysis)\n    {\n        cout << \"상태이상: Paralysis 상태입니다.\" << endl;\n    }\n    else if (iBuff & iPoisoning)\n    {\n        cout << \"상태이상: Poisoning 상태입니다.\" << endl;\n    }\n    else\n    {\n        cout << \"상태이상이 없습니다.\" << endl;\n    }\n\n    return 0;\n}",
+      "explain": "버프 보유 여부처럼 '여러 개가 동시에 참일 수 있는' 검사는 독립된 if문 5개로 각각 처리하고, '셋 중 하나만 골라야 하는' 상태이상 판정은 if ~ else if ~ else 체인으로 처리한다는 것이 이 문제의 핵심 구분이다. 각 플래그는 서로 다른 단독 비트(0x01~0x10)를 쓰기 때문에 |로 결합해도 섞이지 않고 &로 정확히 골라 검사할 수 있다. 입력값 21은 2진수 10101이라 Strength, Speed, Poisoning 비트가 켜져 있고, else if 체인에서는 Paralysis가 먼저 검사되어 우선순위가 높은 상태이상부터 판정된다."
+    }
+  ]
+}

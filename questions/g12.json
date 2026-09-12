@@ -1,0 +1,492 @@
+{
+  "id": "g12",
+  "num": 12,
+  "group": "문법",
+  "title": "형변환 (Type Casting)",
+  "srcFile": "12. Type Casrting.cpp",
+  "questions": [
+    {
+      "q": "수업 자료에서 말하는 '형변환(Type Casting)'의 정의로 가장 알맞은 것은?",
+      "code": null,
+      "choices": [
+        "데이터의 형태(자료형)를 다른 형태로 변환하는 것",
+        "변수의 이름을 다른 이름으로 바꾸는 것",
+        "변수의 값을 삭제하고 새로 만드는 것",
+        "메모리에서 변수를 제거하는 것"
+      ],
+      "answer": 0,
+      "explain": "수업 자료는 형변환을 '데이터의 형태를 변환하는 것'이라고 정의한다. 즉 저장된 값을 다른 자료형으로 해석하거나 바꾸는 작업이다. 변수의 이름을 바꾸거나 메모리에서 변수를 제거하는 것은 형변환과 아무 관계가 없다. 형변환에는 사용자가 직접 지정하는 명시적 형변환과 컴파일러가 자동으로 해 주는 암시적 형변환이 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "사용자가 캐스팅 연산자를 써서 직접 형변환을 지정하는 것을 무엇이라고 하는가?",
+      "code": null,
+      "choices": [
+        "암시적 형변환",
+        "명시적 형변환",
+        "자동 형변환",
+        "묵시적 형변환"
+      ],
+      "answer": 1,
+      "explain": "캐스팅 연산자를 사용해 프로그래머가 직접(강제로) 형변환을 지정하는 것을 명시적 형변환(Explicit Type Casting)이라고 한다. 암시적 형변환, 묵시적 형변환, 자동 형변환은 모두 컴파일러가 스스로 형을 맞춰 주는 경우를 가리키는 말이라 반대 개념이다. 예를 들어 (int)fPI는 명시적 형변환이고, int iValue = fPI;는 암시적 형변환이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "int iNumber = ONE + TWO;처럼 컴파일러가 자동으로 자료형을 맞춰 주는 형변환을 부르는 이름은?",
+      "code": null,
+      "choices": [
+        "명시적 형변환",
+        "강제 형변환",
+        "암시적 형변환 (묵시적 형변환)",
+        "상수 형변환"
+      ],
+      "answer": 2,
+      "explain": "ONE + TWO는 일반 열거형 값이 int로 자동 변환되어 계산되는데, 이렇게 컴파일러가 자동으로 해 주는 형변환을 암시적 형변환 또는 묵시적 형변환이라고 부른다. 명시적 형변환과 강제 형변환은 프로그래머가 캐스팅 연산자를 직접 쓰는 경우를 가리킨다. 상수 형변환이라는 용어는 존재하지 않는다. 같은 개념을 영어로는 Implicit Type Conversion이라고 한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "C 스타일(C Style) 캐스팅의 올바른 문법 형태는?",
+      "code": null,
+      "choices": [
+        "(자료형)값  —  예: (int)fPI",
+        "값(자료형)  —  예: fPI(int)",
+        "자료형 -> 값  —  예: int -> fPI",
+        "cast 자료형 값  —  예: cast int fPI"
+      ],
+      "answer": 0,
+      "explain": "C 스타일 캐스팅은 변환하려는 값 앞에 괄호로 자료형을 적는 (자료형)값 형태이다. 예를 들어 (int)fPI는 float 값을 int로 해석한 값을 만든다. 값 뒤에 자료형을 붙이거나 화살표, cast 키워드를 쓰는 문법은 C++에 존재하지 않는다. C++에는 static_cast<자료형>(값) 같은 C++ 스타일 캐스팅도 따로 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 자료의 정리에 따르면 'Type Conversion(자동 형변환)'에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "프로그래머가 캐스팅 연산자를 사용해 의도적으로 변환하는 작업이다",
+        "컴파일러나 인터프리터가 컴파일 타임, 런타임 동안 자동으로 다른 자료형으로 변환하는 작업이다",
+        "실행 중 사용자 입력에 따라 변수의 자료형이 바뀌는 것이다",
+        "변수를 선언할 때 자료형을 생략하는 것이다"
+      ],
+      "answer": 1,
+      "explain": "수업 자료 정리에 따르면 Type Conversion(자동 형변환)은 컴파일러나 인터프리터가 컴파일 타임 또는 런타임에 자동으로 다른 자료형으로 바꿔 주는 작업이다. 프로그래머가 캐스팅 연산자로 의도적으로 변환하는 것은 Type Casting(강제 형변환)이라고 구분한다. 실행 중에 변수의 자료형 자체가 바뀌는 일은 C++에서 일어나지 않으며, C++은 자료형을 생략할 수 없는 언어다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "C++ 스타일 캐스팅 중 static_cast에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "실행 시간(Run Time)에만 타입 검사를 수행한다",
+        "const의 상수성을 제거할 때 사용한다",
+        "컴파일 타임에 타입 안전성 검사를 수행하며, int와 enum처럼 서로 관련된 타입 사이의 형변환에 사용한다",
+        "어떤 타입이든 제약 없이 강제로 변환한다"
+      ],
+      "answer": 2,
+      "explain": "static_cast는 컴파일 타임에 타입 안전성(Type Safety) 검사를 수행하며, 정수형과 열거형처럼 서로 관련된 타입 사이의 일반적인 형변환에 사용한다. 실행 시간에만 검사한다는 설명은 틀렸고, 상수성 제거는 const_cast의 역할이다. 제약을 무시하고 강제로 변환하는 것은 reinterpret_cast에 가까운 설명이다. 컴파일러가 지원하는 암시적 형변환이 가능한 경우에 static_cast를 쓸 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "reinterpret_cast에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "컴파일 타임에 타입 안전성을 완벽하게 보장한다",
+        "enum class끼리의 형변환을 지원한다",
+        "정수와 실수 값을 반올림해서 변환해 준다",
+        "비트 패턴을 유지한 채 포인터 타입의 해석을 바꾸며, 잘못 쓰면 정의되지 않은 동작이 생길 수 있다"
+      ],
+      "answer": 3,
+      "explain": "reinterpret_cast는 데이터의 실제 비트 패턴을 유지하면서 포인터의 타입 해석만 바꾸는 낮은 수준의 형변환으로, 잘못 사용하면 정의되지 않은 동작(Undefined Behavior)을 초래할 수 있다. 타입 안전성을 보장하지 못하는 것이 특징이므로 보장한다는 설명은 정반대다. 수업 자료에 enum class끼리의 변환은 reinterpret_cast가 지원하지 않는다고 명시되어 있다. 값을 반올림하는 기능도 없다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "const_cast의 역할로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "변수를 상수로 만들어 값 변경을 막는다",
+        "const의 상수성을 없애는 형변환이다",
+        "문자열을 상수 숫자로 바꾼다",
+        "열거형을 상수로 바꾼다"
+      ],
+      "answer": 1,
+      "explain": "const_cast는 const가 붙은 대상의 상수성을 없애는 형변환이라고 수업 자료에 정리되어 있다. 변수를 상수로 만드는 것이 아니라 반대로 상수성을 제거하는 쪽이다. 문자열이나 열거형을 상수로 바꾸는 기능과는 관계가 없다. 상수(const) 개념은 상수 단원에서 배운 내용과 이어진다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "dynamic_cast로 부모-자식 관계가 아닌 타입끼리 형변환을 시도하면 어떻게 되는가? (수업 자료 기준)",
+      "code": null,
+      "choices": [
+        "프로그램이 즉시 종료된다",
+        "값이 0으로 변환된다",
+        "nullptr을 반환한다",
+        "자동으로 static_cast로 바뀌어 변환된다"
+      ],
+      "answer": 2,
+      "explain": "수업 자료에 따르면 dynamic_cast는 부모-자식 관계가 있는 class 사이의 형변환에 사용되며, 관계가 맞지 않으면 nullptr을 반환한다. 프로그램이 즉시 종료되거나 자동으로 static_cast로 바뀌는 일은 없다. 값이 0으로 '변환'되는 것이 아니라 실패를 알리는 nullptr이 반환되는 것이다. class와 상속은 아직 배우지 않았으므로 지금은 이런 캐스팅이 있다는 것만 알아 두면 된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "수업 자료에서 설명하는 캐스팅(Casting)의 본질로 가장 알맞은 것은?",
+      "code": null,
+      "choices": [
+        "메모리에 올라간 비트들을 내가 원하는 타입의 해석 방식으로 그 순간에만 인식시키는 것이며, 실제로는 임시 객체가 만들어져 대입에 사용된다",
+        "원본 변수의 자료형 자체가 영구적으로 바뀌는 것이다",
+        "메모리의 비트 내용을 물리적으로 재배열하는 것이다",
+        "변수를 다른 메모리 주소로 옮기는 것이다"
+      ],
+      "answer": 0,
+      "explain": "수업 자료는 캐스팅을 '메모리에 올라간 인스턴스의 비트들을 원하는 타입의 해석 방식으로 그 순간에만 인식시키는 것'이라고 설명한다. 실제로는 변환된 값을 담은 임시 객체(Temporary Object)가 만들어져 대입의 주체로 사용된다. 원본 변수의 자료형이 영구히 바뀌는 것이 아니므로 캐스팅 후에도 원본은 그대로다. 비트를 물리적으로 재배열하거나 메모리 주소를 옮기는 일은 일어나지 않는다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드에서 형변환이 일어난 후, 변수 cTest의 자료형은 무엇인가?",
+      "code": "char cTest = 'A';\nint iNumber = (int)cTest;",
+      "choices": [
+        "int",
+        "float",
+        "알 수 없다",
+        "char"
+      ],
+      "answer": 3,
+      "explain": "캐스팅은 그 순간에만 값을 다른 타입으로 해석한 임시 값을 만들 뿐, 원본 변수 자체를 바꾸지 않는다. 따라서 (int)cTest 이후에도 cTest는 여전히 char형이다. cTest가 int로 바뀌었다고 생각하기 쉽지만, int가 된 것은 iNumber에 대입된 임시 값이다. 수업 자료에도 'cTest는 형변환 이후에도 char형 Data Type이다'라고 명시되어 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "static_cast와 reinterpret_cast의 차이를 요약한 것으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "static_cast는 낮은 수준의 형변환, reinterpret_cast는 일반적인 형변환이다",
+        "두 캐스팅은 완전히 동일하게 동작한다",
+        "static_cast는 일반적인 형변환, reinterpret_cast는 제약을 무시하는 낮은 수준의 형변환이다",
+        "reinterpret_cast는 static_cast보다 항상 더 안전하다"
+      ],
+      "answer": 2,
+      "explain": "수업 자료의 요약은 static_cast는 일반적인 형변환, reinterpret_cast는 제약을 무시하는 낮은 수준의 형변환이라는 것이다. 두 역할을 서로 바꿔 말한 설명은 틀렸고, 두 캐스팅이 동일하게 동작하는 것도 아니다. 실제로 reinterpret_cast가 static_cast의 변환을 대체할 수는 있지만 타입 안전성 문제로 권장되지 않으며, 더 안전한 쪽은 오히려 static_cast다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum class KOOPA_PATTERN { ATTACK, TRACING, DIE, HIT, HEAL, STUN, IDLE };\n\nint main()\n{\n    KOOPA_PATTERN Koopa = (KOOPA_PATTERN)10;\n\n    switch (Koopa)\n    {\n    case KOOPA_PATTERN::ATTACK: cout << \"ATTACK\" << endl; break;\n    case KOOPA_PATTERN::IDLE:   cout << \"IDLE\" << endl;   break;\n    default:                    cout << \"DEFAULT\" << endl; break;\n    }\n\n    return 0;\n}",
+      "choices": [
+        "ATTACK",
+        "DEFAULT",
+        "IDLE",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 1,
+      "explain": "(KOOPA_PATTERN)10은 컴파일은 되지만, 10은 KOOPA_PATTERN의 어떤 열거자(0~6)에도 해당하지 않는 값이다. 따라서 switch의 어떤 case와도 일치하지 않아 default로 빠져 DEFAULT가 출력된다. 범위 밖 값이라도 명시적 캐스팅이므로 컴파일 에러는 나지 않는다. 이렇게 열거형 변수에 열거자에 없는 값이 들어갈 수 있으므로 switch에 default를 두는 습관이 중요하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum class KOOPA_PATTERN { ATTACK, TRACING, DIE };\nenum class DRAGON_PATTERN { BREATH, IDLE, ATTACK };\n\nint main()\n{\n    KOOPA_PATTERN Koopa = (KOOPA_PATTERN)DRAGON_PATTERN::BREATH;\n\n    switch (Koopa)\n    {\n    case KOOPA_PATTERN::ATTACK:  cout << \"ATTACK\" << endl;  break;\n    case KOOPA_PATTERN::TRACING: cout << \"TRACING\" << endl; break;\n    case KOOPA_PATTERN::DIE:     cout << \"DIE\" << endl;     break;\n    }\n\n    return 0;\n}",
+      "choices": [
+        "BREATH",
+        "TRACING",
+        "컴파일 에러가 발생한다",
+        "ATTACK"
+      ],
+      "answer": 3,
+      "explain": "enum class는 이름이 아니라 내부 정수값으로 변환된다. DRAGON_PATTERN::BREATH는 첫 번째 열거자라 내부값이 0이고, KOOPA_PATTERN에서 0은 ATTACK이므로 ATTACK이 출력된다. BREATH라는 이름이 그대로 넘어간다고 착각하기 쉽지만 KOOPA_PATTERN에는 BREATH라는 열거자가 없다. 명시적 캐스팅을 했으므로 컴파일 에러도 나지 않는다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum NUMBER { ONE = 1, TWO, THREE, FOUR, FIVE };\n\nint main()\n{\n    int iNumber = ONE + TWO;\n\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "3",
+        "12",
+        "ONETWO",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 0,
+      "explain": "NUMBER는 일반 enum이므로 ONE(1)과 TWO(2)가 int로 암시적 형변환되어 덧셈이 계산되고, 결과는 정수 3이다. 1과 2가 문자열처럼 이어 붙어 12가 되는 것도, 이름이 붙어 출력되는 것도 아니다. 일반 enum은 enum class와 달리 캐스팅 없이도 int로 자동 변환된다는 점이 핵심이다. 반대로 int 결과를 다시 NUMBER 변수에 담으려면 명시적 캐스팅이 필요하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    float fValue = 1.2;\n\n    if (fValue == 1.2)\n    {\n        cout << \"참\" << endl;\n    }\n    else\n    {\n        cout << \"거짓\" << endl;\n    }\n\n    return 0;\n}",
+      "choices": [
+        "참",
+        "거짓",
+        "컴파일 에러가 발생한다",
+        "아무것도 출력되지 않는다"
+      ],
+      "answer": 1,
+      "explain": "1.2라는 리터럴은 double형이다. float 변수 fValue에 저장되는 순간 정밀도가 낮은 float 근사값으로 바뀌고, 비교할 때 fValue가 다시 double로 승격되지만 그 값은 double 1.2와 미세하게 다르다. 그래서 조건이 거짓이 되어 '거짓'이 출력된다. 눈에는 같은 1.2로 보여 '참'을 고르기 쉽지만 실수는 근사값으로 저장된다는 점을 기억해야 한다. fValue == 1.2f처럼 float 리터럴로 비교하면 참이 된다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    char cValue = 'A';\n\n    if (cValue == 65)\n    {\n        cout << \"참\" << endl;\n    }\n    else\n    {\n        cout << \"거짓\" << endl;\n    }\n\n    return 0;\n}",
+      "choices": [
+        "거짓",
+        "컴파일 에러가 발생한다",
+        "참",
+        "A"
+      ],
+      "answer": 2,
+      "explain": "'A'의 ASCII 코드는 65이고, char와 int를 비교하면 char가 int로 암시적 형변환(승격)되어 65 == 65가 된다. 따라서 조건이 참이 되어 '참'이 출력된다. 문자와 숫자는 비교할 수 없다고 생각해 컴파일 에러를 고르기 쉽지만, char는 내부적으로 작은 정수이므로 자연스럽게 비교된다. 문자 A 자체를 출력하는 코드는 어디에도 없다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    float fPI = 3.14f;\n    int   iValue = fPI;\n\n    cout << iValue << endl;\n\n    return 0;\n}",
+      "choices": [
+        "3.14",
+        "4",
+        "0",
+        "3"
+      ],
+      "answer": 3,
+      "explain": "float 값을 int 변수에 대입하면 암시적 형변환이 일어나면서 소수부가 버려진다(truncation). 3.14의 소수부 0.14가 잘려 3이 저장된다. 반올림이 아니므로 4가 되지 않고, int 변수는 소수를 저장할 수 없으므로 3.14가 그대로 출력될 수도 없다. 의도를 분명히 하려면 (int)fPI처럼 명시적으로 캐스팅해 주는 것이 좋다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과로 옳은 것은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    float fPI = 3.14f;    // 비트: 01000000 01001000 11110101 11000011\n    int   iValue = 0;\n\n    memcpy(&iValue, &fPI, 4);\n\n    cout << iValue << endl;\n\n    return 0;\n}",
+      "choices": [
+        "3이 출력된다",
+        "3.14가 출력된다",
+        "3이 아닌 큰 값(1078523331)이 출력된다",
+        "0이 출력된다"
+      ],
+      "answer": 2,
+      "explain": "memcpy는 형변환이 아니라 메모리의 비트를 그대로 복사하는 함수다. 3.14f의 IEEE 754 비트 패턴이 iValue에 그대로 들어가고, 그 비트를 int의 해석 방식으로 읽으면 1078523331이라는 전혀 다른 값이 된다. int iValue = fPI;처럼 형변환으로 대입했다면 값이 유지되도록 변환되어 3이 되었을 것이다. 같은 비트라도 자료형(해석 방식)에 따라 완전히 다른 값으로 읽힌다는 것이 이 단원의 핵심이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum class KOOPA_PATTERN { ATTACK, TRACING, DIE, HIT };\nenum class DRAGON_PATTERN { BREATH, IDLE, ATTACK, TRACING };\n\nint main()\n{\n    KOOPA_PATTERN Koopa = static_cast<KOOPA_PATTERN>(DRAGON_PATTERN::IDLE);\n\n    switch (Koopa)\n    {\n    case KOOPA_PATTERN::ATTACK:  cout << \"ATTACK\" << endl;  break;\n    case KOOPA_PATTERN::TRACING: cout << \"TRACING\" << endl; break;\n    default:                     cout << \"DEFAULT\" << endl; break;\n    }\n\n    return 0;\n}",
+      "choices": [
+        "IDLE",
+        "TRACING",
+        "ATTACK",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 1,
+      "explain": "enum class 사이의 변환은 이름이 아니라 내부 정수값 기준이다. DRAGON_PATTERN::IDLE은 두 번째 열거자라 내부값이 1이고(BREATH가 0), KOOPA_PATTERN에서 1은 TRACING이므로 TRACING이 출력된다. IDLE이라는 이름이 그대로 이어질 것 같지만 이 KOOPA_PATTERN에는 IDLE 열거자 자체가 없다. static_cast로 명시적 변환을 했으므로 컴파일 에러도 없다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iResult = 3.7 + 1.5;\n\n    cout << iResult << endl;\n\n    return 0;\n}",
+      "choices": [
+        "5",
+        "5.2",
+        "6",
+        "4"
+      ],
+      "answer": 0,
+      "explain": "3.7 + 1.5는 실수끼리의 덧셈으로 5.2가 되고, int 변수에 대입되면서 암시적 형변환으로 소수부가 버려져 5가 저장된다. 소수부를 버리는 것이지 반올림이 아니라는 점에 주의해야 한다(5.9였어도 5가 된다). int 변수는 소수를 저장할 수 없으므로 5.2가 그대로 출력될 수 없다. 덧셈을 하기 전에 각 값이 잘리는 것이 아니라, 실수로 전부 계산한 뒤 대입 순간에 잘린다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum NUMBER { ONE = 1, TWO, THREE, FOUR, FIVE };\n\nint main()\n{\n    NUMBER eNumber = (NUMBER)(ONE + TWO);\n\n    cout << eNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "THREE",
+        "TWO",
+        "3",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 2,
+      "explain": "일반 enum(NUMBER)의 값은 cout으로 출력할 때 int로 암시적 형변환되어 내부 정수값이 출력된다. eNumber의 값은 ONE(1) + TWO(2) = 3이므로 화면에는 3이 찍힌다. 열거자 이름인 THREE가 문자열로 출력된다고 착각하기 쉽지만, 열거형 변수는 이름이 아니라 정수값을 저장한다. (NUMBER) 캐스팅을 명시했으므로 컴파일 에러도 없다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드가 컴파일되도록 빈칸에 넣어야 하는 것은?",
+      "code": "enum NUMBER { ONE = 1, TWO, THREE, FOUR, FIVE };\n\nint main()\n{\n    NUMBER eNumber = ____(ONE + TWO);   // 빈칸을 채우세요\n\n    return 0;\n}",
+      "choices": [
+        "(int)",
+        "(NUMBER)",
+        "(float)",
+        "아무것도 넣지 않아도 된다"
+      ],
+      "answer": 1,
+      "explain": "ONE + TWO를 계산하는 순간 두 열거자는 int로 암시적 변환되어 결과가 int 값 3이 된다. int를 다시 NUMBER 열거형 변수에 담으려면 (NUMBER) 명시적 형변환이 필요하다. 캐스팅 없이 그대로 대입하면 int에서 enum으로의 암시적 변환이 지원되지 않아 컴파일 에러가 난다. (int)나 (float)를 넣으면 결과 타입이 대입 대상인 NUMBER와 맞지 않아 여전히 에러다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드는 컴파일 에러가 발생한다. 에러를 고치는 올바른 방법은?",
+      "code": "enum class KOOPA_PATTERN { ATTACK, TRACING, DIE };\nenum class DRAGON_PATTERN { BREATH, IDLE, ATTACK };\n\nint main()\n{\n    KOOPA_PATTERN Koopa = KOOPA_PATTERN::ATTACK;\n\n    Koopa = DRAGON_PATTERN::BREATH;   // 컴파일 에러!\n\n    return 0;\n}",
+      "choices": [
+        "Koopa = (int)DRAGON_PATTERN::BREATH; 로 int 캐스팅을 한다",
+        "enum class를 일반 enum으로 바꾸면 캐스팅 없이 서로 대입된다",
+        "Koopa의 선언을 DRAGON_PATTERN Koopa로 바꾸는 것만이 유일한 방법이다",
+        "Koopa = (KOOPA_PATTERN)DRAGON_PATTERN::BREATH; 처럼 명시적 형변환을 한다"
+      ],
+      "answer": 3,
+      "explain": "서로 다른 enum class끼리는 암시적 변환이 전혀 되지 않으므로, (KOOPA_PATTERN) 같은 명시적 형변환을 해야 대입할 수 있다. C++ 스타일로는 static_cast<KOOPA_PATTERN>(DRAGON_PATTERN::BREATH)라고 써도 된다. (int)로 감싸면 int 값이 될 뿐이고 int를 enum class 변수에 넣으려면 또 캐스팅이 필요해 여전히 에러다. 일반 enum으로 바꿔도 서로 다른 열거형끼리 캐스팅 없이 대입되지는 않으며, 변수 타입을 바꾸는 것은 유일한 방법도 아니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "정수 10을 C++ 스타일 캐스팅으로 KOOPA_PATTERN 타입으로 변환하는 올바른 문법은?",
+      "code": null,
+      "choices": [
+        "static_cast<KOOPA_PATTERN>(10)",
+        "static_cast(KOOPA_PATTERN)10",
+        "KOOPA_PATTERN static_cast(10)",
+        "<KOOPA_PATTERN>static_cast(10)"
+      ],
+      "answer": 0,
+      "explain": "C++ 스타일 캐스팅은 static_cast<변환할타입>(값) 형태로, 꺾쇠괄호 안에 타입을 쓰고 소괄호 안에 값을 넣는다. 따라서 static_cast<KOOPA_PATTERN>(10)이 올바른 문법이다. 소괄호에 타입을 쓰는 형태는 C 스타일 캐스팅과 혼동한 것이고, 꺾쇠가 static_cast 앞에 오는 문법은 존재하지 않는다. 같은 변환을 C 스타일로 쓰면 (KOOPA_PATTERN)10이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드에서 컴파일 에러가 발생하는 줄은?",
+      "code": "enum NUMBER { ONE = 1, TWO, THREE };\nenum class KOOPA_PATTERN { ATTACK, TRACING, DIE };\n\nint main()\n{\n    int a = ONE;                          // (1)\n    int b = (int)KOOPA_PATTERN::DIE;      // (2)\n    int c = KOOPA_PATTERN::DIE;           // (3)\n    KOOPA_PATTERN k = (KOOPA_PATTERN)1;   // (4)\n\n    return 0;\n}",
+      "choices": [
+        "(1)",
+        "(2)",
+        "(4)",
+        "(3)"
+      ],
+      "answer": 3,
+      "explain": "enum class는 int로 암시적 형변환이 되지 않으므로 int c = KOOPA_PATTERN::DIE;는 컴파일 에러다. 반면 일반 enum인 NUMBER의 ONE은 int로 자동 변환되므로 문제가 없다. (int)KOOPA_PATTERN::DIE와 (KOOPA_PATTERN)1은 명시적 캐스팅을 했으므로 둘 다 허용된다. enum class는 이런 엄격함 덕분에 서로 다른 열거형의 값이 실수로 섞이는 것을 막아 준다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "'참'이 출력되도록 빈칸에 넣을 가장 알맞은 값은?",
+      "code": "float fValue = 1.2;\n\nif (fValue == ____)   // 빈칸\n{\n    cout << \"참\" << endl;\n}\nelse\n{\n    cout << \"거짓\" << endl;\n}",
+      "choices": [
+        "1.2f",
+        "1.2",
+        "(double)1.2",
+        "1.20"
+      ],
+      "answer": 0,
+      "explain": "1.2f는 float 리터럴이므로 fValue와 같은 정밀도의 값끼리 비교되어 참이 된다. 접미사 없는 1.2와 1.20, (double)1.2는 모두 double이라서 float에 저장된 근사값과 미세하게 달라 거짓이 된다. 실수 리터럴 뒤의 f 접미사가 float형을 의미한다는 것은 자료형 단원에서 배운 내용이다. 실수 비교는 이런 정밀도 문제 때문에 항상 조심해야 한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "쿠파의 패턴을 드래곤의 패턴에서 가져오려고 한다. 다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum class KOOPA_PATTERN { ATTACK, TRACING, DIE, HIT, HEAL };\nenum class DRAGON_PATTERN { BREATH, IDLE, ATTACK, TRACING, DIE };\n\nint main()\n{\n    KOOPA_PATTERN Koopa = static_cast<KOOPA_PATTERN>(DRAGON_PATTERN::ATTACK);\n\n    switch (Koopa)\n    {\n    case KOOPA_PATTERN::ATTACK:  cout << \"ATTACK\" << endl;  break;\n    case KOOPA_PATTERN::TRACING: cout << \"TRACING\" << endl; break;\n    case KOOPA_PATTERN::DIE:     cout << \"DIE\" << endl;     break;\n    default:                     cout << \"DEFAULT\" << endl; break;\n    }\n\n    return 0;\n}",
+      "choices": [
+        "ATTACK",
+        "TRACING",
+        "DEFAULT",
+        "DIE"
+      ],
+      "answer": 3,
+      "explain": "static_cast는 이름이 아니라 내부 정수값으로 변환한다. DRAGON_PATTERN::ATTACK은 세 번째 열거자라 내부값이 2이고, KOOPA_PATTERN에서 2는 DIE이므로 DIE가 출력된다. 같은 이름인 ATTACK이 출력된다고 착각하기 쉽지만 KOOPA_PATTERN::ATTACK의 내부값은 0이다. 두 열거형의 정의 순서가 다르면 캐스팅 결과의 의미가 완전히 달라지므로, 서로 다른 enum class 간 변환은 신중해야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "(KOOPA_PATTERN)10처럼 열거자(enumerator)에 없는 값을 enum class 타입으로 캐스팅하면 어떻게 되는가?",
+      "code": null,
+      "choices": [
+        "컴파일은 되지만, 어떤 열거자와도 일치하지 않는 값이 되어 switch에서 default로 빠질 수 있다",
+        "컴파일 에러가 발생한다",
+        "가장 가까운 열거자 값으로 자동 보정된다",
+        "실행 시 프로그램이 즉시 종료된다"
+      ],
+      "answer": 0,
+      "explain": "열거자에 없는 값이라도 명시적 캐스팅이면 컴파일은 정상적으로 된다. 다만 그 변수는 KOOPA_PATTERN의 어떤 열거자와도 일치하지 않는 값을 갖게 되어, switch에서 모든 case를 비켜 가 default로 빠질 수 있다. 컴파일 에러가 나거나 가장 가까운 값으로 보정된다는 것은 오해이며, 프로그램이 종료되지도 않는다. 그래서 열거형을 switch로 처리할 때는 default를 두는 것이 안전하다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "몬스터의 HP에서 실수형 데미지를 빼는 코드다. 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int   iHP = 100;\n    float fDamage = 10.75f;\n\n    iHP = iHP - fDamage;\n\n    cout << iHP << endl;\n\n    return 0;\n}",
+      "choices": [
+        "90",
+        "89",
+        "89.25",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 1,
+      "explain": "iHP - fDamage에서 int인 iHP가 float로 암시적 형변환되어 100.0f - 10.75f = 89.25f가 계산된다. 이 값을 다시 int 변수 iHP에 대입하면서 소수부가 버려져 89가 저장된다. 반올림이 아니므로 90이 아니고, int 변수는 소수를 저장할 수 없어 89.25가 출력될 수도 없다. 정수와 실수가 섞인 연산은 실수로 계산된 뒤 정수 변수에 담길 때 잘린다는 두 단계를 기억하자.",
+      "difficulty": "응용"
+    }
+  ],
+  "coding": [
+    {
+      "title": "실수 점수를 정수로 바꾸기",
+      "prompt": "float 변수 fScore에 95.7f가 저장되어 있습니다. C 스타일의 명시적 형변환 (int)를 사용해 fScore를 int 변수 iScore에 담고, fScore와 iScore를 한 줄에 하나씩 출력하세요.\n\n[출력 예시]\n95.7\n95\n\n주의: 소수부는 반올림이 아니라 버려집니다. 캐스팅 없이 그냥 대입해도 컴파일은 되지만(암시적 형변환), 이번 문제에서는 반드시 (int) 명시적 형변환을 사용하세요.",
+      "starter": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    float fScore = 95.7f;\n\n    // TODO: fScore를 C 스타일 명시적 형변환 (int)를 사용해\n    //       int 변수 iScore에 담으세요.\n\n    // TODO: fScore와 iScore를 한 줄에 하나씩 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "float\\s+fScore\\s*=\\s*95\\.7f",
+          "desc": "float 변수 fScore = 95.7f 선언 유지"
+        },
+        {
+          "pattern": "int\\s+iScore",
+          "desc": "int형 변수 iScore 선언"
+        },
+        {
+          "pattern": "\\(int\\)\\s*fScore",
+          "desc": "C 스타일 명시적 형변환 (int)fScore 사용"
+        },
+        {
+          "pattern": "cout\\s*<<\\s*fScore",
+          "desc": "fScore 출력"
+        },
+        {
+          "pattern": "cout\\s*<<\\s*iScore",
+          "desc": "iScore 출력"
+        }
+      ],
+      "solution": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    float fScore = 95.7f;\n\n    int iScore = (int)fScore;\n\n    cout << fScore << endl;\n    cout << iScore << endl;\n\n    return 0;\n}",
+      "explain": "float 값을 int로 바꿀 때 (int)fScore처럼 C 스타일 명시적 형변환을 사용하면 '일부러 변환했다'는 의도가 코드에 드러난다. 캐스팅 없이 int iScore = fScore;라고 써도 암시적 형변환으로 컴파일은 되지만 경고가 뜰 수 있다. 이때 소수부 0.7은 반올림되지 않고 버려져 95가 된다."
+    },
+    {
+      "title": "드래곤 패턴을 쿠파 패턴으로",
+      "prompt": "enum class DRAGON_PATTERN의 TRACING 값을 C++ 스타일 캐스팅 static_cast를 사용해 KOOPA_PATTERN 타입 변수 Koopa에 대입하고, switch문으로 Koopa가 어떤 패턴인지 이름을 출력하세요. switch에는 KOOPA_PATTERN의 모든 열거자 case와 default를 포함하세요.\n\n[출력 예시]\nHIT\n\n힌트: enum class는 이름이 아니라 내부 정수값으로 변환됩니다. DRAGON_PATTERN::TRACING의 내부값은 3이고, KOOPA_PATTERN에서 3은 HIT입니다. 같은 이름인 TRACING이 출력될 것이라고 생각하면 안 됩니다.",
+      "starter": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum class KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE,\n};\n\nenum class DRAGON_PATTERN\n{\n    BREATH,\n    IDLE,\n    ATTACK,\n    TRACING,\n    DIE,\n};\n\nint main()\n{\n    // TODO: static_cast를 사용해 DRAGON_PATTERN::TRACING을\n    //       KOOPA_PATTERN 변수 Koopa에 대입하세요.\n\n    // TODO: switch문으로 Koopa의 패턴 이름을 출력하세요. (모든 case + default)\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "enum\\s+class\\s+KOOPA_PATTERN",
+          "desc": "enum class KOOPA_PATTERN 정의 유지"
+        },
+        {
+          "pattern": "static_cast\\s*<\\s*KOOPA_PATTERN\\s*>\\s*\\(\\s*DRAGON_PATTERN::TRACING\\s*\\)",
+          "desc": "static_cast로 DRAGON_PATTERN::TRACING을 KOOPA_PATTERN으로 변환"
+        },
+        {
+          "pattern": "switch\\s*\\(",
+          "desc": "switch문 사용"
+        },
+        {
+          "pattern": "case\\s+KOOPA_PATTERN::HIT",
+          "desc": "KOOPA_PATTERN::HIT case 처리"
+        },
+        {
+          "pattern": "default\\s*:",
+          "desc": "default 처리"
+        }
+      ],
+      "solution": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum class KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE,\n};\n\nenum class DRAGON_PATTERN\n{\n    BREATH,\n    IDLE,\n    ATTACK,\n    TRACING,\n    DIE,\n};\n\nint main()\n{\n    KOOPA_PATTERN Koopa = static_cast<KOOPA_PATTERN>(DRAGON_PATTERN::TRACING);\n\n    switch (Koopa)\n    {\n    case KOOPA_PATTERN::ATTACK:\n        cout << \"ATTACK\" << endl;\n        break;\n    case KOOPA_PATTERN::TRACING:\n        cout << \"TRACING\" << endl;\n        break;\n    case KOOPA_PATTERN::DIE:\n        cout << \"DIE\" << endl;\n        break;\n    case KOOPA_PATTERN::HIT:\n        cout << \"HIT\" << endl;\n        break;\n    case KOOPA_PATTERN::HEAL:\n        cout << \"HEAL\" << endl;\n        break;\n    case KOOPA_PATTERN::STUN:\n        cout << \"STUN\" << endl;\n        break;\n    case KOOPA_PATTERN::IDLE:\n        cout << \"IDLE\" << endl;\n        break;\n    default:\n        cout << \"DEFAULT\" << endl;\n        break;\n    }\n\n    return 0;\n}",
+      "explain": "enum class는 서로 다른 타입끼리 암시적 변환이 되지 않으므로 static_cast<KOOPA_PATTERN>(...)으로 명시적 변환이 필요하다. 변환은 이름이 아니라 내부 정수값 기준이라 DRAGON_PATTERN::TRACING(3)은 KOOPA_PATTERN에서 HIT(3)이 된다. switch문에 모든 case와 default를 갖추면 열거자 범위 밖의 값이 들어와도 안전하게 처리할 수 있다."
+    },
+    {
+      "title": "크리티컬 데미지 계산기",
+      "prompt": "몬스터의 HP가 100일 때, 크리티컬 공격의 데미지를 계산해 남은 HP를 구하는 프로그램을 작성하세요.\n\n1. int iHP = 100, int iAttack = 7, float fMultiplier = 1.5f를 선언합니다. (starter에 이미 있음)\n2. 크리티컬 데미지 iAttack * fMultiplier를 float 변수 fCritical에 저장하세요. (int가 float로 암시적 형변환되어 계산됩니다)\n3. 실제 적용 데미지는 소수부를 버린 정수입니다. C++ 스타일 캐스팅 static_cast<int>를 사용해 fCritical을 int 변수 iFinal에 저장하세요.\n4. iHP에서 iFinal을 빼서 남은 HP를 구하세요.\n5. char cGrade = 'A'를 선언하고, C 스타일 캐스팅 (int)를 사용해 cGrade의 ASCII 코드를 출력하세요.\n6. 아래 예시와 똑같은 형식으로 4줄을 출력하세요.\n\n[출력 예시]\n크리티컬 데미지 : 10.5\n적용 데미지 : 10\n남은 HP : 90\n등급 코드 : 65",
+      "starter": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int   iHP = 100;\n    int   iAttack = 7;\n    float fMultiplier = 1.5f;\n\n    // TODO: 크리티컬 데미지(iAttack * fMultiplier)를 float 변수 fCritical에 저장하세요.\n\n    // TODO: static_cast<int>를 사용해 fCritical을 int 변수 iFinal에 저장하세요.\n\n    // TODO: iHP에서 iFinal을 빼세요.\n\n    // TODO: char cGrade = 'A'; 를 선언하고 (int) 캐스팅으로 ASCII 코드를 구하세요.\n\n    // TODO: 출력 예시와 같은 형식으로 4줄을 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "float\\s+fCritical\\s*=\\s*iAttack\\s*\\*\\s*fMultiplier",
+          "desc": "iAttack * fMultiplier를 float 변수 fCritical에 저장 (암시적 형변환)"
+        },
+        {
+          "pattern": "static_cast\\s*<\\s*int\\s*>\\s*\\(\\s*fCritical\\s*\\)",
+          "desc": "static_cast<int>로 fCritical을 정수로 변환 (C++ 스타일)"
+        },
+        {
+          "pattern": "iHP\\s*(=\\s*iHP\\s*)?-=?\\s*iFinal",
+          "desc": "iHP에서 iFinal을 빼서 남은 HP 계산"
+        },
+        {
+          "pattern": "char\\s+cGrade\\s*=\\s*'A'",
+          "desc": "char 변수 cGrade = 'A' 선언"
+        },
+        {
+          "pattern": "\\(int\\)\\s*cGrade",
+          "desc": "C 스타일 캐스팅 (int)cGrade로 ASCII 코드 변환"
+        },
+        {
+          "pattern": "남은 HP",
+          "desc": "'남은 HP' 출력 형식 사용"
+        }
+      ],
+      "solution": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int   iHP = 100;\n    int   iAttack = 7;\n    float fMultiplier = 1.5f;\n\n    float fCritical = iAttack * fMultiplier;\n\n    int iFinal = static_cast<int>(fCritical);\n\n    iHP = iHP - iFinal;\n\n    char cGrade = 'A';\n\n    cout << \"크리티컬 데미지 : \" << fCritical << endl;\n    cout << \"적용 데미지 : \" << iFinal << endl;\n    cout << \"남은 HP : \" << iHP << endl;\n    cout << \"등급 코드 : \" << (int)cGrade << endl;\n\n    return 0;\n}",
+      "explain": "iAttack * fMultiplier에서 int가 float로 암시적 형변환되어 10.5가 계산된다. 적용 데미지는 static_cast<int>(fCritical)로 소수부를 버려 10을 얻는데, 이것이 C++ 스타일 명시적 형변환이다. 문자 'A'는 (int)cGrade처럼 C 스타일 캐스팅으로 ASCII 코드 65를 얻을 수 있다. 한 프로그램 안에서 암시적 형변환, C 스타일 캐스팅, C++ 스타일 캐스팅이 각각 언제 쓰이는지 비교하는 것이 이 문제의 핵심이다."
+    }
+  ]
+}

@@ -1,0 +1,947 @@
+<title>찬연의 C++ 도장</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground: #F5F6F8;
+    --surface: #FFFFFF;
+    --surface2: #EDF0F4;
+    --ink: #20262E;
+    --muted: #68737F;
+    --accent: #2E6FB8;
+    --accent-soft: #E3EDF8;
+    --accent-ink: #FFFFFF;
+    --ok: #278A5B;
+    --ok-soft: #E6F4EC;
+    --bad: #C94040;
+    --bad-soft: #FAEAEA;
+    --warn: #B07B18;
+    --warn-soft: #FAF2DE;
+    --border: #E1E5EA;
+    --shadow: 0 1px 3px rgba(32,38,46,.07), 0 4px 14px rgba(32,38,46,.05);
+    --code-bg: #1E1E1E;
+    --code-default: #DCDCDC;
+    --code-kw: #569CD6;
+    --code-str: #D69D85;
+    --code-com: #57A64A;
+    --code-num: #B5CEA8;
+    --code-pre: #9B9B9B;
+    --code-fn: #DCDCAA;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #15171C;
+      --surface: #1E222A;
+      --surface2: #262B34;
+      --ink: #E4E8EE;
+      --muted: #9AA4B2;
+      --accent: #569CD6;
+      --accent-soft: #23364A;
+      --accent-ink: #0E1116;
+      --ok: #3EB489;
+      --ok-soft: #17352A;
+      --bad: #E05B5B;
+      --bad-soft: #3B2226;
+      --warn: #D9A741;
+      --warn-soft: #383017;
+      --border: #2B313C;
+      --shadow: 0 1px 3px rgba(0,0,0,.35), 0 4px 14px rgba(0,0,0,.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #15171C;
+    --surface: #1E222A;
+    --surface2: #262B34;
+    --ink: #E4E8EE;
+    --muted: #9AA4B2;
+    --accent: #569CD6;
+    --accent-soft: #23364A;
+    --accent-ink: #0E1116;
+    --ok: #3EB489;
+    --ok-soft: #17352A;
+    --bad: #E05B5B;
+    --bad-soft: #3B2226;
+    --warn: #D9A741;
+    --warn-soft: #383017;
+    --border: #2B313C;
+    --shadow: 0 1px 3px rgba(0,0,0,.35), 0 4px 14px rgba(0,0,0,.25);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-size: 15.5px;
+    line-height: 1.6;
+    -webkit-text-size-adjust: 100%;
+  }
+  button { font: inherit; color: inherit; cursor: pointer; border: none; background: none; padding: 0; }
+  button:focus-visible, a:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  #wrap { max-width: 680px; margin: 0 auto; padding: 0 16px 110px; }
+
+  /* ---------- App bar ---------- */
+  .appbar {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 0 10px;
+    background: var(--ground);
+  }
+  .appbar .back {
+    width: 38px; height: 38px; flex: none;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px; background: var(--surface); border: 1px solid var(--border);
+  }
+  .appbar .back svg { width: 18px; height: 18px; stroke: var(--ink); }
+  .appbar-title { font-weight: 700; font-size: 17px; flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .appbar-sub { color: var(--muted); font-size: 13px; flex: none; font-variant-numeric: tabular-nums; }
+
+  .logo { font-family: 'Do Hyeon', 'IBM Plex Sans KR', sans-serif; font-size: 27px; letter-spacing: .5px; }
+  .logo .dot { color: var(--accent); }
+  .home-date { color: var(--muted); font-size: 13px; }
+
+  /* ---------- Cards & lists ---------- */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; box-shadow: var(--shadow);
+    padding: 16px; margin: 12px 0;
+  }
+  .section-label {
+    margin: 22px 2px 8px; color: var(--muted);
+    font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .chapter-list { display: flex; flex-direction: column; gap: 8px; }
+  .chapter-row {
+    display: flex; align-items: center; gap: 12px; text-align: left;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 13px;
+    padding: 12px 14px; width: 100%;
+  }
+  .chapter-row:active { background: var(--surface2); }
+  .ch-num {
+    flex: none; width: 40px; height: 40px; border-radius: 11px;
+    background: var(--surface2); color: var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Do Hyeon', sans-serif; font-size: 17px;
+  }
+  .ch-num.done { background: var(--ok-soft); color: var(--ok); }
+  .ch-num.part { background: var(--accent-soft); color: var(--accent); }
+  .ch-main { flex: 1; min-width: 0; }
+  .ch-title { font-weight: 500; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ch-sub { color: var(--muted); font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  .ch-pct { flex: none; color: var(--muted); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ch-pct.good { color: var(--ok); }
+
+  .bigbtn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    width: 100%; padding: 14px; border-radius: 13px;
+    background: var(--accent); color: var(--accent-ink);
+    font-weight: 700; font-size: 15.5px;
+  }
+  .bigbtn.ghost { background: var(--surface); color: var(--ink); border: 1px solid var(--border); font-weight: 500; }
+  .bigbtn.subtle { background: var(--surface2); color: var(--ink); font-weight: 500; }
+  .bigbtn:disabled { opacity: .45; cursor: default; }
+  .btnrow { display: flex; gap: 8px; }
+  .btnrow > * { flex: 1; }
+
+  .due-card { border-color: var(--accent); }
+  .due-title { font-weight: 700; font-size: 16px; margin-bottom: 2px; }
+  .due-sub { color: var(--muted); font-size: 13px; margin-bottom: 12px; }
+  .due-n { color: var(--accent); font-family: 'Do Hyeon', sans-serif; font-size: 20px; }
+
+  /* ---------- Quiz ---------- */
+  .qbar { height: 5px; border-radius: 99px; background: var(--surface2); overflow: hidden; margin: 2px 0 14px; }
+  .qbar > i { display: block; height: 100%; background: var(--accent); border-radius: 99px; transition: width .25s ease; }
+  .chips { display: flex; gap: 6px; align-items: center; margin-bottom: 10px; flex-wrap: wrap; }
+  .chip {
+    font-size: 11.5px; font-weight: 700; letter-spacing: .04em;
+    padding: 3px 9px; border-radius: 99px;
+    background: var(--surface2); color: var(--muted);
+  }
+  .chip.acc { background: var(--accent-soft); color: var(--accent); }
+  .chip.warn { background: var(--warn-soft); color: var(--warn); }
+  .chip.bad { background: var(--bad-soft); color: var(--bad); }
+  .qtext { font-size: 16.5px; font-weight: 700; line-height: 1.55; margin: 0 0 12px; text-wrap: balance; }
+
+  pre.code {
+    background: var(--code-bg); color: var(--code-default);
+    font-family: Consolas, 'Cascadia Mono', 'IBM Plex Mono', monospace;
+    font-size: 13px; line-height: 1.6; tab-size: 4;
+    border-radius: 11px; padding: 13px 15px; margin: 0 0 14px;
+    overflow-x: auto; border: 1px solid rgba(255,255,255,.06);
+  }
+  pre.code .k { color: var(--code-kw); }
+  pre.code .s { color: var(--code-str); }
+  pre.code .c { color: var(--code-com); }
+  pre.code .n { color: var(--code-num); }
+  pre.code .p { color: var(--code-pre); }
+  pre.code .f { color: var(--code-fn); }
+
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+  .choice {
+    display: flex; align-items: flex-start; gap: 10px; text-align: left;
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px;
+    padding: 12px 13px; width: 100%; font-size: 15px; line-height: 1.5;
+  }
+  .choice .cnum {
+    flex: none; width: 26px; height: 26px; margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--surface2); color: var(--muted);
+    font-size: 13px; font-weight: 700;
+  }
+  .choice code { font-family: Consolas, 'IBM Plex Mono', monospace; font-size: 13.5px; background: var(--surface2); border-radius: 5px; padding: 1px 5px; }
+  .choice:not(:disabled):active { border-color: var(--accent); }
+  .choice.sel-ok { border-color: var(--ok); background: var(--ok-soft); }
+  .choice.sel-ok .cnum { background: var(--ok); color: #fff; }
+  .choice.sel-bad { border-color: var(--bad); background: var(--bad-soft); }
+  .choice.sel-bad .cnum { background: var(--bad); color: #fff; }
+  .choice.reveal { border-color: var(--ok); }
+  .choice.reveal .cnum { background: var(--ok); color: #fff; }
+  .choice.dim { opacity: .55; }
+
+  .verdict {
+    display: flex; align-items: center; gap: 10px;
+    border-radius: 12px; padding: 12px 14px; margin-top: 14px;
+    font-weight: 700; font-size: 15px;
+  }
+  .verdict.ok { background: var(--ok-soft); color: var(--ok); }
+  .verdict.bad { background: var(--bad-soft); color: var(--bad); }
+  .explain {
+    background: var(--surface2); border-radius: 12px;
+    padding: 13px 15px; margin-top: 10px; font-size: 14.5px;
+  }
+  .explain b.lbl { display: block; font-size: 12px; letter-spacing: .07em; color: var(--muted); margin-bottom: 4px; }
+
+  .quiz-foot { position: sticky; bottom: 88px; margin-top: 16px; }
+
+  /* ---------- Result ---------- */
+  .score-hero { text-align: center; padding: 26px 16px 20px; }
+  .score-big { font-family: 'Do Hyeon', sans-serif; font-size: 64px; line-height: 1; color: var(--accent); }
+  .score-big small { font-size: 26px; color: var(--muted); }
+  .score-msg { font-weight: 700; font-size: 17px; margin-top: 8px; }
+  .score-sub { color: var(--muted); font-size: 13.5px; margin-top: 3px; }
+
+  /* ---------- Dot grid ---------- */
+  .dotgrid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 7px; }
+  .dot {
+    aspect-ratio: 1; border-radius: 9px;
+    background: var(--surface2); color: var(--muted);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums;
+  }
+  .dot.ok { background: var(--ok-soft); color: var(--ok); }
+  .dot.bad { background: var(--bad-soft); color: var(--bad); }
+
+  /* ---------- Wrong book ---------- */
+  .filters { display: flex; gap: 7px; margin: 4px 0 12px; }
+  .fchip {
+    padding: 7px 14px; border-radius: 99px; font-size: 13.5px; font-weight: 500;
+    background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+  }
+  .fchip.on { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 700; }
+  .witem { display: flex; gap: 10px; align-items: flex-start; padding: 11px 0; border-top: 1px solid var(--border); }
+  .witem:first-of-type { border-top: none; }
+  .w-preview { flex: 1; min-width: 0; font-size: 14px; }
+  .w-meta { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .w-streak { flex: none; font-size: 12px; letter-spacing: 2px; color: var(--ok); margin-top: 2px; }
+  .empty { text-align: center; color: var(--muted); padding: 34px 10px; font-size: 14.5px; }
+  .empty .big { font-size: 34px; display: block; margin-bottom: 6px; }
+
+  /* ---------- Coding test ---------- */
+  .tabs { display: flex; background: var(--surface2); border-radius: 12px; padding: 4px; margin: 4px 0 14px; }
+  .tab { flex: 1; padding: 9px; border-radius: 9px; font-size: 14px; font-weight: 500; color: var(--muted); text-align: center; }
+  .tab.on { background: var(--surface); color: var(--ink); font-weight: 700; box-shadow: var(--shadow); }
+  textarea.codebox {
+    width: 100%; min-height: 250px; resize: vertical;
+    background: var(--code-bg); color: var(--code-default); caret-color: #fff;
+    font-family: Consolas, 'Cascadia Mono', 'IBM Plex Mono', monospace;
+    font-size: 13px; line-height: 1.6; tab-size: 4;
+    border-radius: 11px; border: 1px solid var(--border); padding: 13px 15px;
+    white-space: pre; overflow-x: auto;
+  }
+  .checkline { display: flex; gap: 9px; align-items: flex-start; padding: 7px 0; font-size: 14px; }
+  .checkline .mk { flex: none; width: 21px; height: 21px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; margin-top: 1px; }
+  .checkline.pass .mk { background: var(--ok-soft); color: var(--ok); }
+  .checkline.fail .mk { background: var(--bad-soft); color: var(--bad); }
+  .prob-row { display: flex; align-items: center; gap: 11px; width: 100%; text-align: left; padding: 13px 2px; border-top: 1px solid var(--border); }
+  .prob-row:first-of-type { border-top: none; }
+
+  /* ---------- Stats ---------- */
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat-tile { background: var(--surface); border: 1px solid var(--border); border-radius: 13px; padding: 13px 14px; }
+  .stat-num { font-family: 'Do Hyeon', sans-serif; font-size: 28px; color: var(--accent); line-height: 1.15; }
+  .stat-lbl { color: var(--muted); font-size: 12.5px; }
+  .accbar { height: 7px; border-radius: 99px; background: var(--surface2); overflow: hidden; flex: 1; }
+  .accbar > i { display: block; height: 100%; border-radius: 99px; background: var(--accent); }
+  .accrow { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 13.5px; }
+  .accrow .nm { width: 118px; flex: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--muted); }
+  .accrow .pc { width: 40px; flex: none; text-align: right; font-variant-numeric: tabular-nums; font-weight: 700; }
+
+  /* ---------- Bottom nav ---------- */
+  nav {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 30;
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 8px 10px calc(10px + env(safe-area-inset-bottom));
+  }
+  .nav-inner { max-width: 680px; margin: 0 auto; display: flex; }
+  .nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--muted); font-size: 11.5px; font-weight: 500; position: relative; padding: 4px 0; }
+  .nav-btn svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+  .nav-btn.on { color: var(--accent); font-weight: 700; }
+  .nav-badge {
+    position: absolute; top: -1px; left: calc(50% + 6px);
+    min-width: 17px; height: 17px; padding: 0 4px; border-radius: 99px;
+    background: var(--bad); color: #fff; font-size: 10.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ---------- Toast & modal ---------- */
+  #toast {
+    position: fixed; left: 50%; bottom: 100px; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--ground);
+    padding: 10px 18px; border-radius: 99px; font-size: 14px; font-weight: 500;
+    opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+    z-index: 60; white-space: nowrap; max-width: 90vw; overflow: hidden; text-overflow: ellipsis;
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+  #modal-bg { position: fixed; inset: 0; background: rgba(10,12,16,.55); z-index: 50; display: none; }
+  #modal-bg.show { display: flex; align-items: center; justify-content: center; padding: 20px; }
+  #modal { background: var(--surface); border-radius: 16px; padding: 20px; max-width: 420px; width: 100%; max-height: 80vh; overflow-y: auto; }
+
+  .note { color: var(--muted); font-size: 13px; }
+  .hr { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+  h3.blk { font-size: 15px; margin: 18px 0 8px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<div id="wrap"><main id="app"></main></div>
+
+<nav id="nav" hidden>
+  <div class="nav-inner">
+    <button class="nav-btn" data-nav="home">
+      <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9.5h13V10"/></svg>
+      홈
+    </button>
+    <button class="nav-btn" data-nav="wrong">
+      <svg viewBox="0 0 24 24"><path d="M5 4h11.5a2 2 0 0 1 2 2v14l-4-3-4 3-4-3-3.5 3V6a2 2 0 0 1 2-2z"/></svg>
+      오답노트
+      <span class="nav-badge" id="nav-badge" hidden></span>
+    </button>
+    <button class="nav-btn" data-nav="stats">
+      <svg viewBox="0 0 24 24"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
+      기록
+    </button>
+  </div>
+</nav>
+
+<div id="toast" role="status"></div>
+<div id="modal-bg"><div id="modal"></div></div>
+
+<script>
+window.QUIZ_DATA = __QUIZ_DATA_JSON__;
+</script>
+<script>
+(function () {
+  'use strict';
+
+  /* ================= data ================= */
+  var DATA = (window.QUIZ_DATA && window.QUIZ_DATA.chapters) || [];
+  DATA.sort(function (a, b) { return a.num - b.num; });
+  var byId = {};
+  DATA.forEach(function (c) { byId[c.id] = c; });
+
+  var CIRC = ['①', '②', '③', '④'];
+
+  /* ================= storage ================= */
+  var PFX = 'dojo.';
+  function sget(k, d) {
+    try {
+      var v = localStorage.getItem(PFX + k);
+      return v === null ? d : JSON.parse(v);
+    } catch (e) { return d; }
+  }
+  function sset(k, v) {
+    try { localStorage.setItem(PFX + k, JSON.stringify(v)); } catch (e) {}
+  }
+  function todayStr() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  var progress = sget('progress', {});   // {cid: {res:{qi:0|1}, lastIdx:n}}
+  var wrong = sget('wrong', {});         // {"cid|qi": {cid,qi,addedAt,touch,streak}}
+  var codeStore = sget('code', {});      // {"cid|k": {code, passed}}
+  var log = sget('log', {});             // {"YYYY-MM-DD": {n, c}}
+
+  function saveAll() {
+    sset('progress', progress); sset('wrong', wrong);
+    sset('code', codeStore); sset('log', log);
+  }
+  function chProg(cid) {
+    if (!progress[cid]) progress[cid] = { res: {}, lastIdx: 0 };
+    return progress[cid];
+  }
+  function dueItems() {
+    var t = todayStr(), out = [];
+    Object.keys(wrong).forEach(function (k) {
+      if (wrong[k].touch < t) out.push(wrong[k]);
+    });
+    return out;
+  }
+  function allWrongItems() {
+    return Object.keys(wrong).map(function (k) { return wrong[k]; });
+  }
+
+  /* ================= helpers ================= */
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function el(html) {
+    var t = document.createElement('template');
+    t.innerHTML = html.trim();
+    return t.content.firstChild;
+  }
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._tm);
+    t._tm = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+
+  /* ================= VS-style C++ highlighter ================= */
+  var KW = {};
+  ('int char float double bool void short long unsigned signed const static struct enum union typedef using namespace sizeof ' +
+   'if else switch case default break continue for while do return goto true false nullptr NULL auto extern volatile inline wchar_t')
+    .split(' ').forEach(function (w) { KW[w] = 1; });
+
+  var HLRE = /(\/\*[\s\S]*?\*\/|\/\/[^\n]*)|("(?:[^"\\\n]|\\[\s\S])*"?)|('(?:[^'\\\n]|\\[\s\S])*'?)|(^[ \t]*#[^\n]*)|(\b0[xX][0-9a-fA-F]+[uUlL]*|\b\d+(?:\.\d*)?(?:[eE][+-]?\d+)?[fFuUlL]*)|([A-Za-z_]\w*)/gm;
+
+  function hl(src) {
+    var out = '', last = 0, m;
+    HLRE.lastIndex = 0;
+    while ((m = HLRE.exec(src)) !== null) {
+      out += esc(src.slice(last, m.index));
+      var tok = m[0];
+      if (m[1]) out += '<span class="c">' + esc(tok) + '</span>';
+      else if (m[2] || m[3]) out += '<span class="s">' + esc(tok) + '</span>';
+      else if (m[4]) {
+        out += '<span class="p">' + esc(tok).replace(/(&lt;[^&]*&gt;|"[^"]*")/g, '<span class="s">$1</span>') + '</span>';
+      }
+      else if (m[5]) out += '<span class="n">' + esc(tok) + '</span>';
+      else if (m[6]) {
+        if (KW[tok]) out += '<span class="k">' + esc(tok) + '</span>';
+        else {
+          var rest = src.slice(HLRE.lastIndex);
+          if (/^\s*\(/.test(rest)) out += '<span class="f">' + esc(tok) + '</span>';
+          else out += esc(tok);
+        }
+      }
+      last = HLRE.lastIndex;
+    }
+    out += esc(src.slice(last));
+    return out;
+  }
+  function codeBlock(code) {
+    return '<pre class="code"><code>' + hl(code) + '</code></pre>';
+  }
+
+  /* ================= router ================= */
+  var stack = [];
+  var app = document.getElementById('app');
+  var nav = document.getElementById('nav');
+  var ROOTS = { home: 1, wrong: 1, stats: 1 };
+
+  function render() {
+    var cur = stack[stack.length - 1];
+    app.innerHTML = '';
+    window.scrollTo(0, 0);
+    SCREENS[cur.s](cur.p || {});
+    var isRoot = ROOTS[cur.s];
+    nav.hidden = !isRoot;
+    if (isRoot) {
+      document.querySelectorAll('.nav-btn').forEach(function (b) {
+        b.classList.toggle('on', b.getAttribute('data-nav') === cur.s);
+      });
+      updateBadge();
+    }
+  }
+  function go(s, p) { stack.push({ s: s, p: p }); render(); }
+  function back() {
+    if (stack.length > 1) stack.pop();
+    render();
+  }
+  function goRoot(s) { stack = [{ s: s }]; render(); }
+  document.querySelectorAll('.nav-btn').forEach(function (b) {
+    b.addEventListener('click', function () { goRoot(b.getAttribute('data-nav')); });
+  });
+  function updateBadge() {
+    var n = dueItems().length;
+    var bd = document.getElementById('nav-badge');
+    bd.hidden = n === 0;
+    bd.textContent = n > 99 ? '99+' : n;
+  }
+  function appbar(title, sub) {
+    var bar = el('<div class="appbar"><button class="back" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><div class="appbar-title">' + esc(title) + '</div>' + (sub ? '<div class="appbar-sub">' + esc(sub) + '</div>' : '') + '</div>');
+    bar.querySelector('.back').addEventListener('click', back);
+    app.appendChild(bar);
+    return bar;
+  }
+
+  /* ================= answer bookkeeping ================= */
+  function recordAnswer(cid, qi, ok, mode) {
+    var t = todayStr();
+    if (!log[t]) log[t] = { n: 0, c: 0 };
+    log[t].n++; if (ok) log[t].c++;
+
+    var p = chProg(cid);
+    p.res[qi] = ok ? 1 : 0;
+
+    var key = cid + '|' + qi;
+    if (ok) {
+      if (wrong[key]) {
+        wrong[key].streak = (wrong[key].streak || 0) + 1;
+        wrong[key].touch = t;
+        if (wrong[key].streak >= 2) {
+          delete wrong[key];
+          toast('졸업! 오답노트에서 제거됐어요 🎓');
+        }
+      }
+    } else {
+      wrong[key] = {
+        cid: cid, qi: qi,
+        addedAt: (wrong[key] && wrong[key].addedAt) || t,
+        touch: t, streak: 0
+      };
+    }
+    saveAll();
+  }
+
+  /* ================= screens ================= */
+  var SCREENS = {};
+
+  /* ----- home ----- */
+  SCREENS.home = function () {
+    var due = dueItems().length;
+    var wk = ['일', '월', '화', '수', '목', '금', '토'];
+    var d = new Date();
+    var h = el('<div><div class="appbar"><div style="flex:1"><div class="logo">찬연의 C++ 도장<span class="dot">;</span></div><div class="home-date"></div></div></div></div>');
+    h.querySelector('.home-date').textContent = (d.getMonth() + 1) + '월 ' + d.getDate() + '일 (' + wk[d.getDay()] + ') 오늘도 한 판 수련!';
+    app.appendChild(h);
+
+    if (due > 0) {
+      var dc = el('<div class="card due-card"><div class="due-title">오늘의 복습 <span class="due-n">' + due + '문제</span></div><div class="due-sub">어제까지 틀린 문제들이에요. 오늘 다시 풀면 기억이 오래 남아요.</div><button class="bigbtn">복습 시작하기</button></div>');
+      dc.querySelector('button').addEventListener('click', function () { startReview(true); });
+      app.appendChild(dc);
+    }
+
+    var last = sget('last', null);
+    if (last && byId[last.cid]) {
+      var lc = el('<div class="card" style="display:flex;align-items:center;gap:12px;padding:13px 15px"><div style="flex:1;min-width:0"><div style="font-size:12.5px;color:var(--muted)">이어서 공부하기</div><div style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + esc(byId[last.cid].title) + '</div></div><button class="bigbtn subtle" style="width:auto;flex:none;padding:9px 16px">열기</button></div>');
+      lc.querySelector('button').addEventListener('click', function () { go('chapter', { cid: last.cid }); });
+      app.appendChild(lc);
+    }
+
+    var groups = [];
+    DATA.forEach(function (c) {
+      if (!groups.length || groups[groups.length - 1].name !== c.group) groups.push({ name: c.group, items: [] });
+      groups[groups.length - 1].items.push(c);
+    });
+    groups.forEach(function (g) {
+      app.appendChild(el('<div class="section-label">' + esc(g.name) + '</div>'));
+      var list = el('<div class="chapter-list"></div>');
+      g.items.forEach(function (c) {
+        var p = chProg(c.id);
+        var total = c.questions.length;
+        var answered = Object.keys(p.res).length;
+        var correct = 0;
+        Object.keys(p.res).forEach(function (k) { if (p.res[k]) correct++; });
+        var pct = answered ? Math.round(correct / answered * 100) : null;
+        var numCls = answered === 0 ? '' : (answered >= total && correct === total ? 'done' : 'part');
+        var codeN = (c.coding || []).length;
+        var row = el('<button class="chapter-row"><div class="ch-num ' + numCls + '">' + (c.group === '문법' ? String(c.num).padStart(2, '0') : 'P' + (c.num - 26)) + '</div><div class="ch-main"><div class="ch-title">' + esc(c.title) + '</div><div class="ch-sub">' + total + '문제 · 코딩 ' + codeN + ' · 푼 문제 ' + answered + '/' + total + '</div></div><div class="ch-pct ' + (pct !== null && pct >= 80 ? 'good' : '') + '">' + (pct === null ? '' : pct + '%') + '</div></button>');
+        row.addEventListener('click', function () { go('chapter', { cid: c.id }); });
+        list.appendChild(row);
+      });
+      app.appendChild(list);
+    });
+
+    app.appendChild(el('<p class="note" style="margin:20px 4px">새 단원을 배우면 이 앱에 추가할 수 있어요. Claude에게 새 cpp 파일을 주면서 "도장에 단원 추가해줘"라고 요청하면 같은 주소로 업데이트됩니다.</p>'));
+  };
+
+  /* ----- chapter ----- */
+  SCREENS.chapter = function (p) {
+    var c = byId[p.cid];
+    if (!c) { back(); return; }
+    sset('last', { cid: c.id });
+    appbar(c.title, c.srcFile);
+
+    var tab = p.tab || 'quiz';
+    var tabs = el('<div class="tabs"><button class="tab' + (tab === 'quiz' ? ' on' : '') + '">4지선다 ' + c.questions.length + '</button><button class="tab' + (tab === 'code' ? ' on' : '') + '">코딩 테스트 ' + (c.coding || []).length + '</button></div>');
+    var tb = tabs.querySelectorAll('.tab');
+    tb[0].addEventListener('click', function () { stack[stack.length - 1].p = { cid: c.id, tab: 'quiz' }; render(); });
+    tb[1].addEventListener('click', function () { stack[stack.length - 1].p = { cid: c.id, tab: 'code' }; render(); });
+    app.appendChild(tabs);
+
+    if (tab === 'quiz') {
+      var prog = chProg(c.id);
+      var wrongIdx = [];
+      Object.keys(prog.res).forEach(function (k) { if (!prog.res[k]) wrongIdx.push(+k); });
+
+      var card = el('<div class="card"><div class="btnrow" style="margin-bottom:8px"><button class="bigbtn" id="b-start">처음부터 풀기</button></div><div class="btnrow"><button class="bigbtn ghost" id="b-cont">이어서 풀기</button><button class="bigbtn ghost" id="b-rand">랜덤 순서</button></div>' + (wrongIdx.length ? '<div class="btnrow" style="margin-top:8px"><button class="bigbtn subtle" id="b-wrong">이 단원에서 틀린 ' + wrongIdx.length + '문제 다시 풀기</button></div>' : '') + '</div>');
+      function idxAll() { return c.questions.map(function (_, i) { return i; }); }
+      card.querySelector('#b-start').addEventListener('click', function () { startQuiz(c.id, idxAll(), 'chapter'); });
+      var contBtn = card.querySelector('#b-cont');
+      if (!prog.lastIdx || prog.lastIdx >= c.questions.length) { contBtn.disabled = true; contBtn.textContent = '이어서 풀기'; }
+      else contBtn.textContent = (prog.lastIdx + 1) + '번부터 이어서';
+      contBtn.addEventListener('click', function () { startQuiz(c.id, idxAll().slice(prog.lastIdx), 'chapter'); });
+      card.querySelector('#b-rand').addEventListener('click', function () {
+        var a = idxAll();
+        for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+        startQuiz(c.id, a, 'chapter');
+      });
+      var bw = card.querySelector('#b-wrong');
+      if (bw) bw.addEventListener('click', function () { startQuiz(c.id, wrongIdx, 'chapter'); });
+      app.appendChild(card);
+
+      var gridCard = el('<div class="card"><div style="font-weight:700;font-size:14px;margin-bottom:10px">문제별 현황 <span class="note" style="font-weight:400">— 누르면 그 문제만 풀어요</span></div><div class="dotgrid"></div></div>');
+      var grid = gridCard.querySelector('.dotgrid');
+      c.questions.forEach(function (_, i) {
+        var st = prog.res[i];
+        var cls = st === 1 ? ' ok' : (st === 0 ? ' bad' : '');
+        var dot = el('<button class="dot' + cls + '">' + (i + 1) + '</button>');
+        dot.addEventListener('click', function () { startQuiz(c.id, [i], 'chapter'); });
+        grid.appendChild(dot);
+      });
+      app.appendChild(gridCard);
+    } else {
+      var list = el('<div class="card"></div>');
+      (c.coding || []).forEach(function (prob, k) {
+        var saved = codeStore[c.id + '|' + k];
+        var st = saved && saved.passed ? '<span class="chip acc">통과</span>' : (saved && saved.code ? '<span class="chip">작성 중</span>' : '');
+        var lv = ['쉬움', '중간', '어려움'][k] || '';
+        var row = el('<button class="prob-row"><div class="ch-num ' + (saved && saved.passed ? 'done' : '') + '">' + (k + 1) + '</div><div class="ch-main"><div class="ch-title">' + esc(prob.title) + '</div><div class="ch-sub">' + lv + '</div></div>' + st + '</button>');
+        row.addEventListener('click', function () { go('codetest', { cid: c.id, k: k }); });
+        list.appendChild(row);
+      });
+      if (!(c.coding || []).length) list.appendChild(el('<div class="empty">이 단원에는 코딩 문제가 없어요.</div>'));
+      app.appendChild(list);
+      app.appendChild(el('<p class="note" style="margin:14px 4px">코드를 입력하고 채점하면 핵심 기준을 자동으로 확인해요. 더 정확한 첨삭은 "Claude에게 검사받기"로 내 코드를 복사해 Claude 앱에 붙여넣으면 됩니다.</p>'));
+    }
+  };
+
+  /* ----- quiz engine ----- */
+  var qz = null; // {items:[{cid,qi}], pos, nOk, nBad, wrongList, mode}
+
+  function startQuiz(cid, idxs, mode) {
+    if (!idxs.length) { toast('풀 문제가 없어요'); return; }
+    qz = {
+      items: idxs.map(function (i) { return { cid: cid, qi: i }; }),
+      pos: 0, nOk: 0, nBad: 0, wrongList: [], mode: mode
+    };
+    go('quiz');
+  }
+  function startReview(dueOnly) {
+    var items = dueOnly ? dueItems() : allWrongItems();
+    if (!items.length) { toast('복습할 문제가 없어요!'); return; }
+    items = items.slice();
+    for (var i = items.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = items[i]; items[i] = items[j]; items[j] = t; }
+    qz = {
+      items: items.map(function (w) { return { cid: w.cid, qi: w.qi }; }),
+      pos: 0, nOk: 0, nBad: 0, wrongList: [], mode: 'review'
+    };
+    go('quiz');
+  }
+
+  SCREENS.quiz = function () {
+    if (!qz) { back(); return; }
+    var it = qz.items[qz.pos];
+    var c = byId[it.cid];
+    var q = c.questions[it.qi];
+    var total = qz.items.length;
+
+    appbar(qz.mode === 'review' ? '오답 복습' : c.title, (qz.pos + 1) + ' / ' + total);
+    app.appendChild(el('<div class="qbar"><i style="width:' + Math.round(qz.pos / total * 100) + '%"></i></div>'));
+
+    var diffCls = q.difficulty === '심화' ? 'bad' : (q.difficulty === '응용' ? 'warn' : 'acc');
+    var chips = '<div class="chips"><span class="chip ' + diffCls + '">' + esc(q.difficulty || '기초') + '</span>' + (qz.mode === 'review' ? '<span class="chip">' + esc(c.title) + '</span>' : '') + '</div>';
+
+    var card = el('<div class="card">' + chips + '<p class="qtext"></p>' + (q.code ? codeBlock(q.code) : '') + '<div class="choices"></div><div id="fb"></div></div>');
+    card.querySelector('.qtext').textContent = 'Q' + (it.qi + 1) + '. ' + q.q;
+
+    var box = card.querySelector('.choices');
+    var answered = false;
+
+    q.choices.forEach(function (ch, i) {
+      var b = el('<button class="choice"><span class="cnum">' + CIRC[i] + '</span><span class="ctext"></span></button>');
+      b.querySelector('.ctext').textContent = ch;
+      b.addEventListener('click', function () {
+        if (answered) return;
+        answered = true;
+        var ok = i === q.answer;
+        if (ok) qz.nOk++; else { qz.nBad++; qz.wrongList.push(it); }
+        recordAnswer(it.cid, it.qi, ok, qz.mode);
+        if (qz.mode === 'chapter') {
+          var p = chProg(it.cid);
+          if (it.qi + 1 > (p.lastIdx || 0)) { p.lastIdx = it.qi + 1; saveAll(); }
+        }
+
+        var btns = box.querySelectorAll('.choice');
+        btns.forEach(function (bb, bi) {
+          bb.disabled = true;
+          if (bi === i) bb.classList.add(ok ? 'sel-ok' : 'sel-bad');
+          else if (bi === q.answer) bb.classList.add('reveal');
+          else bb.classList.add('dim');
+        });
+
+        var fb = card.querySelector('#fb');
+        fb.innerHTML =
+          '<div class="verdict ' + (ok ? 'ok' : 'bad') + '">' +
+            (ok ? '🎉 정답입니다!' : '❌ 오답이에요. 정답은 ' + CIRC[q.answer] + '번') +
+          '</div>' +
+          '<div class="explain"><b class="lbl">모범답안</b><div style="font-weight:700;margin-bottom:8px">' + CIRC[q.answer] + ' ' + esc(q.choices[q.answer]) + '</div><b class="lbl">해설</b><div class="ex-body"></div></div>';
+        fb.querySelector('.ex-body').textContent = q.explain;
+        if (!ok && qz.mode !== 'review') {
+          fb.appendChild(el('<p class="note" style="margin:8px 2px 0">이 문제는 오답노트에 담겼어요. 내일 "오늘의 복습"에 올라옵니다.</p>'));
+        }
+
+        var foot = el('<div class="quiz-foot"><button class="bigbtn">' + (qz.pos + 1 < total ? '다음 문제' : '결과 보기') + '</button></div>');
+        foot.querySelector('button').addEventListener('click', function () {
+          if (qz.pos + 1 < total) { qz.pos++; render(); }
+          else { stack.pop(); go('result'); }
+        });
+        app.appendChild(foot);
+        foot.querySelector('button').focus();
+        updateBadge();
+      });
+      box.appendChild(b);
+    });
+    app.appendChild(card);
+  };
+
+  /* ----- result ----- */
+  SCREENS.result = function () {
+    if (!qz) { goRoot('home'); return; }
+    var total = qz.items.length;
+    var pct = Math.round(qz.nOk / total * 100);
+    var msg = pct === 100 ? '완벽해요! 오늘 수련 끝!' : pct >= 80 ? '멋져요, 거의 다 왔어요!' : pct >= 50 ? '좋아요. 틀린 문제만 잡으면 돼요.' : '괜찮아요. 오답노트가 도와줄 거예요.';
+    appbar('결과');
+    app.appendChild(el('<div class="card score-hero"><div class="score-big">' + pct + '<small>점</small></div><div class="score-msg">' + esc(msg) + '</div><div class="score-sub">' + total + '문제 중 ' + qz.nOk + '개 정답 · ' + qz.nBad + '개 오답</div></div>'));
+
+    var btns = el('<div class="card"><div class="btnrow" style="flex-direction:column">' +
+      (qz.wrongList.length ? '<button class="bigbtn" id="r-wrong">방금 틀린 ' + qz.wrongList.length + '문제 바로 다시 풀기</button>' : '') +
+      '<button class="bigbtn ghost" id="r-home">홈으로</button></div></div>');
+    var rw = btns.querySelector('#r-wrong');
+    if (rw) rw.addEventListener('click', function () {
+      var items = qz.wrongList.slice();
+      qz = { items: items, pos: 0, nOk: 0, nBad: 0, wrongList: [], mode: qz.mode };
+      stack.pop(); go('quiz');
+    });
+    btns.querySelector('#r-home').addEventListener('click', function () { goRoot('home'); });
+    app.appendChild(btns);
+
+    if (qz.wrongList.length && qz.mode !== 'review') {
+      app.appendChild(el('<p class="note" style="margin:4px 6px">틀린 문제 ' + qz.wrongList.length + '개가 오답노트에 담겼어요. 내일 아침에 다시 만나요!</p>'));
+    }
+  };
+
+  /* ----- wrong book ----- */
+  SCREENS.wrong = function (p) {
+    var filter = (p && p.f) || 'due';
+    app.appendChild(el('<div class="appbar"><div class="appbar-title" style="font-family:\'Do Hyeon\',sans-serif;font-size:24px;font-weight:400">오답노트</div></div>'));
+
+    var due = dueItems(), all = allWrongItems();
+    var fl = el('<div class="filters"><button class="fchip' + (filter === 'due' ? ' on' : '') + '">오늘의 복습 ' + due.length + '</button><button class="fchip' + (filter === 'all' ? ' on' : '') + '">전체 ' + all.length + '</button></div>');
+    var fb = fl.querySelectorAll('.fchip');
+    fb[0].addEventListener('click', function () { stack[stack.length - 1].p = { f: 'due' }; render(); });
+    fb[1].addEventListener('click', function () { stack[stack.length - 1].p = { f: 'all' }; render(); });
+    app.appendChild(fl);
+
+    var items = filter === 'due' ? due : all;
+
+    if (items.length) {
+      var startBtn = el('<button class="bigbtn" style="margin-bottom:4px">' + (filter === 'due' ? '오늘의 복습 시작 (' + due.length + '문제)' : '전체 오답 복습 (' + all.length + '문제)') + '</button>');
+      startBtn.addEventListener('click', function () { startReview(filter === 'due'); });
+      app.appendChild(startBtn);
+    }
+
+    if (!items.length) {
+      app.appendChild(el('<div class="card"><div class="empty"><span class="big">🌱</span>' + (filter === 'due' ? (all.length ? '오늘 복습할 문제는 없어요.<br>틀린 문제는 다음 날 여기에 올라와요.' : '아직 틀린 문제가 없어요.<br>퀴즈를 풀러 가볼까요?') : '오답노트가 비어 있어요.<br>2번 연속 맞히면 문제가 "졸업"해요.') + '</div></div>'));
+      return;
+    }
+
+    var byCh = {};
+    items.forEach(function (w) { (byCh[w.cid] = byCh[w.cid] || []).push(w); });
+    DATA.forEach(function (c) {
+      if (!byCh[c.id]) return;
+      var card = el('<div class="card"><div style="font-weight:700;font-size:14px;margin-bottom:4px">' + esc(c.title) + '</div></div>');
+      byCh[c.id].sort(function (a, b) { return a.qi - b.qi; });
+      byCh[c.id].forEach(function (w) {
+        var q = c.questions[w.qi];
+        if (!q) return;
+        var row = el('<div class="witem"><div class="w-preview"><div class="pv"></div><div class="w-meta">Q' + (w.qi + 1) + ' · 마지막 기록 ' + esc(w.touch) + '</div></div><div class="w-streak">' + (w.streak >= 1 ? '●○' : '○○') + '</div></div>');
+        var pv = row.querySelector('.pv');
+        pv.textContent = q.q.length > 56 ? q.q.slice(0, 56) + '…' : q.q;
+        card.appendChild(row);
+      });
+      app.appendChild(card);
+    });
+    app.appendChild(el('<p class="note" style="margin:8px 6px">●○ = 복습에서 1번 맞힘. 한 번 더 맞히면 졸업이에요.</p>'));
+  };
+
+  /* ----- coding test ----- */
+  SCREENS.codetest = function (p) {
+    var c = byId[p.cid];
+    var prob = c && (c.coding || [])[p.k];
+    if (!prob) { back(); return; }
+    var key = c.id + '|' + p.k;
+    appbar(prob.title, c.title);
+
+    var card = el('<div class="card"><div class="chips"><span class="chip acc">코딩 테스트</span><span class="chip">' + ['쉬움', '중간', '어려움'][p.k] + '</span></div><div class="prob-prompt" style="font-size:14.5px;white-space:pre-wrap"></div></div>');
+    card.querySelector('.prob-prompt').textContent = prob.prompt;
+    app.appendChild(card);
+
+    var saved = codeStore[key];
+    var ed = el('<div><textarea class="codebox" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="코드 입력"></textarea></div>');
+    var ta = ed.querySelector('textarea');
+    ta.value = (saved && saved.code) || prob.starter || '';
+    ta.addEventListener('keydown', function (e) {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        var s = ta.selectionStart, epos = ta.selectionEnd;
+        ta.value = ta.value.slice(0, s) + '    ' + ta.value.slice(epos);
+        ta.selectionStart = ta.selectionEnd = s + 4;
+      }
+    });
+    ta.addEventListener('input', function () {
+      codeStore[key] = codeStore[key] || {};
+      codeStore[key].code = ta.value;
+      saveAll();
+    });
+    app.appendChild(ed);
+
+    var btns = el('<div style="margin-top:10px"><div class="btnrow"><button class="bigbtn" id="ct-grade">채점하기</button></div><div class="btnrow" style="margin-top:8px"><button class="bigbtn ghost" id="ct-sol">모범답안</button><button class="bigbtn ghost" id="ct-claude">Claude에게 검사받기</button><button class="bigbtn ghost" id="ct-reset" style="flex:0 0 76px">초기화</button></div></div>');
+    app.appendChild(btns);
+    var out = el('<div id="ct-out"></div>');
+    app.appendChild(out);
+
+    btns.querySelector('#ct-grade').addEventListener('click', function () {
+      var code = ta.value;
+      var results = (prob.checks || []).map(function (chk) {
+        var pass = false;
+        try { pass = new RegExp(chk.pattern, 'm').test(code); } catch (e) { pass = false; }
+        return { desc: chk.desc, pass: pass };
+      });
+      var nPass = results.filter(function (r) { return r.pass; }).length;
+      var allPass = nPass === results.length && results.length > 0;
+      codeStore[key] = codeStore[key] || {};
+      codeStore[key].code = code;
+      if (allPass) codeStore[key].passed = true;
+      saveAll();
+
+      var html = '<div class="card"><div class="verdict ' + (allPass ? 'ok' : 'bad') + '">' + (allPass ? '🎉 모든 기준 통과! (' + nPass + '/' + results.length + ')' : '기준 ' + nPass + '/' + results.length + ' 충족 — 조금만 더!') + '</div><div style="margin-top:10px">';
+      results.forEach(function (r) {
+        html += '<div class="checkline ' + (r.pass ? 'pass' : 'fail') + '"><span class="mk">' + (r.pass ? '✓' : '✗') + '</span><span></span></div>';
+      });
+      html += '</div><div class="explain" style="margin-top:12px"><b class="lbl">풀이 해설</b><div class="ex-body"></div></div><p class="note" style="margin:10px 2px 0">※ 자동 채점은 핵심 요소만 확인하는 약식 채점이에요. 실제 컴파일 결과나 세밀한 첨삭은 "Claude에게 검사받기"를 활용하세요.</p></div>';
+      out.innerHTML = html;
+      var lines = out.querySelectorAll('.checkline span:last-child');
+      results.forEach(function (r, i) { lines[i].textContent = r.desc; });
+      out.querySelector('.ex-body').textContent = prob.explain;
+      out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    btns.querySelector('#ct-sol').addEventListener('click', function () {
+      out.innerHTML = '<div class="card"><b class="lbl" style="display:block;font-size:12px;letter-spacing:.07em;color:var(--muted);margin-bottom:6px">모범답안</b>' + codeBlock(prob.solution) + '<div class="explain"><b class="lbl">풀이 해설</b><div class="ex-body"></div></div></div>';
+      out.querySelector('.ex-body').textContent = prob.explain;
+      out.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    btns.querySelector('#ct-claude').addEventListener('click', function () {
+      var prompt = '다음은 C++ 연습문제와 내가 작성한 코드야.\n1) 요구사항을 만족하는지 채점해 줘.\n2) 문제가 있으면 고쳐 주고 이유를 설명해 줘.\n3) 이 문제와 관련된 개념을 보충 설명해 줘.\n\n[단원] ' + c.title + '\n\n[문제]\n' + prob.prompt + '\n\n[내 코드]\n```cpp\n' + ta.value + '\n```';
+      copyText(prompt);
+    });
+
+    btns.querySelector('#ct-reset').addEventListener('click', function () {
+      ta.value = prob.starter || '';
+      codeStore[key] = { code: ta.value };
+      saveAll();
+      out.innerHTML = '';
+      toast('시작 코드로 되돌렸어요');
+    });
+  };
+
+  function copyText(text) {
+    function done() { toast('복사 완료! Claude 앱에 붙여넣으세요 📋'); }
+    function fallback() {
+      var bg = document.getElementById('modal-bg'), md = document.getElementById('modal');
+      md.innerHTML = '<div style="font-weight:700;margin-bottom:8px">아래 내용을 길게 눌러 복사하세요</div><textarea class="codebox" style="min-height:180px;font-size:12px" readonly></textarea><button class="bigbtn subtle" style="margin-top:10px">닫기</button>';
+      md.querySelector('textarea').value = text;
+      md.querySelector('button').addEventListener('click', function () { bg.classList.remove('show'); });
+      bg.classList.add('show');
+      md.querySelector('textarea').select();
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, fallback);
+    } else fallback();
+  }
+
+  /* ----- stats ----- */
+  SCREENS.stats = function () {
+    app.appendChild(el('<div class="appbar"><div class="appbar-title" style="font-family:\'Do Hyeon\',sans-serif;font-size:24px;font-weight:400">수련 기록</div></div>'));
+
+    var tn = 0, tc = 0, days = 0;
+    Object.keys(log).forEach(function (d) { tn += log[d].n; tc += log[d].c; days++; });
+    var acc = tn ? Math.round(tc / tn * 100) : 0;
+    var t = todayStr();
+    var todayN = log[t] ? log[t].n : 0;
+
+    app.appendChild(el('<div class="stat-grid"><div class="stat-tile"><div class="stat-num">' + tn + '</div><div class="stat-lbl">지금까지 푼 문제</div></div><div class="stat-tile"><div class="stat-num">' + acc + '%</div><div class="stat-lbl">전체 정답률</div></div><div class="stat-tile"><div class="stat-num">' + todayN + '</div><div class="stat-lbl">오늘 푼 문제</div></div><div class="stat-tile"><div class="stat-num">' + days + '</div><div class="stat-lbl">공부한 날</div></div></div>'));
+
+    var withData = DATA.filter(function (c) { return Object.keys(chProg(c.id).res).length > 0; });
+    if (withData.length) {
+      var card = el('<div class="card"><div style="font-weight:700;font-size:14px;margin-bottom:8px">단원별 정답률</div></div>');
+      withData.forEach(function (c) {
+        var res = chProg(c.id).res, n = 0, ok = 0;
+        Object.keys(res).forEach(function (k) { n++; if (res[k]) ok++; });
+        var pc = Math.round(ok / n * 100);
+        var row = el('<div class="accrow"><span class="nm"></span><span class="accbar"><i style="width:' + pc + '%;' + (pc < 60 ? 'background:var(--bad)' : pc < 80 ? 'background:var(--warn)' : '') + '"></i></span><span class="pc">' + pc + '%</span></div>');
+        row.querySelector('.nm').textContent = c.title;
+        card.appendChild(row);
+      });
+      app.appendChild(card);
+    }
+
+    var wrongN = allWrongItems().length;
+    app.appendChild(el('<div class="card" style="display:flex;align-items:center;gap:10px"><div style="flex:1"><div style="font-weight:700">오답노트</div><div class="note">현재 ' + wrongN + '문제 · 오늘 복습 ' + dueItems().length + '문제</div></div></div>'));
+
+    var reset = el('<div class="card"><div style="font-weight:700;font-size:14px;margin-bottom:6px">데이터</div><p class="note" style="margin:0 0 10px">기록은 이 기기 브라우저에만 저장돼요. 같은 휴대폰·브라우저로 접속하면 이어서 공부할 수 있어요.</p><button class="bigbtn ghost" id="rst" style="color:var(--bad)">모든 기록 초기화</button></div>');
+    reset.querySelector('#rst').addEventListener('click', function () {
+      var bg = document.getElementById('modal-bg'), md = document.getElementById('modal');
+      md.innerHTML = '<div style="font-weight:700;margin-bottom:6px">정말 초기화할까요?</div><p class="note" style="margin:0 0 14px">푼 문제 기록, 오답노트, 작성한 코드가 모두 지워져요. 되돌릴 수 없어요.</p><div class="btnrow"><button class="bigbtn ghost" id="m-no">취소</button><button class="bigbtn" id="m-yes" style="background:var(--bad)">초기화</button></div>';
+      md.querySelector('#m-no').addEventListener('click', function () { bg.classList.remove('show'); });
+      md.querySelector('#m-yes').addEventListener('click', function () {
+        progress = {}; wrong = {}; codeStore = {}; log = {};
+        saveAll(); sset('last', null);
+        bg.classList.remove('show');
+        toast('기록을 초기화했어요');
+        render();
+      });
+      bg.classList.add('show');
+    });
+    app.appendChild(reset);
+  };
+
+  /* ================= boot ================= */
+  if (!DATA.length) {
+    app.innerHTML = '<div class="card"><div class="empty">문제 데이터를 불러오지 못했어요.<br>Claude에게 다시 게시해 달라고 요청해 주세요.</div></div>';
+  } else {
+    document.getElementById('modal-bg').addEventListener('click', function (e) {
+      if (e.target === this) this.classList.remove('show');
+    });
+    goRoot('home');
+  }
+})();
+</script>

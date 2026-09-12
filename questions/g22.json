@@ -1,0 +1,484 @@
+{
+  "id": "g22",
+  "num": 22,
+  "group": "문법",
+  "title": "포인터 (Pointer)",
+  "srcFile": "22. Pointer.cpp",
+  "questions": [
+    {
+      "q": "포인터(Pointer) 변수에 저장되는 것은 무엇인가?",
+      "code": null,
+      "choices": [
+        "가리키는 변수에 저장된 값",
+        "가리키는 변수의 메모리 주소",
+        "가리키는 변수의 자료형 정보",
+        "가리키는 변수의 이름 문자열"
+      ],
+      "answer": 1,
+      "explain": "일반 변수는 자신의 자료형에 해당하는 값을 저장하지만, 포인터 변수는 메모리 주소(Memory Address)를 저장한다. 가리키는 변수에 저장된 값은 포인터에 직접 들어있는 것이 아니라 역참조(*)를 해야 접근할 수 있다. 자료형 정보나 변수 이름은 포인터에 저장되지 않으며, 자료형은 컴파일러가 문법적으로 관리할 뿐이다. 포인터를 이해할 때는 항상 '주소를 담는 변수'라는 정의에서 출발하면 된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "x64(64bit) 환경에서 실행되는 프로그램을 개발할 때 int* 포인터의 크기는?",
+      "code": null,
+      "choices": [
+        "2 Byte",
+        "4 Byte",
+        "8 Byte",
+        "가리키는 자료형인 int와 같은 크기"
+      ],
+      "answer": 2,
+      "explain": "x64 환경의 메모리 주소 체계는 64bit이므로 포인터의 크기는 8Byte이다. 4Byte는 x86(32bit) 환경에서의 포인터 크기라 헷갈리기 쉽다. 포인터는 주소를 저장하는 변수이므로 그 크기는 가리키는 자료형(int, char, double 등)과는 무관하게 환경(주소 체계)에 의해 결정된다. 그래서 같은 환경에서는 char*든 double*든 sizeof 결과가 모두 같다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "int* pNumber = &iNumber; 선언에서 &의 역할은 무엇인가?",
+      "code": null,
+      "choices": [
+        "iNumber의 메모리 주소를 얻는다",
+        "iNumber의 값을 복사한다",
+        "iNumber와 비트 AND 연산을 한다",
+        "pNumber를 역참조한다"
+      ],
+      "answer": 0,
+      "explain": "변수 이름 앞에 &를 붙이면 해당 변수의 메모리 주소를 얻을 수 있고, 이 주소를 포인터에 저장하는 것이 포인터 초기화의 기본 형태다. 값을 복사하는 것은 일반 대입이며 &와는 관계없다. 비트 AND는 & 기호가 두 피연산자 사이에 올 때(a & b)의 이야기로, 변수 앞에 단독으로 붙는 주소 연산자와는 다르다. 역참조는 & 가 아니라 * 를 포인터 앞에 붙이는 것이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "역참조(Dereference)에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "포인터 변수 자신의 주소를 얻는 것",
+        "포인터에 새로운 주소를 저장하는 것",
+        "포인터를 다른 자료형으로 변환하는 것",
+        "포인터가 가리키는 메모리 주소에 저장된 데이터에 접근하는 것"
+      ],
+      "answer": 3,
+      "explain": "역참조는 포인터 앞에 * 를 붙여 포인터가 가리키는 주소에 저장된 데이터에 접근하는 것으로, 값을 읽을 수도 있고 변경할 수도 있다. 포인터 변수 자신의 주소를 얻는 것은 &pNumber처럼 주소 연산자를 쓰는 경우라 반대 개념이다. 포인터에 새로운 주소를 저장하는 것은 pNumber = &다른변수; 형태의 단순 대입이다. 주소만으로는 숫자에 불과하므로 실제로 무언가 처리하려면 반드시 그 주소에 접근(역참조)해야 한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "int형 변수 iNumber의 주소를 저장하는 포인터 선언으로 올바른 것은?",
+      "code": null,
+      "choices": [
+        "int pNumber = &iNumber;",
+        "int* pNumber = &iNumber;",
+        "int* pNumber = iNumber;",
+        "*int pNumber = &iNumber;"
+      ],
+      "answer": 1,
+      "explain": "포인터 선언 형식은 DataType* PointerName = &VariableName; 이다. 자료형 뒤에 * 를 붙여 포인터로 선언하고, 변수 앞에 & 를 붙여 주소를 얻어 저장한다. int pNumber = &iNumber; 는 주소를 일반 int에 넣으려는 것이라 자료형이 맞지 않고, int* pNumber = iNumber; 는 주소가 아닌 값을 포인터에 넣으려는 것이라 잘못됐다. *int 처럼 자료형 앞에 * 를 쓰는 것은 문법 자체가 성립하지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "Dangling Pointer(댕글링 포인터)란 무엇인가?",
+      "code": null,
+      "choices": [
+        "실제 변수가 존재하지 않는 허공을 가리키는 포인터",
+        "두 개 이상의 변수를 동시에 가리키는 포인터",
+        "const가 붙어 값을 바꿀 수 없는 포인터",
+        "주소 대신 일반 값을 저장하고 있는 포인터"
+      ],
+      "answer": 0,
+      "explain": "포인터로 메모리에 접근할 때는 그 주소에 실제 변수가 존재해야 하는데, 존재하지 않는 허공을 가리키는 상태의 포인터를 Dangling Pointer라고 한다. 포인터는 어차피 한 번에 하나의 주소만 저장하므로 여러 변수를 동시에 가리키는 포인터라는 개념은 없다. const 포인터는 값이나 대상 변경이 제한된 정상적인 포인터로 별개의 개념이다. 댕글링 포인터가 가리키는 곳에 값을 쓰면 다른 데이터가 훼손될 수 있어 매우 위험하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "Dangling Pointer가 가리키는 메모리에 값을 저장하면 안 되는 근본적인 이유는?",
+      "code": null,
+      "choices": [
+        "컴파일러가 항상 컴파일 오류를 내기 때문",
+        "포인터의 크기가 8바이트를 초과하게 되기 때문",
+        "그 메모리 공간에 다른 프로세스나 내 프로세스의 다른 변수가 저장되어 있을 수 있어 데이터가 훼손될 위험이 있기 때문",
+        "값을 저장하는 순간 포인터가 자동으로 0으로 초기화되기 때문"
+      ],
+      "answer": 2,
+      "explain": "허공을 가리키는 주소에 값을 쓰면 그 메모리 공간을 이미 사용 중인 다른 변수나 다른 프로세스의 데이터가 훼손될 위험이 있다. 이런 코드는 컴파일러가 항상 잡아주지 못하고 컴파일이 통과되는 경우가 많아서 오히려 더 위험하다. 포인터 크기는 환경(x86/x64)에 의해 고정되며 값 저장과는 무관하다. 포인터가 자동으로 0이 되는 일도 없으므로, 프로그래머 스스로 유효한 주소만 가리키도록 관리해야 한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "double형 변수 dValue의 주소를 저장하려면 어떤 포인터를 사용해야 하는가?",
+      "code": null,
+      "choices": [
+        "int* p = &dValue;",
+        "double p = &dValue;",
+        "char* p = &dValue;",
+        "double* p = &dValue;"
+      ],
+      "answer": 3,
+      "explain": "모든 자료형으로 포인터를 선언할 수 있으며, 어떤 자료형 변수의 주소는 반드시 같은 자료형의 포인터에 저장해야 한다. double 데이터의 주소이므로 double* 에 저장하는 것이 맞다. int* 나 char* 에 double의 주소를 넣으려 하면 자료형이 맞지 않아 컴파일 오류가 난다. double p = &dValue; 는 포인터가 아닌 일반 double 변수에 주소를 넣으려는 것이라 역시 잘못됐다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "x86(32bit) 환경에서 sizeof(char*)와 sizeof(double*)를 비교하면?",
+      "code": null,
+      "choices": [
+        "char*는 1바이트, double*는 8바이트",
+        "둘 다 4바이트로 같다",
+        "char*는 4바이트, double*는 8바이트",
+        "둘 다 8바이트로 같다"
+      ],
+      "answer": 1,
+      "explain": "포인터는 자료형과 상관없이 메모리 주소를 저장하는 변수이므로, x86 환경에서는 모든 포인터가 4바이트로 동일하다. char는 1바이트, double은 8바이트라는 자료형 자체의 크기와 포인터의 크기를 혼동하기 쉬운데, 포인터의 크기는 가리키는 대상이 아니라 주소 체계가 결정한다. 둘 다 8바이트인 것은 x64 환경에서의 이야기다. 수업 예제에서도 char*, int*, float*, double*, Student* 의 sizeof가 모두 같게 출력된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "const int* pNumber1 = &iNumber1; 선언에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "역참조를 통해 가리킨 대상의 값을 바꿀 수 없다",
+        "포인터가 다른 변수를 가리키도록 바꿀 수 없다",
+        "가리킬 대상 변경과 역참조를 통한 값 변경이 모두 불가능하다",
+        "iNumber1 자체가 상수가 되어 어떤 방법으로도 값을 바꿀 수 없다"
+      ],
+      "answer": 0,
+      "explain": "const int* 는 '가리킨 대상의 값을 역참조로 바꿀 수 없다'는 의미로, *pNumber1 = 1004; 같은 코드는 컴파일 오류가 난다. 반면 포인터 자체는 const가 아니므로 pNumber1 = &다른변수; 로 가리키는 대상을 바꾸는 것은 가능하다. 대상 변경까지 막는 것은 int* const, 둘 다 막는 것은 const int* const 이다. iNumber1 자체는 상수가 되는 것이 아니라서 iNumber1 = 5; 처럼 변수 이름으로 직접 바꾸는 것은 여전히 가능하다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "int* const pNumber3 = &iNumber3; 선언에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "역참조를 통해 값을 바꿀 수 없다",
+        "선언할 때 초기화하지 않고 나중에 주소를 넣어도 된다",
+        "가리키는 대상(포인터에 저장된 주소)을 바꿀 수 없다",
+        "const int* pNumber3와 완전히 같은 의미다"
+      ],
+      "answer": 2,
+      "explain": "int* const 는 포인터 변수 자체가 const라는 뜻으로, pNumber3 = &iNumber2; 처럼 다른 변수를 가리키도록 바꾸면 컴파일 오류가 난다. 반면 역참조를 통한 값 변경(*pNumber3 = 100;)은 가능하다는 점이 const int* 와의 결정적 차이다. const int* 는 반대로 값 변경이 불가능하고 대상 변경이 가능하므로 완전히 같은 의미가 아니다. 포인터 자체가 상수이므로 선언과 동시에 반드시 초기화해야 한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "const int* const pNumber4 = &iNumber4; 선언에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "역참조를 통한 값 변경만 가능하다",
+        "가리키는 대상 변경만 가능하다",
+        "역참조를 통한 값 변경과 대상 변경이 모두 가능하다",
+        "가리키는 대상 변경과 역참조를 통한 값 변경이 모두 불가능하다"
+      ],
+      "answer": 3,
+      "explain": "앞의 const는 가리킨 대상의 값을 역참조로 바꿀 수 없게 하고, * 뒤의 const는 포인터 자체(저장된 주소)를 바꿀 수 없게 한다. 두 const가 모두 붙었으므로 가리킬 변수도, 역참조로 값도 바꿀 수 없다. 값 변경만 막는 것은 const int*, 대상 변경만 막는 것은 int* const 라는 점과 구분해야 한다. const의 위치가 * 앞이면 대상의 값, * 뒤면 포인터 자신에 대한 제약이라고 기억하면 쉽다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "int* a, b; 라고 선언했을 때 b의 자료형은 무엇인가?",
+      "code": null,
+      "choices": [
+        "int* (포인터)",
+        "int (일반 변수)",
+        "자료형이 정해지지 않아 컴파일 오류가 난다",
+        "a와 같은 메모리를 공유하는 포인터"
+      ],
+      "answer": 1,
+      "explain": "C/C++ 포인터 선언의 본질은 * 가 타입이 아니라 변수에 붙는다는 것이다. 그래서 int* a, b; 에서 a만 포인터이고 b는 일반 int 변수가 된다. 컴파일 오류가 나는 것이 아니라 조용히 int로 선언되기 때문에 오히려 발견하기 어려운 실수가 된다. 둘 다 포인터로 선언하려면 int *a, *b; 처럼 각 변수마다 * 를 붙여야 하며, 이런 이유로 전통 C 스타일은 int *p 형태를 쓴다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "\"선언은 사용법을 거꾸로 써놓은 것\"이라는 관점에서 int *p; 선언이 의미하는 것은?",
+      "code": null,
+      "choices": [
+        "*p 라고 사용(역참조)했을 때 그 결과가 int라는 뜻이다",
+        "p가 int 값을 직접 저장한다는 뜻이다",
+        "* 라는 이름의 int 변수를 만든다는 뜻이다",
+        "int 자료형의 크기가 포인터와 같아진다는 뜻이다"
+      ],
+      "answer": 0,
+      "explain": "선언 문법은 '변수를 쓰는 방식 그대로 선언한다'는 원리를 따른다. int *p; 는 *p 형태로 사용했을 때 int가 나온다는 뜻이므로 p 자체는 int의 주소를 담는 포인터다. p가 int 값을 직접 저장한다면 그냥 int p; 로 선언했을 것이다. 이 원리는 int arr[10]; 을 arr[3] 처럼 쓰는 것에도 똑같이 적용된다. 선언과 사용법이 거울처럼 대응된다는 점을 기억하면 복잡한 선언도 읽어낼 수 있다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "int const* p 와 완전히 같은 의미인 선언은?",
+      "code": null,
+      "choices": [
+        "int* const p",
+        "const int* const p",
+        "const int* p",
+        "int* p"
+      ],
+      "answer": 2,
+      "explain": "const int* 와 int const* 는 둘 다 '가리킨 대상의 값을 역참조로 바꿀 수 없는 포인터'로 완전히 같은 의미다. const가 * 보다 앞에만 있으면 int 앞이든 뒤든 대상의 값에 대한 제약이 된다. int* const 는 * 뒤에 const가 있으므로 포인터 자체를 바꿀 수 없다는 전혀 다른 의미다. const int* const 는 두 제약을 모두 가지므로 역시 같지 않고, int* p 는 아무 제약이 없는 일반 포인터다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 10;\nint* pNumber = &iNumber;\n\ncout << *pNumber << endl;",
+      "choices": [
+        "10",
+        "iNumber의 주소값",
+        "pNumber 자신의 주소값",
+        "0"
+      ],
+      "answer": 0,
+      "explain": "pNumber는 iNumber의 주소를 저장하고 있고, *pNumber 는 그 주소에 접근(역참조)해 저장된 값을 읽으므로 10이 출력된다. 주소값이 출력되는 것은 * 없이 cout << pNumber 라고 썼을 때다. 포인터 자신의 주소는 &pNumber 로 얻는 것이므로 역시 다르다. '역참조 = 가리키는 변수 그 자체처럼 동작'이라는 감각을 잡는 것이 포인터의 첫걸음이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 10;\nint* pNumber = &iNumber;\n\n*pNumber = 1004;\n\ncout << iNumber << endl;",
+      "choices": [
+        "10",
+        "주소값이 출력된다",
+        "1004",
+        "컴파일 오류"
+      ],
+      "answer": 2,
+      "explain": "*pNumber = 1004; 는 pNumber가 가리키는 주소, 즉 iNumber가 있는 메모리에 1004를 저장하는 것이므로 iNumber의 값 자체가 1004로 바뀐다. 역참조 대입은 가리키는 변수 자체가 되는 것 같은 Side Effect를 가진다는 것이 수업의 핵심 포인트였다. 10이 나온다고 생각했다면 포인터를 통한 변경이 원본에 반영된다는 점을 놓친 것이다. 문법적으로 완전히 정상인 코드이므로 컴파일 오류도 아니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 10;\n\ncout << *&iNumber << endl;",
+      "choices": [
+        "iNumber의 주소값",
+        "10",
+        "컴파일 오류",
+        "쓰레기값"
+      ],
+      "answer": 1,
+      "explain": "&iNumber 로 iNumber의 주소를 얻고, 그 주소에 * 를 붙여 접근하면 다시 iNumber의 값인 10이 나온다. 역참조는 포인터 변수의 전유물이 아니라 주소 자체에 * 처리를 하면 해당 주소에 접근할 수 있다. 주소값이 출력되려면 * 없이 &iNumber 만 출력해야 한다. 결국 *& 는 서로 상쇄되는 것처럼 동작하므로 원래 변수를 그대로 쓴 것과 같은 결과가 된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "x64(64bit) 환경에서 컴파일했을 때 다음 코드의 출력 결과는?",
+      "code": "cout << sizeof(char*) << \" \" << sizeof(double*) << endl;",
+      "choices": [
+        "1 8",
+        "4 4",
+        "4 8",
+        "8 8"
+      ],
+      "answer": 3,
+      "explain": "x64 환경에서 포인터의 크기는 자료형과 무관하게 모두 8바이트이므로 8 8이 출력된다. 1 8은 char와 double 자료형 자체의 크기를 답한 것으로, 포인터의 크기와 자료형의 크기를 혼동한 것이다. 4 4는 x86(32bit) 환경일 때의 결과다. 포인터는 어떤 자료형을 가리키든 '주소'라는 같은 종류의 데이터를 저장하기 때문에 크기가 모두 같다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드에서 출력되는 것은 무엇인가?",
+      "code": "int iNumber = 10;\nint* pNumber = &iNumber;\n\ncout << pNumber << endl;",
+      "choices": [
+        "iNumber의 메모리 주소",
+        "10",
+        "pNumber 자신의 메모리 주소",
+        "0"
+      ],
+      "answer": 0,
+      "explain": "포인터를 역참조 없이 출력하면 포인터에 저장된 값, 즉 iNumber의 메모리 주소가 그대로 출력된다. 10이 출력되려면 *pNumber 로 역참조해야 한다. pNumber 자신의 주소가 출력되는 것은 &pNumber 를 출력할 때이며, 포인터도 변수라서 자기 자신의 주소를 따로 가진다. 수업 예제에서 pNumber Value와 iNumber Address가 같은 값으로 출력되는 것이 바로 이 원리다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iGold = 500;\nint* pShop = &iGold;\nint* pQuest = &iGold;\n\n*pShop = 900;\n\ncout << *pQuest << endl;",
+      "choices": [
+        "500",
+        "쓰레기값",
+        "900",
+        "컴파일 오류"
+      ],
+      "answer": 2,
+      "explain": "pShop과 pQuest는 모두 iGold의 주소를 저장하고 있으므로 같은 변수를 가리킨다. *pShop = 900; 으로 iGold 자체가 900이 되었고, *pQuest 도 같은 iGold를 역참조하므로 900이 출력된다. 500이라고 답했다면 두 포인터가 각자 별도의 복사본을 가진다고 오해한 것인데, 포인터는 값을 복사하는 것이 아니라 같은 메모리를 가리킬 뿐이다. 한 변수를 여러 포인터가 가리키는 것은 문법적으로 전혀 문제없다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber1 = 10;\nint iNumber2 = 20;\n\nint* pNumber = &iNumber1;\npNumber = &iNumber2;\n\n*pNumber = 99;\n\ncout << iNumber1 << \" \" << iNumber2 << endl;",
+      "choices": [
+        "99 20",
+        "10 99",
+        "99 99",
+        "10 20"
+      ],
+      "answer": 1,
+      "explain": "pNumber는 처음에 iNumber1을 가리켰지만 pNumber = &iNumber2; 로 가리키는 대상이 iNumber2로 바뀌었다. 따라서 *pNumber = 99; 는 마지막에 가리키던 iNumber2만 99로 바꾸고, iNumber1은 10 그대로다. 99 20이라고 답했다면 포인터 재지정 이후에도 처음 대상을 계속 가리킨다고 오해한 것이다. 포인터는 저장된 주소가 바뀌면 그 순간부터 새 대상만 가리키며, 이전 대상과의 연결은 완전히 끊어진다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 두 출력에 대한 설명으로 옳은 것은?",
+      "code": "int iNumber = 10;\nint* pNumber = &iNumber;\n\ncout << pNumber << endl;\ncout << &pNumber << endl;",
+      "choices": [
+        "두 줄 모두 항상 같은 주소가 출력된다",
+        "첫 줄은 10, 둘째 줄은 주소가 출력된다",
+        "첫 줄은 pNumber 자신의 주소, 둘째 줄은 iNumber의 주소다",
+        "첫 줄은 iNumber의 주소, 둘째 줄은 pNumber 자신의 주소다"
+      ],
+      "answer": 3,
+      "explain": "pNumber에 저장된 값은 iNumber의 주소이므로 첫 줄에는 iNumber의 주소가 출력된다. 포인터 변수도 메모리 어딘가에 존재하는 변수이므로 자기 자신의 주소를 가지며, &pNumber 는 그 주소를 얻으므로 둘째 줄은 pNumber 자신의 주소다. 두 주소는 서로 다른 변수의 위치이므로 같을 수 없다. 첫 줄에서 10이 나오려면 *pNumber 로 역참조해야 한다는 점도 함께 구분해두자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드를 순서대로 실행했을 때 최종 출력 결과는?",
+      "code": "int iNumber = 10;\nint* pNumber = &iNumber;\n\n*pNumber = iNumber;\n*pNumber = 25;\n\ncout << iNumber << endl;",
+      "choices": [
+        "25",
+        "10",
+        "주소값이 출력된다",
+        "정의되지 않은 동작이 발생한다"
+      ],
+      "answer": 0,
+      "explain": "*pNumber = iNumber; 는 pNumber의 역참조(즉 iNumber)에 iNumber의 값을 넣는 것이므로 iNumber = iNumber와 같아 아무 변화가 없다. 이어서 *pNumber = 25; 는 iNumber = 25와 같으므로 최종적으로 25가 출력된다. 10이라고 답했다면 마지막 역참조 대입이 원본 변수를 바꾼다는 점을 놓친 것이다. pNumber가 유효한 변수(iNumber)를 가리키고 있으므로 정의되지 않은 동작도 아니다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iPoint = 3;\nint* pPoint = &iPoint;\n\n*pPoint = *pPoint + 7;\n\ncout << iPoint << endl;",
+      "choices": [
+        "3",
+        "10",
+        "7",
+        "iPoint의 주소에 7을 더한 값"
+      ],
+      "answer": 1,
+      "explain": "우변의 *pPoint 는 iPoint의 값 3을 읽어오고, 좌변의 *pPoint 는 iPoint에 결과를 저장하므로 iPoint = 3 + 7, 즉 10이 된다. 역참조는 위치에 따라 값 읽기(우변)와 값 쓰기(좌변)로 모두 쓰일 수 있다는 것이 핵심이다. 주소에 7을 더하는 것은 * 없이 pPoint + 7 이라고 썼을 때의 이야기라 전혀 다르다. 역참조된 *pPoint 는 iPoint 그 자체처럼 동작한다고 생각하면 쉽다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드에서 컴파일 오류가 발생하는 줄은?",
+      "code": "int iNumber1 = 10;\nint iNumber2 = 20;\n\nconst int* pNumber = &iNumber1;\n\npNumber = &iNumber2;\n*pNumber = 99;",
+      "choices": [
+        "const int* pNumber = &iNumber1;",
+        "pNumber = &iNumber2;",
+        "*pNumber = 99;",
+        "int iNumber2 = 20;"
+      ],
+      "answer": 2,
+      "explain": "const int* 는 역참조를 통한 값 변경을 막는 포인터이므로 *pNumber = 99; 에서 컴파일 오류가 난다. 반면 포인터 자체는 const가 아니라서 pNumber = &iNumber2; 처럼 가리키는 대상을 바꾸는 것은 허용된다. 이 둘을 반대로 기억하면 int* const 와 혼동하게 되니 주의해야 한다. 선언과 초기화 자체는 정상적인 문법이므로 오류가 아니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드에서 컴파일 오류가 발생하는 줄은?",
+      "code": "int iNumber1 = 10;\nint iNumber2 = 20;\n\nint* const pNumber = &iNumber1;\n\npNumber = &iNumber2;\n*pNumber = 99;",
+      "choices": [
+        "pNumber = &iNumber2;",
+        "*pNumber = 99;",
+        "int* const pNumber = &iNumber1;",
+        "int iNumber1 = 10;"
+      ],
+      "answer": 0,
+      "explain": "int* const 는 포인터 변수 자체가 상수라서 저장된 주소를 바꿀 수 없으므로 pNumber = &iNumber2; 에서 컴파일 오류가 난다. 반면 역참조를 통한 값 변경(*pNumber = 99;)은 허용되므로 오류가 아니다. const int* 와 제약이 정반대라는 점이 이 문제의 핵심이다. 선언과 동시에 &iNumber1로 초기화한 것은 int* const 에서 반드시 필요한 올바른 사용법이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 가장 심각한 문제점은 무엇인가?",
+      "code": "int* pNumber;\n\n*pNumber = 100;\n\ncout << *pNumber << endl;",
+      "choices": [
+        "*pNumber = 100; 이 문법 오류라서 컴파일되지 않는다",
+        "포인터는 선언과 동시에 초기화하면 안 되기 때문이다",
+        "cout으로는 역참조한 값을 출력할 수 없기 때문이다",
+        "초기화되지 않아 허공을 가리키는 포인터를 역참조해 값을 저장하므로 다른 데이터를 훼손할 수 있다"
+      ],
+      "answer": 3,
+      "explain": "pNumber는 유효한 변수의 주소로 초기화되지 않아 어디를 가리키는지 알 수 없는 상태(허공을 가리키는 상태)인데, 여기에 역참조로 100을 저장하면 그 메모리를 쓰고 있을지 모르는 다른 변수나 프로세스의 데이터가 훼손될 수 있다. 문법적으로는 정상이라 컴파일이 통과될 수 있다는 점이 더 위험하며, 문법 오류라고 답하면 이 위험성을 놓치게 된다. 포인터는 오히려 선언과 동시에 유효한 주소로 초기화하는 것이 안전한 습관이다. cout으로 역참조 값을 출력하는 것 자체는 정상적인 사용법이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "pNumber가 iNumber를 가리키게 하려고 한다. 빈칸에 들어갈 것은?",
+      "code": "int iNumber = 10;\n\nint* pNumber = ____;\n\ncout << *pNumber << endl;",
+      "choices": [
+        "iNumber",
+        "&iNumber",
+        "*iNumber",
+        "pNumber"
+      ],
+      "answer": 1,
+      "explain": "포인터에는 값이 아니라 주소를 저장해야 하므로 변수 앞에 & 를 붙여 주소를 얻은 &iNumber 가 들어가야 한다. iNumber만 쓰면 값 10을 포인터에 넣으려는 것이라 자료형이 맞지 않는다. *iNumber 는 포인터가 아닌 일반 변수에 역참조를 시도하는 잘못된 표현이다. 자기 자신인 pNumber를 넣는 것은 아직 아무 주소도 담기지 않은 상태라 의미가 없다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "iNumber라는 이름을 직접 쓰지 않고 포인터로 iNumber의 값을 50으로 바꾸려 한다. 빈칸에 들어갈 것은?",
+      "code": "int iNumber = 10;\nint* pNumber = &iNumber;\n\n____ = 50;\n\ncout << iNumber << endl;    // 50이 출력되어야 한다",
+      "choices": [
+        "pNumber",
+        "&pNumber",
+        "*pNumber",
+        "&iNumber"
+      ],
+      "answer": 2,
+      "explain": "포인터가 가리키는 변수의 값을 바꾸려면 역참조인 *pNumber 에 대입해야 한다. pNumber = 50; 은 정수 값을 포인터(주소를 담는 변수)에 넣으려는 것이라 자료형이 맞지 않아 컴파일 오류가 나며, 의미상으로도 주소를 50번지로 바꾸려는 잘못된 시도다. &pNumber 나 &iNumber 는 주소를 얻는 표현이라 대입의 대상(좌변)으로 쓸 수 없다. 역참조 대입은 가리키는 변수 자체에 값을 쓰는 것이라는 점이 포인터 활용의 핵심이다.",
+      "difficulty": "기초"
+    }
+  ],
+  "coding": [
+    {
+      "title": "포인터 선언과 역참조 출력",
+      "prompt": "int형 변수 iNumber를 10으로 선언하고, iNumber의 주소를 저장하는 포인터 pNumber를 선언하세요. 그 다음 iNumber의 값을 변수 이름으로 한 번, 포인터의 역참조로 한 번 출력하세요.\n\n[출력 예시]\niNumber Value: 10\npNumber Dereference: 10\n\n(두 번째 줄은 반드시 *pNumber 역참조를 사용해 출력해야 합니다.)",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    // TODO: iNumber를 10으로 선언\n\n    // TODO: iNumber의 주소를 저장하는 포인터 pNumber 선언\n\n    // TODO: iNumber의 값을 변수 이름으로 출력\n\n    // TODO: *pNumber 역참조로 같은 값을 출력\n\n    return 0;\n}\n",
+      "checks": [
+        {
+          "pattern": "int\\s+iNumber\\s*=\\s*10",
+          "desc": "iNumber를 10으로 선언했는지 확인"
+        },
+        {
+          "pattern": "int\\s*\\*\\s*pNumber\\s*=\\s*&\\s*iNumber",
+          "desc": "int* 포인터 pNumber에 &iNumber로 주소를 저장했는지 확인"
+        },
+        {
+          "pattern": "<<\\s*iNumber",
+          "desc": "iNumber를 변수 이름으로 출력했는지 확인"
+        },
+        {
+          "pattern": "<<\\s*\\*\\s*pNumber",
+          "desc": "*pNumber 역참조로 값을 출력했는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 10;\n    int* pNumber = &iNumber;\n\n    cout << \"iNumber Value: \" << iNumber << endl;\n    cout << \"pNumber Dereference: \" << *pNumber << endl;\n\n    return 0;\n}\n",
+      "explain": "포인터의 가장 기본적인 사용 흐름을 연습하는 문제입니다. 자료형 뒤에 * 를 붙여 포인터를 선언하고(int* pNumber), 변수 앞에 & 를 붙여 주소를 얻어 저장합니다(&iNumber). 출력할 때 iNumber와 *pNumber 가 같은 값을 보여주는 것은, 역참조가 포인터에 저장된 주소로 찾아가 그곳의 데이터를 읽어오기 때문입니다. 즉 두 표현은 같은 메모리 공간을 서로 다른 경로로 접근한 것입니다."
+    },
+    {
+      "title": "역참조로 HP 회복시키기",
+      "prompt": "캐릭터의 체력 iHP를 40으로 선언하고, iHP의 주소를 저장하는 포인터 pHP를 선언하세요. 회복 전 HP를 출력한 뒤, iHP라는 변수 이름으로 직접 대입하지 말고 반드시 *pHP 역참조만 사용해 HP를 60만큼 회복시키세요. 마지막으로 회복 후 HP를 출력하세요.\n\n[출력 예시]\nBefore HP: 40\nAfter HP: 100",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iHP = 40;\n\n    // TODO: iHP의 주소를 저장하는 포인터 pHP 선언\n\n    cout << \"Before HP: \" << iHP << endl;\n\n    // TODO: *pHP 역참조만 사용해 HP를 60 회복 (iHP에 직접 대입 금지)\n\n    cout << \"After HP: \" << iHP << endl;\n\n    return 0;\n}\n",
+      "checks": [
+        {
+          "pattern": "int\\s+iHP\\s*=\\s*40",
+          "desc": "iHP를 40으로 선언했는지 확인"
+        },
+        {
+          "pattern": "int\\s*\\*\\s*pHP\\s*=\\s*&\\s*iHP",
+          "desc": "포인터 pHP에 &iHP로 주소를 저장했는지 확인"
+        },
+        {
+          "pattern": "\\*\\s*pHP\\s*[+]?=\\s*[^\\s&]",
+          "desc": "*pHP 역참조를 통해 값을 변경했는지 확인"
+        },
+        {
+          "pattern": "Before[\\s\\S]*After",
+          "desc": "회복 전과 후를 순서대로 출력하는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iHP = 40;\n    int* pHP = &iHP;\n\n    cout << \"Before HP: \" << iHP << endl;\n\n    *pHP = *pHP + 60;\n\n    cout << \"After HP: \" << iHP << endl;\n\n    return 0;\n}\n",
+      "explain": "역참조가 값을 읽는 것뿐 아니라 값을 바꾸는 데도 쓰인다는 것을 연습하는 문제입니다. *pHP = *pHP + 60; 에서 우변의 *pHP 는 iHP의 현재 값 40을 읽어오고, 좌변의 *pHP 는 iHP가 있는 메모리에 결과 100을 저장합니다. iHP라는 이름을 한 번도 쓰지 않았는데 iHP의 값이 바뀌는 것이 바로 역참조의 Side Effect입니다. 이 원리는 나중에 함수에 주소를 넘겨 원본 변수를 바꾸는 기법의 토대가 됩니다."
+    },
+    {
+      "title": "포인터로 두 변수 값 교환하기",
+      "prompt": "iNumber1을 10, iNumber2를 20으로 선언하세요. 각 변수의 주소를 저장하는 포인터 pNumber1, pNumber2를 선언한 뒤, 교환 전 두 값을 출력하세요. 그 다음 임시 변수 iTemp를 사용하되 값을 읽고 쓸 때는 반드시 포인터 역참조(*pNumber1, *pNumber2)만 사용해 두 변수의 값을 교환하세요. 마지막으로 교환 후 두 값을 출력하세요.\n\n[출력 예시]\nBefore: iNumber1 = 10, iNumber2 = 20\nAfter: iNumber1 = 20, iNumber2 = 10",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber1 = 10;\n    int iNumber2 = 20;\n\n    // TODO: 각 변수의 주소를 저장하는 포인터 pNumber1, pNumber2 선언\n\n    cout << \"Before: iNumber1 = \" << iNumber1 << \", iNumber2 = \" << iNumber2 << endl;\n\n    // TODO: 임시 변수 iTemp와 역참조만 사용해 두 값을 교환\n    //       1) iTemp에 *pNumber1의 값 저장\n    //       2) *pNumber1에 *pNumber2의 값 저장\n    //       3) *pNumber2에 iTemp의 값 저장\n\n    cout << \"After: iNumber1 = \" << iNumber1 << \", iNumber2 = \" << iNumber2 << endl;\n\n    return 0;\n}\n",
+      "checks": [
+        {
+          "pattern": "int\\s*\\*\\s*pNumber1\\s*=\\s*&\\s*iNumber1",
+          "desc": "pNumber1에 iNumber1의 주소를 저장했는지 확인"
+        },
+        {
+          "pattern": "int\\s*\\*\\s*pNumber2\\s*=\\s*&\\s*iNumber2",
+          "desc": "pNumber2에 iNumber2의 주소를 저장했는지 확인"
+        },
+        {
+          "pattern": "int\\s+iTemp\\s*=\\s*\\*\\s*pNumber1",
+          "desc": "임시 변수 iTemp에 *pNumber1의 값을 저장했는지 확인"
+        },
+        {
+          "pattern": "\\*\\s*pNumber1\\s*=\\s*\\*\\s*pNumber2",
+          "desc": "*pNumber1에 *pNumber2의 값을 역참조로 대입했는지 확인"
+        },
+        {
+          "pattern": "\\*\\s*pNumber2\\s*=\\s*iTemp",
+          "desc": "*pNumber2에 iTemp의 값을 대입해 교환을 완성했는지 확인"
+        },
+        {
+          "pattern": "Before[\\s\\S]*After",
+          "desc": "교환 전과 후를 순서대로 출력하는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber1 = 10;\n    int iNumber2 = 20;\n\n    int* pNumber1 = &iNumber1;\n    int* pNumber2 = &iNumber2;\n\n    cout << \"Before: iNumber1 = \" << iNumber1 << \", iNumber2 = \" << iNumber2 << endl;\n\n    int iTemp = *pNumber1;\n    *pNumber1 = *pNumber2;\n    *pNumber2 = iTemp;\n\n    cout << \"After: iNumber1 = \" << iNumber1 << \", iNumber2 = \" << iNumber2 << endl;\n\n    return 0;\n}\n",
+      "explain": "역참조를 통한 읽기와 쓰기를 조합해 두 변수의 값을 교환하는 문제입니다. 그냥 *pNumber1 = *pNumber2; 부터 해버리면 iNumber1의 원래 값 10이 사라지므로, 먼저 iTemp에 *pNumber1의 값을 대피시켜 두는 것이 핵심입니다. 이후 *pNumber1 에 *pNumber2 의 값을 넣고, 마지막에 iTemp에 보관해둔 값을 *pNumber2 에 넣으면 교환이 완성됩니다. 변수 이름 없이 주소와 역참조만으로 원본 데이터를 자유롭게 조작할 수 있다는 것이 포인터의 힘이며, 이 교환 패턴은 이후 정렬 같은 알고리즘에서도 계속 쓰입니다."
+    }
+  ]
+}

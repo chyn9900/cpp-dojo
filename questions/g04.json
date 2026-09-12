@@ -1,0 +1,342 @@
+{
+  "id": "g04",
+  "num": 4,
+  "group": "문법",
+  "title": "자료형 (Data Type)",
+  "srcFile": "04. Data Type.cpp",
+  "questions": [
+    {
+      "q": "컴퓨터가 데이터를 처리하는 기본 단위인 1 Byte는 몇 bit인가?",
+      "code": null,
+      "choices": ["4 bit", "8 bit", "10 bit", "16 bit"],
+      "answer": 1,
+      "explain": "컴퓨터가 처리하는 기본 단위는 1 Byte이고, 1 Byte는 8 bit로 이루어진다. 10 bit는 1 Byte가 아니라 2의 10제곱, 즉 1024가지를 표현할 수 있다는 별개의 내용이다. 16 bit는 2 Byte(short의 크기)에 해당한다. bit 8개로는 2의 8제곱인 256가지 경우의 수를 표현할 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업에서 배운 용량 단위(SI / IEC)에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "1 KB와 1 KiB는 완전히 같은 크기이다",
+        "1 KiB는 1024 Bytes이고, 운영체제나 RAM 등 컴퓨터 내부에서 사용된다",
+        "1 KB는 1024 Bytes이고, SSD·HDD 제조사가 사용하는 공식 표준이다",
+        "1 KiB는 1000 Bytes이고, 네트워크 속도 표기에 사용된다"
+      ],
+      "answer": 1,
+      "explain": "IEC(2진) 단위인 KiB는 1024 Bytes이고 운영체제, RAM, 파일시스템 등 컴퓨터 내부에서 사용된다. 반면 SI(10진) 단위인 KB는 1000 Bytes로 SSD·HDD 제조사나 네트워크 속도 표기에서 쓰는 공식 표준이다. 'KB가 1024 Bytes'라는 설명은 두 단위 체계를 섞어 쓴 흔한 오개념이다. 그래서 SSD를 사면 운영체제(GiB 기준)에서는 표기 용량보다 작게 보이는 것이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "자료형의 크기에 대한 설명 중 틀린 것은?",
+      "code": null,
+      "choices": [
+        "short는 2 Byte이다",
+        "int는 4 Byte이다",
+        "long long은 4 Byte이다",
+        "double은 8 Byte이다"
+      ],
+      "answer": 2,
+      "explain": "long long은 4 Byte가 아니라 8 Byte이며, 약 -900경 ~ 900경까지 표현할 수 있다. short는 2 Byte(-32768 ~ 32767), int는 4 Byte(약 -21억 ~ 21억), double은 8 Byte가 맞다. 참고로 long은 이름과 달리 int와 같은 4 Byte라서 헷갈리기 쉽다. 크기가 두 배가 되면 표현 범위는 훨씬 크게 늘어난다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "1 Byte 크기인 char가 signed일 때의 표현 범위는?",
+      "code": null,
+      "choices": ["0 ~ 255", "-127 ~ 128", "-128 ~ 127", "-256 ~ 255"],
+      "answer": 2,
+      "explain": "char는 1 Byte(8 bit)로 256가지를 표현하는데, signed일 때는 음수 128개(-128 ~ -1)와 0을 포함한 나머지 128개(0 ~ 127)로 나뉘어 -128 ~ 127이 된다. 0 ~ 255는 unsigned char의 범위이다. -127 ~ 128은 음수 쪽과 양수 쪽 개수를 반대로 착각한 것으로, 0이 양수 쪽 범위에 포함되기 때문에 양수 최대값이 127로 하나 작다. '256가지 = 128 + 128' 구성을 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "변수 이름이 숫자로 시작할 수 없는 이유로 수업에서 배운 것은?",
+      "code": null,
+      "choices": [
+        "숫자는 메모리에 저장할 수 없기 때문",
+        "변수 이름이 길어져 메모리를 많이 차지하기 때문",
+        "운영체제가 숫자로 시작하는 이름을 파일명으로 예약해 두었기 때문",
+        "컴파일러가 lexing(토큰화) 과정에서 숫자로 시작하는 문자열을 정수 리터럴로 해석하려 하기 때문"
+      ],
+      "answer": 3,
+      "explain": "컴파일러는 소스 코드를 읽을 때 lexing(토큰화) 과정을 거치는데, 숫자로 시작하는 문자열은 정수 리터럴로 해석하려고 시도한다. 예를 들어 1Variable을 보면 1을 정수 리터럴로, Variable을 별개의 식별자 토큰으로 분리해 버려 모호해진다. 메모리 용량이나 운영체제와는 관계가 없는, 순수하게 컴파일러가 혼동하지 않게 하기 위한 문법 규칙이다. 같은 이유로 +, -, *, / 처럼 연산자로 쓰이는 특수문자도 변수명에 쓸 수 없고, 연산자가 아닌 _만 허용된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "Classic C++ 관점에서 대입 연산자(=)의 왼쪽(L Value) 자리에 올 수 있는 것은?",
+      "code": null,
+      "choices": ["변수", "리터럴 숫자", "상수", "표현식의 계산 결과"],
+      "answer": 0,
+      "explain": "Classic C++ 관점에서 L Value는 대입 연산자 왼쪽에 오는, 식이 수정할 수 있는 값이어야 하므로 변수만 올 수 있다. 리터럴 숫자나 표현식의 계산 결과는 수정할 수 없는 값이라 왼쪽에 오면 컴파일 에러가 난다. 반대로 R Value 자리에는 변수, 상수, 리터럴이 모두 올 수 있다. 예를 들어 10 = iValue; 는 리터럴이 L Value 자리에 왔기 때문에 에러다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "int iDigit{ 10 }; 과 같이 중괄호를 사용하는 초기화 방식의 이름은?",
+      "code": null,
+      "choices": ["C Initializer", "C++ Initializer", "C++ Uniform Initializer", "C++ Assignment Initializer"],
+      "answer": 2,
+      "explain": "중괄호 {}를 사용하는 int iDigit{ 10 }; 은 C++ Uniform Initializer이다. = 를 쓰는 방식은 C Initializer, 소괄호 ()를 쓰는 방식은 C++ Initializer라고 배웠다. 세 방식 모두 선언과 동시에 값을 넣는 초기화라는 점은 같다. 이름은 다르지만 결과적으로 변수에 10이 저장된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "'int iDigit = 10;' 과 'int iDigit; iDigit = 10;' 에 대한 수업 내용으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "둘은 완전히 같은 문법을 다르게 쓴 것뿐이다",
+        "값이 들어간다는 결과만 같을 뿐 전혀 다른 문법이고 과정이다",
+        "앞의 것은 컴파일 에러가 난다",
+        "뒤의 것은 변수에 값이 저장되지 않는다"
+      ],
+      "answer": 1,
+      "explain": "초기화는 선언과 동시에 값을 지정하는 것이고, 선언 후 대입은 메모리 할당을 받은 뒤 별도의 문장으로 값을 넣는 것이다. 수업에서 강조했듯 두 방식은 값이 들어간다는 '결과'만 같을 뿐 전혀 다른 문법이고 과정이다. 둘 다 컴파일 에러 없이 잘 동작하며 값도 정상적으로 저장된다. 이 구분을 정확히 알아 두어야 이후 문법을 배울 때 혼동하지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "변수를 선언만 하고 값을 대입하거나 초기화하지 않았을 때, 그 메모리 공간에는 무엇이 들어 있는가?",
+      "code": null,
+      "choices": ["항상 0", "쓰레기 값(의미 없는 값)", "항상 -1", "아무 값도 없는 빈 상태"],
+      "answer": 1,
+      "explain": "변수 선언은 메모리 공간을 할당받는 것일 뿐, 값을 넣기 전까지 그 공간에는 이전에 쓰이던 의미 없는 쓰레기 값이 들어 있다. 메모리가 '비어 있는' 상태라는 것은 존재하지 않으며, 어떤 비트 패턴이든 반드시 들어 있다. 자동으로 0이 된다고 생각하기 쉽지만 지역 변수는 자동으로 초기화되지 않는다. 그래서 변수를 만들면 초기화하는 습관이 중요하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "정수의 비트에서 MSB(Most Significant Bit)와 LSB(Least Significant Bit)로 각각 판별할 수 있는 것은?",
+      "code": null,
+      "choices": [
+        "MSB: 홀짝, LSB: 음수/양수",
+        "MSB: 음수/양수, LSB: 홀짝",
+        "MSB: 자료형 크기, LSB: 음수/양수",
+        "MSB: 음수/양수, LSB: 자료형 크기"
+      ],
+      "answer": 1,
+      "explain": "MSB(최상위 비트)는 부호 비트로, 수가 음수인지 양수인지 판별할 수 있다. LSB(최하위 비트)는 1이면 홀수, 0이면 짝수로 홀짝을 판별할 수 있다. 두 비트의 역할을 서로 바꿔 기억하는 경우가 많으니 주의하자. 자료형의 크기는 비트 하나로 알 수 있는 것이 아니라 자료형 자체가 결정한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "컴퓨터에서 어떤 정수의 부호를 반대로 만드는(예: +10 → -10) 올바른 방법으로 수업에서 배운 것은?",
+      "code": null,
+      "choices": [
+        "MSB(부호 비트)만 1로 바꾼다",
+        "모든 비트를 반전시키기만 한다",
+        "모든 비트를 반전시킨 후 1을 더한다",
+        "LSB만 1로 바꾼다"
+      ],
+      "answer": 2,
+      "explain": "컴퓨터는 음수를 보수법으로 표현하며, 어떤 수의 모든 비트를 반전시킨 후 1을 더하면 부호가 반대인 수가 된다. MSB만 1로 바꾸는 방식은 잘못된 표기법으로, +10과 그렇게 만든 -10을 더하면 0이 나오지 않는다. 비트 반전만 하고 1을 더하지 않으면 +10과 더했을 때 모든 비트가 1인 상태(-1)가 되어 역시 0이 아니다. 올바르게 만든 -10과 +10을 더하면 자리올림(overflow) 비트가 폐기되면서 정확히 0이 된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "4 Byte 비트셋 '11111111 11111111 11111111 11111111'에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "어떤 자료형으로 해석해도 항상 같은 값이다",
+        "int로 해석하면 4294967295, unsigned int로 해석하면 -1이다",
+        "int로 해석하면 -2147483648, unsigned int로 해석하면 0이다",
+        "int로 해석하면 -1, unsigned int로 해석하면 4294967295이다"
+      ],
+      "answer": 3,
+      "explain": "같은 비트셋이라도 어떤 자료형으로 해석하느냐에 따라 표현되는 값이 달라진다. 전부 1인 4 Byte 비트셋을 int(signed)로 해석하면 -1이지만, unsigned int로 해석하면 최대값인 4294967295가 된다. 값 자체가 변하는 것이 아니라 해석 방법이 다른 것이므로, 자료형은 '비트셋을 읽는 방법'을 정한다고 이해하면 된다. -2147483648은 MSB만 1이고 나머지가 전부 0인 비트셋이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 실행 결과는? (각 값은 한 줄씩 출력된다)",
+      "code": "bool bTest;\n\nbTest = false;\ncout << bTest << endl;\n\nbTest = true;\ncout << bTest << endl;",
+      "choices": ["false 와 true", "1 과 0", "0 과 1", "true 와 false"],
+      "answer": 2,
+      "explain": "cout은 bool 값을 기본적으로 숫자로 출력하므로 false는 0, true는 1로 출력된다. true/false라는 글자가 그대로 출력된다고 생각하기 쉽지만, true는 1의 또 다른 이름이고 false는 0의 또 다른 이름일 뿐이다. 따라서 첫 번째 출력은 0, 두 번째 출력은 1이다. false = 0, true = 1의 대응을 확실히 기억해 두자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "bool bTest = 121;\ncout << bTest << endl;",
+      "choices": ["121", "1", "0", "컴파일 에러"],
+      "answer": 1,
+      "explain": "bool의 표현 범위는 true/false뿐이라서 0이 아닌 모든 값을 대입하면 내부적으로 1(true)로 저장된다. 따라서 121을 넣어도 저장되는 값은 1이고 출력도 1이다. 121이 그대로 출력된다고 생각하면 bool이 일반 정수처럼 값을 보존한다고 착각한 것이며, 컴파일 에러도 아니다. 컴퓨터에서 참은 '0이 아닌 모든 수', 거짓은 0이라는 원칙을 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "bool bAlive = -5;\ncout << bAlive << endl;",
+      "choices": ["-5", "0", "1", "-1"],
+      "answer": 2,
+      "explain": "-5는 0이 아닌 값이므로 bool에 대입하면 1(true)로 저장된다. 음수라서 0(false)이 된다고 생각하기 쉽지만, 거짓은 오직 0뿐이고 값이 존재하면(0이 아니면) 모두 참이다. 따라서 출력은 1이다. 부호와 참/거짓 판별은 무관하다는 점이 핵심이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "char cTest1 = 'A';\ncout << cTest1 << endl;",
+      "choices": ["A", "'A'", "65", "cTest1"],
+      "answer": 0,
+      "explain": "char 변수에 문자 'A'를 저장하면 cout은 이를 문자 그대로 A로 출력한다. 작은따옴표는 코드에서 문자 리터럴을 표시하는 문법일 뿐 출력에는 포함되지 않는다. char가 내부적으로는 1 Byte 크기의 비트셋으로 저장되지만, cout이 char 자료형을 '문자'로 해석해서 출력하는 것이다. 변수 이름이 그대로 출력되는 것도 아니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iDigit1 = 10;\nint iDigit2(10);\nint iDigit3{ 10 };\n\ncout << iDigit1 << \" \" << iDigit2 << \" \" << iDigit3 << endl;",
+      "choices": ["10 (10) {10}", "10 0 0", "컴파일 에러", "10 10 10"],
+      "answer": 3,
+      "explain": "int iDigit1 = 10; 은 C Initializer, int iDigit2(10); 은 C++ Initializer, int iDigit3{ 10 }; 은 C++ Uniform Initializer로, 문법만 다를 뿐 모두 변수에 10을 넣는 초기화다. 따라서 세 변수 모두 10이 출력된다. 괄호나 중괄호가 출력에 나타난다고 생각하면 초기화 문법과 출력 결과를 혼동한 것이다. 셋 다 정상적인 문법이므로 컴파일 에러도 나지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 10;\nint iValue;\n\niValue = iNumber;\niNumber = 20;\n\ncout << iValue << endl;",
+      "choices": ["10", "20", "0", "쓰레기 값"],
+      "answer": 0,
+      "explain": "iValue = iNumber; 는 그 시점의 iNumber 값 10을 iValue에 복사해 넣는 것이다. 이후 iNumber를 20으로 바꿔도 이미 복사된 iValue의 값에는 아무 영향이 없다. 두 변수가 연결되어 함께 변한다고 생각하면 대입의 의미를 오해한 것이다. 대입 연산자는 R Value의 값을 L Value에 '복사해 넣는다'는 점을 기억하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "unsigned int uiNumber = -1;\ncout << uiNumber << endl;",
+      "choices": ["-1", "0", "4294967295", "2147483647"],
+      "answer": 2,
+      "explain": "-1의 비트셋은 모든 비트가 1인 상태(11111111 11111111 11111111 11111111)다. 이 비트셋을 unsigned int로 해석하면 부호 비트가 없으므로 표현 가능한 최대값인 4294967295가 된다. -1이 그대로 출력된다고 생각하면 자료형이 비트셋의 해석 방법을 결정한다는 개념을 놓친 것이다. 2147483647은 signed int의 최대값으로, 이 비트셋과는 다른 비트 패턴이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "unsigned int uiNumber = -1;\nuiNumber = uiNumber + 1;\ncout << uiNumber << endl;",
+      "choices": ["4294967296", "-1", "1", "0"],
+      "answer": 3,
+      "explain": "모든 비트가 1인 상태에서 1을 더하면 모든 자리에서 자리올림이 일어나 33번째 비트로 넘어가고, 4 Byte를 벗어난 overflow 비트는 폐기된다. 남는 것은 모든 비트가 0인 상태이므로 출력은 0이다. 4294967296은 overflow 비트가 폐기되지 않는다고 가정하고 수학적으로만 계산한 값이다. unsigned의 최대값에서 1을 더하면 0으로 되돌아온다는 것이 overflow의 핵심이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int Question = 2147483647 + 1;\ncout << Question << endl;",
+      "choices": ["2147483648", "-2147483648", "0", "-1"],
+      "answer": 1,
+      "explain": "2147483647은 int의 최대값(01111111 11111111 11111111 11111111)이고, 여기에 1을 더하면 10000000 00000000 00000000 00000000이 된다. 이 비트셋을 signed int로 해석하면 최소값인 -2147483648이다. 2147483648이라고 답하면 int가 4 Byte라는 한계를 무시하고 수학적으로만 계산한 것이다. 최대값에서 1을 더하면 최소값으로 넘어가는 것이 정수 overflow 현상이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "short sNumber = 32767;\nsNumber = sNumber + 1;\ncout << sNumber << endl;",
+      "choices": ["32768", "0", "-32768", "-1"],
+      "answer": 2,
+      "explain": "short는 2 Byte로 표현 범위가 -32768 ~ 32767이다. 최대값 32767에서 1을 더하면 MSB(부호 비트)가 1이 되는 비트 패턴이 되어 최소값 -32768로 넘어간다. 32768이라고 답하면 short의 크기 한계를 무시한 것이다. int가 약 21억 경계에서 일으키는 overflow와 완전히 같은 원리가 short에서는 32767 경계에서 일어난다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드가 잘못된 이유는?",
+      "code": "char cTest = \"A\";",
+      "choices": [
+        "문자는 작은따옴표('')로 감싸야 하는데 큰따옴표(\"\")를 사용했다",
+        "char에는 알파벳을 저장할 수 없다",
+        "변수 이름이 소문자로 시작했다",
+        "char는 2 Byte라서 A를 저장할 수 없다"
+      ],
+      "answer": 0,
+      "explain": "문자는 작은따옴표('')로, 문자열은 큰따옴표(\"\")로 감싸서 표현한다. \"A\"는 문자 하나가 아니라 문자열이므로 char 변수에 넣을 수 없어 에러가 난다. char에 알파벳 문자를 저장하는 것 자체는 전혀 문제가 없고, char의 크기는 2 Byte가 아니라 1 Byte이다. 'A'로 고치면 정상 동작한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드에서 컴파일 에러가 나는 이유는?",
+      "code": "int 1Player = 100;",
+      "choices": [
+        "int는 100을 저장할 수 없기 때문",
+        "변수 이름에 대문자를 쓸 수 없기 때문",
+        "= 대신 다른 연산자를 써야 하기 때문",
+        "변수 이름은 숫자로 시작할 수 없기 때문"
+      ],
+      "answer": 3,
+      "explain": "변수 이름은 숫자로 시작할 수 없다. 컴파일러가 lexing 과정에서 1을 정수 리터럴로 해석하려 해서 1과 Player가 서로 다른 토큰으로 분리되기 때문이다. int는 100을 충분히 저장할 수 있고, 변수 이름에 대문자를 쓰는 것은 자유이며, 초기화에 = 를 쓰는 것도 올바른 문법이다. Player1처럼 숫자를 뒤로 보내거나 _만 사용하는 이름으로 바꾸면 사용할 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "float 변수를 초기화하는 코드의 빈칸에 들어갈, 수업에서 배운 표기로 가장 알맞은 것은?",
+      "code": "float fPI = ____;",
+      "choices": ["3.14f", "\"3.14\"", "'3.14'", "3,14"],
+      "answer": 0,
+      "explain": "float 리터럴에는 f 접미사를 붙여 3.14f처럼 쓴다. 접미사가 없는 3.14는 double 리터럴이라서 float 변수에 넣으면 자료형이 맞지 않는다. 큰따옴표나 작은따옴표를 쓰면 문자열/문자가 되어 실수를 저장할 수 없다. 소수점은 쉼표가 아니라 점(.)으로 표기하며, double 변수에는 접미사 없이 3.14를 쓴다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 중 나머지 셋과 의미가 다른 변수 선언은?",
+      "code": null,
+      "choices": ["int iNumber;", "signed iNumber;", "signed int iNumber;", "unsigned iNumber;"],
+      "answer": 3,
+      "explain": "int, signed, signed int는 (그리고 __int32도) 모두 같은 signed 4 Byte 정수 선언이다. 반면 unsigned iNumber; 는 unsigned int와 같은 표현으로, 부호 없는 정수를 선언하므로 나머지와 의미가 다르다. signed int는 약 -21억 ~ +21억, unsigned int는 0 ~ 약 42억으로 표현 범위가 다르다. signed나 unsigned 키워드만 단독으로 써도 int가 생략된 것으로 취급된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드에서 컴파일 에러가 나는 이유는?",
+      "code": "int iValue = 10;\n568115 = iValue;",
+      "choices": [
+        "L Value 자리에는 수정 가능한 변수만 올 수 있는데 리터럴이 왔기 때문",
+        "568115가 int의 표현 범위를 벗어나기 때문",
+        "iValue가 초기화되지 않았기 때문",
+        "대입 연산자가 왼쪽 값을 오른쪽에 넣으려 하기 때문"
+      ],
+      "answer": 0,
+      "explain": "대입 연산자의 왼쪽(L Value)에는 식이 수정할 수 있는 값, 즉 변수만 올 수 있다. 568115는 리터럴 숫자라서 값을 저장할 공간이 아니므로 왼쪽에 올 수 없다. 568115는 int 범위(약 -21억 ~ 21억) 안에 충분히 들어가므로 범위 문제가 아니고, iValue는 10으로 초기화되어 있다. 대입 연산자는 오른쪽 값(R Value)을 왼쪽(L Value)에 넣는 방향이라는 것도 함께 기억하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "게임 캐릭터의 HP가 0 이상 255 이하의 정수라면, 메모리를 가장 아끼면서 저장할 수 있는 자료형은?",
+      "code": null,
+      "choices": ["unsigned char", "int", "short", "double"],
+      "answer": 0,
+      "explain": "HP의 범위가 0 ~ 255라면 unsigned char(1 Byte, 0 ~ 255)가 범위에 정확히 맞으면서 메모리를 가장 아낀다. int는 4 Byte, short는 2 Byte로 필요 이상으로 크다. double은 실수 자료형이라 정수 HP 저장에 적합하지 않고 8 Byte로 가장 크다. signed char는 127까지밖에 담지 못하므로 unsigned로 선언하는 것이 핵심이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "전 세계 인구 약 80억 명을 정수 하나로 저장하려 한다. 표현 범위가 충분한 가장 작은 자료형은?",
+      "code": null,
+      "choices": ["int", "unsigned int", "long long", "short"],
+      "answer": 2,
+      "explain": "80억은 int의 최대값 약 21억은 물론 unsigned int의 최대값 약 42억(4294967295)도 넘는다. 따라서 8 Byte인 long long(약 -900경 ~ 900경)이 필요하다. short는 2 Byte로 32767까지밖에 표현하지 못한다. 저장할 값의 범위를 먼저 따져 보고 자료형을 고르는 것이 자료형 선택의 기본이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "게임 캐릭터의 '생존 여부(살았다/죽었다)'를 저장할 변수로 가장 적절한 자료형은?",
+      "code": null,
+      "choices": ["char", "int", "float", "bool"],
+      "answer": 3,
+      "explain": "생존 여부는 '살았다/죽었다' 두 가지뿐인 명제이므로 명제를 다루는 자료형인 bool이 가장 적절하다. char나 int로도 0과 1을 저장할 수는 있지만 의도가 드러나지 않고 불필요한 값까지 표현하게 된다. float는 실수 자료형이라 참/거짓 표현과 맞지 않는다. bool은 1 Byte 크기로 true(1) 또는 false(0)를 저장한다.",
+      "difficulty": "응용"
+    }
+  ],
+  "coding": [
+    {
+      "title": "캐릭터 스탯 선언하기",
+      "prompt": "게임 캐릭터의 스탯을 저장하는 변수 4개를 알맞은 자료형으로 '선언과 동시에 초기화'하고, 한 줄에 하나씩 출력하세요.\n\n1) HP: 정수 100 → int 사용\n2) 이동 속도: 실수 2.5 → float 사용 (f 접미사를 꼭 붙일 것)\n3) 등급: 문자 A → char 사용 (작은따옴표를 사용할 것)\n4) 생존 여부: 참 → bool 사용 (true를 대입할 것)\n\n출력 예시:\n100\n2.5\nA\n1\n\n(bool 값을 cout으로 출력하면 true는 1로 출력됩니다.)",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    // TODO: int 자료형으로 HP 변수를 100으로 초기화하세요.\n\n    // TODO: float 자료형으로 이동 속도 변수를 2.5f로 초기화하세요.\n\n    // TODO: char 자료형으로 등급 변수를 'A'로 초기화하세요.\n\n    // TODO: bool 자료형으로 생존 여부 변수를 true로 초기화하세요.\n\n    // TODO: 네 변수를 cout으로 한 줄에 하나씩 출력하세요.\n\n    return 0;\n}\n",
+      "checks": [
+        { "pattern": "int\\s+\\w+\\s*=\\s*100", "desc": "int 변수를 100으로 초기화했는지 확인" },
+        { "pattern": "float\\s+\\w+\\s*=\\s*2\\.5f", "desc": "float 변수를 f 접미사가 붙은 2.5f로 초기화했는지 확인" },
+        { "pattern": "char\\s+\\w+\\s*=\\s*'A'", "desc": "char 변수를 작은따옴표 문자 'A'로 초기화했는지 확인" },
+        { "pattern": "bool\\s+\\w+\\s*=\\s*true", "desc": "bool 변수를 true로 초기화했는지 확인" },
+        { "pattern": "cout\\s*<<", "desc": "cout으로 출력했는지 확인" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iHP = 100;\n    float fSpeed = 2.5f;\n    char cGrade = 'A';\n    bool bAlive = true;\n\n    cout << iHP << endl;\n    cout << fSpeed << endl;\n    cout << cGrade << endl;\n    cout << bAlive << endl;\n\n    return 0;\n}\n",
+      "explain": "각 데이터의 성격에 맞는 자료형을 고르는 연습이다. 정수는 int, 실수는 float(리터럴에 f 접미사 필수), 문자는 char(작은따옴표), 명제는 bool(true/false)을 사용한다. 모두 '선언과 동시에 값을 지정'하는 초기화 문법(DataType VariableName = Value;)을 사용했다. bool을 cout으로 출력하면 true는 1, false는 0으로 출력된다는 점도 확인하자."
+    },
+    {
+      "title": "bool 판별기",
+      "prompt": "bool 변수 하나를 선언한 뒤, false → true → 121 순서로 값을 대입하면서 대입할 때마다 그 변수를 한 줄씩 출력하는 프로그램을 작성하세요.\n\n출력 예시:\n0\n1\n1\n\n마지막 줄이 121이 아니라 1이 나오는 이유를 생각해 보세요. (bool은 0이 아닌 모든 값을 내부적으로 1(true)로 저장합니다.)",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    // TODO: bool 변수를 선언하세요.\n\n    // TODO: false를 대입하고 출력하세요.\n\n    // TODO: true를 대입하고 출력하세요.\n\n    // TODO: 121을 대입하고 출력하세요.\n\n    return 0;\n}\n",
+      "checks": [
+        { "pattern": "bool\\s+\\w+", "desc": "bool 자료형으로 변수를 선언했는지 확인" },
+        { "pattern": "=\\s*false", "desc": "false를 대입했는지 확인" },
+        { "pattern": "=\\s*true", "desc": "true를 대입했는지 확인" },
+        { "pattern": "=\\s*121", "desc": "0이 아닌 값 121을 대입했는지 확인" },
+        { "pattern": "cout\\s*<<[\\s\\S]*cout\\s*<<[\\s\\S]*cout\\s*<<", "desc": "세 번 이상 출력했는지 확인" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    bool bTest;\n\n    bTest = false;\n    cout << bTest << endl;\n\n    bTest = true;\n    cout << bTest << endl;\n\n    bTest = 121;\n    cout << bTest << endl;\n\n    return 0;\n}\n",
+      "explain": "bool은 명제(참/거짓)를 다루는 자료형으로, false는 0의 또 다른 이름, true는 1의 또 다른 이름이다. 컴퓨터에서 거짓은 0이고 참은 '0이 아닌 모든 수'이므로, 121처럼 0이 아닌 값을 bool에 대입하면 내부적으로 1(true)이 저장된다. 그래서 출력이 0, 1, 1이 된다. 변수를 먼저 선언한 뒤 대입하는 과정과 cout 출력을 반복하며 bool의 저장 방식을 직접 확인하는 문제다."
+    },
+    {
+      "title": "오버플로우 실험실",
+      "prompt": "정수 overflow를 직접 관찰하는 프로그램을 작성하세요.\n\n1) int 변수에 int의 최대값 2147483647을 초기화하고 출력하세요.\n2) 그 변수에 1을 더한 값을 다시 대입한 뒤 출력하세요. (최소값으로 넘어가는지 관찰)\n3) unsigned int 변수에 -1을 초기화하고 출력하세요. (모든 비트가 1인 비트셋이 unsigned로는 어떻게 읽히는지 관찰)\n4) 그 unsigned 변수에 1을 더한 값을 다시 대입한 뒤 출력하세요. (overflow 비트가 폐기되어 0이 되는지 관찰)\n\n출력 예시:\n2147483647\n-2147483648\n4294967295\n0",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    // TODO: int 변수에 최대값 2147483647을 초기화하고 출력하세요.\n\n    // TODO: 위 변수에 1을 더한 값을 다시 대입하고 출력하세요.\n\n    // TODO: unsigned int 변수에 -1을 초기화하고 출력하세요.\n\n    // TODO: 위 unsigned 변수에 1을 더한 값을 다시 대입하고 출력하세요.\n\n    return 0;\n}\n",
+      "checks": [
+        { "pattern": "int\\s+\\w+\\s*=\\s*2147483647", "desc": "int 변수를 최대값 2147483647로 초기화했는지 확인" },
+        { "pattern": "unsigned\\s+int\\s+\\w+\\s*=\\s*-1", "desc": "unsigned int 변수에 -1을 초기화했는지 확인" },
+        { "pattern": "\\w+\\s*=\\s*\\w+\\s*\\+\\s*1", "desc": "변수에 1을 더한 값을 다시 대입했는지 확인" },
+        { "pattern": "cout\\s*<<[\\s\\S]*cout\\s*<<[\\s\\S]*cout\\s*<<[\\s\\S]*cout\\s*<<", "desc": "네 번 출력했는지 확인" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 2147483647;\n    cout << iNumber << endl;\n\n    iNumber = iNumber + 1;\n    cout << iNumber << endl;\n\n    unsigned int uiNumber = -1;\n    cout << uiNumber << endl;\n\n    uiNumber = uiNumber + 1;\n    cout << uiNumber << endl;\n\n    return 0;\n}\n",
+      "explain": "int의 최대값 2147483647(01111111 11111111 11111111 11111111)에 1을 더하면 10000000 00000000 00000000 00000000이 되는데, signed로 해석하면 최소값 -2147483648이다. 한편 -1의 비트셋은 모든 비트가 1이므로 unsigned int로 해석하면 최대값 4294967295가 된다. 여기에 1을 더하면 자리올림으로 33번째 비트가 생기지만 4 Byte를 벗어난 overflow 비트는 폐기되어 0이 된다. 같은 비트셋이라도 자료형이 어떻게 해석하느냐에 따라 값이 달라진다는 것이 이 단원의 핵심이다."
+    }
+  ]
+}

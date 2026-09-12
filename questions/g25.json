@@ -1,0 +1,492 @@
+{
+  "id": "g25",
+  "num": 25,
+  "group": "문법",
+  "title": "구조체 포인터",
+  "srcFile": "25. Struct Pointer.cpp",
+  "questions": [
+    {
+      "q": "구조체 포인터 선언 `__Student* pStudent = &tStudent;` 에서 pStudent에 실제로 저장되는 값은 무엇인가?",
+      "code": null,
+      "choices": [
+        "tStudent가 저장된 메모리의 시작 주소",
+        "tStudent의 모든 멤버 값의 복사본",
+        "tStudent의 첫 번째 멤버인 szName의 문자열 내용",
+        "구조체 __Student의 전체 크기(바이트 수)"
+      ],
+      "answer": 0,
+      "explain": "포인터 변수는 어떤 타입을 가리키든 항상 '주소'를 저장한다. &tStudent는 tStudent가 메모리에 자리 잡은 시작 주소이므로 pStudent에는 이 주소가 들어간다. 멤버 값의 복사본이 저장된다고 생각하면 이후 pStudent->iKorean = 10; 이 원본 tStudent를 바꾸는 이유를 설명할 수 없다. 포인터는 대상을 '가리키기'만 할 뿐 값을 복사하지 않는다는 점이 구조체 포인터의 핵심이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 코드에서 `(*pStudent).iMath = 100;` 처럼 *pStudent를 반드시 괄호로 감싸야 하는 이유는?",
+      "code": null,
+      "choices": [
+        "* 연산자가 . 연산자보다 우선순위가 높아서 순서를 명확히 하려고",
+        "괄호가 없어도 동작하지만 가독성을 위해 관례적으로 붙이는 것이다",
+        ". 연산자가 * 연산자보다 우선순위가 높아서, 괄호가 없으면 pStudent.iMath가 먼저 해석되기 때문",
+        "iMath가 구조체 안의 배열이라 괄호 없이는 접근할 수 없기 때문"
+      ],
+      "answer": 2,
+      "explain": "연산자 우선순위에서 멤버 접근 연산자 . 이 역참조 연산자 * 보다 높다. 그래서 괄호가 없으면 *pStudent.iMath 는 *(pStudent.iMath) 로 해석되는데, pStudent는 주소를 담은 포인터라 . 을 직접 쓸 수 없어 컴파일 에러가 난다. 괄호는 가독성용이 아니라 문법적으로 반드시 필요하다. 이 불편함 때문에 같은 의미인 -> 연산자를 대신 쓰게 된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`(*pStudent).iMath` 와 완전히 같은 의미의 표현은?",
+      "code": null,
+      "choices": [
+        "pStudent.iMath",
+        "pStudent->iMath",
+        "*pStudent.iMath",
+        "&pStudent->iMath"
+      ],
+      "answer": 1,
+      "explain": "(*pStudent).iMath 는 포인터를 먼저 역참조한 뒤 멤버에 접근하는 것이고, pStudent->iMath 는 이것을 한 번에 쓰는 같은 문법이다. pStudent.iMath 는 포인터에 . 을 직접 쓴 것이라 컴파일 에러다. *pStudent.iMath 는 우선순위 때문에 *(pStudent.iMath) 로 해석되어 역시 에러다. 수업 파일 주석의 (*Pointer). == Pointer-> 가 바로 이 내용이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "화살표 연산자 `->` 에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "구조체 변수에서 직접 멤버에 접근할 때 사용한다",
+        "구조체 변수의 주소를 얻을 때 사용한다",
+        "포인터 변수 자체의 주소를 출력할 때 사용한다",
+        "포인터가 가리키는 구조체의 멤버에 접근할 때 사용하며, (*포인터).멤버 와 같은 문법이다"
+      ],
+      "answer": 3,
+      "explain": "-> 는 포인터가 가리키는 구조체의 멤버에 접근하는 연산자로, (*포인터).멤버 를 줄여 쓴 것이다. 구조체 변수에서 직접 멤버에 접근할 때는 . 을 사용한다. 주소를 얻는 것은 & 연산자의 역할이지 -> 와는 관계없다. 괄호를 매번 쓰는 번거로움을 없애 주기 때문에 실제 코드에서는 -> 를 훨씬 많이 쓴다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "구조체 멤버에 접근할 때 `.` 과 `->` 의 올바른 사용 구분은?",
+      "code": null,
+      "choices": [
+        "구조체 변수에는 . 을, 구조체 포인터에는 -> 를 사용한다",
+        "구조체 변수에는 -> 를, 구조체 포인터에는 . 을 사용한다",
+        "둘은 완전히 같아서 변수든 포인터든 아무거나 써도 된다",
+        "-> 는 구조체 배열에서만 사용할 수 있다"
+      ],
+      "answer": 0,
+      "explain": "tStudent 같은 구조체 변수는 . 으로, pStudent 같은 구조체 포인터는 -> 로 멤버에 접근한다. 반대로 쓰면(변수에 ->, 포인터에 .) 모두 컴파일 에러가 난다. 포인터에서도 (*포인터).멤버 형태로 . 을 쓸 수는 있지만, 이는 역참조로 먼저 '변수 상태'로 만든 것이므로 결국 '변수에는 .' 이라는 원칙과 같다. 배열 여부와는 관계없는 규칙이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 코드의 `__Student tStudent = {};` 처럼 선언하면 어떻게 되는가?",
+      "code": null,
+      "choices": [
+        "멤버들이 쓰레기값으로 초기화된다",
+        "컴파일 에러가 발생한다",
+        "모든 멤버가 0으로 초기화된다 (szName은 빈 문자열, 점수들은 0)",
+        "szName만 초기화되고 정수 멤버들은 쓰레기값이 된다"
+      ],
+      "answer": 2,
+      "explain": "= {} 는 구조체의 모든 멤버를 0으로 초기화한다. char 배열 szName은 전부 0(널 문자)이 되어 빈 문자열이 되고, 점수 멤버들도 0이 된다. 그래서 수업 코드에서 점수를 대입하기 전에 출력했을 때 국어: 0 이 나온 것이다. 초기화하지 않은 지역 구조체 변수는 쓰레기값을 가지므로 {} 초기화 습관이 중요하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`&tStudent` 표현의 의미는?",
+      "code": null,
+      "choices": [
+        "tStudent의 값을 복사한 새 구조체",
+        "tStudent가 메모리에 저장된 시작 주소",
+        "tStudent의 첫 번째 멤버의 값",
+        "두 값의 논리 AND 연산 결과"
+      ],
+      "answer": 1,
+      "explain": "& 는 변수 앞에 붙으면 그 변수의 메모리 주소를 얻는 주소 연산자다. 구조체 변수에 붙이면 구조체가 메모리에 저장된 시작 주소를 돌려주며, 이 값을 구조체 포인터에 저장한다. 값의 복사본을 만드는 것이 아니라는 점에 주의해야 한다. 논리 AND는 && 처럼 두 개를 쓸 때이고, 변수 앞의 & 하나는 주소 연산자다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`pStudent->iKorean = 10;` 을 실행하면 원본인 tStudent.iKorean도 10이 되는 이유는?",
+      "code": null,
+      "choices": [
+        "대입할 때 구조체 전체가 자동으로 복사되기 때문",
+        "iKorean이 전역변수라서 어디서든 같은 값이기 때문",
+        "-> 연산자가 값을 양쪽에 복사해 주기 때문",
+        "pStudent가 tStudent의 주소를 저장하고 있어서, 결국 같은 메모리 공간을 수정하는 것이기 때문"
+      ],
+      "answer": 3,
+      "explain": "pStudent에는 tStudent의 주소가 들어 있으므로, pStudent->iKorean 은 결국 tStudent.iKorean 과 같은 메모리 공간이다. 같은 공간을 수정하니 원본이 바뀌는 것이 당연하다. 만약 구조체가 복사된다면 오히려 원본은 바뀌지 않아야 하므로 복사 때문이라는 설명은 반대다. 이렇게 포인터를 쓰면 큰 구조체를 복사하지 않고도 원본을 직접 다룰 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "tStudent를 가리키는 구조체 포인터를 올바르게 선언한 것은?",
+      "code": null,
+      "choices": [
+        "__Student* pStudent = &tStudent;",
+        "__Student pStudent = &tStudent;",
+        "*__Student pStudent = &tStudent;",
+        "__Student* pStudent = tStudent;"
+      ],
+      "answer": 0,
+      "explain": "구조체 포인터는 '구조체타입* 변수명 = &구조체변수;' 형태로 선언한다. * 없이 선언하면 포인터가 아닌 일반 구조체 변수에 주소를 넣으려는 것이라 에러다. * 가 타입 이름 앞에 오는 문법은 존재하지 않는다. & 없이 tStudent를 그대로 대입하면 주소가 아닌 구조체 자체를 포인터에 넣으려는 것이라 역시 에러다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "x64 환경에서 sizeof(__Student)가 48바이트일 때, 구조체 포인터 타입 __Student* 의 크기는?",
+      "code": null,
+      "choices": [
+        "48바이트 (가리키는 구조체와 같은 크기)",
+        "구조체 멤버 개수에 따라 달라진다",
+        "8바이트 (포인터는 종류와 상관없이 주소 하나의 크기)",
+        "1바이트"
+      ],
+      "answer": 2,
+      "explain": "포인터는 가리키는 대상이 무엇이든 '주소'만 저장하므로 크기가 항상 같다. x64 환경에서 주소는 8바이트이므로 __Student* 도 8바이트다. 구조체가 아무리 커져도 그 구조체를 가리키는 포인터의 크기는 변하지 않는다. 이 덕분에 큰 구조체를 통째로 복사하는 대신 8바이트짜리 주소만 다뤄서 원본에 접근할 수 있다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "pStudent가 __Student* 타입일 때 `cout << pStudent;` 를 실행하면 무엇이 출력되는가?",
+      "code": null,
+      "choices": [
+        "tStudent의 모든 멤버 값",
+        "tStudent가 저장된 메모리 주소(16진수)",
+        "컴파일 에러가 발생한다",
+        "첫 번째 멤버인 szName의 문자열 내용"
+      ],
+      "answer": 1,
+      "explain": "일반 포인터를 cout으로 출력하면 저장된 주소가 16진수로 출력된다. 멤버 값을 보려면 pStudent->iKorean 처럼 멤버에 직접 접근해야 한다. 예외는 char* 로, 문자 포인터 단원에서 배웠듯 cout이 문자열로 취급해 내용을 출력한다. 구조체 포인터는 그런 예외가 없으므로 주소가 그대로 나온다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "수업 코드에서 이름을 저장할 때 `tStudent.szName = \"정인우\";` 이 아니라 `strcpy_s(tStudent.szName, \"정인우\");` 를 쓰는 이유는?",
+      "code": null,
+      "choices": [
+        "szName이 const로 선언되어 있기 때문",
+        "한글 문자열은 = 로 대입할 수 없기 때문",
+        "strcpy_s가 = 보다 실행 속도가 빠르기 때문",
+        "char 배열에는 = 로 문자열을 통째로 대입할 수 없어서 복사 함수를 써야 하기 때문"
+      ],
+      "answer": 3,
+      "explain": "배열 이름에는 = 로 새 값을 통째로 대입할 수 없다. 문자열은 char 배열이므로 선언 이후에는 strcpy_s 같은 복사 함수로 내용을 복사해 넣어야 한다. const 여부나 한글 여부, 속도와는 관계없는 배열의 문법 규칙이다. 문자열 단원에서 배운 이 규칙이 구조체 멤버인 char 배열에도 똑같이 적용된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Point { int x; int y; };\n\nint main()\n{\n    Point pt = { 3, 4 };\n    Point* p = &pt;\n    p->x = 10;\n    cout << pt.x << \" \" << pt.y << endl;\n    return 0;\n}",
+      "choices": [
+        "10 4",
+        "3 4",
+        "10 0",
+        "3 10"
+      ],
+      "answer": 0,
+      "explain": "p는 pt의 주소를 담고 있으므로 p->x = 10; 은 pt.x를 직접 10으로 바꾼다. y는 건드리지 않았으니 초기값 4가 유지된다. 그래서 10 4가 출력된다. 포인터로 바꾼 값이 원본에 그대로 반영된다는 것이 구조체 포인터의 핵심 동작이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Student { int kor; int math; };\n\nint main()\n{\n    Student s = {};\n    Student* p = &s;\n    (*p).kor = 80;\n    p->math = 90;\n    cout << s.kor + s.math << endl;\n    return 0;\n}",
+      "choices": [
+        "0",
+        "80",
+        "170",
+        "90"
+      ],
+      "answer": 2,
+      "explain": "(*p).kor 와 p->kor 는 같은 문법이므로 두 줄 모두 원본 s의 멤버를 수정한다. kor에 80, math에 90이 들어가 합은 170이다. {} 초기화로 0에서 시작했지만 포인터를 통해 원본 s가 바뀌었으므로 0이 아니다. 두 접근 방식이 완전히 동일하게 원본을 수정한다는 것을 확인하는 문제다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 코드를 요약한 다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct __Student { int iKorean; int iMath; };\n\nint main()\n{\n    __Student tStudent = {};\n    tStudent.iKorean = 80;\n    __Student* pStudent = &tStudent;\n    (*pStudent).iMath = 100;\n    pStudent->iKorean = 10;\n    cout << tStudent.iKorean << \" \" << tStudent.iMath << endl;\n    return 0;\n}",
+      "choices": [
+        "80 100",
+        "10 100",
+        "10 0",
+        "80 0"
+      ],
+      "answer": 1,
+      "explain": "순서대로 따라가면 iKorean은 80이 됐다가 마지막의 pStudent->iKorean = 10; 으로 10이 된다. iMath는 (*pStudent).iMath = 100; 으로 100이 된다. 포인터를 통한 수정이 모두 원본 tStudent에 반영되므로 10 100이 출력된다. 80 100을 골랐다면 마지막 -> 대입도 원본을 바꾼다는 점을 놓친 것이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Point { int x; int y; };\n\nint main()\n{\n    Point pt = { 1, 2 };\n    Point* p = &pt;\n    p->x++;\n    (*p).y += 3;\n    cout << pt.x << \" \" << pt.y << endl;\n    return 0;\n}",
+      "choices": [
+        "1 2",
+        "2 2",
+        "1 5",
+        "2 5"
+      ],
+      "answer": 3,
+      "explain": "p->x++ 은 pt.x를 1 증가시켜 2가 되고, (*p).y += 3 은 pt.y를 2에서 5로 만든다. -> 와 (*p). 는 같은 문법이므로 둘 다 원본 pt를 수정한다. 따라서 2 5가 출력된다. p->x++ 은 (p->x)++ 로 해석되어 멤버 값이 증가하는 것이지 포인터가 이동하는 것이 아니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Player { char szName[16]; int iHP; };\n\nint main()\n{\n    Player t = {};\n    strcpy_s(t.szName, \"찬연\");\n    Player* p = &t;\n    p->iHP = 100;\n    cout << p->szName << \" \" << p->iHP << endl;\n    return 0;\n}",
+      "choices": [
+        "찬연 100",
+        "찬연 0",
+        "(메모리 주소) 100",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 0,
+      "explain": "strcpy_s로 szName에 '찬연'이 복사되고, p->iHP = 100; 으로 iHP가 100이 된다. p->szName 은 char 배열(문자열)이므로 cout이 문자열 내용을 출력한다. 그래서 찬연 100이 나온다. 구조체 포인터로 접근해도 멤버가 char 배열이면 주소가 아니라 문자열로 출력된다는 점을 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Student { int kor; int math; };\n\nint main()\n{\n    Student s = { 50, 60 };\n    Student* p = &s;\n    s.kor = 70;\n    cout << p->kor << endl;\n    return 0;\n}",
+      "choices": [
+        "50",
+        "60",
+        "70",
+        "쓰레기값이 출력된다"
+      ],
+      "answer": 2,
+      "explain": "p는 s의 주소를 저장하고 있을 뿐, 포인터를 만든 시점의 값을 복사해 두는 것이 아니다. 그래서 s.kor = 70; 으로 원본이 바뀐 뒤 p->kor 로 읽으면 바뀐 값 70이 나온다. 50이라고 답했다면 포인터가 값을 저장한다고 오해한 것이다. 포인터와 원본은 항상 같은 메모리를 바라본다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Student { int kor; int math; };\n\nint main()\n{\n    Student a = { 10, 20 };\n    Student b = { 30, 40 };\n    Student* p = &a;\n    p->kor = 99;\n    p = &b;\n    p->kor = 77;\n    cout << a.kor << \" \" << b.kor << endl;\n    return 0;\n}",
+      "choices": [
+        "10 30",
+        "99 77",
+        "77 77",
+        "99 30"
+      ],
+      "answer": 1,
+      "explain": "처음 p는 a를 가리키므로 p->kor = 99; 는 a.kor를 99로 만든다. 이후 p = &b; 로 가리키는 대상을 바꾸면 p->kor = 77; 은 b.kor를 77로 만든다. 따라서 99 77이 출력된다. 포인터는 실행 중에 다른 대상을 가리키도록 재대입할 수 있고, 수정은 항상 '그 순간 가리키는 대상'에 적용된다는 점이 핵심이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Student { int kor; int math; };\n\nint main()\n{\n    Student a = { 50, 60 };\n    Student b = a;\n    Student* p = &a;\n    p->kor = 100;\n    cout << a.kor << \" \" << b.kor << endl;\n    return 0;\n}",
+      "choices": [
+        "50 50",
+        "100 100",
+        "50 100",
+        "100 50"
+      ],
+      "answer": 3,
+      "explain": "Student b = a; 는 그 시점의 a 값을 통째로 복사한 별개의 구조체를 만든다. 이후 p->kor = 100; 은 p가 가리키는 a만 수정하고, 복사본 b는 영향을 받지 않는다. 그래서 100 50이 출력된다. '복사'는 별도의 메모리를 만들고 '포인터'는 같은 메모리를 가리킨다는 차이를 구분하는 문제다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Student { int kor; int math; };\n\nint main()\n{\n    Student arr[2] = { { 10, 20 }, { 30, 40 } };\n    Student* p = arr;\n    cout << p->kor << \" \";\n    p++;\n    cout << p->kor << endl;\n    return 0;\n}",
+      "choices": [
+        "10 30",
+        "10 20",
+        "10 11",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 0,
+      "explain": "구조체 포인터에 ++ 를 하면 1바이트가 아니라 구조체 하나 크기만큼 이동한다. p는 처음 arr[0]을 가리켜 10을 출력하고, p++ 후에는 arr[1]을 가리켜 30을 출력한다. 값이 1 증가한다거나 int 하나만큼만 이동해 20이 나온다고 생각하면 틀린다. 배열과 포인터 단원에서 배운 포인터 연산 규칙이 구조체 배열에도 똑같이 적용된다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Student { int kor; int math; };\n\nint main()\n{\n    Student arr[2] = { { 10, 20 }, { 30, 40 } };\n    Student* p = arr;\n    cout << (p + 1)->math << endl;\n    return 0;\n}",
+      "choices": [
+        "20",
+        "30",
+        "40",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 2,
+      "explain": "(p + 1) 은 구조체 하나 크기만큼 이동한 주소, 즉 arr[1]의 주소다. 여기에 -> 를 적용하면 arr[1].math 인 40에 접근한다. 20을 골랐다면 p + 1이 int 하나만큼 이동한다고 오해한 것이다. (p + 1)->math 는 arr[1].math 와 완전히 같은 표현이며, 우선순위 때문에 p + 1을 괄호로 감싸야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "빈칸에 들어갈 알맞은 코드는?",
+      "code": "__Student tStudent = {};\n__Student* pStudent = ____;",
+      "choices": [
+        "tStudent",
+        "&tStudent",
+        "*tStudent",
+        "tStudent.szName"
+      ],
+      "answer": 1,
+      "explain": "포인터에는 주소를 저장해야 하므로 & 연산자로 tStudent의 주소를 얻어 대입한다. tStudent만 쓰면 구조체 자체를 포인터에 넣으려는 것이라 컴파일 에러다. *tStudent 는 포인터가 아닌 변수에 역참조를 시도하는 잘못된 문법이다. tStudent.szName은 char 배열이라 __Student* 와 타입이 맞지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "pStudent가 tStudent를 가리키는 구조체 포인터일 때, 빈칸에 들어갈 연산자는?",
+      "code": "__Student tStudent = {};\n__Student* pStudent = &tStudent;\npStudent____iKorean = 10;",
+      "choices": [
+        ".",
+        "*",
+        "&",
+        "->"
+      ],
+      "answer": 3,
+      "explain": "pStudent는 포인터이므로 멤버에 접근하려면 -> 를 사용한다. . 을 쓰면 포인터에 직접 멤버 접근을 시도하는 것이라 컴파일 에러다. * 나 & 는 역참조와 주소 연산자일 뿐 멤버 접근 연산자가 아니다. -> 대신 (*pStudent).iKorean = 10; 으로 써도 같은 의미가 된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`__Student* pStudent = tStudent;` 가 컴파일 에러인 이유는?",
+      "code": null,
+      "choices": [
+        "포인터에는 주소를 저장해야 하는데 구조체 변수 자체를 대입했기 때문 (&tStudent로 주소를 넘겨야 한다)",
+        "구조체 타입으로는 포인터를 만들 수 없기 때문",
+        "구조체 포인터는 선언과 동시에 초기화할 수 없기 때문",
+        "tStudent가 아직 초기화되지 않았기 때문"
+      ],
+      "answer": 0,
+      "explain": "포인터 변수에는 반드시 '주소'를 저장해야 한다. tStudent는 구조체 변수 자체이므로 타입이 맞지 않아 컴파일 에러가 나고, &tStudent 처럼 주소를 대입해야 한다. 구조체도 당연히 포인터를 만들 수 있고, 선언과 동시에 초기화하는 것도 정상적인 문법이다. 에러의 원인은 오직 & 가 빠진 것 하나다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "pStudent가 tStudent를 가리키는 구조체 포인터일 때, `pStudent->iKorean++;` 를 실행하면 어떤 일이 일어나는가?",
+      "code": null,
+      "choices": [
+        "pStudent가 배열의 다음 구조체로 이동한다",
+        "연산자 우선순위 문제로 컴파일 에러가 발생한다",
+        "pStudent가 가리키는 tStudent의 iKorean 값이 1 증가한다",
+        "iKorean의 복사본만 증가하고 원본은 변하지 않는다"
+      ],
+      "answer": 2,
+      "explain": "이 식은 (pStudent->iKorean)++ 로 해석되어, 포인터가 가리키는 tStudent의 iKorean이 1 증가한다. -> 가 먼저 멤버에 접근한 뒤 그 멤버에 ++ 가 적용되는 것이지, 포인터 자체가 이동하는 것이 아니다. * 와 . 을 조합할 때와 달리 -> 는 괄호 없이도 안전하게 쓸 수 있다. 포인터로 접근했으므로 복사본이 아닌 원본 멤버가 바뀐다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드에서 컴파일 에러가 발생하는 줄은?",
+      "code": "struct Point { int x; int y; };\n\nint main()\n{\n    Point pt = { 1, 2 };\n    Point* p = &pt;\n    p->x = 10;      // (가)\n    *p.y = 20;      // (나)\n    (*p).x = 30;    // (다)\n    pt.y = 40;      // (라)\n    return 0;\n}",
+      "choices": [
+        "(가) p->x = 10;",
+        "(나) *p.y = 20;",
+        "(다) (*p).x = 30;",
+        "(라) pt.y = 40;"
+      ],
+      "answer": 1,
+      "explain": "*p.y 는 우선순위 때문에 *(p.y) 로 해석되는데, 포인터 p에 . 을 쓸 수 없어 컴파일 에러가 난다. (*p).y = 20; 또는 p->y = 20; 으로 고쳐야 한다. p->x 와 (*p).x 는 올바른 포인터 멤버 접근이고, pt.y 는 변수에 . 을 쓴 정상 문법이다. 수업 파일에서 주석 처리해 둔 잘못된 코드가 바로 이 형태다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Student { int kor; int math; };\n\nint main()\n{\n    Student s = { 10, 20 };\n    Student* p1 = &s;\n    Student* p2 = &s;\n    p1->kor = 50;\n    cout << p2->kor << endl;\n    return 0;\n}",
+      "choices": [
+        "10",
+        "컴파일 에러가 발생한다",
+        "쓰레기값이 출력된다",
+        "50"
+      ],
+      "answer": 3,
+      "explain": "p1과 p2는 서로 다른 포인터 변수지만 둘 다 같은 s의 주소를 저장하고 있다. p1->kor = 50; 으로 s.kor가 50이 되면, p2->kor 로 읽어도 같은 메모리이므로 50이 나온다. 하나의 구조체를 여러 포인터가 동시에 가리키는 것은 전혀 문제가 없다. 포인터마다 별도의 복사본이 생긴다고 생각하면 틀린다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "연산자 우선순위에 따라 컴파일러는 `*pStudent.iKorean` 을 어떻게 해석하는가?",
+      "code": null,
+      "choices": [
+        "*(pStudent.iKorean) 으로 해석되어, 포인터인 pStudent에 . 을 적용하려다 컴파일 에러가 난다",
+        "(*pStudent).iKorean 으로 해석되어 정상적으로 멤버에 접근한다",
+        "* 를 곱셈 연산자로 해석해서 두 값을 곱한다",
+        "pStudent->iKorean 과 완전히 같은 코드로 해석한다"
+      ],
+      "answer": 0,
+      "explain": ". 이 * 보다 우선순위가 높으므로 컴파일러는 *(pStudent.iKorean) 순서로 해석한다. 그런데 pStudent는 포인터라서 . 을 쓸 수 없으므로 이 지점에서 컴파일 에러가 난다. (*pStudent).iKorean 으로 해석되길 기대했다면 우선순위를 반대로 알고 있는 것이다. 이런 실수를 피하려면 괄호를 쓰거나 처음부터 -> 를 쓰는 것이 안전하다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nstruct Point { int x; int y; };\n\nint main()\n{\n    Point arr[2] = { { 1, 2 }, { 3, 4 } };\n    Point* p = arr;\n    cout << (p++)->x << \" \";\n    cout << p->x << endl;\n    return 0;\n}",
+      "choices": [
+        "1 1",
+        "3 3",
+        "1 3",
+        "2 3"
+      ],
+      "answer": 2,
+      "explain": "(p++)->x 는 후위 ++ 라서 현재 p가 가리키는 arr[0].x 인 1을 먼저 사용한 뒤에 p를 다음 구조체로 이동시킨다. 다음 줄의 p->x 는 이동한 뒤의 arr[1].x 인 3을 출력한다. 따라서 1 3이 출력된다. 2 3을 골랐다면 ++ 가 멤버 값이 아니라 포인터 자체를 구조체 크기만큼 이동시킨다는 점을 놓친 것이다.",
+      "difficulty": "심화"
+    }
+  ],
+  "coding": [
+    {
+      "title": "구조체 포인터로 좌표 수정하기",
+      "prompt": "Point 구조체(멤버: int x, int y)가 주어진다. pt를 { 3, 4 } 로 초기화한 뒤, 구조체 포인터 p를 선언해 pt의 주소를 저장하라. -> 연산자로 x를 10으로 수정하고, (*p). 방식으로 y를 20으로 수정한 뒤 pt의 값을 출력하라.\n\n출력 예시:\nx: 10, y: 20",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nstruct Point\n{\n    int x;\n    int y;\n};\n\nint main()\n{\n    Point pt = { 3, 4 };\n\n    // TODO: Point 포인터 p를 선언하고 pt의 주소를 저장하세요.\n\n    // TODO: -> 연산자로 x를 10으로 바꾸세요.\n\n    // TODO: (*p). 방식으로 y를 20으로 바꾸세요.\n\n    // TODO: pt.x와 pt.y를 출력하세요. (예: x: 10, y: 20)\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "Point\\s*\\*\\s*\\w+\\s*=\\s*&\\s*pt",
+          "desc": "Point 포인터를 선언하고 pt의 주소로 초기화했는지 확인"
+        },
+        {
+          "pattern": "\\w+\\s*->\\s*x\\s*=\\s*10",
+          "desc": "-> 연산자로 x를 10으로 수정했는지 확인"
+        },
+        {
+          "pattern": "\\(\\s*\\*\\s*\\w+\\s*\\)\\s*\\.\\s*y\\s*=\\s*20",
+          "desc": "(*p). 방식으로 y를 20으로 수정했는지 확인"
+        },
+        {
+          "pattern": "cout\\s*<<",
+          "desc": "cout으로 결과를 출력했는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nstruct Point\n{\n    int x;\n    int y;\n};\n\nint main()\n{\n    Point pt = { 3, 4 };\n\n    Point* p = &pt;\n\n    p->x = 10;\n    (*p).y = 20;\n\n    cout << \"x: \" << pt.x << \", y: \" << pt.y << endl;\n\n    return 0;\n}",
+      "explain": "구조체 포인터의 가장 기본 패턴을 연습하는 문제다. &pt로 주소를 얻어 Point* 포인터에 저장하고, -> 연산자와 (*p). 두 가지 방식으로 멤버를 수정한다. 두 방식은 완전히 같은 문법이며, (*p). 는 . 이 * 보다 우선순위가 높기 때문에 괄호가 반드시 필요하다. 포인터로 수정한 결과가 원본 pt에 그대로 반영되는 것을 출력으로 확인한다."
+    },
+    {
+      "title": "구조체 포인터로 성적 처리하기",
+      "prompt": "수업 파일과 같은 Student 구조체(멤버: char szName[32], int iKorean, int iMath, int iEnglish, int iTotal, float fAverage)가 주어진다. 다음을 수행하라.\n1) tStudent를 {} 로 초기화하고 strcpy_s로 이름 \"찬연\"을 저장\n2) 구조체 포인터 pStudent를 선언하고 tStudent의 주소를 저장\n3) 포인터의 -> 연산자로 국어 90, 수학 85, 영어 80을 대입\n4) 포인터로 iTotal(세 과목의 합)을 계산\n5) fAverage를 (float) 캐스팅을 사용해 iTotal / 3 으로 계산\n6) 포인터로 이름, 총점, 평균을 출력\n\n출력 예시:\n이름: 찬연\n총점: 255\n평균: 85",
+      "starter": "#include <iostream>\n\n#define NAME_SIZE 32\n\nusing std::cout;\nusing std::endl;\n\nstruct Student\n{\n    char szName[NAME_SIZE];\n    int iKorean;\n    int iMath;\n    int iEnglish;\n    int iTotal;\n    float fAverage;\n};\n\nint main()\n{\n    Student tStudent = {};\n\n    // TODO: strcpy_s로 이름 \"찬연\"을 저장하세요.\n\n    // TODO: 구조체 포인터 pStudent를 선언하고 tStudent의 주소를 저장하세요.\n\n    // TODO: -> 연산자로 국어 90, 수학 85, 영어 80을 대입하세요.\n\n    // TODO: 포인터로 iTotal(세 과목 합)을 계산하세요.\n\n    // TODO: fAverage를 (float) 캐스팅을 사용해 계산하세요.\n\n    // TODO: 이름, 총점, 평균을 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "strcpy_s\\s*\\(",
+          "desc": "strcpy_s로 이름을 복사했는지 확인"
+        },
+        {
+          "pattern": "Student\\s*\\*\\s*\\w+\\s*=\\s*&",
+          "desc": "구조체 포인터를 선언하고 주소로 초기화했는지 확인"
+        },
+        {
+          "pattern": "->\\s*iKorean\\s*=\\s*90",
+          "desc": "-> 연산자로 국어 점수를 대입했는지 확인"
+        },
+        {
+          "pattern": "->\\s*iTotal\\s*=",
+          "desc": "포인터로 총점을 계산했는지 확인"
+        },
+        {
+          "pattern": "\\(\\s*float\\s*\\)",
+          "desc": "평균 계산에 (float) 캐스팅을 사용했는지 확인"
+        },
+        {
+          "pattern": "->\\s*fAverage\\s*=",
+          "desc": "포인터로 평균을 대입했는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\n#define NAME_SIZE 32\n\nusing std::cout;\nusing std::endl;\n\nstruct Student\n{\n    char szName[NAME_SIZE];\n    int iKorean;\n    int iMath;\n    int iEnglish;\n    int iTotal;\n    float fAverage;\n};\n\nint main()\n{\n    Student tStudent = {};\n\n    strcpy_s(tStudent.szName, \"찬연\");\n\n    Student* pStudent = &tStudent;\n\n    pStudent->iKorean = 90;\n    pStudent->iMath = 85;\n    pStudent->iEnglish = 80;\n\n    pStudent->iTotal = pStudent->iKorean + pStudent->iMath + pStudent->iEnglish;\n    pStudent->fAverage = (float)pStudent->iTotal / 3;\n\n    cout << \"이름: \" << pStudent->szName << endl;\n    cout << \"총점: \" << pStudent->iTotal << endl;\n    cout << \"평균: \" << pStudent->fAverage << endl;\n\n    return 0;\n}",
+      "explain": "수업 파일의 __Student 예제를 그대로 확장한 문제다. 구조체 포인터 하나로 이름 출력, 점수 대입, 총점과 평균 계산까지 모두 처리한다. 평균을 계산할 때 (float) 캐스팅을 하지 않으면 정수 나눗셈이 되어 소수점이 잘리므로 주의해야 한다. 포인터를 통한 모든 수정이 원본 tStudent에 반영되며, -> 연산자가 (*pStudent). 와 같다는 것을 몸으로 익히는 것이 목표다."
+    },
+    {
+      "title": "몬스터 배열을 구조체 포인터로 순회하기",
+      "prompt": "Monster 구조체(멤버: char szName[32], int iHP, int iAttack)를 정의하고, 몬스터 3마리를 배열로 만들어 { \"슬라임\", 50, 5 }, { \"고블린\", 80, 10 }, { \"드래곤\", 300, 40 } 으로 초기화하라.\n1) Monster 포인터 p에 배열의 시작 주소를 저장\n2) for문과 포인터 연산((p + i)-> 또는 p++)으로 모든 몬스터의 iHP를 20씩 감소시키고, 각 몬스터의 이름과 남은 HP를 출력\n3) 두 번째 for문에서 포인터 pWeakest를 이용해 HP가 가장 낮은 몬스터를 찾아 이름과 HP를 출력\n\n출력 예시:\n슬라임 HP: 30\n고블린 HP: 60\n드래곤 HP: 280\n가장 약한 몬스터: 슬라임 (HP 30)",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\n// TODO: Monster 구조체를 정의하세요. (szName[32], iHP, iAttack)\n\nint main()\n{\n    // TODO: 몬스터 3마리 배열을 만들고 초기화하세요.\n\n    // TODO: Monster 포인터 p에 배열의 시작 주소를 저장하세요.\n\n    // TODO: for문과 포인터 연산으로 모든 몬스터의 iHP를 20 감소시키고 이름과 HP를 출력하세요.\n\n    // TODO: 포인터 pWeakest로 HP가 가장 낮은 몬스터를 찾아 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "struct\\s+Monster",
+          "desc": "Monster 구조체를 정의했는지 확인"
+        },
+        {
+          "pattern": "Monster\\s+\\w+\\s*\\[",
+          "desc": "Monster 구조체 배열을 선언했는지 확인"
+        },
+        {
+          "pattern": "Monster\\s*\\*",
+          "desc": "Monster 포인터를 사용했는지 확인"
+        },
+        {
+          "pattern": "for\\s*\\(",
+          "desc": "for문으로 배열을 순회했는지 확인"
+        },
+        {
+          "pattern": "->\\s*iHP",
+          "desc": "-> 연산자로 iHP 멤버에 접근했는지 확인"
+        },
+        {
+          "pattern": "->\\s*iHP\\s*<",
+          "desc": "포인터로 HP를 비교하며 가장 약한 몬스터를 찾았는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nstruct Monster\n{\n    char szName[32];\n    int iHP;\n    int iAttack;\n};\n\nint main()\n{\n    Monster arr[3] =\n    {\n        { \"슬라임\", 50, 5 },\n        { \"고블린\", 80, 10 },\n        { \"드래곤\", 300, 40 }\n    };\n\n    Monster* p = arr;\n\n    for (int i = 0; i < 3; ++i)\n    {\n        (p + i)->iHP -= 20;\n        cout << (p + i)->szName << \" HP: \" << (p + i)->iHP << endl;\n    }\n\n    Monster* pWeakest = arr;\n\n    for (int i = 1; i < 3; ++i)\n    {\n        if ((p + i)->iHP < pWeakest->iHP)\n        {\n            pWeakest = p + i;\n        }\n    }\n\n    cout << \"가장 약한 몬스터: \" << pWeakest->szName << \" (HP \" << pWeakest->iHP << \")\" << endl;\n\n    return 0;\n}",
+      "explain": "구조체 배열과 포인터 연산을 결합한 문제다. 배열 이름이 곧 시작 주소이므로 Monster* p = arr; 로 포인터를 만들고, 구조체 포인터에 + i 를 하면 구조체 크기만큼 i번 이동하므로 (p + i)-> 로 각 몬스터에 접근할 수 있다. 가장 약한 몬스터를 찾을 때는 구조체 값을 복사하지 않고 포인터 pWeakest가 가리키는 대상만 바꿔 가며 비교한다. 포인터를 '현재 선택된 대상'을 기억하는 용도로 활용하는 것이 이 문제의 핵심이다."
+    }
+  ]
+}

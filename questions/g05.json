@@ -1,0 +1,444 @@
+{
+  "id": "g05",
+  "num": 5,
+  "group": "문법",
+  "title": "표현식과 연산자",
+  "srcFile": "05. Expression.cpp",
+  "questions": [
+    {
+      "q": "C++에서 10 / 20 처럼 int끼리 나눗셈을 하면 결과는 어떻게 되는가?",
+      "code": null,
+      "choices": [
+        "자동으로 실수형으로 변환되어 0.5가 된다",
+        "반올림되어 1이 된다",
+        "소수점 이하를 버림 처리하여 몫인 0만 int로 나온다",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 2,
+      "explain": "int / int의 결과는 int로 나오기 때문에 소수점 이하는 버림 처리되고 몫만 남는다. 그래서 10 / 20은 0.5가 아니라 0이다. 자동으로 실수형으로 변환된다는 생각이 가장 흔한 오개념인데, 소수 계산이 완료되려면 피연산자(Operand) 중 하나라도 실수형이어야 한다(예: 10 / 20.f = 0.5). 또한 버림이지 반올림이 아니라는 점도 주의하자. 이 성질은 나중에 평균 계산 같은 곳에서 자주 실수하는 부분이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "% (Modulus, 나머지) 연산자를 사용할 수 없는 자료형은?",
+      "code": null,
+      "choices": [
+        "int",
+        "char",
+        "short",
+        "float"
+      ],
+      "answer": 3,
+      "explain": "float이나 double 같은 실수형은 / 연산에서 소수점까지 몫 계산이 완료되므로 나머지라는 것이 존재하지 않아 % 연산이 불가능하다. int, char, short 같은 정수 계열은 나눗셈 결과가 몫과 나머지로 나뉘기 때문에 % 를 쓸 수 있다. 실수도 나눗셈이 되니까 % 도 될 것이라고 생각하기 쉽지만, % 는 '정수 나눗셈의 나머지'라는 개념 위에 서 있는 연산자다. 정수 나눗셈(소수점 버림)과 한 쌍으로 기억해 두자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "iValue = iValue + 20; 과 완전히 동일한 동작을 하는 문장은?",
+      "code": null,
+      "choices": [
+        "iValue += 20;",
+        "iValue =+ 20;",
+        "iValue = +20;",
+        "iValue == 20;"
+      ],
+      "answer": 0,
+      "explain": "+= 는 복합 할당(Compound Assignment) 연산자로, 자기 자신의 값에 20을 더해서 다시 자신에게 대입한다. iValue =+ 20; 은 = 와 + 의 순서가 뒤바뀐 것으로, '양수 20'을 그냥 대입하는 문장이라 기존 값이 통째로 사라진다(수업에서 강조한 함정!). iValue == 20; 은 비교만 할 뿐 값을 바꾸지 않는다. 복합 할당 연산자를 쓸 때는 연산자 기호가 = 앞에 온다는 순서를 꼭 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력으로 옳은 것은? (첫 줄, 둘째 줄 순서)",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << (10 < 20) << endl;\n    cout << (10 == 20) << endl;\n\n    return 0;\n}",
+      "choices": [
+        "1 그리고 0",
+        "true 그리고 false",
+        "0 그리고 1",
+        "10 그리고 20"
+      ],
+      "answer": 0,
+      "explain": "관계(비교) 연산자는 양 변을 연산해 결과를 true / false로 반환한다. 10 < 20은 참이므로 true, 10 == 20은 거짓이므로 false인데, cout으로 출력하면 기본적으로 1과 0이라는 숫자로 표시된다. 'true'와 'false'라는 글자가 그대로 출력된다고 생각하는 것이 흔한 오개념이다. bool 값이 1/0으로 출력되는 이 규칙은 논리 연산자(&&, ||)의 결과에도 똑같이 적용된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "논리 연산자 && (AND)가 true를 반환하는 경우는?",
+      "code": null,
+      "choices": [
+        "양 변 중 하나라도 참일 때",
+        "양 변이 모두 참일 때만",
+        "양 변이 모두 거짓일 때만",
+        "양 변의 값이 서로 다를 때"
+      ],
+      "answer": 1,
+      "explain": "AND(&&)는 양 변의 값이 모두 참일 때만 참을 반환한다. '하나라도 참이면 참'은 OR(||)의 규칙이므로 헷갈리지 않도록 진리표를 함께 외워 두자. '서로 다를 때 참'은 배타적 논리합 XOR(^)의 규칙이다. 참고로 C++에서는 && 대신 and, || 대신 or 라는 키워드도 쓸 수 있다는 것을 파일 예제에서 확인했다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "비트 논리 연산자 ^ (XOR, 배타적 논리합)의 결과 비트가 1(true)이 되는 조건은?",
+      "code": null,
+      "choices": [
+        "두 비트가 서로 다를 때",
+        "두 비트가 모두 1일 때",
+        "두 비트가 모두 0일 때",
+        "두 비트 중 하나라도 1일 때"
+      ],
+      "answer": 0,
+      "explain": "XOR(^)은 배타적 논리합으로, 두 비트가 같으면 0(false), 다르면 1(true)이 된다. 즉 '둘 중 하나만 1이어야' 1이 나온다. 두 비트가 모두 1일 때 1이 되는 것은 AND(&)이고, 하나라도 1이면 1이 되는 것은 OR(|)이므로 구분해야 한다. 세 연산자 &, |, ^ 는 비트 단위로 각각 자리를 맞춰 계산한다는 공통점이 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "sizeof에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "iostream에서 제공하는 함수다",
+        "사용자가 정의한 함수다",
+        "C++의 keyword(예약어)다",
+        "변수 이름으로 자유롭게 사용할 수 있다"
+      ],
+      "answer": 2,
+      "explain": "소괄호가 열리고 닫힌다고 해서 무조건 함수인 것은 아니다. sizeof, typeid 등은 C++ 문법의 일부로 미리 예약된 keyword다. keyword는 특정한 의미와 기능을 갖도록 언어에 정의되어 있으며, 변수명이나 함수명 같은 식별자로는 사용할 수 없다. sizeof(int)를 출력하면 int 자료형의 크기인 4(바이트)가 나온다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "정수 x에 비트 반전 연산자 ~ 를 적용한 ~x의 값을 식으로 나타내면?",
+      "code": null,
+      "choices": [
+        "-x",
+        "-x - 1",
+        "-x + 1",
+        "x - 1"
+      ],
+      "answer": 1,
+      "explain": "~ 는 모든 비트를 반전(Bit Reversal)시키는 연산자로, 결과는 '부호를 반대로 하고 -1 처리가 된 값'이다. 예를 들어 ~10 = -11, ~(-10) = 9가 된다. 단순히 부호만 바뀐 -x가 된다고 착각하기 쉽지만, 2의 보수 표현 때문에 항상 1 차이가 난다. x + ~x 를 계산하면 모든 비트가 1이 되어 -1이 나온다는 것으로 이 공식을 기억할 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "정수를 0으로 나누는 코드(예: 10 / a, a = 0)를 실행하면 어떻게 되는가?",
+      "code": null,
+      "choices": [
+        "0이 출력된다",
+        "무한대가 출력된다",
+        "실행 시 오류(Zero Division Error)가 발생한다",
+        "자동으로 1로 보정되어 계산된다"
+      ],
+      "answer": 2,
+      "explain": "정수는 0으로 나눌 수 없으며, 실행하면 Zero Division Error가 발생해 프로그램이 비정상 종료된다. 0이 출력되거나 자동으로 보정된다는 것은 잘못된 생각이다. 파일 예제에서도 이 코드를 주석 처리해 두고 '0으로 나눌 수 없다'고 명시했다. 나중에 나머지 연산 % 역시 내부적으로 나눗셈이므로 0으로 나머지를 구하는 것도 안 된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 세 줄을 순서대로 고르면?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << 10 * 20 << endl;\n    cout << 10 / 20 << endl;\n    cout << 10 / 20.f << endl;\n\n    return 0;\n}",
+      "choices": [
+        "200, 0, 0.5",
+        "200, 0.5, 0.5",
+        "200, 0, 0",
+        "0.5, 0, 200"
+      ],
+      "answer": 0,
+      "explain": "10 * 20은 200이다. 10 / 20은 int끼리의 나눗셈이라 소수점 이하가 버려져 0이 된다. 반면 10 / 20.f 는 피연산자 중 하나가 float이므로 소수 계산이 완료되어 0.5가 출력된다. 둘째 줄도 0.5가 나온다고 생각했다면 int / int = int 규칙을 다시 떠올리자. 자료형 하나 차이로 결과가 완전히 달라지는 것이 이 예제의 핵심이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNegate = 10;\n    cout << ~iNegate << endl;\n\n    return 0;\n}",
+      "choices": [
+        "-10",
+        "11",
+        "-9",
+        "-11"
+      ],
+      "answer": 3,
+      "explain": "~ 는 10의 모든 비트(00000000 00000000 00000000 00001010)를 반전시켜 11111111 11111111 11111111 11110101을 만드는데, 이는 2의 보수 표현으로 -11이다. 공식으로는 ~x = -x - 1 이므로 ~10 = -11. 부호만 바뀐 -10이라고 답하는 것이 가장 흔한 실수다. 반대로 ~(-10)은 +9가 되는 것도 함께 기억해 두자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << (77 & 42) << endl;\n\n    return 0;\n}",
+      "choices": [
+        "111",
+        "103",
+        "8",
+        "119"
+      ],
+      "answer": 2,
+      "explain": "77은 1001101, 42는 0101010이다. & (비트 AND)는 두 비트가 모두 1인 자리만 1이 되므로 0001000, 즉 8이 나온다. 111은 | (OR)의 결과이고, 103은 ^ (XOR)의 결과이므로 어떤 연산자인지에 따라 답이 달라진다. 비트 연산은 두 수를 2진수로 펼쳐 자리별로 계산하는 연습이 필수다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 두 줄을 순서대로 고르면?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 20;\n\n    iNumber <<= 2;\n    cout << iNumber << endl;\n\n    iNumber <<= 3;\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "80 그리고 640",
+        "40 그리고 320",
+        "80 그리고 240",
+        "22 그리고 25"
+      ],
+      "answer": 0,
+      "explain": "좌측 시프트 한 칸은 2진수 자릿수가 한 칸 올라가는 것이므로 사실상 곱하기 2다. 20 << 2 = 20 * 4 = 80, 이어서 80 << 3 = 80 * 8 = 640이 된다. 시프트 칸 수만큼 더하는 것(22, 25)이 아니라 2의 거듭제곱을 곱하는 것임에 주의하자. <<= 는 iNumber = iNumber << 2 를 줄인 복합 할당 연산자다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 10;\n\n    ++iNumber;\n    iNumber++;\n\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "10",
+        "11",
+        "13",
+        "12"
+      ],
+      "answer": 3,
+      "explain": "++iNumber와 iNumber++ 는 모두 iNumber += 1; 과 같은 효과로 값을 1씩 증가시킨다. 10에서 두 번 증가했으므로 12가 출력된다. 전위/후위의 차이는 '같은 문장 안에서 값을 사용할 때' 드러나는 것이지, 이렇게 단독 문장으로 쓰면 결과가 완전히 동일하다. 전위와 후위가 항상 다른 결과를 낸다고 오해하지 않도록 주의하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "정수 변수 n이 짝수인지 검사하는 표현식으로 가장 적절한 것은?",
+      "code": null,
+      "choices": [
+        "n % 2 == 0",
+        "n / 2 == 0",
+        "n % 2 == 1",
+        "n * 2 == 0"
+      ],
+      "answer": 0,
+      "explain": "짝수는 2로 나눈 나머지가 0인 수이므로 % (Modulus) 연산자로 n % 2 를 구해 0과 비교하면 된다. n / 2 == 0 은 몫이 0인지 묻는 것이라 0과 1에서만 참이 되는 전혀 다른 식이다. n % 2 == 1 은 반대로 홀수 검사다. 이렇게 % 와 비교 연산자를 조합하는 패턴은 앞으로 배수 판정, 순환 인덱스 등에서 계속 쓰인다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iValue = 30;\n    iValue = iValue + 20;\n    iValue =+ 20;\n\n    cout << iValue << endl;\n\n    return 0;\n}",
+      "choices": [
+        "70",
+        "50",
+        "20",
+        "컴파일 에러"
+      ],
+      "answer": 2,
+      "explain": "iValue = iValue + 20; 까지는 50이지만, 다음 줄의 iValue =+ 20; 은 += 가 아니라 '양수 20을 대입'하는 문장이다. 즉 = 와 단항 + 로 해석되어 기존 값 50이 사라지고 20이 들어간다. += 와 똑같이 동작해 70이 된다고 생각하는 것이 이 함정의 포인트다. 컴파일 에러도 나지 않고 조용히 잘못된 값이 되기 때문에 더 위험하다. 복합 할당은 반드시 연산자 기호를 = 앞에 쓰자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNegate = -10;\n    cout << ~iNegate << endl;\n\n    return 0;\n}",
+      "choices": [
+        "10",
+        "9",
+        "-9",
+        "11"
+      ],
+      "answer": 1,
+      "explain": "-10의 비트(11111111 11111111 11111111 11110110)를 전부 반전하면 00000000 00000000 00000000 00001001, 즉 +9가 된다. 공식 ~x = -x - 1 에 대입해도 ~(-10) = 10 - 1 = 9다. 부호만 뒤집힌 10이라고 답하기 쉽지만 항상 1이 모자란 값이 나온다. 음수에 ~ 를 적용하면 절댓값이 1 줄어든 양수가 된다고 정리해 두면 편하다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << (77 ^ 42) << endl;\n\n    return 0;\n}",
+      "choices": [
+        "8",
+        "111",
+        "119",
+        "103"
+      ],
+      "answer": 3,
+      "explain": "77(1001101)과 42(0101010)를 자리별로 XOR 하면 서로 다른 자리만 1이 되어 1100111, 즉 103이 나온다. 8은 & (AND)의 결과이고 111은 | (OR)의 결과다. XOR은 'OR에서 둘 다 1인 자리를 뺀 것'으로 볼 수도 있어서 111 - 8 = 103으로 검산할 수 있다. 세 비트 연산의 결과를 나란히 비교해 보면 각 연산자의 성질이 명확해진다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 80;\n\n    iNumber >>= 3;\n    iNumber >>= 1;\n    iNumber >>= 1;\n\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "2",
+        "2.5",
+        "3",
+        "5"
+      ],
+      "answer": 0,
+      "explain": "우측 시프트 한 칸은 사실상 나누기 2다. 80 >> 3 = 10, 10 >> 1 = 5, 그리고 5 >> 1 에서 5(101)는 한 칸 밀리면 10(2진수), 즉 2가 된다. 5 / 2 = 2.5가 아니라 소수점이 버려진 2가 나온다는 것이 핵심 포인트다. 시프트는 정수 비트 연산이므로 밀려난 비트는 그냥 사라진다. 정수 나눗셈의 버림 규칙과 같은 원리다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 세 줄을 순서대로 고르면?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 10;\n\n    cout << iNumber++ << endl;\n    cout << ++iNumber << endl;\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "10, 11, 11",
+        "10, 12, 12",
+        "11, 12, 12",
+        "10, 11, 12"
+      ],
+      "answer": 1,
+      "explain": "첫 줄의 iNumber++ 는 후위 연산자라 기존 값 10을 먼저 출력하고, 문장이 끝난 뒤 11이 된다. 둘째 줄의 ++iNumber 는 전위 연산자라 먼저 12로 증가시킨 뒤 12를 출력한다. 셋째 줄은 현재 값 12를 그대로 출력한다. 후위는 '출력 후 증가', 전위는 '증가 후 출력'이라는 시점 차이를 정확히 추적하는 것이 관건이다. 두 연산자 모두 최종적으로 값을 1씩 올린다는 점은 같다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": ">> (우측 시프트) 연산자를 signed 자료형에 사용할 때, 왼쪽에 생기는 빈 비트는 무엇으로 채워지는가?",
+      "code": null,
+      "choices": [
+        "항상 0으로 채워진다",
+        "항상 1로 채워진다",
+        "MSB(부호 비트) 모양대로 채워진다",
+        "무작위 값으로 채워진다"
+      ],
+      "answer": 2,
+      "explain": "signed 자료형의 >> 는 MSB(최상위 비트, 부호 비트) 모양대로 패딩되어 부호가 유지된다. 그래서 음수를 우측 시프트해도 음수가 유지된다. '항상 0으로 채워진다'는 unsigned 자료형에만 해당하는 규칙이므로 구분해야 한다. 참고로 << (좌측 시프트)는 signed든 unsigned든 항상 0으로 패딩된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "후위(Postfix) 증감 연산자의 Side Effect(값 변경)가 실제로 반영되는 시점은?",
+      "code": null,
+      "choices": [
+        "Sequence Point 이전",
+        "Sequence Point 이후",
+        "컴파일하는 시점",
+        "변수가 선언되는 시점"
+      ],
+      "answer": 1,
+      "explain": "Sequence Point는 계산·평가와 부수 효과(Side Effect)가 완료되는 지점으로 ; , && , || , 함수 호출 등이 해당한다. 전위(Prefix)는 Sequence Point 이전에 값이 바뀌고, 후위(Postfix)는 Sequence Point 이후에 값이 바뀐다. 그래서 cout << iNumber++ 는 기존 값을 먼저 출력한 뒤에 증가가 반영된다. '전위'의 전은 공간상의 앞이 아니라 시점상 이전(prefix)을 의미한다는 수업 설명을 떠올리자. 컴파일 시점에 값이 바뀌는 것이 아니라 실행 중의 시점 문제다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "학생은 iNot의 논리를 반전시켜 0을 출력하려 했지만 56461이 그대로 출력되었다. 원인은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNot = 56461;\n\n    iNot != iNot;\n    cout << iNot << endl;\n\n    return 0;\n}",
+      "choices": [
+        "!= 는 복합 할당이 아니라 비교 연산자라서 iNot의 값이 바뀌지 않기 때문",
+        "iNot이 int형이라 논리 반전이 불가능하기 때문",
+        "56461이 너무 큰 수라서 반전이 무시되기 때문",
+        "cout이 ! 연산을 지원하지 않기 때문"
+      ],
+      "answer": 0,
+      "explain": "iNot != iNot; 은 '같지 않은가'를 비교만 하고 결과를 버리는 문장이라 iNot의 값에는 아무 영향이 없다. += 처럼 생겨서 != 도 복합 할당(반전 후 대입)이라고 착각하는 것이 이 문제의 함정이다. 의도대로 하려면 iNot = !iNot; 이라고 써야 하고, 56461은 0이 아니므로 참으로 취급되어 !iNot은 0이 된다. int형도 논리 연산이 가능하며 0이 아니면 참, 0이면 거짓으로 해석된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "iNumber(5)를 8배인 40으로 만들려고 한다. 빈칸에 들어갈 연산자는?",
+      "code": "int iNumber = 5;\n\niNumber ____ 3;\n\ncout << iNumber << endl;    // 40이 출력되어야 한다",
+      "choices": [
+        ">>=",
+        "<<=",
+        "*=",
+        "^="
+      ],
+      "answer": 1,
+      "explain": "좌측 시프트 한 칸은 곱하기 2이므로 세 칸이면 2의 3제곱, 즉 8배가 된다. 5 << 3 = 40. *= 3 을 고르면 3배인 15가 되므로 '3이라는 숫자가 곧 배수'라고 착각하면 안 된다. >>= 3 은 반대로 8로 나누는 효과라 0이 된다. 2의 거듭제곱 배를 만들 때 시프트 연산이 곱셈 대신 쓰일 수 있다는 것이 이 단원의 응용 포인트다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 중 iNumber의 값을 2배로 만들지 못하는 문장은?",
+      "code": null,
+      "choices": [
+        "iNumber *= 2;",
+        "iNumber = iNumber * 2;",
+        "iNumber <<= 1;",
+        "iNumber >>= 1;"
+      ],
+      "answer": 3,
+      "explain": "iNumber >>= 1; 은 우측 시프트로 2로 나누는 효과이므로 2배가 아니라 절반이 된다. 나머지 셋은 모두 같은 결과다: *= 2 는 복합 할당, iNumber * 2 대입은 그 풀어쓴 형태이고, <<= 1 은 좌측 시프트 한 칸으로 곱하기 2와 같다. 좌측(<<)이 곱하기, 우측(>>)이 나누기라는 방향을 반대로 기억하는 실수가 잦다. 2진수에서 자릿수가 한 칸 이동하면 값이 2배/절반이 되기 때문에 생기는 성질이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = -10;\n\n    iNumber >>= 3;\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "-1",
+        "-2",
+        "536870910",
+        "0"
+      ],
+      "answer": 1,
+      "explain": "-10은 11111111 11111111 11111111 11110110이고, signed int의 >> 는 MSB(1) 모양대로 패딩되므로 3칸 밀면 11111111 11111111 11111111 11111110, 즉 -2가 된다. 0으로 패딩된다고 생각하면 536870910 같은 거대한 양수를 고르게 되는데 그것은 unsigned일 때의 동작이다. -10 / 8 = -1.25를 단순 버림한 -1이 아니라, 비트가 밀리면서 더 작은 쪽(-2)으로 내려간다는 것도 미묘한 포인트다. 음수 시프트는 나눗셈과 결과가 다를 수 있으므로 비트로 직접 확인하는 습관이 중요하다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 두 줄을 순서대로 고르면?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << (2 && 4) << endl;\n    cout << (2 & 4) << endl;\n\n    return 0;\n}",
+      "choices": [
+        "1 그리고 1",
+        "0 그리고 0",
+        "1 그리고 0",
+        "0 그리고 1"
+      ],
+      "answer": 2,
+      "explain": "&& 는 논리 연산자로 값 전체를 참/거짓으로 본다. 2와 4는 둘 다 0이 아니므로 참 && 참 = 1이다. 반면 & 는 비트 연산자로 자리별로 계산하는데, 2(010)와 4(100)는 겹치는 1비트가 하나도 없어 결과가 0이다. 논리적으로는 둘 다 참인데 비트로는 0이 나올 수 있다는 것이 && 와 & 를 혼동하면 안 되는 결정적인 이유다. 기호 하나 차이가 완전히 다른 연산이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "unsigned 시프트 결과(큰 양수)를 확인하려고 작성한 코드인데, 실행하면 -2가 두 번 출력된다. 원인은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = -10;\n    iNumber >>= 3;\n    cout << iNumber << endl;\n\n    unsigned int iTest = -10;\n    iTest >>= 1;\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "unsigned도 signed처럼 MSB로 패딩되기 때문",
+        "마지막 출력문에서 iTest가 아니라 iNumber를 출력했기 때문",
+        "unsigned int에 -10을 대입하면 컴파일 에러가 나기 때문",
+        ">>= 연산자는 unsigned 자료형에 사용할 수 없기 때문"
+      ],
+      "answer": 1,
+      "explain": "마지막 cout이 iTest가 아니라 iNumber를 출력하고 있다(복사-붙여넣기 실수). iTest 계산 자체는 정상적으로 수행되지만 그 결과를 보여주지 않아 -2가 반복 출력된 것이다. unsigned의 >> 는 0으로 패딩되므로 iTest를 제대로 출력했다면 2147483643이라는 큰 양수가 나왔을 것이다. unsigned에 -10을 대입하는 것은 에러가 아니라 같은 비트 패턴이 4294967286으로 해석될 뿐이다. 실제 수업 파일에 있던 실수로, 출력하는 변수 이름까지 꼼꼼히 확인하는 습관이 필요하다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "cout << 10 < 20 << endl; 처럼 괄호 없이 쓰면 의도한 비교 결과(1)가 출력되지 않는 이유는?",
+      "code": null,
+      "choices": [
+        "< 가 << 보다 우선순위가 높아 10 < 20이 먼저 계산되기 때문",
+        "cout은 bool 값을 출력할 수 없기 때문",
+        "<< 가 < 보다 우선순위가 높아 (cout << 10) < 20 순서로 해석되기 때문",
+        "10 < 20은 표현식(Expression)이 아니기 때문"
+      ],
+      "answer": 2,
+      "explain": "시프트 연산자 << 는 비교 연산자 < 보다 우선순위가 높다. 그래서 괄호가 없으면 (cout << 10) < 20 으로 해석되어 10이 먼저 출력된 뒤 엉뚱한 비교가 시도되고, 의도한 동작이 되지 않는다. 파일 예제에서 항상 cout << (10 < 20) 처럼 괄호로 감싼 이유가 바로 이것이다. 비교 결과인 bool은 cout으로 얼마든지 출력할 수 있으므로 그것이 원인은 아니다. 비트/시프트 연산자를 cout과 함께 쓸 때는 괄호를 습관화하자.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 세 줄을 순서대로 고르면?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 12;\n\n    cout << ++iNumber << endl;\n    cout << iNumber++ << endl;\n    cout << iNumber << endl;\n\n    return 0;\n}",
+      "choices": [
+        "13, 13, 13",
+        "13, 14, 14",
+        "12, 13, 14",
+        "13, 13, 14"
+      ],
+      "answer": 3,
+      "explain": "첫 줄의 ++iNumber 는 전위 연산자이므로 Sequence Point 이전에 13으로 증가한 뒤 13이 출력된다. 둘째 줄의 iNumber++ 는 후위 연산자이므로 현재 값 13을 출력하고, 문장(Sequence Point)이 끝난 뒤 14가 된다. 셋째 줄은 최종 값 14를 출력한다. 둘째 줄에서 14가 출력된다고 생각했다면 후위의 Side Effect가 출력 이후에 반영된다는 시점을 놓친 것이다. 전위/후위가 섞인 코드는 한 줄씩 값의 변화를 표로 추적하면 정확하다.",
+      "difficulty": "심화"
+    }
+  ],
+  "coding": [
+    {
+      "title": "산술 연산자 다섯 형제",
+      "prompt": "두 정수 변수 a = 7, b = 3이 선언되어 있다. 산술 연산자 다섯 개(+, -, *, /, %)를 각각 사용하여 결과를 한 줄에 하나씩, 총 다섯 줄로 출력하는 프로그램을 완성하세요.\n\n출력 예시:\n10\n4\n21\n2\n1\n\n주의: a / b 는 int끼리의 나눗셈이므로 소수점이 버려진 몫 2가 나와야 하고, a % b 는 나머지 1이 나와야 합니다.",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int a = 7;\n    int b = 3;\n\n    // TODO: 덧셈, 뺄셈, 곱셈, 나눗셈(몫), 나머지 결과를 한 줄에 하나씩 출력\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "#include\\s*<iostream>", "desc": "iostream 헤더 포함" },
+        { "pattern": "a\\s*\\+\\s*b", "desc": "덧셈 연산자(+) 사용" },
+        { "pattern": "a\\s*-\\s*b", "desc": "뺄셈 연산자(-) 사용" },
+        { "pattern": "a\\s*\\*\\s*b", "desc": "곱셈 연산자(*) 사용" },
+        { "pattern": "a\\s*/\\s*b", "desc": "나눗셈 연산자(/) 사용" },
+        { "pattern": "a\\s*%\\s*b", "desc": "나머지 연산자(%) 사용" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int a = 7;\n    int b = 3;\n\n    cout << a + b << endl;\n    cout << a - b << endl;\n    cout << a * b << endl;\n    cout << a / b << endl;\n    cout << a % b << endl;\n\n    return 0;\n}",
+      "explain": "산술 연산자 다섯 개를 순서대로 적용하는 기본 문제다. 핵심은 7 / 3 이 2.333...이 아니라 int / int 규칙에 따라 소수점이 버려진 몫 2가 된다는 것, 그리고 7 % 3 은 그 나눗셈의 나머지 1이라는 것이다. 몫과 나머지는 한 쌍(7 = 3 * 2 + 1)으로 검산할 수 있다. % 는 실수형(float, double)에는 사용할 수 없다는 것도 함께 기억하자."
+    },
+    {
+      "title": "비트 연산 계산기",
+      "prompt": "정수 변수 x = 77, y = 42를 선언하고 다음 다섯 값을 한 줄에 하나씩 출력하세요.\n\n1) x & y (비트 AND)\n2) x | y (비트 OR)\n3) x ^ y (비트 XOR)\n4) x << 1 (좌측 시프트 1칸)\n5) x >> 2 (우측 시프트 2칸)\n\n출력 예시:\n8\n111\n103\n154\n19\n\n힌트: cout과 함께 쓸 때 &, |, ^ 는 << 보다 우선순위가 낮으므로 반드시 괄호로 감싸야 합니다. 예) cout << (x & y) << endl;",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int x = 77;\n    int y = 42;\n\n    // TODO: AND, OR, XOR, 좌측 시프트, 우측 시프트 결과를 순서대로 출력 (괄호 주의!)\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "x\\s*&\\s*y", "desc": "비트 AND(&) 연산 사용" },
+        { "pattern": "x\\s*\\|\\s*y", "desc": "비트 OR(|) 연산 사용" },
+        { "pattern": "x\\s*\\^\\s*y", "desc": "비트 XOR(^) 연산 사용" },
+        { "pattern": "x\\s*<<\\s*1", "desc": "좌측 시프트(<< 1) 사용" },
+        { "pattern": "x\\s*>>\\s*2", "desc": "우측 시프트(>> 2) 사용" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int x = 77;\n    int y = 42;\n\n    cout << (x & y) << endl;\n    cout << (x | y) << endl;\n    cout << (x ^ y) << endl;\n    cout << (x << 1) << endl;\n    cout << (x >> 2) << endl;\n\n    return 0;\n}",
+      "explain": "77은 1001101, 42는 0101010이다. 자리별로 계산하면 & 는 둘 다 1인 자리만 남아 8, | 는 하나라도 1이면 남아 111, ^ 는 서로 다른 자리만 남아 103이 된다. 좌측 시프트 1칸은 곱하기 2라서 154, 우측 시프트 2칸은 나누기 4라서 19(소수점 버림)가 나온다. cout의 << 가 비트 연산자들보다 우선순위가 높으므로 (x & y)처럼 괄호로 감싸지 않으면 의도와 다르게 해석된다는 점이 실전 포인트다."
+    },
+    {
+      "title": "연산자 값 추적 마스터",
+      "prompt": "정수 변수 iNumber = 10에서 시작하여 아래 순서대로 조작하고 출력하는 프로그램을 작성하세요.\n\n1) 복합 할당 연산자 += 로 5를 더한 뒤 iNumber 출력\n2) 전위 증가 연산자를 cout 문장 안에서 사용하여, 증가가 반영된 값을 바로 출력\n3) 후위 증가 연산자를 cout 문장 안에서 사용하여, 증가되기 전의 값을 출력\n4) 현재 iNumber 값 출력\n5) 좌측 시프트 복합 할당 연산자로 iNumber를 4배로 만든 뒤 출력\n6) iNumber가 짝수인지 % 와 == 연산자로 검사한 결과(1 또는 0) 출력\n\n출력 예시:\n15\n16\n16\n17\n68\n1",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 10;\n\n    // TODO: 1) 복합 할당으로 5를 더한 뒤 출력\n\n    // TODO: 2) 전위 증가를 출력문 안에서 사용\n\n    // TODO: 3) 후위 증가를 출력문 안에서 사용\n\n    // TODO: 4) 현재 값 출력\n\n    // TODO: 5) 좌측 시프트 복합 할당으로 4배 만든 뒤 출력\n\n    // TODO: 6) 짝수 검사 결과(1 또는 0) 출력\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "\\+=\\s*5", "desc": "복합 할당 연산자 += 사용" },
+        { "pattern": "\\+\\+iNumber", "desc": "전위 증가 연산자(++iNumber) 사용" },
+        { "pattern": "iNumber\\s*\\+\\+", "desc": "후위 증가 연산자(iNumber++) 사용" },
+        { "pattern": "<<=\\s*2", "desc": "좌측 시프트 복합 할당(<<= 2)으로 4배 만들기" },
+        { "pattern": "%\\s*2\\s*==\\s*0", "desc": "% 와 == 를 조합한 짝수 검사" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iNumber = 10;\n\n    iNumber += 5;\n    cout << iNumber << endl;\n\n    cout << ++iNumber << endl;\n    cout << iNumber++ << endl;\n    cout << iNumber << endl;\n\n    iNumber <<= 2;\n    cout << iNumber << endl;\n\n    cout << (iNumber % 2 == 0) << endl;\n\n    return 0;\n}",
+      "explain": "값의 변화를 정확히 추적하는 종합 문제다. 10 += 5 로 15가 되고, 전위 증가는 Sequence Point 이전에 값이 바뀌므로 16으로 만든 뒤 16을 출력한다. 후위 증가는 현재 값 16을 먼저 출력하고 문장이 끝난 뒤 17이 되므로, 다음 줄에서 17이 확인된다. 4배는 좌측 시프트 2칸(2의 2제곱)으로 만들 수 있어 17 << 2 = 68이 된다. 마지막으로 68 % 2 == 0 은 참이므로 1이 출력되는데, 비교 연산자의 결과 bool이 1/0으로 출력된다는 규칙까지 한 번에 복습된다."
+    }
+  ]
+}

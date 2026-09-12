@@ -1,0 +1,484 @@
+{
+  "id": "g21",
+  "num": 21,
+  "group": "문법",
+  "title": "자료형 별칭 (Type Alias)",
+  "srcFile": "21. Type Alias.cpp",
+  "questions": [
+    {
+      "q": "typedef 문법 「typedef A B;」에서 A와 B의 역할로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "A는 기존 자료형 이름이고, B는 새로 붙이는 별칭이다",
+        "A는 별칭이고, B는 기존 자료형 이름이다",
+        "A와 B 모두 새로 만들어지는 자료형이다",
+        "A는 변수 이름이고, B는 자료형 이름이다"
+      ],
+      "answer": 0,
+      "explain": "typedef는 「typedef 기존자료형 별칭;」 순서로 쓴다. 즉 앞(A)에 원래 있던 자료형 이름이 오고, 뒤(B)에 새로 붙일 별칭이 온다. 별칭이 앞에 온다고 생각하기 쉽지만 그것은 using 문법(using 별칭 = 기존자료형;)의 순서다. 수업 파일 첫 줄 주석 「typedef Data_Type_Name Data_Type_Alias;」가 바로 이 규칙이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "typedef가 하는 일에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "기존 자료형을 복사해서 크기가 다른 새 자료형을 만든다",
+        "기존 자료형에 또 다른 이름(별칭)을 붙인다",
+        "변수에 별명을 붙여 두 이름으로 같은 변수에 접근하게 한다",
+        "기존 자료형의 이름을 지우고 새 이름으로 바꾼다"
+      ],
+      "answer": 1,
+      "explain": "typedef는 새로운 자료형을 만드는 것이 아니라, 이미 있는 자료형에 별칭(또 하나의 이름)을 붙이는 문법이다. 크기나 성질이 달라지는 것이 아니므로 새 자료형을 만든다는 설명은 틀렸고, 별칭의 대상은 변수가 아니라 자료형이므로 변수에 별명을 붙인다는 설명도 틀렸다. 원래 이름도 그대로 유지되므로 이름이 교체되는 것도 아니다. 별칭을 만든 뒤에는 원래 이름과 별칭 둘 다 사용할 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 파일에 나온 「using Student = __Student;」의 의미로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "__Student는 Student의 별칭이 된다",
+        "Student라는 이름의 변수를 하나 선언한다",
+        "Student는 __Student의 별칭이 된다",
+        "Student와 __Student라는 두 개의 구조체를 새로 정의한다"
+      ],
+      "answer": 2,
+      "explain": "using 문법은 「using 별칭 = 기존자료형;」 형태로, 등호 왼쪽이 새로 만드는 별칭이다. 따라서 Student가 __Student라는 기존 구조체의 별칭이 된다. 방향을 반대로 읽어서 __Student가 별칭이라고 생각하면 틀린다. 이 한 줄로 구조체가 새로 정의되거나 변수가 만들어지는 것은 아니고, 이름 하나가 추가될 뿐이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "using 문법 「using A = B;」에서 새로 만들어지는 별칭은 어느 것인가?",
+      "code": null,
+      "choices": [
+        "등호 오른쪽의 B",
+        "A와 B 둘 다",
+        "using 키워드 자체",
+        "등호 왼쪽의 A"
+      ],
+      "answer": 3,
+      "explain": "using은 변수 초기화 「int a = 10;」처럼 왼쪽에 새 이름(별칭), 오른쪽에 기존 자료형을 쓴다. 그래서 typedef(기존 이름이 앞)와 순서 감각이 반대라는 점을 기억해야 한다. 오른쪽 B가 별칭이라고 생각하는 것이 가장 흔한 실수다. 「별칭 = 원본」이라고 읽으면 헷갈리지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 파일의 형태 2) 「struct { ... }Student;」에서 Student는 무엇인가?",
+      "code": null,
+      "choices": [
+        "이름 없는 임시 구조체로 만든 변수의 이름",
+        "구조체 자료형의 이름",
+        "구조체의 별칭",
+        "구조체 멤버의 이름"
+      ],
+      "answer": 0,
+      "explain": "typedef 없이 구조체 정의 뒤에 바로 이름을 쓰면, 그 이름은 자료형이 아니라 방금 정의한 구조체로 만든 변수의 이름이 된다. 앞에 typedef가 붙은 형태 4)에서만 Student가 자료형 별칭이 된다. 겉모양이 거의 똑같아서 자료형 이름이라고 착각하기 쉬운 부분이다. typedef 한 단어의 유무로 Student의 정체가 변수와 자료형으로 완전히 갈린다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 파일의 형태 4) 「typedef struct { ... }Student;」에서 Student는 무엇인가?",
+      "code": null,
+      "choices": [
+        "구조체로 만든 변수의 이름",
+        "이름 없는 임시 구조체에 붙인 별칭(자료형 이름)",
+        "구조체 안의 멤버 변수 이름",
+        "main 함수에서만 쓸 수 있는 지역 변수"
+      ],
+      "answer": 1,
+      "explain": "typedef가 붙어 있으므로 Student는 변수가 아니라 이름 없는 임시 구조체의 별칭, 즉 자료형 이름이 된다. 이후 「Student tStudent;」처럼 자료형으로 사용해 변수를 만들 수 있다. typedef가 없는 형태 2)와 혼동해 변수 이름이라고 답하기 쉬우니 주의해야 한다. 이 형태는 구조체에 이름을 따로 짓지 않고 별칭 하나로만 쓰고 싶을 때 사용한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "자료형 별칭(typedef, using)을 사용하는 이유로 가장 알맞은 것은?",
+      "code": null,
+      "choices": [
+        "프로그램의 실행 속도가 빨라진다",
+        "변수가 차지하는 메모리 크기를 줄일 수 있다",
+        "길거나 복잡한 자료형 이름을 짧고 읽기 쉬운 이름으로 쓸 수 있다",
+        "컴파일러가 자료형 검사를 생략하게 된다"
+      ],
+      "answer": 2,
+      "explain": "별칭은 __Student처럼 길거나 복잡한 자료형 이름을 Student처럼 짧고 의미 있는 이름으로 바꿔 코드의 가독성을 높이기 위해 쓴다. 별칭은 이름만 하나 더 생기는 것이라 실행 속도나 메모리 크기에는 아무 영향이 없다. 자료형 검사도 그대로 이루어진다. 즉 별칭은 컴퓨터가 아니라 코드를 읽는 사람을 위한 문법이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "게임에서 골드처럼 음수가 없는 값을 저장하려고 unsigned int에 gold_t라는 별칭을 붙이고 싶다. 올바른 선언은?",
+      "code": null,
+      "choices": [
+        "typedef gold_t unsigned int;",
+        "using unsigned int = gold_t;",
+        "gold_t typedef unsigned int;",
+        "using gold_t = unsigned int;"
+      ],
+      "answer": 3,
+      "explain": "using은 「using 별칭 = 기존자료형;」이므로 왼쪽에 새 이름 gold_t, 오른쪽에 unsigned int를 쓴 것이 맞다. typedef를 쓴다면 「typedef unsigned int gold_t;」처럼 기존 자료형이 먼저 와야 하는데, 순서가 뒤집힌 보기는 틀렸다. using에서 좌우가 바뀐 보기도 별칭 자리가 반대라 틀렸다. typedef와 using은 별칭이 오는 위치가 서로 다르다는 점을 꼭 구분하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\ntypedef int MyInt;\n\nint main()\n{\n    MyInt iNum = 10;\n    iNum = iNum + 5;\n    cout << iNum << endl;\n    return 0;\n}",
+      "choices": [
+        "15",
+        "10",
+        "105",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 0,
+      "explain": "MyInt는 int의 별칭이므로 iNum은 평범한 int 변수와 완전히 똑같이 동작한다. 10에 5를 더해 다시 저장했으므로 15가 출력된다. 별칭 자료형은 문법이 특별해 보여도 계산 규칙은 원본 자료형과 동일하다. 컴파일 에러를 골랐다면 별칭 자료형도 정식 자료형처럼 쓸 수 있다는 점을 놓친 것이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\ntypedef struct\n{\n    int iX;\n    int iY;\n}Point;\n\nint main()\n{\n    Point tPos;\n    tPos.iX = 3;\n    tPos.iY = 4;\n    cout << tPos.iX * tPos.iY << endl;\n    return 0;\n}",
+      "choices": [
+        "7",
+        "12",
+        "34",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 1,
+      "explain": "형태 4)처럼 typedef로 이름 없는 임시 구조체에 Point라는 별칭을 붙였으므로, Point는 자료형으로 사용할 수 있다. tPos의 iX에 3, iY에 4를 넣고 곱했으므로 12가 출력된다. 7은 곱셈을 덧셈으로 잘못 읽은 경우다. 이름 없는 구조체라도 typedef 별칭만 있으면 얼마든지 변수를 만들 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\nusing score_t = int;\n\nint main()\n{\n    score_t iKorean = 90;\n    score_t iMath = 80;\n    cout << (iKorean + iMath) / 2 << endl;\n    return 0;\n}",
+      "choices": [
+        "170",
+        "85.5",
+        "85",
+        "컴파일 에러가 발생한다"
+      ],
+      "answer": 2,
+      "explain": "score_t는 using으로 만든 int의 별칭이므로 두 변수는 int이고, (90 + 80) / 2 = 85가 출력된다. 170은 나누기를 빼먹은 값이다. 85.5를 골랐다면 int끼리의 나눗셈은 소수점을 버리는 정수 나눗셈이라는 점을 다시 확인하자(이 경우는 나누어떨어져서 85). using으로 만든 별칭도 typedef와 똑같이 원본 자료형처럼 동작한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "__Student 구조체의 별칭 Student를 만들려고 한다. 빈칸에 들어갈 키워드는?",
+      "code": "struct __Student\n{\n    char szName[32];\n    int iKorean;\n    int iMath;\n    int iEnglish;\n};\n\n________ __Student Student;",
+      "choices": [
+        "using",
+        "struct",
+        "alias",
+        "typedef"
+      ],
+      "answer": 3,
+      "explain": "「기존자료형 별칭」 순서로 나란히 쓰고 앞에 키워드를 붙이는 형태는 typedef 문법이다. using을 쓰려면 「using Student = __Student;」처럼 등호가 필요하므로 이 빈칸 형태와는 맞지 않는다. struct를 넣으면 별칭이 아니라 변수 선언 「struct __Student Student;」가 되어 버린다. alias라는 키워드는 C++에 존재하지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "using 문법으로 __Student의 별칭 Student를 만들려고 한다. 빈칸에 들어갈 것은?",
+      "code": "struct __Student\n{\n    int iKorean;\n    int iMath;\n    int iEnglish;\n};\n\nusing Student ____ __Student;",
+      "choices": [
+        "==",
+        "=",
+        ":",
+        "<-"
+      ],
+      "answer": 1,
+      "explain": "using 별칭 선언은 대입 연산자처럼 등호 하나(=)를 사용해 「using Student = __Student;」로 쓴다. ==는 두 값이 같은지 비교하는 비교 연산자라서 선언문에 쓸 수 없다. 콜론(:)이나 화살표는 이 문법과 관계없는 기호다. 등호 왼쪽이 새 별칭, 오른쪽이 기존 자료형이라는 방향도 함께 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\nstruct __Student\n{\n    int iKorean;\n    int iMath;\n    int iEnglish;\n};\n\nusing Student = __Student;\n\nint main()\n{\n    Student tStudent;\n    tStudent.iKorean = 90;\n    tStudent.iMath = 85;\n    tStudent.iEnglish = 80;\n    cout << tStudent.iKorean + tStudent.iMath + tStudent.iEnglish << endl;\n    return 0;\n}",
+      "choices": [
+        "255",
+        "908580",
+        "85",
+        "컴파일 에러가 발생한다(Student는 자료형이 아니다)"
+      ],
+      "answer": 0,
+      "explain": "using 선언 덕분에 Student는 __Student의 별칭이 되어 자료형으로 쓸 수 있고, 90 + 85 + 80 = 255가 출력된다. 908580은 세 값을 각각 이어서 출력했을 때의 모양인데, 여기서는 덧셈 결과 하나만 출력한다. 컴파일 에러를 골랐다면 별칭도 정식 자료형 이름처럼 변수 선언에 쓸 수 있다는 점을 놓친 것이다. 이 코드는 수업 파일의 실제 구조와 같은 패턴이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 파일의 main에서 「Student tStudent;」가 문제없이 컴파일되는 이유는?",
+      "code": "struct __Student\n{\n    char szName[32];\n    int iKorean;\n    int iMath;\n    int iEnglish;\n};\n\nusing Student = __Student;\n\nint main()\n{\n    Student tStudent;\n    return 0;\n}",
+      "choices": [
+        "Student라는 이름의 구조체가 별도로 정의되어 있기 때문",
+        "tStudent가 전역 변수이기 때문",
+        "using 선언으로 Student가 __Student의 별칭이 되었기 때문",
+        "C++에서는 선언하지 않은 이름도 자료형으로 쓸 수 있기 때문"
+      ],
+      "answer": 2,
+      "explain": "이 파일에 정의된 구조체는 __Student 하나뿐이고, 「using Student = __Student;」 덕분에 Student라는 별칭으로도 같은 구조체를 가리킬 수 있게 되었다. Student라는 구조체가 따로 정의된 것은 아니다. tStudent는 main 안의 지역 변수이며, 전역/지역 여부는 컴파일 성공과 관계없다. C++은 선언되지 않은 이름을 자료형으로 쓸 수 없으므로 using 줄을 지우면 이 코드는 에러가 난다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "형태 2) 「struct { ... }Student;」와 형태 4) 「typedef struct { ... }Student;」의 차이로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "형태 2의 Student는 변수이고, 형태 4의 Student는 자료형 별칭이다",
+        "형태 2의 Student는 자료형이고, 형태 4의 Student는 변수이다",
+        "두 형태 모두 Student는 자료형 별칭이다",
+        "두 형태 모두 Student는 변수 이름이다"
+      ],
+      "answer": 0,
+      "explain": "typedef가 없으면 구조체 정의 뒤의 이름은 그 자리에서 만들어지는 변수의 이름이고, typedef가 붙으면 같은 자리의 이름이 자료형 별칭이 된다. 두 형태는 typedef 한 단어만 다르지만 의미가 완전히 달라진다. 반대로 외우거나 둘을 같다고 생각하는 것이 이 단원에서 가장 흔한 실수다. 헷갈리면 「typedef가 있으면 타입(Type)」이라고 기억하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "「typedef struct __Student { ... } Student;」 (형태 5) 선언 이후, 변수 선언에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "__Student만 자료형으로 쓸 수 있다",
+        "Student만 자료형으로 쓸 수 있다",
+        "__Student tA; 와 Student tB; 둘 다 가능하다",
+        "둘 다 자료형이 아니므로 변수를 만들 수 없다"
+      ],
+      "answer": 2,
+      "explain": "형태 5는 이름 있는 구조체 __Student를 정의하면서 동시에 Student라는 별칭까지 붙인 것이다. 그래서 원래 이름 __Student와 별칭 Student 둘 다 자료형으로 사용해 변수를 만들 수 있다. 별칭을 만들면 원래 이름을 못 쓰게 된다고 생각하기 쉽지만, 별칭은 이름을 추가하는 것이지 교체하는 것이 아니다. 두 이름은 완전히 같은 자료형을 가리킨다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "typedef와 using의 관계에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "typedef는 구조체에만, using은 기본 자료형에만 쓸 수 있다",
+        "using이 만든 별칭은 원본과 다른 새로운 자료형이 된다",
+        "typedef는 C++ 전용, using은 C 전용 문법이다",
+        "둘 다 자료형 별칭을 만들며, using이 더 나중에 나온 C++ 스타일 문법이다"
+      ],
+      "answer": 3,
+      "explain": "typedef와 using은 둘 다 자료형 별칭을 만드는 문법이고, using이 C++에서 나중에 추가된 더 현대적인 방식이다. 수업 파일에서도 typedef 줄을 주석 처리하고 using으로 같은 일을 했다. 둘 다 기본 자료형과 구조체에 모두 쓸 수 있으므로 용도가 나뉜다는 보기는 틀렸다. typedef는 C에서 온 문법이고 using 별칭 선언은 C++ 문법이라는 점에서 C/C++ 소속이 반대로 된 보기도 틀렸다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\ntypedef int Level;\nusing Exp = Level;\n\nint main()\n{\n    Exp iExp = 7;\n    Level iLevel = iExp + 3;\n    cout << iLevel << endl;\n    return 0;\n}",
+      "choices": [
+        "10",
+        "7",
+        "73",
+        "컴파일 에러가 발생한다(별칭의 별칭은 만들 수 없다)"
+      ],
+      "answer": 0,
+      "explain": "Level은 int의 별칭이고, Exp는 다시 Level의 별칭이므로 결국 Exp도 int와 같다. 별칭에 또 별칭을 붙이는 것도 얼마든지 가능하다. 따라서 iExp(7)에 3을 더한 10이 출력된다. 별칭의 별칭이 불가능하다고 생각해 컴파일 에러를 고르기 쉽지만, 별칭은 몇 번을 거쳐도 전부 같은 원본 자료형을 가리킬 뿐이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\nstruct\n{\n    int iHP;\n    int iMP;\n}Player;\n\nint main()\n{\n    Player.iHP = 100;\n    Player.iMP = 50;\n    cout << Player.iHP - Player.iMP << endl;\n    return 0;\n}",
+      "choices": [
+        "컴파일 에러가 발생한다(Player는 자료형이라 멤버에 접근할 수 없다)",
+        "50",
+        "10050",
+        "150"
+      ],
+      "answer": 1,
+      "explain": "typedef가 없으므로 이것은 형태 2)이고, Player는 이름 없는 임시 구조체로 만든 전역 변수다. 변수이므로 Player.iHP처럼 바로 멤버에 접근할 수 있고, 100 - 50 = 50이 출력된다. Player를 자료형으로 착각해 컴파일 에러를 고르기 쉬운데, typedef가 붙은 형태 4)였다면 실제로 에러가 났을 것이다. typedef의 유무를 먼저 확인하는 습관이 필요하다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\nstruct __Stat\n{\n    int iAttack;\n};\n\ntypedef __Stat Stat;\nusing BuffStat = __Stat;\n\nint main()\n{\n    Stat tBase;\n    tBase.iAttack = 30;\n\n    BuffStat tBuff = tBase;\n    tBuff.iAttack = tBuff.iAttack + 10;\n\n    cout << tBase.iAttack << \" \" << tBuff.iAttack << endl;\n    return 0;\n}",
+      "choices": [
+        "40 40",
+        "30 30",
+        "30 40",
+        "컴파일 에러가 발생한다(서로 다른 자료형끼리 대입할 수 없다)"
+      ],
+      "answer": 2,
+      "explain": "Stat과 BuffStat은 둘 다 __Stat의 별칭이므로 완전히 같은 자료형이고, 서로 대입하는 데 아무 문제가 없다. 구조체 대입은 멤버 값을 복사하므로 tBuff는 tBase의 복사본이 되고, tBuff의 값을 10 올려도 원본 tBase는 30 그대로다. 그래서 30 40이 출력된다. 두 변수가 연결되어 함께 변한다고 생각해 40 40을 고르기 쉽지만, 대입은 복사일 뿐이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드에서 컴파일 에러가 나는 이유는?",
+      "code": "struct __Student\n{\n    int iKorean;\n};\n\ntypedef Student __Student;   // 컴파일 에러!",
+      "choices": [
+        "typedef는 구조체에 쓸 수 없기 때문",
+        "기존 자료형과 별칭의 순서가 뒤바뀌었기 때문",
+        "세미콜론이 빠졌기 때문",
+        "__Student처럼 밑줄로 시작하는 이름은 쓸 수 없기 때문"
+      ],
+      "answer": 1,
+      "explain": "typedef는 「typedef 기존자료형 별칭;」 순서인데, 이 코드는 아직 존재하지 않는 Student를 기존 자료형 자리에 놓아서 에러가 난다. 올바르게 고치면 「typedef __Student Student;」이다. typedef는 구조체에도 얼마든지 쓸 수 있고, 세미콜론도 있으며, 밑줄로 시작하는 이름도 이 코드에서는 문제가 아니다. typedef에서 순서를 뒤집는 것은 매우 흔한 실수이므로 「원본이 먼저」라고 외워 두자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 using 줄에서 컴파일 에러가 난다. 올바르게 고친 것은?",
+      "code": "struct __Item\n{\n    int iPrice;\n};\n\nusing __Item = Item;   // 컴파일 에러!",
+      "choices": [
+        "using Item = __Item;",
+        "using __Item == Item;",
+        "typedef Item __Item;",
+        "using = Item __Item;"
+      ],
+      "answer": 0,
+      "explain": "using은 등호 왼쪽이 새로 만드는 별칭, 오른쪽이 기존 자료형이어야 한다. 원래 있는 자료형은 __Item이고 새로 만들 별칭이 Item이므로 「using Item = __Item;」이 맞다. 문제의 코드는 좌우가 뒤바뀌어 존재하지 않는 Item을 원본 자리에 놓아서 에러가 났다. ==는 비교 연산자라 선언에 쓸 수 없고, typedef 버전도 순서가 뒤집혀 있어 틀렸다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing namespace std;\n\ntypedef struct\n{\n    int iScore;\n}Student;\n\nint main()\n{\n    Student tArr[3];\n\n    for (int i = 0; i < 3; ++i)\n    {\n        tArr[i].iScore = (i + 1) * 10;\n    }\n\n    int iSum = 0;\n    for (int i = 0; i < 3; ++i)\n    {\n        iSum += tArr[i].iScore;\n    }\n\n    cout << iSum << endl;\n    return 0;\n}",
+      "choices": [
+        "30",
+        "600",
+        "6",
+        "60"
+      ],
+      "answer": 3,
+      "explain": "Student는 typedef로 만든 별칭 자료형이므로 일반 구조체처럼 배열도 만들 수 있다. 첫 for문에서 i가 0, 1, 2일 때 (i+1)*10이므로 각 학생의 점수는 10, 20, 30이 된다. 두 번째 for문에서 이를 모두 더하면 60이다. 30을 골랐다면 마지막 원소 하나만 본 것이고, 인덱스가 0부터 시작한다는 점과 (i+1)을 곱한다는 점을 함께 봐야 한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "게임에서 몬스터의 체력(iHP)과 공격력(iAttack)을 담는 구조체를 만들고, Monster라는 이름을 자료형으로 쓰고 싶다. 올바른 코드는?",
+      "code": null,
+      "choices": [
+        "struct { int iHP; int iAttack; } Monster;",
+        "typedef struct { int iHP; int iAttack; } Monster;",
+        "Monster struct { int iHP; int iAttack; };",
+        "typedef Monster struct { int iHP; int iAttack; };"
+      ],
+      "answer": 1,
+      "explain": "형태 4)처럼 typedef를 붙이면 뒤의 Monster가 이름 없는 임시 구조체의 별칭(자료형)이 되어 「Monster tOrc;」처럼 쓸 수 있다. typedef가 없는 첫 번째 보기는 Monster가 변수가 되어 버려 자료형으로는 못 쓴다. 별칭 이름을 struct 앞에 쓰거나 typedef 바로 뒤에 쓰는 문법은 존재하지 않는다. 별칭은 항상 구조체 정의(또는 기존 자료형) 뒤에 온다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는? (int는 4바이트)",
+      "code": "#include <iostream>\nusing namespace std;\n\nstruct __Student\n{\n    char szName[32];\n    int iKorean;\n    int iMath;\n    int iEnglish;\n};\n\nusing Student = __Student;\n\nint main()\n{\n    cout << sizeof(__Student) << \" \" << sizeof(Student) << endl;\n    return 0;\n}",
+      "choices": [
+        "44 44",
+        "44 4",
+        "35 35",
+        "서로 다른 두 값이 출력된다"
+      ],
+      "answer": 0,
+      "explain": "szName은 char 32개라 32바이트, int 멤버 3개는 12바이트이므로 구조체 크기는 44바이트다. Student는 __Student의 별칭이므로 완전히 같은 자료형이고 sizeof도 당연히 같다. 별칭이라서 크기가 달라진다거나 별칭 자체의 크기(4)가 나온다고 생각하면 틀린다. 35는 char 배열을 1바이트 3개로 잘못 센 경우로, 배열 크기 32를 전부 세어야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "수업 파일의 형태 1) 「struct { char szName[32]; int iKorean; int iMath; int iEnglish; };」의 문제점은?",
+      "code": null,
+      "choices": [
+        "세미콜론이 빠져 있어 컴파일 에러가 난다",
+        "멤버 변수가 4개를 넘어서 에러가 난다",
+        "구조체 이름도, 변수도, 별칭도 없어서 이후 이 구조체를 사용할 방법이 없다",
+        "typedef 없이 struct를 쓰면 항상 컴파일 에러가 난다"
+      ],
+      "answer": 2,
+      "explain": "형태 1은 이름 없는 임시 구조체를 정의만 하고 끝낸 것이다. 구조체 이름이 없으니 나중에 변수를 만들 수 없고, 그 자리에서 변수를 만들지도 않았고, 별칭도 붙이지 않았으므로 이 구조체는 다시는 사용할 수 없다. 세미콜론은 있고 멤버 개수 제한 같은 것도 없으므로 컴파일 에러가 나는 것은 아니다. 그래서 실제로는 형태 2~6처럼 변수나 별칭을 함께 만들어야 의미가 있다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "형태 3) 「struct __Student { ... } Student;」 선언 직후의 상황으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "Student는 자료형이므로 Student tA; 로 새 변수를 만들 수 있다",
+        "Student는 이미 만들어진 변수이고, 새 변수는 __Student tB; 처럼 만들 수 있다",
+        "__Student는 구조체 이름일 뿐 자료형으로는 쓸 수 없다",
+        "이 문장 자체가 컴파일 에러다"
+      ],
+      "answer": 1,
+      "explain": "형태 3은 이름 있는 구조체 __Student를 정의하면서 동시에 Student라는 변수를 하나 만든 것이다. typedef가 없으므로 Student는 자료형이 아니라 변수이고, 추가 변수가 필요하면 구조체 이름 __Student를 자료형으로 써서 만들면 된다. 형태 5(typedef 버전)와 겉모양이 비슷해서 Student를 자료형으로 착각하기 쉽다. 구조체 이름은 당연히 자료형으로 쓸 수 있으므로 그 반대 보기도 틀렸다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "별칭과 원본 자료형의 관계에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "별칭 타입 변수와 원본 타입 변수는 형변환을 해야만 서로 대입할 수 있다",
+        "별칭은 완전히 같은 자료형의 다른 이름일 뿐이므로 두 이름을 섞어 써도 된다",
+        "별칭 타입으로 만든 변수는 원본 타입보다 메모리를 더 차지한다",
+        "하나의 자료형에는 별칭을 하나만 만들 수 있다"
+      ],
+      "answer": 1,
+      "explain": "typedef나 using으로 만든 별칭은 새로운 자료형이 아니라 같은 자료형을 가리키는 또 하나의 이름이다. 그래서 __Student 변수와 Student 변수는 형변환 없이 자유롭게 대입할 수 있고, 크기도 완전히 같다. 별칭은 typedef __Stat Stat; 과 using BuffStat = __Stat; 처럼 한 자료형에 여러 개를 만들 수도 있다. 별칭을 서로 다른 자료형으로 취급한다고 오해하면 형변환이 필요하다는 잘못된 결론에 이르게 된다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드는 컴파일 에러가 난다. 그 이유로 옳은 것은?",
+      "code": "#include <iostream>\nusing namespace std;\n\ntypedef struct\n{\n    int iHP;\n}Monster;\n\nint main()\n{\n    Monster.iHP = 100;\n    cout << Monster.iHP << endl;\n    return 0;\n}",
+      "choices": [
+        "에러가 나지 않고 100이 정상 출력된다",
+        "Monster 구조체에 iHP라는 멤버가 없기 때문이다",
+        "typedef 뒤에는 struct를 쓸 수 없기 때문이다",
+        "Monster는 자료형(별칭)이므로 변수처럼 멤버에 접근할 수 없다. Monster tMon; 처럼 변수를 먼저 만들어야 한다"
+      ],
+      "answer": 3,
+      "explain": "typedef가 붙어 있으므로 Monster는 변수가 아니라 이름 없는 임시 구조체의 별칭, 즉 자료형이다. 자료형 이름에는 점(.)으로 멤버 접근을 할 수 없고, 반드시 「Monster tMon;」으로 변수를 만든 뒤 「tMon.iHP = 100;」처럼 써야 한다. typedef가 없었다면 형태 2)가 되어 Monster가 변수가 되므로 그대로 동작했을 것이다. iHP 멤버는 분명히 존재하고, typedef struct 조합도 정상 문법이므로 나머지 이유는 틀렸다.",
+      "difficulty": "심화"
+    }
+  ],
+  "coding": [
+    {
+      "title": "점수 자료형 별칭 만들기",
+      "prompt": "typedef를 사용해 int의 별칭 score_t를 만드세요. 그리고 score_t 자료형으로 국어 점수(90)와 수학 점수(80)를 저장하는 변수 두 개를 만든 뒤, 두 점수의 합계를 출력하세요.\n\n[출력 예시]\n합계: 170",
+      "starter": "#include <iostream>\nusing namespace std;\n\n// TODO: typedef를 사용해 int의 별칭 score_t를 만드세요.\n\nint main()\n{\n    // TODO: score_t 자료형으로 국어(90), 수학(80) 점수 변수를 만드세요.\n\n    // TODO: \"합계: 170\" 형식으로 두 점수의 합을 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "typedef\\s+int\\s+score_t\\s*;",
+          "desc": "typedef로 int의 별칭 score_t를 선언했는지"
+        },
+        {
+          "pattern": "score_t\\s+\\w+",
+          "desc": "score_t 자료형으로 변수를 선언했는지"
+        },
+        {
+          "pattern": "cout\\s*<<",
+          "desc": "cout으로 결과를 출력하는지"
+        },
+        {
+          "pattern": "합계",
+          "desc": "출력에 '합계' 문구가 포함되는지"
+        }
+      ],
+      "solution": "#include <iostream>\nusing namespace std;\n\ntypedef int score_t;\n\nint main()\n{\n    score_t iKorean = 90;\n    score_t iMath = 80;\n\n    cout << \"합계: \" << iKorean + iMath << endl;\n\n    return 0;\n}",
+      "explain": "typedef는 「typedef 기존자료형 별칭;」 순서이므로 「typedef int score_t;」로 별칭을 만든다. 이후 score_t는 int와 완전히 같은 자료형이므로 평범한 int 변수처럼 선언하고 계산할 수 있다. 별칭을 쓰면 이 변수가 '점수'라는 의미를 이름만 보고도 알 수 있어 코드 가독성이 좋아진다."
+    },
+    {
+      "title": "using으로 구조체 별칭 만들기",
+      "prompt": "국어(iKorean), 수학(iMath), 영어(iEnglish) 점수를 멤버로 갖는 구조체 __Student가 주어져 있습니다. using을 사용해 __Student의 별칭 Student를 만드세요. 그리고 Student 자료형으로 변수를 만들어 90, 85, 80을 저장한 뒤, 총점과 평균(정수)을 출력하세요.\n\n[출력 예시]\n총점: 255\n평균: 85",
+      "starter": "#include <iostream>\nusing namespace std;\n\nstruct __Student\n{\n    int iKorean;\n    int iMath;\n    int iEnglish;\n};\n\n// TODO: using을 사용해 __Student의 별칭 Student를 만드세요.\n\nint main()\n{\n    // TODO: Student 자료형으로 변수를 만들고 90, 85, 80을 저장하세요.\n\n    // TODO: 총점과 평균을 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "using\\s+Student\\s*=\\s*__Student\\s*;",
+          "desc": "using으로 __Student의 별칭 Student를 선언했는지"
+        },
+        {
+          "pattern": "Student\\s+\\w+\\s*;",
+          "desc": "Student 자료형으로 변수를 선언했는지"
+        },
+        {
+          "pattern": "\\.\\s*iKorean",
+          "desc": "점(.)으로 구조체 멤버에 접근하는지"
+        },
+        {
+          "pattern": "총점",
+          "desc": "총점을 출력하는지"
+        },
+        {
+          "pattern": "평균",
+          "desc": "평균을 출력하는지"
+        }
+      ],
+      "solution": "#include <iostream>\nusing namespace std;\n\nstruct __Student\n{\n    int iKorean;\n    int iMath;\n    int iEnglish;\n};\n\nusing Student = __Student;\n\nint main()\n{\n    Student tStudent;\n\n    tStudent.iKorean = 90;\n    tStudent.iMath = 85;\n    tStudent.iEnglish = 80;\n\n    int iTotal = tStudent.iKorean + tStudent.iMath + tStudent.iEnglish;\n\n    cout << \"총점: \" << iTotal << endl;\n    cout << \"평균: \" << iTotal / 3 << endl;\n\n    return 0;\n}",
+      "explain": "using 별칭 선언은 「using 별칭 = 기존자료형;」이므로 「using Student = __Student;」로 쓴다. 이렇게 하면 밑줄이 붙은 내부용 이름 __Student 대신 깔끔한 Student를 자료형으로 쓸 수 있다. 총점은 세 멤버를 더한 값이고, 평균은 int끼리의 나눗셈이므로 소수점이 버려진 정수 85가 나온다. 이는 수업 파일의 구조와 같은 패턴이다."
+    },
+    {
+      "title": "typedef struct로 학생 배열 관리하기",
+      "prompt": "수업에서 배운 형태 4) 「typedef struct { ... }Student;」를 사용해, 번호(iNumber)와 점수(iScore)를 멤버로 갖는 Student 자료형을 만드세요. Student 배열을 3개 크기로 선언하고, for문으로 학생 3명의 점수를 cin으로 입력받으세요(번호는 1번부터 차례대로 저장). 마지막으로 최고 점수와 그 학생의 번호를 출력하세요.\n\n[입력 예시]\n70 95 80\n\n[출력 예시]\n최고 점수: 95\n학생 번호: 2",
+      "starter": "#include <iostream>\nusing namespace std;\n\n// TODO: typedef struct { ... }Student; 형태로\n// 번호(iNumber)와 점수(iScore)를 갖는 Student 자료형을 만드세요.\n\nint main()\n{\n    // TODO: Student 배열을 3개 크기로 선언하세요.\n\n    // TODO: for문으로 3명의 점수를 입력받고, 번호는 1번부터 저장하세요.\n\n    // TODO: 최고 점수와 그 학생의 번호를 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "typedef\\s+struct[\\s\\S]*\\}\\s*Student\\s*;",
+          "desc": "typedef struct { ... }Student; 형태로 별칭을 만들었는지"
+        },
+        {
+          "pattern": "Student\\s+\\w+\\s*\\[\\s*3\\s*\\]",
+          "desc": "Student 자료형으로 크기 3짜리 배열을 선언했는지"
+        },
+        {
+          "pattern": "for\\s*\\(",
+          "desc": "for문을 사용했는지"
+        },
+        {
+          "pattern": "cin\\s*>>",
+          "desc": "cin으로 점수를 입력받는지"
+        },
+        {
+          "pattern": "\\.\\s*iScore",
+          "desc": "점(.)으로 iScore 멤버에 접근하는지"
+        }
+      ],
+      "solution": "#include <iostream>\nusing namespace std;\n\ntypedef struct\n{\n    int iNumber;\n    int iScore;\n}Student;\n\nint main()\n{\n    Student tArr[3];\n\n    for (int i = 0; i < 3; ++i)\n    {\n        tArr[i].iNumber = i + 1;\n        cin >> tArr[i].iScore;\n    }\n\n    int iMaxIndex = 0;\n\n    for (int i = 1; i < 3; ++i)\n    {\n        if (tArr[i].iScore > tArr[iMaxIndex].iScore)\n        {\n            iMaxIndex = i;\n        }\n    }\n\n    cout << \"최고 점수: \" << tArr[iMaxIndex].iScore << endl;\n    cout << \"학생 번호: \" << tArr[iMaxIndex].iNumber << endl;\n\n    return 0;\n}",
+      "explain": "형태 4)는 이름 없는 임시 구조체에 typedef로 Student라는 별칭을 붙이는 방식이다. 별칭 자료형도 일반 구조체처럼 배열을 만들 수 있으므로 Student tArr[3]으로 학생 3명을 관리한다. 첫 for문에서 번호(i+1)와 점수를 채우고, 두 번째 for문에서 최고 점수의 인덱스를 찾는다. 최고값을 찾을 때는 0번을 기준으로 두고 더 큰 값이 나올 때마다 인덱스를 갱신하는 것이 핵심이다."
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "id": "g02",
+  "num": 2,
+  "group": "문법",
+  "title": "C++ 프로젝트와 입출력",
+  "srcFile": "02. C++ Project.cpp",
+  "questions": [
+    {
+      "q": "C++에서 문자열을 화면에 출력할 때 사용하는 표준 출력 스트림 개체는 무엇인가?",
+      "code": null,
+      "choices": ["std::cin", "std::endl", "std::printf", "std::cout"],
+      "answer": 3,
+      "explain": "cout은 C++ 표준 라이브러리가 제공하는 표준 출력 스트림 개체로, << 연산자와 함께 사용해 화면에 값을 내보낸다. cin은 반대로 키보드 입력을 받을 때 쓰는 입력 스트림이고, endl은 출력 개체가 아니라 줄바꿈을 만들어 주는 요소다. printf는 C의 출력 함수라서 C++ 스트림 방식과는 다른 물건이다. 수업 파일에서도 std::cout << \"Hello World\" 형태로 출력을 연습했다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "std::cout과 std::endl을 사용하기 위해 포함해야 하는 헤더는 무엇인가?",
+      "code": null,
+      "choices": ["<stdio.h>", "<cstdio>", "<iostream>", "<cmath>"],
+      "answer": 2,
+      "explain": "cout과 endl은 <iostream> 헤더에 선언되어 있으므로 #include <iostream>이 필요하다. <stdio.h>와 <cstdio>는 printf 같은 C 표준 입출력 함수를 위한 헤더이고, <cmath>는 수학 함수용이라 cout과는 무관하다. 수업 파일 맨 위에서도 C 헤더들과 구분해서 #include <iostream>을 포함했다. 헤더를 빼먹으면 cout이라는 이름 자체를 컴파일러가 찾지 못한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "std::cout이라고 쓸 때 std는 무엇을 의미하는가?",
+      "code": null,
+      "choices": ["표준 라이브러리의 이름들이 모여 있는 namespace", "cout이 정의된 헤더 파일의 이름", "C++ 컴파일러의 이름", "출력 함수가 돌려주는 반환값"],
+      "answer": 0,
+      "explain": "std는 standard의 줄임말로, C++ 표준 라이브러리의 이름들이 모두 들어 있는 namespace다. cout이 정의된 파일 이름은 iostream이므로 헤더 이름과 namespace를 혼동하면 안 된다. 컴파일러 이름이나 반환값과는 전혀 관련이 없다. 수업에서는 iostream을 주소, std를 소속, cout을 이름에 비유해서 설명했다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 파일의 주석에 따르면 namespace 키워드를 사용하는 목적은 무엇인가?",
+      "code": null,
+      "choices": ["프로그램 실행 속도를 높이기 위해", "메모리를 절약하기 위해", "헤더 파일의 중복 포함을 막기 위해", "관련된 코드 요소들을 하나의 범위로 묶어 이름 충돌 없이 구분하기 위해"],
+      "answer": 3,
+      "explain": "수업 파일 주석에 namespace는 관련 개체 집합을 포함하는 범위를 선언하는 데 사용하며, 코드 요소를 구성하고 전역적으로 고유한 형식을 만들 수 있다고 적혀 있다. 즉 같은 이름이 여러 곳에 있어도 소속으로 구분할 수 있게 해 주는 문법이다. 실행 속도나 메모리와는 관계가 없고, 헤더 중복 포함을 막는 것은 #pragma once의 역할이다. Protoss, Terran, Zerg처럼 종족별로 함수를 묶었던 예제가 바로 이 목적을 보여 준다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "Protoss::Zealot_Attack(10, 39); 에서 사용된 :: 기호의 이름은 무엇인가?",
+      "code": null,
+      "choices": ["범위 지정 연산자 (scope resolution operator)", "멤버 접근 연산자", "삽입 연산자", "비교 연산자"],
+      "answer": 0,
+      "explain": ":: 는 범위 지정 연산자로, 어떤 이름이 어느 namespace 소속인지 지정할 때 사용한다. Protoss::Zealot_Attack은 Protoss namespace 안의 Zealot_Attack이라는 뜻이다. 멤버 접근 연산자는 . 기호이고, 삽입 연산자는 cout에 값을 넣을 때 쓰는 << 이므로 서로 역할이 다르다. std::cout, stl::TestValue 등 수업 코드 곳곳에서 이 연산자를 사용했다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "using namespace std; 라고 쓰면 어떤 효과가 있는가?",
+      "code": null,
+      "choices": ["std라는 namespace를 새로 만든다", "std라는 이름의 변수를 선언한다", "std namespace 안의 모든 이름을 std:: 없이 사용할 수 있게 된다", "iostream 헤더가 자동으로 포함된다"],
+      "answer": 2,
+      "explain": "using namespace 지시문은 해당 namespace 안의 모든 이름을 접두어 없이 쓸 수 있게 풀어 주는 것이지, namespace나 변수를 새로 만드는 문법이 아니다. 그래서 using namespace std; 뒤에는 cout, endl을 std:: 없이 바로 쓸 수 있다. 다만 헤더 포함과는 별개라서 #include <iostream>은 여전히 필요하다. 수업 파일에서는 이 방식 대신 using std::cout; 처럼 필요한 것만 가져오는 방법을 주로 사용했다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "using std::cout; 과 using namespace std; 의 차이로 옳은 것은?",
+      "code": null,
+      "choices": ["아무 차이가 없어 둘 중 아무거나 써도 완전히 동일하다", "using std::cout;은 cout 하나만 가져오고, using namespace std;는 std 안의 모든 이름을 가져온다", "using std::cout;은 C 문법이고 using namespace std;는 C++ 문법이다", "using std::cout;을 쓰면 endl도 자동으로 std:: 없이 쓸 수 있다"],
+      "answer": 1,
+      "explain": "using std::cout;은 cout이라는 이름 하나만 콕 집어 가져오는 using 선언이고, using namespace std;는 std의 모든 이름을 한꺼번에 가져오는 지시문이다. 그래서 수업 파일에서는 using std::cout;과 using std::endl;을 각각 따로 써 주었다. cout만 가져왔다고 endl까지 따라오는 것이 아니라는 점이 자주 틀리는 부분이다. 둘 다 C++ 문법이며, 이름 충돌 위험을 줄이려면 필요한 것만 가져오는 using 선언이 더 안전하다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "C의 <stdio.h> 헤더를 C++ 스타일로 포함할 때 사용하는 이름은?",
+      "code": null,
+      "choices": ["<stdio>", "<cstdio>", "<stdio.hpp>", "<iostream>"],
+      "answer": 1,
+      "explain": "C 표준 헤더를 C++에서 쓸 때는 앞에 c를 붙이고 .h 확장자를 떼어낸 이름을 사용한다. 그래서 stdio.h는 cstdio, string.h는 cstring, math.h는 cmath가 되며 수업 파일 맨 위 주석에 이 짝들이 정리되어 있다. <stdio>처럼 c를 빼고 확장자만 지운 이름은 존재하지 않는다. <iostream>은 C 헤더의 변환형이 아니라 cout, cin을 위한 C++ 고유의 입출력 헤더다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "#include <iostream> 은 꺾쇠괄호를 쓰고 #include \"02. iostream.h\" 는 큰따옴표를 쓴다. 두 방식의 차이는?",
+      "code": null,
+      "choices": ["꺾쇠괄호가 큰따옴표보다 컴파일 속도가 빠르다", "꺾쇠괄호는 C 헤더에, 큰따옴표는 C++ 헤더에 사용한다", "꺾쇠괄호는 표준 라이브러리 경로에서 찾고, 큰따옴표는 내 프로젝트 폴더에서 먼저 찾는다", "아무 차이 없이 완전히 동일하게 동작한다"],
+      "answer": 2,
+      "explain": "꺾쇠괄호 <>는 컴파일러가 표준 라이브러리가 설치된 경로에서 헤더를 찾게 하고, 큰따옴표 \"\"는 현재 소스 파일이 있는 프로젝트 폴더에서 먼저 찾게 한다. 그래서 표준 헤더인 iostream은 <>로, 직접 만든 02. iostream.h는 \"\"로 포함했다. 컴파일 속도나 C와 C++의 구분 문제가 아니라 헤더를 찾는 위치의 문제다. 직접 만든 헤더를 <>로 포함하면 표준 경로에는 그 파일이 없어서 찾지 못할 수 있다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "02. iostream.h 파일 맨 위에 있는 #pragma once의 역할은 무엇인가?",
+      "code": null,
+      "choices": ["같은 헤더 파일이 여러 번 포함되는 것을 막는다", "컴파일러 최적화 기능을 켠다", "이 헤더 안의 함수를 한 번만 호출할 수 있게 한다", "namespace의 중복 선언을 막는다"],
+      "answer": 0,
+      "explain": "#pragma once는 이 헤더가 한 번 포함된 뒤에 또 #include 되더라도 두 번째부터는 무시하게 만들어, 같은 내용이 중복 정의되는 컴파일 에러를 막아 준다. 함수 호출 횟수를 제한하는 것이 아니라 포함 횟수를 제한하는 것이므로 혼동하면 안 된다. 최적화나 namespace 선언과는 무관하다. 여러 소스 파일이 같은 헤더를 포함하는 프로젝트에서 필수적인 안전장치다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "std::endl의 역할로 옳은 것은?",
+      "code": null,
+      "choices": ["문자열 두 개를 이어 붙인다", "출력을 끝내고 프로그램을 종료한다", "공백 한 칸을 출력한다", "줄바꿈을 출력한다"],
+      "answer": 3,
+      "explain": "endl은 end line의 줄임말로, cout에 넣으면 그 지점에서 줄이 바뀐다. 프로그램을 종료하는 것은 main의 return 0;이지 endl이 아니므로 헷갈리면 안 된다. 공백을 넣으려면 \" \" 같은 문자열을 직접 출력해야 한다. 수업 파일에서도 std::cout << \"Hello World\" << std::endl; 형태로 매 출력 끝에 줄바꿈을 넣었다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업에서 iostream은 '서울특별시 중랑구 상봉동의 주소', std는 '인하대학교 기계공학과 18학번', cout은 '변찬연'에 비유했다. 이 비유가 설명하는 구조로 옳은 것은?",
+      "code": null,
+      "choices": ["cout이라는 이름이 iostream 헤더 안의 std namespace에 소속되어 있다", "std namespace가 cout 안에 정의되어 있다", "iostream 헤더가 std namespace 안에 들어 있다", "cout은 어느 namespace에도 속하지 않는 전역 이름이다"],
+      "answer": 0,
+      "explain": "주소(파일 위치)에 해당하는 것이 iostream 헤더, 소속에 해당하는 것이 std namespace, 실제 이름에 해당하는 것이 cout이다. 즉 iostream이라는 파일 안에 std namespace가 있고 그 안에 cout이 선언되어 있는 구조다. std가 cout 안에 있다거나 iostream이 std 안에 있다고 보면 포함 관계가 뒤집힌 것이다. cout은 전역 이름이 아니라 std 소속이기 때문에 std::cout처럼 소속을 밝혀야 찾을 수 있다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Hello\" << \" \" << \"World\" << std::endl;\n    return 0;\n}",
+      "choices": ["Hello World", "HelloWorld", "Hello << World", "Hello \" \" World"],
+      "answer": 0,
+      "explain": "<< 연산자는 여러 번 이어 붙여서 연속으로 출력할 수 있고, 넣은 순서대로 화면에 나온다. 중간에 \" \" 라는 공백 한 칸짜리 문자열을 출력했으므로 Hello와 World 사이에 공백이 들어간다. 공백 문자열이 없었다면 HelloWorld처럼 붙어서 나왔을 것이다. << 기호나 큰따옴표 자체는 출력되지 않고 문자열의 내용만 출력된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\n\nnamespace stl\n{\n    int TestValue;\n}\n\nint main()\n{\n    stl::TestValue = 10;\n    std::cout << stl::TestValue << std::endl;\n    return 0;\n}",
+      "choices": ["stl::TestValue", "0", "10", "컴파일 에러가 발생한다"],
+      "answer": 2,
+      "explain": "stl이라는 namespace 안에 선언된 TestValue 변수에 범위 지정 연산자로 접근해 10을 저장했으므로, 출력하면 10이 나온다. cout에 변수를 넣으면 변수 이름이 아니라 변수에 저장된 값이 출력된다. 값을 저장한 뒤에 출력했으므로 0이 아니고, namespace 안의 변수 접근은 정상 문법이라 에러도 아니다. 수업 파일에서 stl::TestValue = 10; 으로 직접 실습했던 코드다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 실행 결과는?",
+      "code": "#include <iostream>\n\nnamespace Protoss { int UnitCount; }\nnamespace Terran { int UnitCount; }\n\nint main()\n{\n    Protoss::UnitCount = 3;\n    Terran::UnitCount = 5;\n    std::cout << Protoss::UnitCount << Terran::UnitCount << std::endl;\n    return 0;\n}",
+      "choices": ["8", "35", "3 5", "컴파일 에러 — UnitCount가 두 번 정의되었다"],
+      "answer": 1,
+      "explain": "UnitCount라는 이름이 두 번 나오지만 서로 다른 namespace 소속이므로 완전히 별개의 변수이고, 중복 정의 에러가 나지 않는다는 것이 namespace의 핵심이다. cout으로 3과 5를 연달아 출력하면 사이에 아무것도 넣지 않았으므로 붙어서 35처럼 보인다. 두 값을 더한 것이 아니므로 8이 아니고, 공백을 따로 출력하지 않았으므로 3 5도 아니다. 값 사이를 띄우고 싶다면 << \" \" << 처럼 공백 문자열을 직접 넣어야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드를 컴파일하고 실행하면 어떻게 되는가?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << \"My life for Aiur!\" << endl;\n    return 0;\n}",
+      "choices": ["컴파일 에러 — cout 앞에 std::가 필요하다", "아무것도 출력되지 않는다", "using 선언을 두 번 써서 에러가 발생한다", "My life for Aiur! 가 출력되고 줄바꿈된다"],
+      "answer": 3,
+      "explain": "using std::cout;과 using std::endl; 선언 덕분에 main 안에서는 std:: 접두어 없이 cout과 endl을 바로 사용할 수 있다. 그래서 이 코드는 정상 컴파일되어 문장을 출력하고 줄을 바꾼다. using 선언은 가져올 이름마다 하나씩 쓰는 것이므로 두 번 썼다고 에러가 나지 않는다. 수업 파일에서도 같은 방식으로 네 가지 표기(std:: 유무 조합)를 모두 실습했다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "Protoss와 Terran 두 namespace에 이름이 같은 All_Unit_Attack 함수가 각각 있다. 다음 코드의 결과는?",
+      "code": "#include <iostream>\n\nnamespace Protoss\n{\n    void All_Unit_Attack() { std::cout << \"Protoss!\\n\"; }\n}\nnamespace Terran\n{\n    void All_Unit_Attack() { std::cout << \"Terran!\\n\"; }\n}\n\nusing namespace Protoss;\nusing namespace Terran;\n\nint main()\n{\n    All_Unit_Attack();\n    return 0;\n}",
+      "choices": ["먼저 using한 Protoss의 All_Unit_Attack이 호출된다", "나중에 using한 Terran의 All_Unit_Attack이 호출된다", "두 함수가 차례로 모두 호출된다", "어느 쪽인지 구분할 수 없어 컴파일 에러가 발생한다"],
+      "answer": 3,
+      "explain": "using namespace를 두 개 모두 풀어 놓은 상태에서 namespace 없이 All_Unit_Attack()을 부르면, 컴파일러는 Protoss 것인지 Terran 것인지 결정할 수 없어 모호성 에러를 낸다. 수업 파일 주석에도 namespace를 생략하는 순간 함수를 구분해 줄 수 없다고 적혀 있다. using 순서에 따른 우선순위 같은 것은 없으며, 둘 다 호출되는 일도 없다. 해결하려면 Protoss::All_Unit_Attack()처럼 범위 지정 연산자로 소속을 밝혀야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "앞 문제와 같은 상황에서 Zealot_Attack()은 namespace를 붙이지 않고 호출해도 정상 동작한다. 그 이유는?",
+      "code": "#include <iostream>\n\nnamespace Protoss\n{\n    void Zealot_Attack() { std::cout << \"My life for Aiur!\\n\"; }\n    void All_Unit_Attack() { std::cout << \"Protoss!\\n\"; }\n}\nnamespace Terran\n{\n    void All_Unit_Attack() { std::cout << \"Terran!\\n\"; }\n}\n\nusing namespace Protoss;\nusing namespace Terran;\n\nint main()\n{\n    Zealot_Attack();\n    return 0;\n}",
+      "choices": ["Protoss가 Terran보다 먼저 using 되었기 때문", "Zealot_Attack이라는 이름이 두 namespace를 통틀어 하나뿐이라 모호하지 않기 때문", "Zealot_Attack 함수에 매개변수가 없기 때문", "main 함수보다 위쪽에 정의되어 있기 때문"],
+      "answer": 1,
+      "explain": "using namespace로 풀린 이름들 중 Zealot_Attack은 Protoss에만 존재하므로, 컴파일러가 후보를 하나로 확정할 수 있어 모호성이 생기지 않는다. 반면 All_Unit_Attack은 양쪽에 다 있어서 생략하면 에러가 났다. using의 선언 순서는 우선순위를 만들지 않으므로 순서 때문이라는 설명은 틀렸다. 매개변수 유무나 정의 위치는 이 문제와 무관하며, 핵심은 이름이 유일한가 아닌가이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 모양은?",
+      "code": "#include <iostream>\n\nint main()\n{\n    std::cout << \"A\\nB\" << std::endl;\n    return 0;\n}",
+      "choices": ["한 줄에 AnB 가 출력된다", "한 줄에 AB 가 붙어서 출력된다", "A 가 출력되고 줄이 바뀐 뒤 B 가 출력된다", "A\\nB 라는 글자가 그대로 출력된다"],
+      "answer": 2,
+      "explain": "문자열 안의 \\n은 역슬래시와 n 두 글자가 아니라 줄바꿈을 뜻하는 이스케이프 문자 하나다. 그래서 A를 출력한 뒤 줄이 바뀌고 B가 출력되며, 마지막 endl로 한 번 더 줄바꿈된다. 이스케이프 문자는 화면에 그대로 보이지 않으므로 A\\nB나 AnB처럼 출력되지 않는다. 02. iostream.h의 printf 문자열들에서도 \\n으로 줄바꿈, \\t로 탭을 넣는 것을 확인했다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << \"Zealot\" << endl;\n    cout << \"Marine\" << endl;\n    return 0;\n}",
+      "choices": ["Zealot 이 출력되고 다음 줄에 Marine 이 출력된다", "ZealotMarine 이 한 줄에 붙어서 출력된다", "Marine 이 먼저 출력되고 다음 줄에 Zealot 이 출력된다", "Zealot endl Marine endl 이 그대로 출력된다"],
+      "answer": 0,
+      "explain": "코드는 위에서 아래로 순서대로 실행되므로 Zealot이 먼저 출력되고, endl로 줄이 바뀐 뒤 Marine이 출력된다. 첫 출력 뒤에 endl이 있으므로 두 단어가 한 줄에 붙는 일은 없다. endl은 화면에 글자로 나오는 것이 아니라 줄바꿈 동작을 하는 것이다. using 선언 덕분에 std:: 없이 cout과 endl을 쓸 수 있다는 점도 함께 확인하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "02. iostream.h의 Zealot_Attack 함수를 참고할 때, 다음 코드의 출력 결과는?",
+      "code": "#include <cstdio>\n\nint main()\n{\n    printf(\"Position X: %d\\tPosition Y: %d\\n\", 10, 39);\n    return 0;\n}",
+      "choices": ["Position X: %d(탭)Position Y: %d 가 그대로 출력된다", "Position X: 39 와 Position Y: 10 이 출력된다", "Position X: 10 이 출력되고 줄바꿈된 뒤 Position Y: 39 가 출력된다", "Position X: 10 과 Position Y: 39 가 탭 간격을 두고 한 줄에 출력된다"],
+      "answer": 3,
+      "explain": "printf의 %d는 뒤에 오는 정수 인수를 순서대로 받아 출력하는 서식 지정자이므로, 첫 번째 %d에 10, 두 번째 %d에 39가 들어간다. \\t는 탭 간격, \\n은 줄바꿈이므로 두 값은 탭으로 벌어진 채 한 줄에 나오고 마지막에 줄이 바뀐다. %d가 글자 그대로 출력되지 않으며, 인수는 뒤에서부터가 아니라 앞에서부터 순서대로 대응된다. Protoss::Zealot_Attack(10, 39)가 정확히 이 형태로 좌표를 출력했다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 두 출력문의 관계로 옳은 것은?",
+      "code": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    std::cout << \"Hello\" << std::endl;\n    cout << \"Hello\" << endl;\n    return 0;\n}",
+      "choices": ["첫 번째 출력문만 정상 동작한다", "두 번째 출력문만 정상 동작한다", "두 출력문은 완전히 같은 동작을 한다", "두 출력문은 서로 다른 cout 개체를 사용한다"],
+      "answer": 2,
+      "explain": "using std::cout; 선언은 std::cout이라는 기존 개체를 cout이라는 짧은 이름으로 부를 수 있게 해 줄 뿐, 새로운 개체를 만드는 것이 아니다. 따라서 std::cout과 cout은 같은 개체이고 두 문장은 완전히 동일하게 동작한다. using 선언이 있어도 std::를 붙여 쓰는 것은 여전히 허용되므로 어느 한쪽만 동작한다는 설명은 틀렸다. 수업 파일에서는 std:: 유무를 조합한 네 가지 표기를 나란히 실행하며 이를 확인했다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드를 컴파일하면 어떻게 되는가?",
+      "code": "#include <iostream>\n\nusing std::cout;\n\nint main()\n{\n    cout << \"Hello World\" << endl;\n    return 0;\n}",
+      "choices": ["Hello World 가 출력되고 줄바꿈된다", "컴파일 에러 — cout도 std::cout으로 써야 한다", "컴파일 에러 — endl은 using 선언이 없으므로 std::endl로 써야 한다", "Hello World 만 출력되고 줄바꿈은 조용히 무시된다"],
+      "answer": 2,
+      "explain": "using std::cout;은 cout 하나만 가져오는 선언이므로 endl은 여전히 std 소속인 채로 남아 있다. 따라서 접두어 없는 endl을 컴파일러가 찾지 못해 에러가 난다. cout은 using 선언이 되어 있으므로 문제가 없고, 컴파일 에러는 실행 자체가 안 되는 것이라 일부만 출력되고 무시되는 일은 없다. 그래서 수업 파일에서는 using std::cout;과 using std::endl;을 반드시 짝으로 선언했다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 빈칸에 들어갈 기호는?",
+      "code": "#include <iostream>\n\nint main()\n{\n    std____cout << \"Hello World\";\n    return 0;\n}",
+      "choices": [".", "::", "->", ":"],
+      "answer": 1,
+      "explain": "namespace 소속의 이름에 접근할 때는 범위 지정 연산자 :: 를 사용하므로 std::cout이 올바른 표기다. 마침표 . 는 개체의 내부에 접근할 때 쓰는 기호라 namespace에는 쓸 수 없다. 콜론 하나 : 만 쓰는 문법은 존재하지 않으므로 반드시 두 개를 붙여야 한다. 콜론 개수 하나 차이로 컴파일 에러가 나니 타이핑할 때 주의해야 한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드가 정상 동작하도록 빈칸에 들어갈 키워드는?",
+      "code": "#include <iostream>\n\n____ std::cout;\n\nint main()\n{\n    cout << \"Hello\";\n    return 0;\n}",
+      "choices": ["using", "namespace", "#include", "import"],
+      "answer": 0,
+      "explain": "std::cout을 짧은 이름 cout으로 쓸 수 있게 가져오는 문법은 using 선언, 즉 using std::cout; 이다. namespace 키워드는 새로운 namespace를 만들 때 쓰는 것이라 여기에는 맞지 않는다. #include는 헤더 파일을 포함하는 전처리 지시문이고, import라는 키워드는 이 수업 범위의 C++ 문법이 아니다. main 안에서 접두어 없이 cout을 썼으므로 반드시 이 선언이 필요하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드는 컴파일 에러가 발생한다. 원인으로 옳은 것은?",
+      "code": "#include <iostream>\n\nint main()\n{\n    cout << \"Hello World\" << endl;\n    return 0;\n}",
+      "choices": ["iostream 헤더에는 cout이 들어 있지 않기 때문", "return 0; 보다 먼저 출력을 했기 때문", "문자열에 큰따옴표를 사용하면 안 되기 때문", "cout과 endl은 std namespace 소속이라 std:: 또는 using 선언 없이는 찾을 수 없기 때문"],
+      "answer": 3,
+      "explain": "cout과 endl은 std namespace 안에 선언되어 있으므로, std::cout처럼 소속을 밝히거나 using 선언(또는 using namespace std;)으로 가져와야 컴파일러가 찾을 수 있다. iostream 헤더에 cout이 있는 것은 맞지만 헤더 포함만으로 접두어가 면제되는 것은 아니다. 출력 후에 return 하는 것은 지극히 정상적인 순서이고, 문자열은 원래 큰따옴표로 감싼다. 헤더 포함과 namespace 지정은 서로 다른 두 가지 요건이라는 점을 기억하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "Protoss라는 namespace를 만들고 그 안에 int형 변수 UnitCount를 선언하는 올바른 코드는?",
+      "code": null,
+      "choices": ["namespace Protoss { int UnitCount; }", "namespace Protoss ( int UnitCount; )", "Protoss namespace { int UnitCount; }", "namespace = Protoss { int UnitCount; }"],
+      "answer": 0,
+      "explain": "namespace를 만들 때는 namespace 키워드, 이름, 그리고 중괄호 블록 순서로 쓴다. 소괄호가 아니라 중괄호를 사용해야 하고, 키워드가 이름보다 앞에 와야 하며, 등호는 사용하지 않는다. 수업 파일의 namespace stl { int TestValue; } 와 똑같은 구조다. 참고로 namespace 블록의 닫는 중괄호 뒤에는 세미콜론을 붙이지 않아도 된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 중 표준 C++에서 올바르지 않은 헤더 포함은?",
+      "code": null,
+      "choices": ["#include <iostream>", "#include <cstdio>", "#include <iostream.h>", "#include \"02. iostream.h\""],
+      "answer": 2,
+      "explain": "표준 C++의 라이브러리 헤더는 확장자 없이 <iostream>처럼 쓰며, <iostream.h>는 표준화 이전에 쓰이던 옛날 이름이라 현재 표준에는 없다. <cstdio>는 C의 stdio.h를 C++식으로 바꾼 정상적인 표준 헤더다. 큰따옴표를 쓴 \"02. iostream.h\"는 표준 헤더가 아니라 수업에서 직접 만든 사용자 헤더를 프로젝트 폴더에서 찾아 포함하는 올바른 방법이다. 표준 헤더는 꺾쇠괄호에 확장자 없이, 내가 만든 헤더는 큰따옴표로 구분해 기억하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "두 개발팀이 만든 라이브러리에 똑같이 Attack이라는 함수가 들어 있어 이름이 충돌한다. C++에서 이 문제를 해결하는 가장 적절한 방법은?",
+      "code": null,
+      "choices": ["각 팀의 코드를 서로 다른 namespace로 감싸고 범위 지정 연산자로 구분해 호출한다", "두 팀에게 함수 이름을 전부 다르게 고쳐 달라고 요청한다", "한 팀의 함수만 사용하고 다른 팀의 것은 포기한다", "#pragma once를 사용해 충돌을 제거한다"],
+      "answer": 0,
+      "explain": "namespace는 바로 이런 이름 충돌을 해결하기 위한 문법으로, 각 팀의 코드를 TeamA::Attack, TeamB::Attack처럼 소속으로 구분하면 같은 이름이라도 공존할 수 있다. 이름을 전부 고치거나 한쪽을 포기하는 것은 현실적으로 어렵고 근본적인 해결책이 아니다. #pragma once는 같은 헤더의 중복 포함을 막는 것이지 서로 다른 라이브러리의 이름 충돌과는 무관하다. 수업의 Protoss, Terran, Zerg가 모두 All_Unit_Attack을 가질 수 있었던 것이 이 원리다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "수업에서 stl이라는 namespace를 직접 만들고 그 안에 cout이라는 이름을 넣었는데도 표준 라이브러리의 std::cout과 충돌하지 않았다. 그 이유는?",
+      "code": null,
+      "choices": ["stl::cout이 std::cout을 덮어써서 하나만 남기 때문", "컴파일러가 표준 라이브러리의 cout을 우선시하고 사용자 cout을 무시하기 때문", "iostream을 포함하지 않으면 std::cout이 사라지기 때문", "같은 cout이라도 소속 namespace가 다르면 stl::cout과 std::cout은 완전히 별개의 개체이기 때문"],
+      "answer": 3,
+      "explain": "namespace가 다르면 이름이 같아도 전혀 다른 개체로 취급되므로, stl::cout과 std::cout은 평화롭게 공존한다. 이것이 namespace로 전역적으로 고유한 이름을 만들 수 있다는 수업 주석의 의미다. 어느 한쪽이 다른 쪽을 덮어쓰거나, 컴파일러가 표준 쪽을 우선시하는 규칙은 존재하지 않는다. 호출할 때 stl::cout처럼 소속을 명시하기만 하면 컴파일러는 정확히 그 namespace에서 이름을 찾는다.",
+      "difficulty": "심화"
+    }
+  ],
+  "coding": [
+    {
+      "title": "std::cout으로 Hello World 출력하기",
+      "prompt": "std::cout과 std::endl을 사용해 화면에 Hello World를 출력하고 줄바꿈하는 프로그램을 작성하세요.\n\n조건:\n1. #include <iostream> 을 포함할 것\n2. using namespace std; 는 사용하지 말고, std:: 접두어를 직접 붙여서 쓸 것\n3. 출력 마지막에 std::endl로 줄바꿈할 것\n\n[출력 예시]\nHello World",
+      "starter": "#include <iostream>\n\nint main()\n{\n    // TODO: std::cout과 std::endl을 사용해 Hello World를 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "#include\\s*<iostream>", "desc": "iostream 헤더를 포함했는지" },
+        { "pattern": "std::cout\\s*<<", "desc": "std:: 접두어를 붙여 cout을 사용했는지" },
+        { "pattern": "Hello World", "desc": "Hello World 문자열을 출력하는지" },
+        { "pattern": "std::endl", "desc": "std::endl로 줄바꿈했는지" },
+        { "pattern": "^(?![\\s\\S]*using\\s+namespace\\s+std)", "desc": "using namespace std; 를 사용하지 않았는지" }
+      ],
+      "solution": "#include <iostream>\n\nint main()\n{\n    std::cout << \"Hello World\" << std::endl;\n    return 0;\n}",
+      "explain": "cout과 endl은 std namespace 소속이므로 using 없이 쓰려면 std::cout, std::endl처럼 범위 지정 연산자 ::로 소속을 밝혀야 합니다. << 연산자로 문자열을 cout에 흘려보내고, 마지막에 endl을 넣으면 줄이 바뀝니다. 수업 파일의 std::cout << \"Hello World\" << std::endl; 과 같은 형태로, C++ 입출력의 가장 기본이 되는 한 줄입니다.",
+      "difficulty": "쉬움"
+    },
+    {
+      "title": "using 선언으로 자기소개 출력하기",
+      "prompt": "using 선언을 이용해 std:: 접두어 없이 cout과 endl만으로 아래 3줄을 출력하는 프로그램을 작성하세요. 수업에서 배운 비유(iostream=주소, std=소속, cout=이름)를 코드로 표현하는 문제입니다.\n\n조건:\n1. using std::cout; 과 using std::endl; 두 개의 using 선언을 사용할 것\n2. using namespace std; 전체 지시문은 사용 금지\n3. main 안에서는 std:: 를 한 번도 쓰지 않고 cout, endl만 사용할 것\n\n[출력 예시]\nName: Chanyeon\nNamespace: std\nHeader: iostream",
+      "starter": "#include <iostream>\n\n// TODO: using 선언으로 std::cout과 std::endl을 가져오세요. (using namespace std; 금지)\n\nint main()\n{\n    // TODO: cout과 endl만 사용해 아래 3줄을 출력하세요.\n    // Name: Chanyeon\n    // Namespace: std\n    // Header: iostream\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "using\\s+std::cout\\s*;", "desc": "using 선언으로 std::cout을 가져왔는지" },
+        { "pattern": "using\\s+std::endl\\s*;", "desc": "using 선언으로 std::endl을 가져왔는지" },
+        { "pattern": "^(?![\\s\\S]*using\\s+namespace\\s+std)", "desc": "using namespace std; 를 사용하지 않았는지" },
+        { "pattern": "\\bcout\\s*<<", "desc": "접두어 없이 cout으로 출력했는지" },
+        { "pattern": "Header: iostream", "desc": "요구한 출력 내용이 들어 있는지" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    cout << \"Name: Chanyeon\" << endl;\n    cout << \"Namespace: std\" << endl;\n    cout << \"Header: iostream\" << endl;\n    return 0;\n}",
+      "explain": "using 선언은 필요한 이름만 하나씩 가져오는 방식이라 using std::cout; 과 using std::endl; 을 각각 따로 써야 합니다. cout만 가져오면 endl은 여전히 std 소속이라 접두어 없이 쓸 수 없다는 점이 이 문제의 핵심입니다. using namespace std; 로 전부 풀어 버리는 것보다 필요한 이름만 가져오는 편이 이름 충돌 위험이 적어 수업에서도 이 방식을 사용했습니다.",
+      "difficulty": "중간"
+    },
+    {
+      "title": "세 종족 namespace 만들기",
+      "prompt": "스타크래프트의 세 종족처럼 Protoss, Terran, Zerg 세 개의 namespace를 만들고, 각 namespace 안에 int형 변수 UnitCount를 하나씩 선언하세요. 그리고 main에서 범위 지정 연산자(::)로 각 종족의 UnitCount에 값을 저장한 뒤 아래 형식으로 출력하세요. 같은 이름의 변수가 세 개 있어도 namespace가 다르면 충돌하지 않는다는 것을 확인하는 문제입니다.\n\n조건:\n1. Protoss, Terran, Zerg 세 namespace를 각각 정의하고 안에 int UnitCount; 를 선언할 것\n2. main에서 Protoss::UnitCount = 12; Terran::UnitCount = 8; Zerg::UnitCount = 30; 으로 값을 저장할 것\n3. 범위 지정 연산자로 각 변수에 접근해 아래와 똑같은 형식으로 출력할 것\n\n[출력 예시]\nProtoss Unit: 12\nTerran Unit: 8\nZerg Unit: 30",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\n// TODO: Protoss, Terran, Zerg namespace를 만들고 각각 안에 int UnitCount; 를 선언하세요.\n\nint main()\n{\n    // TODO: 범위 지정 연산자(::)로 각 종족의 UnitCount에 12, 8, 30을 저장하세요.\n\n    // TODO: 아래 형식으로 출력하세요.\n    // Protoss Unit: 12\n    // Terran Unit: 8\n    // Zerg Unit: 30\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "namespace\\s+Protoss", "desc": "Protoss namespace를 정의했는지" },
+        { "pattern": "namespace\\s+Terran", "desc": "Terran namespace를 정의했는지" },
+        { "pattern": "namespace\\s+Zerg", "desc": "Zerg namespace를 정의했는지" },
+        { "pattern": "Protoss::UnitCount\\s*=", "desc": "범위 지정 연산자로 Protoss의 UnitCount에 값을 저장했는지" },
+        { "pattern": "Terran::UnitCount\\s*=", "desc": "범위 지정 연산자로 Terran의 UnitCount에 값을 저장했는지" },
+        { "pattern": "cout\\s*<<[\\s\\S]*Zerg::UnitCount", "desc": "cout으로 namespace 소속 변수를 출력했는지" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\n\nnamespace Protoss\n{\n    int UnitCount;\n}\n\nnamespace Terran\n{\n    int UnitCount;\n}\n\nnamespace Zerg\n{\n    int UnitCount;\n}\n\nint main()\n{\n    Protoss::UnitCount = 12;\n    Terran::UnitCount = 8;\n    Zerg::UnitCount = 30;\n\n    cout << \"Protoss Unit: \" << Protoss::UnitCount << endl;\n    cout << \"Terran Unit: \" << Terran::UnitCount << endl;\n    cout << \"Zerg Unit: \" << Zerg::UnitCount << endl;\n\n    return 0;\n}",
+      "explain": "UnitCount라는 이름이 세 번 등장하지만 각각 Protoss, Terran, Zerg라는 다른 namespace 소속이므로 중복 정의 에러가 나지 않습니다. 접근할 때는 반드시 Protoss::UnitCount처럼 범위 지정 연산자로 소속을 밝혀야 하며, 이것이 수업 파일의 stl::TestValue = 10; 과 같은 패턴입니다. cout에는 문자열과 변수를 << 로 번갈아 이어 붙여 원하는 형식의 한 줄을 만들 수 있습니다. namespace가 이름 충돌을 막아 준다는 이 단원의 핵심을 코드로 직접 확인하는 문제입니다.",
+      "difficulty": "어려움"
+    }
+  ]
+}

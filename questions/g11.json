@@ -1,0 +1,492 @@
+{
+  "id": "g11",
+  "num": 11,
+  "group": "문법",
+  "title": "열거형 (Enum)",
+  "srcFile": "11. Enumerator.cpp",
+  "questions": [
+    {
+      "q": "열거형(enum)에 대한 설명으로 가장 알맞은 것은?",
+      "code": null,
+      "choices": [
+        "연속된 정수에 이름을 붙여 가독성을 높이는, 새로 만드는 자료형이다",
+        "실수(소수점) 값에 이름을 붙여 저장하는 자료형이다",
+        "문자열 여러 개를 한 곳에 모아 두는 자료형이다",
+        "컴파일러가 자동으로 만들어 주는 내장 자료형이다"
+      ],
+      "answer": 0,
+      "explain": "수업 파일의 정의 그대로, enum은 연속된 정수에 대해 가독성을 위해 이름을 가진 자료형을 만들어서 멤버에 특정 정수를 지정하는 기능이다. 실수 값이나 문자열을 담는 기능이 아니라 어디까지나 정수 상수에 이름을 붙이는 것이다. 컴파일러가 자동으로 만들어 주는 것이 아니라 프로그래머가 직접 정의하는 사용자 정의 자료형이라는 점도 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "enum의 멤버에 아무 값도 지정하지 않았을 때, 첫 번째 멤버가 갖는 값은?",
+      "code": null,
+      "choices": [
+        "1",
+        "0",
+        "쓰레기값(불특정한 값)",
+        "컴파일 에러가 난다"
+      ],
+      "answer": 1,
+      "explain": "값을 지정하지 않으면 enum의 멤버는 0부터 1씩 차례대로 값이 지정된다. 그래서 KOOPA_PATTERN의 ATTACK은 0이다. 1부터 시작한다고 착각하기 쉽지만, 1부터 시작하려면 ONE = 1처럼 직접 값을 지정해야 한다. 값을 지정하지 않아도 규칙에 따라 자동으로 정해지므로 쓰레기값이 되거나 에러가 나지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "enum 멤버 중 하나에 값을 지정하면, 그 뒤에 오는 멤버들의 값은 어떻게 되는가?",
+      "code": null,
+      "choices": [
+        "다시 0부터 시작한다",
+        "모든 멤버가 지정한 값과 같아진다",
+        "지정한 값 이후부터 1씩 증가한다",
+        "값을 모두 지정하지 않으면 컴파일 에러가 난다"
+      ],
+      "answer": 2,
+      "explain": "값을 지정하면 지정한 이후부터 1씩 증가한다. enum NUMBER에서 ONE = 1로 지정했기 때문에 TWO는 2, THREE는 3, FOUR는 4, FIVE는 5가 된다. 다시 0부터 시작하거나 같은 값이 복사되는 것이 아니다. 일부 멤버만 값을 지정하는 것도 완전히 정상적인 문법이므로 에러가 나지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "enum은 어떤 종류의 자료형으로 분류되는가?",
+      "code": null,
+      "choices": [
+        "내장 자료형(Built-in Data Type)",
+        "원시 자료형(Primitive Data Type)",
+        "사용자 정의 자료형(User Defined Data Type)",
+        "자료형이 아니라 단순한 상수 목록이다"
+      ],
+      "answer": 2,
+      "explain": "enum은 프로그래머가 직접 이름과 멤버를 정해서 만드는 사용자 정의 자료형이다. int, char처럼 언어가 처음부터 제공하는 자료형이 내장 자료형(원시 자료형)이고, 이 둘은 서로 반대되는 개념이다. enum은 단순한 상수 목록이 아니라 KOOPA_PATTERN eKoopa = IDLE;처럼 변수를 선언할 수 있는 진짜 자료형이라는 점이 중요하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 중 사용자 정의 자료형이 아닌, 내장(원시) 자료형인 것은?",
+      "code": null,
+      "choices": [
+        "NUMBER",
+        "KOOPA_PATTERN",
+        "int",
+        "SEASON (enum으로 정의한 계절 자료형)"
+      ],
+      "answer": 2,
+      "explain": "int는 C++ 언어가 처음부터 제공하는 내장 자료형(원시 자료형)이다. NUMBER, KOOPA_PATTERN, SEASON은 모두 enum으로 프로그래머가 직접 만든 사용자 정의 자료형이다. enum으로 만든 이름은 아무리 많이 써도 결국 사용자가 정의한 것이라는 점에서 int, char, double 같은 내장 자료형과 구분된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "올바른 enum 선언 형식은?",
+      "code": null,
+      "choices": [
+        "enum COLOR { RED, GREEN, BLUE };",
+        "enum COLOR ( RED, GREEN, BLUE );",
+        "enum COLOR { RED; GREEN; BLUE };",
+        "COLOR enum { RED, GREEN, BLUE };"
+      ],
+      "answer": 0,
+      "explain": "enum의 형식은 enum EnumName { EnumMember1, EnumMember2, ... }; 이다. 멤버를 감싸는 것은 소괄호가 아니라 중괄호이고, 멤버 사이는 세미콜론이 아니라 콤마로 구분한다. enum 키워드가 이름보다 먼저 와야 하며, 정의가 끝나면 중괄호 뒤에 세미콜론을 붙여야 한다는 것도 잊지 말자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업에서 배운 sizeof 키워드의 역할은?",
+      "code": null,
+      "choices": [
+        "변수에 저장된 값의 자릿수를 알려준다",
+        "자료형의 이름을 문자열로 알려준다",
+        "enum 멤버의 개수를 알려준다",
+        "자료형이나 변수가 차지하는 메모리 크기를 바이트 단위로 알려준다"
+      ],
+      "answer": 3,
+      "explain": "sizeof는 자료형, 변수, 리터럴이 메모리에서 차지하는 크기를 바이트 단위로 알려주는 키워드다. 파일에서 sizeof(int), sizeof(iNumber), sizeof(KOOPA_PATTERN) 등을 출력해 본 것이 그 예다. 값의 자릿수나 멤버 개수를 세는 기능이 아니며, 자료형 이름을 알려주는 것은 typeid의 역할이다. sizeof(1134232)처럼 리터럴에도 쓸 수 있다는 점을 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "typeid(변수).name()이 알려주는 것은?",
+      "code": null,
+      "choices": [
+        "변수의 자료형 이름",
+        "변수가 차지하는 메모리 크기",
+        "변수에 현재 저장된 값",
+        "변수가 선언된 코드의 줄 번호"
+      ],
+      "answer": 0,
+      "explain": "typeid(변수).name()은 그 변수가 어떤 자료형인지 이름을 알려준다. 파일에서 typeid(eKoopa).name(), typeid(int).name() 등을 출력해서 자료형을 확인해 보았다. 메모리 크기를 알려주는 것은 sizeof이므로 두 키워드의 역할을 혼동하지 말자. 수업에서 sizeof와 typeid는 평소에 알아 두면 좋은 키워드로 소개되었다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "쿠파(보스)의 행동 상태를 enum KOOPA_PATTERN으로 만들어 관리하는 가장 큰 이유는?",
+      "code": null,
+      "choices": [
+        "상태 값을 실수(소수점)로 저장하기 위해",
+        "숫자 0, 1, 2 대신 ATTACK, DIE 같은 이름을 써서 코드의 의미를 읽기 쉽게 하기 위해",
+        "프로그램 실행 속도가 항상 빨라지기 때문에",
+        "switch문 없이도 상태가 자동으로 바뀌기 때문에"
+      ],
+      "answer": 1,
+      "explain": "enum의 핵심 목적은 가독성이다. case 2:라고 쓰면 무슨 상태인지 알 수 없지만 case DIE:라고 쓰면 죽는 상태 처리라는 것이 바로 보인다. enum 멤버는 결국 정수이므로 실수 저장과는 관계가 없고, 실행 속도를 바꾸는 기능도 아니다. 상태 전환은 eKoopa = DIE;처럼 프로그래머가 직접 대입해야 하며 자동으로 바뀌지 않는다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "파일의 enum NUMBER : char 처럼 enum 이름 뒤에 콜론(:)과 char를 붙이는 것의 의미는?",
+      "code": null,
+      "choices": [
+        "멤버 이름을 한 글자로만 지어야 한다는 뜻이다",
+        "enum의 기반 자료형을 char로 지정해서 크기가 1바이트가 된다",
+        "멤버 값으로 문자만 넣을 수 있다는 뜻이다",
+        "char형 변수에는 이 enum을 대입할 수 없게 막는다"
+      ],
+      "answer": 1,
+      "explain": "enum 이름 뒤의 : char는 이 열거형이 내부적으로 값을 저장할 기반 자료형을 char로 지정한다는 뜻이다. char는 1바이트이므로 sizeof(NUMBER)는 1이 된다. 멤버 이름의 길이나 문자 전용 여부와는 아무 관계가 없다. 기반 자료형을 지정하지 않으면 보통 int 기준이라 sizeof(KOOPA_PATTERN)처럼 4가 출력된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "수업 파일의 switch문에서는 case ZERO(#define), case ONE(enum 멤버), case Three(const int)를 모두 사용했다. 다음 중 case 라벨로 사용할 수 없는 것은?",
+      "code": null,
+      "choices": [
+        "#define으로 만든 매크로 상수",
+        "enum의 멤버",
+        "const int로 선언한 상수",
+        "값을 바꿀 수 있는 일반 int 변수"
+      ],
+      "answer": 3,
+      "explain": "case 라벨에는 컴파일 시점에 값이 정해지는 상수만 올 수 있다. #define 매크로 상수, enum 멤버, const int 상수는 모두 컴파일 시점에 값이 확정되므로 파일에서처럼 case에 쓸 수 있다. 반면 일반 int 변수는 실행 중에 값이 바뀔 수 있어서 case 라벨로 쓰면 컴파일 에러가 난다. 파일에서 const int Three = 3;을 case에 쓴 것이 바로 상수라서 가능했던 것이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "파일의 enum KOOPA_PATTERN은 마지막 멤버 IDLE 뒤에도 콤마가 있다(IDLE, } 형태). 이에 대한 설명으로 맞는 것은?",
+      "code": null,
+      "choices": [
+        "문법 오류라서 컴파일되지 않는다",
+        "허용되는 문법이며, 멤버 개수나 값에는 아무 영향이 없다",
+        "마지막에 이름 없는 멤버가 하나 더 생긴다",
+        "콤마 뒤부터 멤버 값이 다시 0으로 돌아간다"
+      ],
+      "answer": 1,
+      "explain": "enum에서 마지막 멤버 뒤의 콤마(trailing comma)는 허용되는 문법이다. 실제 수업 파일도 IDLE 뒤에 콤마를 붙인 채 정상적으로 컴파일된다. 콤마가 있다고 해서 빈 멤버가 생기거나 값이 초기화되지 않으며, KOOPA_PATTERN의 멤버는 여전히 ATTACK(0)부터 IDLE(6)까지 7개다. 나중에 멤버를 추가할 때 편리해서 이런 스타일을 쓰기도 한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE\n};\n\nint main()\n{\n    cout << DIE << endl;\n    return 0;\n}",
+      "choices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "answer": 2,
+      "explain": "값을 지정하지 않은 enum은 첫 멤버부터 0, 1, 2, ... 순서로 값이 정해진다. ATTACK이 0, TRACING이 1이므로 세 번째 멤버인 DIE는 2다. 첫 멤버를 1로 착각하면 DIE를 3으로 잘못 계산하게 되니 주의하자. cout으로 enum 멤버를 출력하면 이름이 아니라 그 멤버가 가진 정수 값이 출력된다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum NUMBER\n{\n    ONE = 1,\n    TWO,\n    THREE,\n    FOUR,\n    FIVE\n};\n\nint main()\n{\n    cout << FIVE << endl;\n    return 0;\n}",
+      "choices": [
+        "4",
+        "5",
+        "6",
+        "0"
+      ],
+      "answer": 1,
+      "explain": "ONE = 1로 시작 값을 지정했으므로 그 뒤 멤버들은 1씩 증가해 TWO는 2, THREE는 3, FOUR는 4, FIVE는 5가 된다. 값을 지정하지 않았을 때처럼 0부터 세면 FIVE를 4로 잘못 계산하게 된다. 시작 값을 지정하면 그 이후부터 1씩 증가한다는 규칙을 정확히 적용하는 것이 핵심이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE\n};\n\nint main()\n{\n    cout << ATTACK << \" \" << IDLE << endl;\n    return 0;\n}",
+      "choices": [
+        "0 6",
+        "1 7",
+        "0 7",
+        "1 6"
+      ],
+      "answer": 0,
+      "explain": "값을 지정하지 않았으므로 첫 멤버 ATTACK은 0이고, 뒤로 1씩 증가해 마지막 멤버 IDLE은 6이 된다. 멤버가 7개라서 마지막 값을 7로 착각하기 쉽지만, 0부터 시작하기 때문에 마지막 값은 멤버 개수보다 1 작다. 1부터 세면 두 값 모두 틀리게 되니 enum의 기본 시작 값이 0이라는 것을 꼭 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE\n};\n\nint main()\n{\n    KOOPA_PATTERN eKoopa = HEAL;\n\n    switch (eKoopa)\n    {\n    case ATTACK:\n        cout << \"공격\" << endl;\n        break;\n    case DIE:\n        cout << \"사망\" << endl;\n        break;\n    case HEAL:\n        cout << \"회복\" << endl;\n        break;\n    default:\n        cout << \"대기\" << endl;\n        break;\n    }\n    return 0;\n}",
+      "choices": [
+        "공격",
+        "사망",
+        "회복",
+        "대기"
+      ],
+      "answer": 2,
+      "explain": "eKoopa에 HEAL을 대입했으므로 switch는 case HEAL로 이동해서 회복을 출력한다. 각 case마다 break가 있으므로 다른 case로 넘어가지 않고 switch를 빠져나온다. eKoopa가 ATTACK이나 DIE와 일치하지 않으므로 그 case들은 실행되지 않고, HEAL과 일치하는 case가 있으므로 default도 실행되지 않는다. enum 변수를 switch의 조건으로 쓰는 것이 상태 처리의 기본 패턴이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum LEVEL\n{\n    EASY,\n    NORMAL = 10,\n    HARD,\n    HELL\n};\n\nint main()\n{\n    cout << EASY << \" \" << HARD << \" \" << HELL << endl;\n    return 0;\n}",
+      "choices": [
+        "0 11 12",
+        "0 10 11",
+        "1 11 12",
+        "0 2 3"
+      ],
+      "answer": 0,
+      "explain": "EASY는 값을 지정하지 않은 첫 멤버라서 0이다. NORMAL = 10으로 지정한 이후부터 1씩 증가하므로 HARD는 11, HELL은 12가 된다. HARD를 10으로 계산하는 것은 지정된 값이 NORMAL의 것임을 놓친 실수이고, 2와 3으로 계산하는 것은 중간의 값 지정을 무시한 실수다. 값 지정이 섞인 enum은 어디서부터 다시 증가하는지 정확히 따라가야 한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum POWER\n{\n    LOW = 5,\n    MID,\n    HIGH\n};\n\nint main()\n{\n    cout << MID + HIGH << endl;\n    return 0;\n}",
+      "choices": [
+        "11",
+        "13",
+        "12",
+        "57"
+      ],
+      "answer": 1,
+      "explain": "LOW = 5로 지정했으므로 MID는 6, HIGH는 7이다. enum 멤버는 정수이므로 산술 연산이 가능해서 MID + HIGH는 6 + 7 = 13이 된다. LOW를 0부터 세서 MID를 1, HIGH를 2로 계산하면 틀린다. 57처럼 값이 이어 붙는 것이 아니라 일반 정수 덧셈이 일어난다는 점도 기억하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은? (수업 파일의 switch문과 같은 구조다)",
+      "code": "#include <iostream>\n#define ZERO 0\nusing std::cout;\nusing std::endl;\n\nenum NUMBER\n{\n    ONE = 1,\n    TWO,\n    THREE,\n    FOUR,\n    FIVE\n};\n\nint main()\n{\n    int iNumber = 3;\n    const int Three = 3;\n\n    switch (iNumber)\n    {\n    case ZERO:\n        cout << \"0입니다\" << endl;\n        break;\n    case ONE:\n        cout << \"1입니다\" << endl;\n        break;\n    case TWO:\n    case Three:\n        cout << \"2 or 3입니다\" << endl;\n        break;\n    default:\n        cout << \"그 외의 숫자입니다\" << endl;\n        break;\n    }\n    return 0;\n}",
+      "choices": [
+        "1입니다",
+        "그 외의 숫자입니다",
+        "아무것도 출력되지 않는다",
+        "2 or 3입니다"
+      ],
+      "answer": 3,
+      "explain": "iNumber가 3이므로 const int 상수 Three(3)와 일치하는 case Three로 이동한다. case TWO: 바로 아래에 break 없이 case Three:가 이어져 있어서 2가 들어와도 3이 들어와도 같은 출력문이 실행된다. 이것이 수업에서 배운 if문의 or 효과다. 3과 일치하는 case가 있으므로 default(그 외)로 가지 않고, switch는 일치하는 case를 찾아 실행하므로 아무것도 안 나오는 일도 없다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은? (수업에서 실습한 환경 기준으로 int는 4바이트다)",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE\n};\n\nint main()\n{\n    KOOPA_PATTERN eKoopa = IDLE;\n\n    cout << sizeof(KOOPA_PATTERN) << \" \" << sizeof(eKoopa) << \" \" << sizeof(IDLE) << endl;\n    return 0;\n}",
+      "choices": [
+        "1 1 1",
+        "7 7 7",
+        "4 4 4",
+        "4 1 7"
+      ],
+      "answer": 2,
+      "explain": "기반 자료형을 지정하지 않은 enum은 int를 기준으로 하므로 자료형(KOOPA_PATTERN), 그 자료형의 변수(eKoopa), 멤버(IDLE) 모두 sizeof가 4로 나온다. 이는 수업 파일에서 직접 출력해 확인한 결과와 같다. 7은 멤버의 개수일 뿐 sizeof와는 관계가 없다. sizeof는 메모리 크기를 재는 것이지 멤버 수나 값을 세는 것이 아니라는 점을 구분하자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력은? (수업에서 실습한 환경 기준으로 int는 4바이트, char는 1바이트다)",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum NUMBER : char\n{\n    ONE = 1,\n    TWO,\n    THREE,\n    FOUR,\n    FIVE\n};\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE\n};\n\nint main()\n{\n    cout << sizeof(NUMBER) << \" \" << sizeof(KOOPA_PATTERN) << endl;\n    return 0;\n}",
+      "choices": [
+        "4 4",
+        "1 4",
+        "1 1",
+        "2 4"
+      ],
+      "answer": 1,
+      "explain": "NUMBER는 : char로 기반 자료형을 char로 지정했으므로 크기가 1바이트다. 반면 KOOPA_PATTERN은 기반 자료형을 지정하지 않아 int 기준인 4바이트다. 둘 다 4라고 답하면 : char 지정의 효과를 놓친 것이고, 둘 다 1이라고 답하면 기본이 int라는 사실을 놓친 것이다. 기반 자료형 지정은 enum이 차지하는 메모리 크기를 바꾸는 문법이라는 것이 핵심이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력은?",
+      "code": "#include <iostream>\n#define Sum(_1Param, _2Param) (_1Param + _2Param)\nusing std::cout;\nusing std::endl;\n\nenum NUMBER\n{\n    ONE = 1,\n    TWO,\n    THREE,\n    FOUR,\n    FIVE\n};\n\nint main()\n{\n    int iNumber = Sum(1, 1) * 2;\n\n    switch (iNumber)\n    {\n    case ONE:\n        cout << \"1입니다\" << endl;\n        break;\n    case TWO:\n        cout << \"2입니다\" << endl;\n        break;\n    case THREE:\n        cout << \"3입니다\" << endl;\n        break;\n    case FOUR:\n        cout << \"4입니다\" << endl;\n        break;\n    default:\n        cout << \"그 외\" << endl;\n        break;\n    }\n    return 0;\n}",
+      "choices": [
+        "2입니다",
+        "3입니다",
+        "4입니다",
+        "그 외"
+      ],
+      "answer": 2,
+      "explain": "매크로 Sum은 (_1Param + _2Param)처럼 괄호로 감싸져 있어서 Sum(1, 1) * 2는 (1 + 1) * 2 = 4로 계산된다. 따라서 case FOUR(4)에 걸려 4입니다가 출력된다. 만약 매크로가 괄호 없이 _1Param + _2Param이었다면 1 + 1 * 2 = 3이 되어 결과가 달라졌을 것이다. 매크로는 단순 글자 치환이므로 괄호가 결과를 좌우한다는 점, 그리고 ONE = 1로 시작한 enum이라 FOUR가 4라는 점이 함께 쓰인 문제다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드는 컴파일 에러가 난다. 그 이유로 가장 알맞은 것은?",
+      "code": "#include <iostream>\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE\n};\n\nint main()\n{\n    KOOPA_PATTERN eKoopa = IDLE;\n\n    eKoopa = 2;    // 이 줄에서 에러!\n    return 0;\n}",
+      "choices": [
+        "2는 KOOPA_PATTERN의 멤버 값 범위를 벗어나기 때문이다",
+        "eKoopa가 const가 아니어서 값을 바꿀 수 없기 때문이다",
+        "enum 변수는 선언할 때 한 번만 값을 넣을 수 있기 때문이다",
+        "int 값은 enum 변수에 그대로 대입할 수 없고, DIE 같은 enum 멤버를 대입해야 하기 때문이다"
+      ],
+      "answer": 3,
+      "explain": "C++에서 int 값 2를 enum 자료형 변수에 그대로 대입하는 것은 허용되지 않아서 eKoopa = DIE;처럼 enum 멤버를 대입해야 한다. 2는 사실 DIE의 값이라 범위를 벗어난 것도 아닌데 에러가 나는 것이 포인트다. eKoopa는 const가 아니므로 값 변경 자체는 가능하며, 실제로 수업 파일에서도 IDLE로 초기화한 뒤 eKoopa = DIE;로 다시 대입했다. enum이 int와 구분되는 별도의 자료형이기 때문에 생기는 규칙이다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드는 컴파일 에러가 난다. 그 이유로 가장 알맞은 것은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iValue = 3;\n    int iNumber = 3;\n\n    switch (iNumber)\n    {\n    case iValue:    // 이 줄에서 에러!\n        cout << \"3입니다\" << endl;\n        break;\n    default:\n        break;\n    }\n    return 0;\n}",
+      "choices": [
+        "switch의 조건에는 int형 변수를 쓸 수 없기 때문이다",
+        "case 라벨에는 컴파일 시점에 값이 정해진 상수만 쓸 수 있는데, iValue는 일반 변수이기 때문이다",
+        "case가 하나뿐일 때는 반드시 default를 먼저 써야 하기 때문이다",
+        "switch 안에서는 다른 변수의 이름을 쓸 수 없기 때문이다"
+      ],
+      "answer": 1,
+      "explain": "case 라벨은 컴파일 시점에 값이 확정된 상수여야 하는데 iValue는 실행 중 값이 바뀔 수 있는 일반 변수라서 에러가 난다. iValue를 const int iValue = 3;으로 바꾸면 수업 파일의 case Three처럼 정상적으로 쓸 수 있다. switch의 조건(괄호 안)에는 int 변수를 넣는 것이 오히려 정상이므로 조건이 문제인 것은 아니다. case와 default의 순서는 문법 에러와 무관하다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "eKoopa를 KOOPA_PATTERN 자료형의 변수로 선언하려고 한다. 빈칸에 들어갈 알맞은 것은?",
+      "code": "#include <iostream>\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE\n};\n\nint main()\n{\n    ________ eKoopa = IDLE;\n    return 0;\n}",
+      "choices": [
+        "int",
+        "enum",
+        "KOOPA_PATTERN",
+        "IDLE"
+      ],
+      "answer": 2,
+      "explain": "enum으로 만든 KOOPA_PATTERN은 그 자체가 자료형 이름이므로, int iNumber처럼 KOOPA_PATTERN eKoopa라고 선언한다. enum이라는 키워드만 쓰는 것은 자료형 이름이 아니라서 안 되고, IDLE은 자료형이 아니라 멤버(값)이므로 선언 자리에 올 수 없다. 사용자 정의 자료형도 내장 자료형과 똑같이 '자료형이름 변수이름' 형식으로 변수를 선언한다는 것이 핵심이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드에서 컴파일 에러의 원인은?",
+      "code": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum NUMBER\n{\n    ONE = 1,\n    TWO,\n    THREE\n}\n\nint main()\n{\n    cout << TWO << endl;\n    return 0;\n}",
+      "choices": [
+        "enum 정의가 끝나는 중괄호 뒤에 세미콜론(;)이 빠졌다",
+        "ONE에만 값을 지정하고 나머지는 지정하지 않아서다",
+        "멤버가 3개뿐이라서 enum을 만들 수 없다",
+        "enum 이름 NUMBER를 대문자로 지어서다"
+      ],
+      "answer": 0,
+      "explain": "enum 정의는 닫는 중괄호 뒤에 반드시 세미콜론을 붙여야 하는데 이 코드에는 세미콜론이 없어서 에러가 난다. 일부 멤버에만 값을 지정하는 것은 정상 문법이고, 지정 이후부터 1씩 증가할 뿐이다. 멤버 개수에는 제한이 없으며, 이름을 대문자로 짓는 것은 오히려 수업 파일에서 쓰는 흔한 관례다. 자료형을 정의하는 문장은 세미콜론으로 끝난다는 것을 기억하자.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "GOLD의 값이 10이 되게 하려면 빈칸에 들어갈 값은?",
+      "code": "enum RANK\n{\n    BRONZE = ____,\n    SILVER,\n    GOLD\n};",
+      "choices": [
+        "10",
+        "7",
+        "9",
+        "8"
+      ],
+      "answer": 3,
+      "explain": "값을 지정한 이후부터 1씩 증가하므로 BRONZE = 8이면 SILVER는 9, GOLD는 10이 된다. BRONZE를 10으로 지정하면 GOLD는 12가 되어 버린다. 목표 멤버가 시작 멤버로부터 몇 번째 뒤에 있는지 세어서 거꾸로 계산하면 된다. GOLD는 BRONZE보다 2칸 뒤이므로 10 - 2 = 8이 답이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "수업 파일에 나온 다음 코드가 하는 일로 가장 알맞은 것은?",
+      "code": "KOOPA_PATTERN eKoopa = IDLE;\nint iKoopaHP = 100;\n\n// (플레이어의 공격으로 iKoopaHP가 줄어든다)\n\nif (iKoopaHP <= 0)\n{\n    eKoopa = DIE;\n}\n\nswitch (eKoopa)\n{\ncase DIE:\n    // PlayAnimation(\"Die Animation Sprite Directory\");\n    break;\n    // ... 다른 case들 ...\n}",
+      "choices": [
+        "HP가 0 이하가 되면 프로그램이 즉시 종료된다",
+        "DIE라는 새로운 변수를 만들어 남은 HP를 저장한다",
+        "HP가 0 이하가 되면 쿠파가 자동으로 HEAL 상태로 회복한다",
+        "HP가 0 이하가 되면 상태 변수를 DIE로 바꿔, switch에서 사망 처리를 하게 한다"
+      ],
+      "answer": 3,
+      "explain": "if문이 HP가 0 이하인지 검사해서 상태 변수 eKoopa를 DIE로 바꾸고, 이어지는 switch가 현재 상태에 맞는 처리(여기서는 사망 애니메이션 재생 자리)를 실행한다. 이것이 enum으로 게임 캐릭터의 상태를 관리하는 전형적인 패턴이다. 프로그램이 종료되는 코드는 없고, DIE는 새 변수가 아니라 KOOPA_PATTERN의 멤버(값 2)다. 상태 변경은 대입으로 직접 해야 하며 HEAL로 바뀌는 코드도 없다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "요일을 월요일(MON) = 1부터 일요일(SUN) = 7까지 순서대로 갖는 enum을 만들려고 한다. 올바른 정의는?",
+      "code": null,
+      "choices": [
+        "enum DAY { MON = 1, TUE, WED, THU, FRI, SAT, SUN };",
+        "enum DAY { MON, TUE, WED, THU, FRI, SAT, SUN };",
+        "enum DAY { MON = 7, TUE, WED, THU, FRI, SAT, SUN };",
+        "enum DAY { MON = 1, SUN = 7 };"
+      ],
+      "answer": 0,
+      "explain": "첫 멤버 MON에 1을 지정하면 이후 멤버들이 1씩 증가해 TUE = 2, ..., SUN = 7이 되어 요구를 정확히 만족한다. 값을 지정하지 않으면 MON이 0부터 시작해 SUN이 6이 되어 버린다. MON = 7로 지정하면 7부터 13까지가 되고, MON과 SUN만 정의하면 나머지 요일 멤버가 아예 없어서 쓸 수 없다. 수업 파일의 enum NUMBER가 ONE = 1로 시작한 것과 같은 원리다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "#define ZERO 0 같은 매크로 상수와 enum의 멤버(예: ATTACK = 0)의 차이로 가장 알맞은 것은?",
+      "code": null,
+      "choices": [
+        "둘은 완전히 같은 기능이라 아무 차이가 없다",
+        "enum 멤버는 실행 중에 값을 바꿀 수 있지만 #define 상수는 바꿀 수 없다",
+        "#define 상수는 switch의 case 라벨로 쓸 수 없다",
+        "#define은 전처리기가 코드의 글자를 단순 치환하는 것이고, enum 멤버는 새로 만든 자료형에 속한 이름 있는 상수다"
+      ],
+      "answer": 3,
+      "explain": "#define은 컴파일 전에 전처리기가 ZERO라는 글자를 0으로 바꿔치기하는 단순 치환이고, enum 멤버는 KOOPA_PATTERN 같은 새 자료형에 소속된 상수라서 그 자료형의 변수(eKoopa)를 선언하고 대입하는 데 쓸 수 있다. 이것이 enum이 '자료형을 만든다'는 말의 의미다. enum 멤버든 #define 상수든 실행 중에 값을 바꿀 수는 없다. 수업 파일에서 case ZERO:를 쓴 것처럼 #define 상수도 case 라벨로 쓸 수 있으므로 그 보기도 틀렸다.",
+      "difficulty": "심화"
+    }
+  ],
+  "coding": [
+    {
+      "title": "계절 열거형 만들기",
+      "prompt": "계절을 나타내는 enum SEASON을 만들고 값을 출력하는 프로그램을 작성하세요.\n\n요구사항:\n1. enum SEASON을 정의하고, 멤버는 SPRING, SUMMER, FALL, WINTER 순서로 넣는다. 값은 직접 지정하지 않는다(자동으로 0부터 시작).\n2. SEASON 자료형의 변수 eSeason을 선언하고 SUMMER로 초기화한다.\n3. 네 멤버의 값을 아래 형식으로 한 줄씩 출력하고, 마지막 줄에 eSeason의 값을 출력한다.\n\n출력 예시:\nSPRING: 0\nSUMMER: 1\nFALL: 2\nWINTER: 3\n현재 계절 번호: 1",
+      "starter": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\n// TODO: enum SEASON을 정의하세요 (SPRING, SUMMER, FALL, WINTER 순서)\n\nint main()\n{\n    // TODO: SEASON 자료형의 변수 eSeason을 SUMMER로 초기화하세요\n\n    // TODO: 각 멤버의 값을 출력 예시 형식대로 출력하세요\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "enum\\s+SEASON",
+          "desc": "enum SEASON 자료형을 정의했는지 확인"
+        },
+        {
+          "pattern": "SPRING\\s*,\\s*SUMMER\\s*,\\s*FALL\\s*,\\s*WINTER",
+          "desc": "멤버 4개를 SPRING, SUMMER, FALL, WINTER 순서로 정의했는지 확인"
+        },
+        {
+          "pattern": "SEASON\\s+\\w+\\s*=\\s*SUMMER",
+          "desc": "SEASON 자료형의 변수를 SUMMER로 초기화했는지 확인"
+        },
+        {
+          "pattern": "cout\\s*<<[\\s\\S]*SPRING",
+          "desc": "cout으로 enum 멤버의 값을 출력하는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nenum SEASON\n{\n    SPRING,\n    SUMMER,\n    FALL,\n    WINTER\n};\n\nint main()\n{\n    SEASON eSeason = SUMMER;\n\n    cout << \"SPRING: \" << SPRING << endl;\n    cout << \"SUMMER: \" << SUMMER << endl;\n    cout << \"FALL: \" << FALL << endl;\n    cout << \"WINTER: \" << WINTER << endl;\n    cout << \"현재 계절 번호: \" << eSeason << endl;\n\n    return 0;\n}",
+      "explain": "값을 지정하지 않은 enum은 첫 멤버부터 0, 1, 2, 3 순서로 값이 정해지므로 SPRING이 0, WINTER가 3이 된다. enum으로 만든 SEASON은 사용자 정의 자료형이므로 int처럼 SEASON eSeason = SUMMER; 형식으로 변수를 선언할 수 있다. cout으로 enum 멤버나 enum 변수를 출력하면 이름이 아니라 정수 값이 출력된다는 것도 이 문제의 확인 포인트다."
+    },
+    {
+      "title": "쿠파 상태 머신",
+      "prompt": "수업 파일의 쿠파 예제처럼, HP에 따라 보스의 상태를 바꾸고 switch로 처리하는 프로그램을 작성하세요.\n\n요구사항:\n1. enum KOOPA_PATTERN을 정의한다. 멤버는 ATTACK, TRACING, DIE, HIT, HEAL, STUN, IDLE 순서.\n2. cin으로 쿠파의 HP(정수)를 입력받는다.\n3. KOOPA_PATTERN 자료형의 변수 eKoopa를 IDLE로 초기화한다.\n4. if문으로 HP가 0 이하이면 eKoopa를 DIE로 바꾼다.\n5. switch (eKoopa)에서 case DIE이면 \"쿠파가 쓰러졌습니다.\", case IDLE이면 \"쿠파가 대기 중입니다.\"를 출력한다.\n\n입출력 예시 1) 입력: 30 -> 출력: 쿠파가 대기 중입니다.\n입출력 예시 2) 입력: -5 -> 출력: 쿠파가 쓰러졌습니다.",
+      "starter": "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::endl;\n\n// TODO: enum KOOPA_PATTERN을 정의하세요 (ATTACK, TRACING, DIE, HIT, HEAL, STUN, IDLE 순서)\n\nint main()\n{\n    int iKoopaHP = 0;\n\n    cout << \"쿠파의 HP를 입력하세요: \";\n    // TODO: cin으로 HP를 입력받으세요\n\n    // TODO: KOOPA_PATTERN 변수 eKoopa를 IDLE로 초기화하세요\n\n    // TODO: HP가 0 이하이면 eKoopa를 DIE로 바꾸세요\n\n    // TODO: switch문으로 eKoopa 상태에 따라 메시지를 출력하세요\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "enum\\s+KOOPA_PATTERN",
+          "desc": "enum KOOPA_PATTERN 자료형을 정의했는지 확인"
+        },
+        {
+          "pattern": "cin\\s*>>",
+          "desc": "cin으로 HP를 입력받는지 확인"
+        },
+        {
+          "pattern": "if\\s*\\([^)]*<=\\s*0",
+          "desc": "if문으로 HP가 0 이하인지 검사하는지 확인"
+        },
+        {
+          "pattern": "=\\s*DIE",
+          "desc": "조건을 만족하면 상태 변수에 DIE를 대입하는지 확인"
+        },
+        {
+          "pattern": "switch\\s*\\(",
+          "desc": "switch문으로 상태를 분기하는지 확인"
+        },
+        {
+          "pattern": "case\\s+DIE\\s*:[\\s\\S]*case\\s+IDLE\\s*:",
+          "desc": "case DIE와 case IDLE을 모두 처리하는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\nusing std::cin;\nusing std::cout;\nusing std::endl;\n\nenum KOOPA_PATTERN\n{\n    ATTACK,\n    TRACING,\n    DIE,\n    HIT,\n    HEAL,\n    STUN,\n    IDLE\n};\n\nint main()\n{\n    int iKoopaHP = 0;\n\n    cout << \"쿠파의 HP를 입력하세요: \";\n    cin >> iKoopaHP;\n\n    KOOPA_PATTERN eKoopa = IDLE;\n\n    if (iKoopaHP <= 0)\n    {\n        eKoopa = DIE;\n    }\n\n    switch (eKoopa)\n    {\n    case DIE:\n        cout << \"쿠파가 쓰러졌습니다.\" << endl;\n        break;\n    case IDLE:\n        cout << \"쿠파가 대기 중입니다.\" << endl;\n        break;\n    default:\n        break;\n    }\n\n    return 0;\n}",
+      "explain": "수업 파일의 쿠파 예제를 그대로 재현하는 문제다. 상태를 enum 변수 하나(eKoopa)로 관리하고, 조건(HP <= 0)에 따라 eKoopa = DIE;처럼 enum 멤버를 대입해 상태를 전환한다. 마지막에 switch (eKoopa)로 현재 상태에 맞는 처리를 실행하는 것이 게임 상태 머신의 기본 구조다. int 값 2가 아니라 반드시 DIE라는 멤버 이름을 대입해야 한다는 점이 enum의 핵심 규칙이다."
+    },
+    {
+      "title": "세 가지 상수를 쓰는 숫자 판정기",
+      "prompt": "수업 파일처럼 #define 상수, enum 멤버, const int 상수를 모두 case 라벨로 사용하는 숫자 판정 프로그램을 작성하세요.\n\n요구사항:\n1. #define ZERO 0 매크로 상수를 정의한다.\n2. enum NUMBER를 정의하고 ONE = 1부터 시작해 TWO, THREE, FOUR, FIVE가 2~5가 되게 한다.\n3. main 안에 const int Three = 3; 상수를 선언한다.\n4. cin으로 정수를 입력받아 switch로 판정한다.\n   - case ZERO: \"입력한 숫자는 0입니다.\"\n   - case ONE: \"입력한 숫자는 1입니다.\"\n   - case TWO와 case Three는 붙여 써서(fall-through) 둘 다 \"입력한 숫자는 2 or 3입니다.\"\n   - case FOUR: \"입력한 숫자는 4입니다.\"\n   - case FIVE: \"입력한 숫자는 5입니다.\"\n   - default: \"그 외의 숫자입니다.\"\n\n입출력 예시 1) 입력: 3 -> 출력: 입력한 숫자는 2 or 3입니다.\n입출력 예시 2) 입력: 0 -> 출력: 입력한 숫자는 0입니다.\n입출력 예시 3) 입력: 9 -> 출력: 그 외의 숫자입니다.",
+      "starter": "#include <iostream>\n\n// TODO: #define으로 ZERO 매크로 상수(값 0)를 정의하세요\n\nusing std::cin;\nusing std::cout;\nusing std::endl;\n\n// TODO: enum NUMBER를 정의하세요 (ONE = 1부터 FIVE까지)\n\nint main()\n{\n    int iNumber = 0;\n\n    cout << \"Input Number: \";\n    // TODO: cin으로 숫자를 입력받으세요\n\n    // TODO: const int Three 상수를 3으로 선언하세요\n\n    // TODO: switch문에서 case ZERO, case ONE, case TWO/Three(fall-through),\n    //       case FOUR, case FIVE, default를 처리하세요\n\n    return 0;\n}",
+      "checks": [
+        {
+          "pattern": "#define\\s+ZERO\\s+0",
+          "desc": "#define으로 ZERO 매크로 상수를 정의했는지 확인"
+        },
+        {
+          "pattern": "enum\\s+NUMBER[\\s\\S]*ONE\\s*=\\s*1",
+          "desc": "enum NUMBER를 정의하고 ONE = 1로 시작 값을 지정했는지 확인"
+        },
+        {
+          "pattern": "const\\s+int\\s+Three\\s*=\\s*3",
+          "desc": "const int 상수 Three를 선언했는지 확인"
+        },
+        {
+          "pattern": "case\\s+ZERO\\s*:",
+          "desc": "#define 상수를 case 라벨로 사용했는지 확인"
+        },
+        {
+          "pattern": "case\\s+TWO\\s*:\\s*case\\s+Three\\s*:",
+          "desc": "case TWO와 case Three를 붙여 fall-through(or 효과)를 만들었는지 확인"
+        },
+        {
+          "pattern": "default\\s*:",
+          "desc": "default로 그 외의 숫자를 처리하는지 확인"
+        }
+      ],
+      "solution": "#include <iostream>\n\n#define ZERO 0\n\nusing std::cin;\nusing std::cout;\nusing std::endl;\n\nenum NUMBER\n{\n    ONE = 1,\n    TWO,\n    THREE,\n    FOUR,\n    FIVE\n};\n\nint main()\n{\n    int iNumber = 0;\n\n    cout << \"Input Number: \";\n    cin >> iNumber;\n\n    const int Three = 3;\n\n    switch (iNumber)\n    {\n    case ZERO:\n        cout << \"입력한 숫자는 0입니다.\" << endl;\n        break;\n    case ONE:\n        cout << \"입력한 숫자는 1입니다.\" << endl;\n        break;\n    case TWO:\n    case Three:\n        cout << \"입력한 숫자는 2 or 3입니다.\" << endl;\n        break;\n    case FOUR:\n        cout << \"입력한 숫자는 4입니다.\" << endl;\n        break;\n    case FIVE:\n        cout << \"입력한 숫자는 5입니다.\" << endl;\n        break;\n    default:\n        cout << \"그 외의 숫자입니다.\" << endl;\n        break;\n    }\n\n    return 0;\n}",
+      "explain": "수업 파일의 첫 번째 switch문을 직접 완성해 보는 문제다. case 라벨에는 컴파일 시점 상수만 올 수 있는데, #define 매크로 상수(ZERO), enum 멤버(ONE~FIVE), const int 상수(Three) 세 가지가 모두 이 조건을 만족한다는 것을 몸으로 익히는 것이 목표다. case TWO: 바로 아래에 break 없이 case Three:를 이어 쓰면 2와 3이 같은 출력문을 실행하는 fall-through, 즉 if문의 or 효과가 난다. ONE = 1로 시작 값을 지정하면 이후 멤버가 1씩 증가해 FIVE가 5가 된다는 enum의 값 규칙도 함께 쓰인다."
+    }
+  ]
+}

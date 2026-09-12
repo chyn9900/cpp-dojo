@@ -1,0 +1,294 @@
+{
+  "id": "g10",
+  "num": 10,
+  "group": "문법",
+  "title": "switch 문",
+  "srcFile": "10. Switch.cpp",
+  "questions": [
+    {
+      "q": "수업 자료에서 switch 문은 어떤 종류의 문장(Statement)으로 분류되는가?",
+      "code": null,
+      "choices": ["반복문(Iteration Statement)", "선택문(Selection Statement)", "점프문(Jump Statement)", "표현식문(Expression Statement)"],
+      "answer": 1,
+      "explain": "switch문은 if문과 마찬가지로 조건에 따라 실행할 코드를 '선택'하는 Selection Statement(선택문)의 한 종류입니다. 반복문(while, for)은 코드를 여러 번 반복 실행하는 구문이므로 switch와는 역할이 다릅니다. switch 안에서 쓰는 break는 점프에 해당하지만, switch문 자체의 분류는 선택문입니다. if문이 조건식의 참/거짓으로 갈래를 나눈다면, switch는 정수 값에 따라 여러 갈래로 나눕니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "switch (expression)에서 expression 자리에 올 수 있는 값의 타입으로 옳은 것은?",
+      "code": null,
+      "choices": ["double 같은 실수형도 가능하다", "어떤 타입이든 모두 가능하다", "정수형이어야 한다", "문자열도 가능하다"],
+      "answer": 2,
+      "explain": "수업 자료에 나온 대로 switch의 expression 자리에는 정수형 값이 와야 합니다. double 같은 실수형을 넣으면 컴파일 에러가 발생합니다. 문자열도 사용할 수 없으며, char는 문자처럼 보이지만 내부적으로 정수형이라 사용할 수 있습니다. 통상적으로 이 자리에 변수나 함수의 반환 값 같은 정수 표현식을 넣어 사용합니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "case 레이블 뒤에 올 수 있는 값으로 옳은 것은?",
+      "code": null,
+      "choices": ["정수 리터럴 또는 const 상수", "값이 바뀔 수 있는 일반 변수", "3.14 같은 실수 리터럴", "0 ~ 9 같은 범위 표현"],
+      "answer": 0,
+      "explain": "case 뒤에는 'case 정수:' 형태로 리터럴 숫자(Literal Number)나 상수(Constant)만 올 수 있습니다. 값이 바뀔 수 있는 일반 변수는 컴파일 시점에 값이 정해지지 않으므로 case에 쓸 수 없습니다. 실수 리터럴은 switch 자체가 정수형만 다루므로 불가능하고, 0 ~ 9 같은 범위 표현 문법도 존재하지 않습니다. 범위를 다루고 싶다면 iNumber / 10처럼 식을 가공해서 하나의 정수 값으로 만들어야 합니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "switch문 안에서 break의 역할로 옳은 것은?",
+      "code": null,
+      "choices": ["프로그램 전체를 종료한다", "다음 case로 이동시킨다", "main 함수를 종료한다", "실행 중인 switch 블록을 빠져나간다"],
+      "answer": 3,
+      "explain": "break는 실행 중인 switch 블록을 즉시 빠져나가게 합니다. break가 없으면 다음 case의 코드까지 이어서 실행되기 때문에, 각 case의 끝에는 보통 break를 넣습니다. 프로그램이나 main 함수를 종료하는 것은 return의 역할이지 break가 아닙니다. '다음 case로 이동'은 오히려 break를 생략했을 때 일어나는 일입니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "switch문의 default는 if ~ else 구문의 무엇과 같은 효과를 내는가?",
+      "code": null,
+      "choices": ["if", "else", "else if", "조건식(condition)"],
+      "answer": 1,
+      "explain": "default는 expression과 일치하는 case를 하나도 찾지 못했을 때 실행되므로, if ~ else 구문에서 모든 조건이 거짓일 때 실행되는 else와 같은 효과입니다. 수업 파일 주석에도 default 옆에 'if문 else 효과'라고 적혀 있습니다. else if는 또 다른 조건을 검사하는 것이므로 개별 case 쪽에 가깝습니다. default는 보통 switch의 마지막에 두고 예외적인 값을 처리하는 용도로 씁니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "아래처럼 case 2:와 case 3:을 연달아 쓰면 어떻게 동작하는가?",
+      "code": "switch (iNumber)\n{\ncase 2:\ncase 3:\n    cout << \"입력한 숫자는 2 or 3입니다.\" << endl;\n    break;\n}",
+      "choices": ["iNumber가 2 또는 3이면 같은 코드가 실행된다", "iNumber가 2일 때만 실행된다", "iNumber가 3일 때만 실행된다", "컴파일 에러가 발생한다"],
+      "answer": 0,
+      "explain": "case 2: 뒤에 코드 없이 바로 case 3:이 오면, 2가 들어와도 3이 들어와도 같은 코드가 실행됩니다. case 2:로 들어온 실행 흐름이 break를 만날 때까지 아래로 흐르기 때문입니다. 수업 파일에서도 이를 'if문 or 효과'라고 설명합니다. 2일 때만 또는 3일 때만 실행된다고 생각하면 이 흐름(fall-through)을 놓친 것입니다. 문법적으로 완전히 허용되는 코드이므로 컴파일 에러도 아닙니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "수업 자료의 설명에 따르면, switch문에서 case 구문의 역할은?",
+      "code": null,
+      "choices": ["조건식을 참/거짓으로 평가한다", "반복이 시작되는 지점을 표시한다", "실행이 시작될 위치를 알려주는 목적지(레이블) 역할을 한다", "변수를 새로 선언하는 역할을 한다"],
+      "answer": 2,
+      "explain": "수업 자료는 case 구문을 'switch(expression)이 실행될 때 실행되어야 할 구문이 있는 곳의 목적지 역할'이라고 설명합니다. 즉 case는 조건을 평가하는 것이 아니라, 점프해서 도착할 위치를 표시하는 레이블입니다. 조건식을 참/거짓으로 평가하는 것은 if문의 방식입니다. 반복 시작점 표시는 반복문과 관련된 개념이라 switch와 무관합니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "case 안에서 break를 생략하면 어떻게 되는가?",
+      "code": null,
+      "choices": ["컴파일 에러가 발생한다", "break를 만날 때까지 다음 case의 코드도 이어서 실행된다", "해당 case만 실행되고 자동으로 switch를 빠져나간다", "무조건 default로 점프한다"],
+      "answer": 1,
+      "explain": "break를 생략하면 해당 case의 코드를 실행한 뒤 멈추지 않고 그 아래 case의 코드까지 계속 실행됩니다(fall-through). 이것은 컴파일 에러가 아니라 문법적으로 허용되는 동작이며, case 2: case 3:처럼 일부러 활용하기도 합니다. 자동으로 switch를 빠져나가게 하는 것이 바로 break의 역할이므로, 생략하면 그 효과가 사라집니다. default로 점프하는 것이 아니라 바로 다음 줄로 흐른다는 점에 주의하세요.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "switch문의 case로 직접 표현할 수 없는 조건은?",
+      "code": null,
+      "choices": ["iNumber가 5와 같은지", "iNumber가 const 상수 MAX와 같은지", "iNumber가 문자 'A'와 같은지", "iNumber가 10 이상 19 이하인지(범위)"],
+      "answer": 3,
+      "explain": "case는 expression과 하나의 정수 값이 '일치'하는지만 검사할 수 있고, 10 이상 19 이하 같은 범위나 대소 비교는 직접 쓸 수 없습니다. 그래서 범위 검사는 기본적으로 if문이 적합합니다. 다만 수업 연습문제처럼 iNumber / 10 같은 정수 나눗셈으로 범위를 하나의 값으로 바꾸면 switch로도 처리할 수 있습니다. 'A' 같은 문자는 char가 정수형이므로 case에 쓸 수 있고, const 상수도 리터럴처럼 case에 올 수 있습니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "switch문이 expression과 일치하는 case를 찾았을 때, 코드는 어디까지 실행되는가?",
+      "code": null,
+      "choices": ["해당 case부터 break를 만날 때까지 실행된다", "해당 case의 첫 한 줄만 실행된다", "일치 여부와 상관없이 switch 블록 전체가 실행된다", "해당 case부터 default 직전까지 항상 실행된다"],
+      "answer": 0,
+      "explain": "switch는 expression 값과 일치하는 case 레이블을 찾아 그 지점부터 break를 만날 때까지 실행합니다. 한 줄만 실행되는 것이 아니라 break 전까지의 모든 문장이 실행됩니다. 중간에 break가 있으면 default 직전까지 가지 않고 바로 switch를 빠져나갑니다. '어디서 멈추는가'를 break가 결정한다는 것이 switch 동작의 핵심입니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "이 코드를 컴파일하면 어떻게 되는가?",
+      "code": "double dNumber = 3.14;\nswitch (dNumber)\n{\ncase 3:\n    cout << \"three\" << endl;\n    break;\ndefault:\n    cout << \"etc\" << endl;\n    break;\n}",
+      "choices": ["3.14가 3으로 변환되어 three가 출력된다", "일치하는 case가 없어 etc가 출력된다", "컴파일 에러가 발생한다", "경고만 뜨고 three가 출력된다"],
+      "answer": 2,
+      "explain": "switch의 expression에는 정수형만 올 수 있으므로 double 변수를 넣으면 컴파일 에러가 발생합니다. 실수가 알아서 3으로 변환되어 실행될 것이라고 생각하기 쉽지만, switch는 그런 변환을 허용하지 않습니다. 경고 수준이 아니라 아예 컴파일이 되지 않는 에러입니다. 실수 값의 비교나 범위 검사가 필요하다면 if문을 사용해야 합니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "이 코드를 컴파일하면 어떻게 되는가?",
+      "code": "int x = 1;\nswitch (x)\n{\ncase 1:\n    cout << \"first\" << endl;\n    break;\ncase 1:\n    cout << \"second\" << endl;\n    break;\n}",
+      "choices": ["첫 번째 case 1만 실행되어 first가 출력된다", "두 case가 모두 실행된다", "마지막 case 1이 우선되어 second가 출력된다", "case 값이 중복되어 컴파일 에러가 발생한다"],
+      "answer": 3,
+      "explain": "하나의 switch 안에서 같은 값의 case 레이블을 두 번 쓰면 컴파일 에러입니다. case는 점프 목적지인데 같은 값의 목적지가 두 개면 어디로 가야 할지 정할 수 없기 때문입니다. 첫 번째나 마지막 case가 우선된다는 규칙은 존재하지 않습니다. 여러 값이 같은 코드를 실행하게 하려면 case 1: case 2: 처럼 서로 다른 값을 연달아 쓰는 방식을 사용해야 합니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 3;\nswitch (iNumber)\n{\ncase 0:\n    cout << \"입력한 숫자는 0입니다.\" << endl;\n    break;\ncase 1:\n    cout << \"입력한 숫자는 1입니다.\" << endl;\n    break;\ncase 2:\ncase 3:\n    cout << \"입력한 숫자는 2 or 3입니다.\" << endl;\n    break;\ndefault:\n    cout << \"그 외의 숫자입니다.\" << endl;\n    break;\n}",
+      "choices": ["입력한 숫자는 3입니다.", "입력한 숫자는 2입니다.", "입력한 숫자는 2 or 3입니다.", "그 외의 숫자입니다."],
+      "answer": 2,
+      "explain": "iNumber가 3이므로 case 3: 레이블로 점프합니다. case 2:와 case 3:이 연달아 있고 그 아래 코드를 공유하므로 \"입력한 숫자는 2 or 3입니다.\"가 출력됩니다. '입력한 숫자는 3입니다.'라는 별도의 case는 이 코드에 존재하지 않습니다. 이것이 수업 파일에서 설명한 연속 case의 or 효과입니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 7;\nswitch (iNumber)\n{\ncase 1:\n    cout << \"입력한 숫자는 1입니다.\" << endl;\n    break;\ncase 2:\ncase 3:\n    cout << \"입력한 숫자는 2 or 3입니다.\" << endl;\n    break;\ncase 4:\n    cout << \"입력한 숫자는 4입니다.\" << endl;\n    break;\ndefault:\n    cout << \"그 외의 숫자입니다.\" << endl;\n    break;\n}",
+      "choices": ["아무것도 출력되지 않는다", "컴파일 에러가 발생한다", "입력한 숫자는 7입니다.", "그 외의 숫자입니다."],
+      "answer": 3,
+      "explain": "7과 일치하는 case가 없으므로 default 레이블이 실행되어 \"그 외의 숫자입니다.\"가 출력됩니다. 일치하는 case가 없어도 컴파일 에러가 아니며, default가 있으면 default가 실행되고 없으면 아무것도 실행되지 않습니다. 수업 파일은 이를 'if문 else 효과'라고 설명합니다. default 덕분에 예상 밖의 입력도 안전하게 처리할 수 있습니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int x = 1;\nswitch (x)\n{\ncase 1:\n    cout << \"one \";\ncase 2:\n    cout << \"two \";\n    break;\ncase 3:\n    cout << \"three \";\n    break;\n}",
+      "choices": ["one", "one two", "one two three", "two"],
+      "answer": 1,
+      "explain": "x가 1이므로 case 1:부터 실행되어 \"one \"이 출력되는데, case 1에는 break가 없습니다. 그래서 멈추지 않고 case 2:의 코드까지 이어져 \"two \"가 출력되고, 거기서 break를 만나 switch를 빠져나갑니다(fall-through). \"three \"까지 출력된다고 생각했다면 case 2 끝의 break를 놓친 것입니다. break의 위치가 실행 범위를 결정한다는 점을 기억하세요.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 7;\nswitch (iNumber % 2)\n{\ncase 0:\n    cout << \"짝수\" << endl;\n    break;\ncase 1:\n    cout << \"홀수\" << endl;\n    break;\n}",
+      "choices": ["홀수", "짝수", "아무것도 출력되지 않는다", "컴파일 에러가 발생한다"],
+      "answer": 0,
+      "explain": "iNumber % 2는 7을 2로 나눈 나머지이므로 1입니다. 따라서 case 1:로 점프해 \"홀수\"가 출력됩니다. switch의 expression 자리에는 변수뿐 아니라 이렇게 정수 결과를 내는 식도 올 수 있습니다. 나머지 연산 %는 짝수/홀수 판별처럼 값을 몇 가지 경우로 나눌 때 switch와 잘 어울립니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int iNumber = 25;\nswitch (iNumber / 10)\n{\ncase 0:\n    cout << \"0 ~ 9 사이의 숫자입니다.\" << endl;\n    break;\ncase 1:\n    cout << \"10 ~ 19 사이의 숫자입니다.\" << endl;\n    break;\ncase 2:\n    cout << \"20 ~ 29 사이의 숫자입니다.\" << endl;\n    break;\ndefault:\n    cout << \"그 외의 숫자입니다.\" << endl;\n    break;\n}",
+      "choices": ["0 ~ 9 사이의 숫자입니다.", "그 외의 숫자입니다.", "20 ~ 29 사이의 숫자입니다.", "10 ~ 19 사이의 숫자입니다."],
+      "answer": 2,
+      "explain": "25 / 10은 정수 나눗셈이라 소수점이 버려져 2가 됩니다. 따라서 case 2:가 실행되어 \"20 ~ 29 사이의 숫자입니다.\"가 출력됩니다. 이렇게 정수 나눗셈으로 범위를 하나의 값으로 압축하는 것이 if ~ else 범위 검사를 switch로 변환하는 핵심 기법입니다. 2.5라는 실수가 된다고 생각했다면 정수 나눗셈 규칙을 다시 확인하세요.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "위와 같은 범위 구분 switch문에서 iNumber가 9일 때 출력 결과는?",
+      "code": "int iNumber = 9;\nswitch (iNumber / 10)\n{\ncase 0:\n    cout << \"0 ~ 9 사이의 숫자입니다.\" << endl;\n    break;\ncase 1:\n    cout << \"10 ~ 19 사이의 숫자입니다.\" << endl;\n    break;\ndefault:\n    cout << \"그 외의 숫자입니다.\" << endl;\n    break;\n}",
+      "choices": ["0 ~ 9 사이의 숫자입니다.", "그 외의 숫자입니다.", "10 ~ 19 사이의 숫자입니다.", "컴파일 에러가 발생한다"],
+      "answer": 0,
+      "explain": "9 / 10은 정수 나눗셈이므로 0.9가 아니라 0입니다. 따라서 case 0:이 실행되어 \"0 ~ 9 사이의 숫자입니다.\"가 출력됩니다. 정수끼리의 나눗셈은 항상 소수점 이하를 버린다는 것이 핵심입니다. 일치하는 case가 없을 것이라 생각해 default를 골랐다면 9 / 10을 실수 나눗셈으로 계산한 것입니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드에서 iNumber가 -5일 때 출력 결과는?",
+      "code": "int iNumber = -5;\nswitch (iNumber / 10)\n{\ncase 0:\n    cout << \"0 ~ 9 사이의 숫자입니다.\" << endl;\n    break;\ncase 1:\n    cout << \"10 ~ 19 사이의 숫자입니다.\" << endl;\n    break;\ndefault:\n    cout << \"그 외의 숫자입니다.\" << endl;\n    break;\n}",
+      "choices": ["그 외의 숫자입니다.", "0 ~ 9 사이의 숫자입니다.", "컴파일 에러가 발생한다", "10 ~ 19 사이의 숫자입니다."],
+      "answer": 1,
+      "explain": "C++의 정수 나눗셈은 0 방향으로 소수점을 버리므로 -5 / 10은 -1이 아니라 0입니다. 그래서 case 0:이 실행되어 \"0 ~ 9 사이의 숫자입니다.\"가 출력됩니다. 원래의 if ~ else 버전이라면 0 <= iNumber 조건이 거짓이라 else(그 외)로 갔을 텐데, switch 변환 버전은 음수를 잘못 분류하는 것입니다. if문을 switch로 바꿀 때는 이런 경계값과 음수 입력에서 동작이 같은지 반드시 검토해야 합니다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int kor = 90, eng = 80, math = 70;\nint avg = (kor + eng + math) / 3;\nswitch (avg / 10)\n{\ncase 10:\ncase 9:\n    cout << \"A\" << endl;\n    break;\ncase 8:\n    cout << \"B\" << endl;\n    break;\ncase 7:\n    cout << \"C\" << endl;\n    break;\ndefault:\n    cout << \"F\" << endl;\n    break;\n}",
+      "choices": ["A", "B", "C", "F"],
+      "answer": 1,
+      "explain": "(90 + 80 + 70) / 3 = 240 / 3 = 80이므로 avg는 80입니다. avg / 10은 8이 되어 case 8:이 실행되고 \"B\"가 출력됩니다. 90점 이상만 A이므로 평균 80은 A가 아닙니다. 평균을 10으로 나눠 등급 구간 하나를 case 하나로 만드는 것이 수업 파일 마지막 연습문제의 핵심입니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "int kor = 90, eng = 90, math = 89;\nint avg = (kor + eng + math) / 3;\nswitch (avg / 10)\n{\ncase 10:\ncase 9:\n    cout << \"A\" << endl;\n    break;\ncase 8:\n    cout << \"B\" << endl;\n    break;\ncase 7:\n    cout << \"C\" << endl;\n    break;\ndefault:\n    cout << \"F\" << endl;\n    break;\n}",
+      "choices": ["A", "F", "B", "C"],
+      "answer": 2,
+      "explain": "(90 + 90 + 89) = 269이고 269 / 3은 정수 나눗셈이라 89.67이 아니라 89입니다. 89 / 10 = 8이므로 case 8:이 실행되어 \"B\"가 출력됩니다. 실수로 계산해 89.67을 90으로 반올림하면 A로 착각하기 쉽습니다. 정수 나눗셈은 반올림이 아니라 버림이라는 점이 이 문제의 함정입니다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "세 과목이 모두 100점일 때 다음 코드의 출력 결과는?",
+      "code": "int kor = 100, eng = 100, math = 100;\nint avg = (kor + eng + math) / 3;\nswitch (avg / 10)\n{\ncase 10:\ncase 9:\n    cout << \"A\" << endl;\n    break;\ncase 8:\n    cout << \"B\" << endl;\n    break;\ndefault:\n    cout << \"F\" << endl;\n    break;\n}",
+      "choices": ["A", "F", "컴파일 에러가 발생한다", "B"],
+      "answer": 0,
+      "explain": "avg는 (100 + 100 + 100) / 3 = 100이고 avg / 10 = 10입니다. case 10:에는 코드가 없으므로 실행 흐름이 바로 아래 case 9:의 코드로 이어져 \"A\"가 출력됩니다. 이것이 연속 case를 이용한 or 효과로, avg / 10이 9든 10이든 A가 되게 만든 것입니다. 만약 case 10:이 없었다면 일치하는 case가 없어 default의 F가 출력되는 버그가 생깁니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "수업 파일에 나온 다음 코드는 컴파일되지 않는다. 그 이유는?",
+      "code": "int x = 0;\nswitch (x)\n{\ncase 1:\n    int a = 10;\n    cout << a << endl;\n    break;\ncase 2:\n    a = 10;\n    cout << \"two\" << endl;\n    break;\n}",
+      "choices": ["x가 0이라 어떤 case와도 일치하지 않기 때문", "case 안에서는 어떤 변수도 절대 선언할 수 없기 때문", "break가 두 번 이상 나올 수 없기 때문", "case 2:로 점프할 때 a의 초기화(int a = 10)를 건너뛰게 되기 때문"],
+      "answer": 3,
+      "explain": "switch의 점프는 초기화가 있는 변수 선언을 건너뛰어 그 변수가 유효한 영역 안으로 들어갈 수 없습니다(ill-formed). x가 2라면 case 2:로 바로 점프하는데, 이때 int a = 10;의 초기화가 실행되지 않은 채 a가 살아 있는 영역에 들어가 a를 쓰게 되므로 컴파일 에러가 납니다. 일치하는 case가 없는 것 자체는 에러가 아니고, case마다 break를 쓰는 것도 정상입니다. 변수 선언이 필요하면 해당 case의 코드를 중괄호 { }로 감싸 범위를 제한하면 됩니다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "다음 코드는 case 1: 안의 초기화가 있는 변수 선언 때문에 컴파일 에러가 난다. 올바른 해결 방법은?",
+      "code": "switch (x)\n{\ncase 1:\n    int a = 10;\n    cout << a << endl;\n    break;\ncase 2:\n    cout << \"two\" << endl;\n    break;\n}",
+      "choices": ["case 1: 의 코드 전체를 중괄호 { }로 감싸 변수의 범위를 제한한다", "case 2: 에서 int a = 10;을 한 번 더 선언한다", "break;를 모두 제거한다", "switch 앞에 default를 추가한다"],
+      "answer": 0,
+      "explain": "case 1: 의 코드를 중괄호 { }로 감싸면 변수 a의 범위(scope)가 그 블록 안으로 제한되어, case 2:로 점프해도 a의 영역을 침범하지 않으므로 컴파일됩니다. case 2:에서 다시 선언하는 것은 근본 해결이 아니며 상황에 따라 또 다른 에러를 만듭니다. break를 제거하면 fall-through가 생겨 동작만 달라질 뿐 에러는 그대로입니다. default 추가 여부는 이 에러와 아무 관련이 없습니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 코드의 빈칸(____)에 들어갈 기호는?",
+      "code": "switch (iNumber)\n{\ncase 1____\n    cout << \"one\" << endl;\n    break;\n}",
+      "choices": ["; (세미콜론)", ": (콜론)", ", (쉼표)", "= (등호)"],
+      "answer": 1,
+      "explain": "case 레이블은 'case 정수:' 형태로 반드시 콜론(:)으로 끝납니다. 세미콜론(;)은 문장의 끝을 의미하는 기호라 레이블 문법에 맞지 않습니다. default 뒤에도 마찬가지로 콜론을 붙입니다. 콜론은 이 지점이 점프해서 도착하는 목적지 레이블임을 나타내는 기호입니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드가 컴파일되지 않는 이유는?",
+      "code": "int iNumber = 5;\nint target = 5;\nswitch (iNumber)\n{\ncase target:\n    cout << \"일치!\" << endl;\n    break;\ndefault:\n    cout << \"불일치\" << endl;\n    break;\n}",
+      "choices": ["switch의 괄호에 변수 iNumber를 넣었기 때문", "default에 break가 있기 때문", "case 레이블에 일반 변수 target을 사용했기 때문", "case가 하나뿐이기 때문"],
+      "answer": 2,
+      "explain": "case 레이블에는 리터럴 숫자나 const 상수처럼 컴파일 시점에 값이 정해진 것만 올 수 있는데, target은 값이 바뀔 수 있는 일반 변수라 컴파일 에러가 납니다. const int target = 5; 로 상수로 만들면 case에 사용할 수 있습니다. 반면 switch의 괄호(expression)에 변수를 넣는 것은 오히려 가장 일반적인 사용법이므로 iNumber는 문제가 없습니다. default에 break를 두는 것도 정상적인 코드입니다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "일치하는 case가 없을 때 실행되도록, 다음 코드의 빈칸(________)에 들어갈 키워드는?",
+      "code": "switch (iNumber)\n{\ncase 0:\n    cout << \"zero\" << endl;\n    break;\n________:\n    cout << \"그 외의 숫자입니다.\" << endl;\n    break;\n}",
+      "choices": ["else", "otherwise", "case else", "default"],
+      "answer": 3,
+      "explain": "일치하는 case가 없을 때 실행될 코드는 default: 레이블에 둡니다. else는 if문에서 쓰는 키워드이고 switch 안에서는 쓸 수 없습니다. otherwise나 case else 같은 문법은 C++에 존재하지 않습니다. default도 다른 case처럼 콜론(:)으로 끝나고 보통 break로 마무리합니다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "0~9 / 10~19 / 20~29 범위를 구분하는 if ~ else if 구문을 switch문으로 바꿀 때, switch의 expression으로 가장 적절한 것은?",
+      "code": null,
+      "choices": ["iNumber % 10", "iNumber / 10", "iNumber", "iNumber * 10"],
+      "answer": 1,
+      "explain": "iNumber / 10을 하면 정수 나눗셈 덕분에 0~9는 0, 10~19는 1, 20~29는 2로, 각 범위가 하나의 정수 값으로 압축되어 case 0, 1, 2로 처리할 수 있습니다. iNumber % 10은 일의 자리 숫자를 구하는 것이라 범위 구분에 쓸 수 없습니다. iNumber를 그대로 쓰면 범위마다 case를 10개씩, 총 30개나 나열해야 해서 비효율적입니다. 곱하기 10은 값의 구간을 압축하는 것이 아니라 오히려 넓히므로 도움이 되지 않습니다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "세 과목 평균이 100점(avg = 100)일 때, 다음 코드의 출력과 그 이유로 옳은 것은?",
+      "code": "int avg = 100;\nswitch (avg / 10)\n{\ncase 9:\n    cout << \"A\" << endl;\n    break;\ncase 8:\n    cout << \"B\" << endl;\n    break;\ndefault:\n    cout << \"F\" << endl;\n    break;\n}",
+      "choices": ["A — 90점 이상이므로 정상 동작한다", "B — 100 / 10이 반올림되어 9가 되기 때문", "컴파일 에러 — case 10이 없기 때문", "F — 100 / 10은 10인데 case 10이 없어 default로 가기 때문"],
+      "answer": 3,
+      "explain": "avg가 100이면 avg / 10은 10인데, 이 switch에는 case 10:이 없으므로 default로 가서 \"F\"가 출력됩니다. 90점 이상은 A여야 하므로 만점 학생이 F를 받는 심각한 논리 버그입니다. 일치하는 case가 없는 것은 컴파일 에러가 아니라 그냥 default가 실행될 뿐입니다. case 10: case 9: 처럼 연속 case로 붙여 쓰면 10(만점)과 9(90점대)가 모두 A로 처리되어 해결됩니다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "if ~ else if 연쇄보다 switch문이 더 적합한 상황은?",
+      "code": null,
+      "choices": ["하나의 정수 값이 어떤 값인지에 따라 여러 갈래로 나뉠 때", "두 변수의 대소를 비교할 때(a > b)", "실수(double) 값의 범위를 검사할 때", "여러 조건을 &&, ||로 조합해야 할 때"],
+      "answer": 0,
+      "explain": "switch는 하나의 정수 expression이 어떤 값인지에 따라 여러 갈래로 나뉠 때 가장 알맞고, 코드도 if ~ else if 연쇄보다 읽기 좋습니다. 두 변수의 대소 비교나 실수 범위 검사는 case로 표현할 수 없어 if문이 필요합니다. &&, ||로 조합하는 복합 조건 역시 switch의 case 하나로는 표현할 수 없습니다. 값 일치에 따른 분기는 switch, 조건식에 따른 분기는 if라고 정리하면 됩니다.",
+      "difficulty": "기초"
+    }
+  ],
+  "coding": [
+    {
+      "title": "숫자를 한글로 출력하기 (연속 case 연습)",
+      "prompt": "정수 하나를 입력받아 switch문으로 다음과 같이 출력하는 프로그램을 작성하세요.\n- 0이면 \"영\"\n- 1이면 \"일\"\n- 2 또는 3이면 \"이 또는 삼\" (case 2: case 3: 처럼 연속 case를 활용할 것)\n- 그 외에는 \"그 외의 숫자입니다.\"\n각 case는 break로 끝내세요. 입력 변수 이름은 iNumber를 사용하세요.\n\n입력 예시 1) 1 입력 -> 출력: 일\n입력 예시 2) 3 입력 -> 출력: 이 또는 삼\n입력 예시 3) 8 입력 -> 출력: 그 외의 숫자입니다.",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\nusing std::cin;\n\nint main()\n{\n    int iNumber;\n    cout << \"Input Number: \";\n    cin >> iNumber;\n\n    // TODO: switch문을 사용해 iNumber 값에 따라 출력하세요.\n    // 0 -> \"영\", 1 -> \"일\", 2 또는 3 -> \"이 또는 삼\", 그 외 -> \"그 외의 숫자입니다.\"\n\n    return 0;\n}\n",
+      "checks": [
+        { "pattern": "switch\\s*\\(\\s*iNumber\\s*\\)", "desc": "switch (iNumber) 로 입력 값에 따라 분기하는지" },
+        { "pattern": "case\\s+2\\s*:\\s*case\\s+3\\s*:", "desc": "case 2: case 3: 연속 case로 2와 3을 함께 처리하는지" },
+        { "pattern": "default\\s*:", "desc": "그 외의 값을 default로 처리하는지" },
+        { "pattern": "break\\s*;", "desc": "각 case를 break로 끝내는지" },
+        { "pattern": "cin\\s*>>\\s*iNumber", "desc": "iNumber 변수로 입력을 받는지" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\nusing std::cin;\n\nint main()\n{\n    int iNumber;\n    cout << \"Input Number: \";\n    cin >> iNumber;\n\n    switch (iNumber)\n    {\n    case 0:\n        cout << \"영\" << endl;\n        break;\n    case 1:\n        cout << \"일\" << endl;\n        break;\n    case 2:\n    case 3:\n        cout << \"이 또는 삼\" << endl;\n        break;\n    default:\n        cout << \"그 외의 숫자입니다.\" << endl;\n        break;\n    }\n\n    return 0;\n}\n",
+      "explain": "switch (iNumber)로 입력 값에 따라 분기하고, 각 case 끝에 break를 두어 다른 case로 흘러가지 않게 합니다. 2와 3은 case 2: case 3: 처럼 레이블을 연달아 붙여 하나의 코드를 공유하게 만드는 것이 핵심으로, 수업 파일에서 설명한 'if문 or 효과'를 그대로 연습하는 문제입니다. 어떤 case와도 일치하지 않는 값은 default에서 처리하며, 이는 if문의 else와 같은 역할입니다."
+    },
+    {
+      "title": "if ~ else 범위 검사를 switch로 변환하기",
+      "prompt": "수업 파일에 있던 if ~ else if 구문(0~9 / 10~19 / 20~29 / 그 외)을 switch문으로 변환하세요. 핵심은 switch의 expression에 iNumber / 10 (정수 나눗셈)을 사용해 각 범위를 하나의 정수 값으로 만드는 것입니다. case 0, case 1, case 2와 default를 사용하세요. 입력 변수 이름은 iNumber를 사용하세요.\n\n입력: 25 -> 출력: 입력한 숫자 25은(는) 20 ~ 29 사이의 숫자입니다.\n입력: 7 -> 출력: 입력한 숫자 7은(는) 0 ~ 9 사이의 숫자입니다.\n입력: 42 -> 출력: 입력한 숫자 42은(는) 그 외의 숫자입니다.",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\nusing std::cin;\n\nint main()\n{\n    int iNumber;\n    cout << \"숫자를 입력하세요 : \";\n    cin >> iNumber;\n\n    cout << \"입력한 숫자 \" << iNumber << \"은(는) \";\n\n    // TODO: iNumber / 10 을 이용한 switch문으로\n    // 0~9, 10~19, 20~29, 그 외를 구분해 출력하세요.\n\n    return 0;\n}\n",
+      "checks": [
+        { "pattern": "switch\\s*\\(\\s*iNumber\\s*/\\s*10\\s*\\)", "desc": "switch의 expression에 iNumber / 10 정수 나눗셈을 사용하는지" },
+        { "pattern": "case\\s+0\\s*:", "desc": "0~9 범위를 case 0으로 처리하는지" },
+        { "pattern": "case\\s+1\\s*:", "desc": "10~19 범위를 case 1로 처리하는지" },
+        { "pattern": "case\\s+2\\s*:", "desc": "20~29 범위를 case 2로 처리하는지" },
+        { "pattern": "default\\s*:", "desc": "그 외의 숫자를 default로 처리하는지" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\nusing std::cin;\n\nint main()\n{\n    int iNumber;\n    cout << \"숫자를 입력하세요 : \";\n    cin >> iNumber;\n\n    cout << \"입력한 숫자 \" << iNumber << \"은(는) \";\n\n    switch (iNumber / 10)\n    {\n    case 0:\n        cout << \"0 ~ 9 사이의 숫자입니다.\" << endl;\n        break;\n    case 1:\n        cout << \"10 ~ 19 사이의 숫자입니다.\" << endl;\n        break;\n    case 2:\n        cout << \"20 ~ 29 사이의 숫자입니다.\" << endl;\n        break;\n    default:\n        cout << \"그 외의 숫자입니다.\" << endl;\n        break;\n    }\n\n    return 0;\n}\n",
+      "explain": "범위 조건(0 <= iNumber && iNumber <= 9 등)은 case로 직접 쓸 수 없으므로, iNumber / 10 이라는 정수 나눗셈으로 각 범위를 하나의 값으로 압축하는 것이 핵심입니다. 0~9는 몫이 0, 10~19는 1, 20~29는 2가 되므로 case 0/1/2로 처리하고, 나머지는 default가 if문의 else 역할을 합니다. 수업 파일의 if ~ else 예제를 그대로 switch로 옮기는 연습이며, 정수 나눗셈이 소수점을 버린다는 성질을 활용합니다."
+    },
+    {
+      "title": "세 과목 평균으로 학점 매기기 (A/B/C/F)",
+      "prompt": "국어(kor), 영어(eng), 수학(math) 점수를 차례로 입력받아 평균을 구하고, switch문으로 등급을 출력하세요.\n- 평균 90점 이상: A\n- 80점 이상: B\n- 70점 이상: C\n- 70점 미만: F\n조건: 평균은 (kor + eng + math) / 3 정수 나눗셈으로 구해 avg 변수에 저장하고, switch (avg / 10) 을 사용하세요. 세 과목이 모두 100점이면 avg / 10이 10이 되므로, case 10: case 9: 를 연달아 써서 이 경우에도 A가 나오게 해야 합니다.\n\n입력: 90 80 70 -> 평균 80 -> 출력: B\n입력: 100 100 100 -> 평균 100 -> 출력: A\n입력: 60 70 65 -> 평균 65 -> 출력: F",
+      "starter": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\nusing std::cin;\n\nint main()\n{\n    int kor, eng, math;\n\n    // TODO: 국어, 영어, 수학 점수를 입력받으세요. (cin)\n\n    // TODO: 평균을 구해 avg 변수에 저장하세요. (정수 나눗셈)\n\n    // TODO: switch (avg / 10) 으로 A/B/C/F 등급을 출력하세요.\n    //       100점 평균(avg / 10 == 10)도 A가 나오도록 case 10: case 9: 를 활용하세요.\n\n    return 0;\n}\n",
+      "checks": [
+        { "pattern": "kor\\s*\\+\\s*eng\\s*\\+\\s*math", "desc": "세 과목 점수를 모두 더하는지" },
+        { "pattern": "/\\s*3", "desc": "합계를 3으로 나눠 평균을 구하는지" },
+        { "pattern": "switch\\s*\\(\\s*avg\\s*/\\s*10\\s*\\)", "desc": "switch의 expression에 avg / 10 을 사용하는지" },
+        { "pattern": "case\\s+10\\s*:\\s*case\\s+9\\s*:", "desc": "case 10: case 9: 연속 case로 100점 평균도 A로 처리하는지" },
+        { "pattern": "case\\s+8\\s*:", "desc": "80점대를 case 8로 처리하는지" },
+        { "pattern": "default\\s*:", "desc": "70점 미만을 default로 F 처리하는지" }
+      ],
+      "solution": "#include <iostream>\n\nusing std::cout;\nusing std::endl;\nusing std::cin;\n\nint main()\n{\n    int kor, eng, math;\n\n    cout << \"국어 점수 입력: \";\n    cin >> kor;\n    cout << \"영어 점수 입력: \";\n    cin >> eng;\n    cout << \"수학 점수 입력: \";\n    cin >> math;\n\n    int avg = (kor + eng + math) / 3;\n\n    cout << \"평균: \" << avg << \", 등급: \";\n\n    switch (avg / 10)\n    {\n    case 10:\n    case 9:\n        cout << \"A\" << endl;\n        break;\n    case 8:\n        cout << \"B\" << endl;\n        break;\n    case 7:\n        cout << \"C\" << endl;\n        break;\n    default:\n        cout << \"F\" << endl;\n        break;\n    }\n\n    return 0;\n}\n",
+      "explain": "세 점수의 합을 3으로 나눈 정수 나눗셈 결과를 avg에 저장하고, avg / 10으로 등급 구간을 case 하나의 값으로 만듭니다. 90~99점은 avg / 10이 9지만 100점은 10이 되므로, case 10: case 9: 를 연달아 써서(연속 case의 or 효과) 두 경우 모두 A가 나오게 하는 것이 이 문제의 핵심 포인트입니다. 80점대는 case 8, 70점대는 case 7, 나머지는 default로 F를 출력하며, default가 if문의 else 역할을 한다는 수업 내용을 그대로 적용합니다."
+    }
+  ]
+}

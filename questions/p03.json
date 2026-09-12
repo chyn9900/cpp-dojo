@@ -1,0 +1,443 @@
+{
+  "id": "p03",
+  "num": 29,
+  "group": "프로젝트",
+  "title": "프로젝트: 숫자야구",
+  "srcFile": "04. Baseball/main.cpp",
+  "questions": [
+    {
+      "q": "이 프로젝트에서 Fisher-Yates 셔플 알고리즘을 사용하는 이유는?",
+      "code": null,
+      "choices": [
+        "배열을 오름차순으로 정렬하기 위해",
+        "1~9 숫자가 담긴 배열을 무작위로 섞어 이번 게임의 정답 숫자를 만들기 위해",
+        "배열에서 중복된 숫자를 제거하기 위해",
+        "배열의 크기를 실행 중에 늘리기 위해"
+      ],
+      "answer": 1,
+      "explain": "iBaseball 배열에 1부터 9까지 채운 뒤 Fisher-Yates 셔플로 무작위로 섞고, 섞인 배열의 앞 3개(SELECT)가 이번 게임의 정답이 된다. 정렬은 순서를 규칙적으로 만드는 것이므로 섞기와는 반대 개념이다. 배열은 처음부터 1~9로 중복 없이 채워졌으니 중복 제거도 필요 없고, C++ 배열은 선언 후 크기를 바꿀 수 없다. Fisher-Yates는 모든 배치가 같은 확률로 나오는 대표적인 셔플 알고리즘이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`#define RANGE 9`에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "RANGE라는 int 변수를 만들고 9를 대입한다",
+        "실행 중에 RANGE의 값을 바꿀 수 있다",
+        "전처리기가 컴파일 전에 코드 속의 RANGE를 전부 9로 치환한다",
+        "RANGE는 main 함수 안에서만 사용할 수 있다"
+      ],
+      "answer": 2,
+      "explain": "#define은 전처리기 지시문으로, 컴파일이 시작되기 전에 소스 코드의 RANGE라는 글자를 전부 9로 바꿔치기한다. 변수가 아니므로 메모리를 차지하지 않고, 실행 중에 값을 바꿀 수도 없다. 함수 안팎을 가리지 않고 정의된 지점 이후 파일 전체에서 치환된다. 이렇게 이름을 붙여 두면 9라는 매직 넘버가 코드 곳곳에 흩어지는 것을 막고 한 곳만 고쳐도 전체가 바뀐다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`srand((unsigned int)time(NULL));`을 프로그램 시작 시 한 번 호출하는 이유는?",
+      "code": null,
+      "choices": [
+        "rand()의 시드를 현재 시간으로 설정해 실행할 때마다 다른 난수가 나오게 하기 위해",
+        "난수를 직접 하나 생성해서 반환받기 위해",
+        "rand()의 실행 속도를 더 빠르게 만들기 위해",
+        "현재 시간을 정수로 변환해 배열에 저장하기 위해"
+      ],
+      "answer": 0,
+      "explain": "rand()는 시드값에서 출발해 정해진 계산으로 수열을 만들어내는 의사난수 생성기라서, 시드가 같으면 매번 같은 수열이 나온다. time(NULL)은 현재 시각(초 단위)을 돌려주므로 실행할 때마다 시드가 달라져 셔플 결과도 달라진다. srand 자체는 난수를 반환하는 함수가 아니라 시드만 설정하며, 실행 속도와도 무관하다. 그래서 프로그램 시작 시 딱 한 번만 호출하면 충분하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "이 숫자야구 게임의 판정 규칙으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "숫자가 맞으면 자리와 상관없이 무조건 스트라이크다",
+        "숫자와 자리가 모두 맞으면 스트라이크, 숫자만 맞고 자리가 다르면 볼이다",
+        "자리만 맞으면 스트라이크, 숫자만 맞으면 아웃이다",
+        "입력한 세 숫자의 합이 정답의 합과 같으면 스트라이크다"
+      ],
+      "answer": 1,
+      "explain": "판정 코드에서 iBaseball[i] == iInput[j]로 숫자가 같은지 확인하고, 그때 인덱스까지 같으면(i == j) 자리도 맞은 것이므로 스트라이크, 인덱스가 다르면 숫자만 맞은 것이므로 볼로 센다. 숫자가 맞아도 자리가 다르면 스트라이크가 아니라 볼이라는 점이 핵심이다. 아웃은 스트라이크와 볼이 모두 0일 때, 즉 맞은 숫자가 하나도 없을 때다. 합을 비교하는 규칙은 이 게임에 없다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "두 배열 원소의 값을 교환(swap)할 때 임시 변수 iTemp가 필요한 이유는?",
+      "code": null,
+      "choices": [
+        "임시 변수 없이 대입하면 한쪽 값이 먼저 덮어써져 원래 값을 잃어버리기 때문",
+        "임시 변수를 쓰면 프로그램 실행 속도가 빨라지기 때문",
+        "C++ 문법상 대입문은 반드시 세 줄로 써야 하기 때문",
+        "임시 변수가 없으면 컴파일 에러가 발생하기 때문"
+      ],
+      "answer": 0,
+      "explain": "iBaseball[i] = iBaseball[j]를 먼저 실행하는 순간 iBaseball[i]에 있던 원래 값은 덮어써져 사라진다. 그래서 교환 전에 iTemp에 한쪽 값을 보관해 두었다가 마지막에 꺼내 쓰는 것이다. 임시 변수는 속도를 위한 것이 아니라 값을 잃지 않기 위한 것이며, 없이 대입만 두 번 해도 컴파일은 되지만 결과가 틀려진다. '값 보관 → 덮어쓰기 → 보관값 복원'의 3단계 스왑은 앞으로도 계속 쓰이는 기본 패턴이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "셔플 코드의 `int j = rand() % (i + 1);`에서 j가 가질 수 있는 값의 범위는?",
+      "code": null,
+      "choices": [
+        "1부터 i까지",
+        "0부터 i+1까지",
+        "0부터 i까지",
+        "1부터 i+1까지"
+      ],
+      "answer": 2,
+      "explain": "모듈러 연산 x % n의 결과는 항상 0부터 n-1까지다. 여기서 n이 i + 1이므로 j는 0부터 i까지의 값을 가진다. 1부터 시작한다고 착각하기 쉽지만, 나머지 연산의 결과는 0이 될 수 있다는 점을 꼭 기억해야 한다. 이 범위에 i 자신이 포함되어야 원소가 제자리에 남는 경우도 나올 수 있어 셔플이 공평해진다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`cin.fail()`이 true를 반환하는 대표적인 상황은?",
+      "code": null,
+      "choices": [
+        "사용자가 아무것도 입력하지 않고 기다리고 있을 때",
+        "int 변수에 숫자가 아닌 문자(예: abc)를 입력했을 때",
+        "입력한 숫자가 게임 범위(1~9)를 벗어났을 때",
+        "cout으로 화면 출력이 실패했을 때"
+      ],
+      "answer": 1,
+      "explain": "cin >> 로 int 변수에 값을 읽는데 사용자가 'abc' 같은 문자를 입력하면 변환에 실패하고 스트림에 오류 플래그가 켜지며, cin.fail()이 true가 된다. 아무것도 입력하지 않고 기다리는 것은 그냥 대기 상태일 뿐 실패가 아니다. 숫자의 크고 작음은 형식 오류가 아니라서 별도의 범위 검사(if문)로 걸러야 한다. cin.fail()은 입력 스트림의 상태를 확인하는 것이므로 cout과는 무관하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "게임 루프(while문) 안에서 continue와 break의 차이로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "continue는 프로그램을 종료하고, break는 다음 라운드로 넘어간다",
+        "둘 다 루프를 완전히 빠져나온다",
+        "continue는 현재 반복만 건너뛰고 루프의 조건 검사로 돌아가며, break는 루프를 완전히 빠져나온다",
+        "continue는 if문에서만, break는 switch문에서만 쓸 수 있다"
+      ],
+      "answer": 2,
+      "explain": "continue는 이번 반복의 남은 코드를 건너뛰고 루프의 조건 검사로 돌아가고, break는 루프 자체를 완전히 빠져나온다. 이 프로그램에서 범위 초과나 중복 입력이면 continue로 같은 라운드를 다시 시작하고, 0 입력·승리·게임오버면 break로 게임을 끝낸다. 프로그램 종료는 main의 return이 담당하는 것이지 continue의 역할이 아니다. break는 switch에서도 쓰이지만 continue와 break 모두 반복문 안에서 사용할 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "`int iBaseball[RANGE] = {};` 선언(RANGE는 9)의 결과로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "9개의 원소가 모두 0으로 초기화된다",
+        "원소가 하나도 없는 빈 배열이 만들어진다",
+        "원소들이 쓰레기값을 가진 채로 만들어진다",
+        "크기를 지정했는데 초기값이 비어 있어 컴파일 에러가 발생한다"
+      ],
+      "answer": 0,
+      "explain": "배열 선언 뒤에 = {}를 붙이면 모든 원소가 0으로 초기화된다. C++ 배열은 선언 시 크기가 정해지므로 '빈 배열'이 되는 것이 아니라 크기 9의 배열이 만들어진다. 초기화 없이 int arr[9];라고만 쓰면 지역 배열의 원소는 쓰레기값을 가지므로 주의해야 한다. RANGE는 #define으로 컴파일 전에 9로 치환되는 상수라서 배열 크기로 쓸 수 있다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\n\nint main()\n{\n    int a = 3, b = 7;\n    int t = a;\n    a = b;\n    b = t;\n    cout << a << \" \" << b;\n    return 0;\n}",
+      "choices": [
+        "3 7",
+        "7 3",
+        "7 7",
+        "3 3"
+      ],
+      "answer": 1,
+      "explain": "t에 a의 값 3을 보관하고, a에 b의 값 7을 넣고, b에 보관해 둔 3을 넣으므로 a는 7, b는 3이 되어 '7 3'이 출력된다. 두 값이 서로 바뀌는 것이지 한쪽으로 복사되는 것이 아니다. '7 7'이나 '3 3'은 임시 변수 없이 잘못 교환했을 때 나오는 결과다. 이 스왑 패턴이 Fisher-Yates 셔플의 핵심 부품이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\n\nint main()\n{\n    int arr[9] = {};\n    for (int i = 0; i < 9; i++)\n    {\n        arr[i] = i + 1;\n    }\n    cout << arr[0] << \" \" << arr[8];\n    return 0;\n}",
+      "choices": [
+        "0 8",
+        "1 8",
+        "0 9",
+        "1 9"
+      ],
+      "answer": 3,
+      "explain": "루프에서 arr[i] = i + 1이므로 인덱스 0에는 1이, 인덱스 8에는 9가 저장된다. 배열 인덱스는 0부터 시작하므로 마지막 원소는 arr[8]이고 arr[9]는 범위 밖 접근이다. 인덱스와 저장된 값이 1씩 어긋난다는 점(인덱스 i ↔ 값 i+1)을 놓치면 '0 8'이나 '1 8' 같은 답을 고르게 된다. 숫자야구에서 정답 후보 1~9를 만드는 바로 그 코드다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\n\nint main()\n{\n    int iStrike = 5, iBall = 7;\n    iStrike = iBall = 0;\n    cout << iStrike << \" \" << iBall;\n    return 0;\n}",
+      "choices": [
+        "5 7",
+        "0 7",
+        "0 0",
+        "5 0"
+      ],
+      "answer": 2,
+      "explain": "대입 연산자 =는 오른쪽에서 왼쪽으로 결합하므로 iBall = 0이 먼저 실행되고, 그 대입식의 결과값 0이 다시 iStrike에 대입된다. 결국 두 변수 모두 0이 되어 '0 0'이 출력된다. 원래 값 5와 7은 덮어써져 사라진다. 실제 게임에서도 매 라운드 판정 전에 이렇게 한 줄로 스트라이크·볼 카운트를 리셋한다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\n#define MAX_GAMECOUNT 9\nusing std::cout;\n\nint main()\n{\n    int iGameCount = 0;\n    cout << \"Round \" << iGameCount + 1\n        << \" (Remaining attempts: \" << MAX_GAMECOUNT - iGameCount << \")\";\n    return 0;\n}",
+      "choices": [
+        "Round 0 (Remaining attempts: 9)",
+        "Round 1 (Remaining attempts: 8)",
+        "Round 0 (Remaining attempts: 8)",
+        "Round 1 (Remaining attempts: 9)"
+      ],
+      "answer": 3,
+      "explain": "iGameCount는 0부터 시작하지만 사람에게 보여줄 때는 iGameCount + 1로 1라운드부터 표시한다. 남은 기회는 MAX_GAMECOUNT - iGameCount = 9 - 0 = 9다. 0 기반으로 세는 프로그램 내부 값과 1 기반으로 보여주는 화면 표시를 구분하는 것이 포인트다. 'Round 0'은 +1을 빼먹은 결과이고, 'Remaining attempts: 8'은 아직 0인 iGameCount를 1이라고 착각한 결과다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "이 프로그램에서 `while (true)` 무한 루프를 빠져나오는 경우가 아닌 것은?",
+      "code": null,
+      "choices": [
+        "숫자 0을 입력했을 때 (종료)",
+        "3개 숫자를 모두 자리까지 맞혔을 때 (3 스트라이크)",
+        "9번째 라운드까지 못 맞혔을 때 (게임 오버)",
+        "범위를 벗어난 숫자를 입력했을 때"
+      ],
+      "answer": 3,
+      "explain": "범위를 벗어난 숫자를 입력하면 안내 메시지를 출력하고 continue로 루프의 처음으로 돌아가 같은 라운드를 다시 진행할 뿐, 루프를 빠져나오지 않는다. 반면 0 입력(종료), 3스트라이크(승리), 9라운드 소진(게임오버)은 모두 break로 while을 탈출한다. while (true)는 조건이 항상 참이므로 break 없이는 절대 끝나지 않는다는 점이 핵심이다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "Fisher-Yates 셔플의 빈칸에 들어갈 코드로 옳은 것은?",
+      "code": "for (int i = 8; i > 0; i--)\n{\n    int j = rand() % ____;\n\n    int iTemp = arr[i];\n    arr[i] = arr[j];\n    arr[j] = iTemp;\n}",
+      "choices": [
+        "(i + 1)",
+        "i",
+        "9",
+        "(i - 1)"
+      ],
+      "answer": 0,
+      "explain": "아직 확정되지 않은 앞부분 0~i 전체에서 균등하게 하나를 골라야 하므로 rand() % (i + 1)이 맞다. rand() % i는 0~i-1만 나와 자기 자신(i)이 제자리에 남는 경우를 만들 수 없어 결과가 편향된다. rand() % 9는 이미 섞어서 확정해 둔 뒷부분과도 다시 교환해 버려 균등한 셔플이 깨진다. rand() % (i - 1)은 i가 1일 때 0으로 나누게 되어 아예 위험하다.",
+      "difficulty": "기초"
+    },
+    {
+      "q": "잘못된 입력(문자 등)을 처리할 때 `cin.clear()`와 `cin.ignore(...)`의 역할을 바르게 설명한 것은?",
+      "code": null,
+      "choices": [
+        "clear()는 화면을 지우고, ignore()는 사용자의 다음 입력을 무시한다",
+        "clear()는 스트림의 오류 상태 플래그를 리셋하고, ignore()는 입력 버퍼에 남은 문자들을 비운다",
+        "clear()는 입력 버퍼를 비우고, ignore()는 오류 상태 플래그를 리셋한다",
+        "둘 다 입력받은 변수의 값을 0으로 초기화한다"
+      ],
+      "answer": 1,
+      "explain": "잘못된 형식의 입력이 들어오면 cin은 오류 상태가 되고 입력 버퍼에는 잘못 입력한 문자들이 그대로 남는다. cin.clear()가 먼저 오류 상태 플래그를 리셋하고, 그다음 cin.ignore(...)가 버퍼에 남은 문자들을 개행 문자까지 버린다. 두 함수의 역할을 서로 바꿔 기억하기 쉬운데, 순서도 중요하다 — 오류 상태인 채로는 ignore가 동작하지 않는다. 화면을 지우는 것은 system(\"cls\")의 역할이며, 이 처리가 없으면 남은 문자 때문에 cin이 계속 실패해 무한 루프가 된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "중복 입력 검사에서 안쪽 반복문을 `int j = i + 1`부터 시작하는 이유는?",
+      "code": null,
+      "choices": [
+        "배열의 마지막 원소는 검사할 필요가 없기 때문",
+        "j를 0부터 시작하면 컴파일 에러가 나기 때문",
+        "자기 자신과의 비교와 이미 검사한 쌍의 재비교를 피하기 위해",
+        "입력 숫자가 항상 오름차순으로 들어오기 때문"
+      ],
+      "answer": 2,
+      "explain": "j를 i + 1부터 시작하면 자기 자신과 비교하는 일이 없고, (0,1)을 검사했는데 (1,0)을 또 검사하는 중복도 없다. 만약 j를 0부터 시작하면 i == j가 되는 순간 iInput[i] == iInput[j]가 항상 참이 되어 모든 입력이 중복으로 판정되는 버그가 생긴다. 이는 컴파일 에러가 아니라 논리 오류라서 더 찾기 어렵다. n개 중에서 서로 다른 두 개를 뽑는 모든 쌍을 정확히 한 번씩 검사하는 표준 패턴이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 판정 코드의 출력 결과는?",
+      "code": "int iBaseball[3] = { 3, 1, 2 };\nint iInput[3] = { 1, 2, 3 };\nint iStrike = 0, iBall = 0;\nfor (int i = 0; i < 3; i++)\n{\n    for (int j = 0; j < 3; j++)\n    {\n        if (iBaseball[i] == iInput[j])\n        {\n            if (i == j)\n                iStrike++;\n            else\n                iBall++;\n            break;\n        }\n    }\n}\ncout << iStrike << \" Strike \" << iBall << \" Ball\";",
+      "choices": [
+        "3 Strike 0 Ball",
+        "0 Strike 3 Ball",
+        "1 Strike 2 Ball",
+        "0 Strike 0 Ball"
+      ],
+      "answer": 1,
+      "explain": "정답 3은 입력의 인덱스 2에 있고(i=0, j=2, 자리 다름 → 볼), 정답 1은 입력의 인덱스 0에(i=1, j=0 → 볼), 정답 2는 입력의 인덱스 1에 있다(i=2, j=1 → 볼). 세 숫자가 모두 존재하지만 자리가 전부 어긋나므로 0 스트라이크 3 볼이다. 숫자가 다 맞았다고 '3 Strike 0 Ball'을 고르면 자리 조건(i == j)을 놓친 것이다. 스트라이크는 값과 인덱스가 모두 일치할 때만 올라간다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 판정 코드의 출력 결과는?",
+      "code": "int iBaseball[3] = { 5, 2, 8 };\nint iInput[3] = { 5, 8, 2 };\nint iStrike = 0, iBall = 0;\nfor (int i = 0; i < 3; i++)\n{\n    for (int j = 0; j < 3; j++)\n    {\n        if (iBaseball[i] == iInput[j])\n        {\n            if (i == j)\n                iStrike++;\n            else\n                iBall++;\n            break;\n        }\n    }\n}\ncout << iStrike << \" Strike \" << iBall << \" Ball\";",
+      "choices": [
+        "1 Strike 2 Ball",
+        "2 Strike 1 Ball",
+        "3 Strike 0 Ball",
+        "0 Strike 3 Ball"
+      ],
+      "answer": 0,
+      "explain": "정답 5는 입력 인덱스 0에 있고 i=0, j=0으로 자리까지 같아 스트라이크다. 정답 2는 입력 인덱스 2에(i=1, j=2 → 볼), 정답 8은 입력 인덱스 1에 있다(i=2, j=1 → 볼). 따라서 1 스트라이크 2 볼이다. 첫 숫자만 자리가 맞고 뒤의 두 숫자는 서로 자리가 바뀌어 있는 상황임을 표로 그려 보면 명확해진다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "셔플의 첫 번째 반복에서 다음 코드가 출력하는 것은?",
+      "code": "#include <iostream>\n#define RANGE 9\nusing std::cout;\n\nint main()\n{\n    int i = RANGE - 1;\n    cout << RANGE - i << \" / \" << RANGE;\n    return 0;\n}",
+      "choices": [
+        "8 / 9",
+        "9 / 9",
+        "1 / 9",
+        "0 / 9"
+      ],
+      "answer": 2,
+      "explain": "i는 RANGE - 1 = 8에서 시작하므로 첫 반복에서 RANGE - i는 9 - 8 = 1이고 '1 / 9'가 출력된다. 이후 i가 1씩 줄어들면 RANGE - i는 1씩 늘어나 2/9, 3/9, ... 8/9로 진행 상황을 표시한다. i의 값 8을 그대로 출력한다고 생각하면 '8 / 9'를 고르게 되는데, 출력식은 i가 아니라 RANGE - i라는 점을 봐야 한다. 거꾸로 도는 루프 변수를 사람이 보기 좋은 진행 횟수로 바꿔 주는 계산이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "다음 중복 검사 코드의 출력 결과는?",
+      "code": "int iInput[3] = { 3, 5, 3 };\nbool bException = false;\nfor (int i = 0; i < 3; i++)\n{\n    for (int j = i + 1; j < 3; j++)\n    {\n        if (iInput[i] == iInput[j])\n        {\n            bException = true;\n            break;\n        }\n    }\n    if (bException)\n        break;\n}\ncout << bException;",
+      "choices": [
+        "0",
+        "true",
+        "3",
+        "1"
+      ],
+      "answer": 3,
+      "explain": "i=0일 때 j는 1, 2를 검사하는데 iInput[0](3)과 iInput[2](3)이 같으므로 bException이 true가 된다. bool 값을 cout으로 출력하면 기본 설정에서는 true가 1, false가 0으로 출력되므로 결과는 1이다. 'true'라는 글자가 나오려면 std::boolalpha 설정이 따로 필요하다. 안쪽 break로 j 루프를 나가고 바깥의 if (bException) break로 i 루프까지 나가는 2단 탈출 구조도 눈여겨보자.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "정답이 {1, 2, 3}이고 사용자가 {4, 5, 6}을 입력했을 때, 이 프로그램이 출력하는 결과는?",
+      "code": null,
+      "choices": [
+        "0 Strike 0 Ball",
+        "Out !!!",
+        "Game Over.",
+        "아무것도 출력되지 않는다"
+      ],
+      "answer": 1,
+      "explain": "정답 {1, 2, 3}과 입력 {4, 5, 6}은 겹치는 숫자가 하나도 없어 스트라이크 0, 볼 0이다. 프로그램은 이 경우를 else if (iStrike == 0 && iBall == 0) 분기로 따로 잡아서 '0 Strike 0 Ball' 대신 야구 용어인 'Out !!!'를 출력한다. 'Game Over.'는 9라운드를 모두 소진했을 때 나오는 별개의 메시지다. 조건 분기는 승리(3스트라이크) → 아웃 → 일반 결과 순서로 검사된다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "입력받은 3개의 숫자 중 중복이 있는지 검사하려 한다. 빈칸에 들어갈 코드로 옳은 것은?",
+      "code": "for (int i = 0; i < 3; i++)\n{\n    for (int j = ____; j < 3; j++)\n    {\n        if (iInput[i] == iInput[j])\n        {\n            cout << \"Duplicate!\";\n        }\n    }\n}",
+      "choices": [
+        "0",
+        "i",
+        "i + 1",
+        "1"
+      ],
+      "answer": 2,
+      "explain": "자기 자신과 비교하지 않고 아직 검사하지 않은 새로운 쌍만 보려면 j를 i + 1부터 시작해야 한다. 0이나 i에서 시작하면 i == j인 자기 자신 비교가 일어나 항상 '중복'으로 잘못 판정된다. 1에서 시작해도 i가 1일 때 j 역시 1부터라 자기 자신을 비교하게 되고, 이미 검사한 쌍을 다시 보는 낭비도 생긴다. 이중 루프로 모든 쌍을 정확히 한 번씩 검사하는 것이 목적이다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "`#define SELECT 3`을 `#define SELECT 4`로만 바꾸고 다시 컴파일하면 프로그램은 어떻게 동작하는가?",
+      "code": null,
+      "choices": [
+        "숫자를 4개 입력받고 4개를 맞히는 게임으로 일관되게 바뀐다",
+        "매크로는 다시 정의할 수 없으므로 컴파일 에러가 발생한다",
+        "화면 표시만 4개로 바뀌고 여전히 3개만 입력받는다",
+        "iInput 배열 크기는 3으로 고정되어 있어 항상 범위 초과 오류가 난다"
+      ],
+      "answer": 0,
+      "explain": "배열 크기 int iInput[SELECT], 입력 루프, 중복 검사, 판정 루프, 승리 조건 if (iStrike == SELECT)까지 전부 SELECT 매크로를 사용하므로, 정의 한 줄만 바꾸면 4개 숫자를 맞히는 게임으로 일관되게 바뀐다. 배열 크기도 SELECT로 선언되어 있어 자동으로 4가 되므로 범위 초과가 나지 않는다. 만약 숫자 3을 코드 곳곳에 직접 썼다면 전부 찾아서 고쳐야 했을 것이다. 이것이 매직 넘버 대신 이름 있는 상수를 쓰는 가장 큰 이유다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "범위 검사 조건 `if (iInput[i] < EXIT || iInput[i] > RANGE)` (EXIT는 0, RANGE는 9)에 대한 설명으로 옳은 것은?",
+      "code": null,
+      "choices": [
+        "음수와 10 이상의 값을 걸러내며, 0은 앞선 종료 검사에서 이미 처리된다",
+        "0을 입력하면 이 조건에서 범위 초과로 걸러진다",
+        "9를 입력하면 범위 초과로 걸러진다",
+        "||가 아니라 &&를 써야 하는 버그가 있다"
+      ],
+      "answer": 0,
+      "explain": "0은 이 검사보다 먼저 실행되는 종료(Exit) 검사에서 break로 처리되어 while을 빠져나가므로, 범위 검사까지 내려오는 0은 없다. 따라서 이 조건은 실질적으로 음수와 10 이상을 걸러낸다. 9는 iInput[i] > RANGE, 즉 9 > 9가 거짓이라 정상 통과한다. '0보다 작다'와 '9보다 크다'는 동시에 참일 수 없으므로 ||가 맞고, &&로 바꾸면 항상 거짓이 되어 아무것도 거르지 못한다.",
+      "difficulty": "응용"
+    },
+    {
+      "q": "셔플에서 `rand() % (i + 1)`로 뽑은 j가 i와 같은 값이 나올 수도 있다. 이때 일어나는 일은?",
+      "code": null,
+      "choices": [
+        "같은 원소끼리 교환되어 배열이 그대로 유지된다 (문제 없음)",
+        "배열 범위를 벗어나 오류가 발생한다",
+        "해당 원소의 값이 0이 되어버린다",
+        "교환이 끝나지 않아 무한 루프에 빠진다"
+      ],
+      "answer": 0,
+      "explain": "j가 i와 같으면 자기 자신과 교환하는 것인데, 값을 iTemp에 복사했다가 도로 넣는 셈이라 배열은 아무 변화 없이 그대로다. 오류도, 값 손실도, 무한 루프도 생기지 않는다. 오히려 j의 범위에 i 자신이 포함되어야(0~i) 원소가 제자리에 남는 배치도 나올 수 있어 모든 순열이 같은 확률이 된다. 자기 자신을 일부러 빼면(rand() % i) 셔플 결과가 편향된다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "MAX_GAMECOUNT가 9일 때, 다음 코드에서 'Game Over.'가 출력되는 것은 화면상 몇 번째 라운드를 틀린 직후인가?",
+      "code": "if (iGameCount + 1 == MAX_GAMECOUNT)\n{\n    cout << \"Round \" << iGameCount + 1 << \".\" << endl;\n    cout << \"Game Over.\" << endl;\n    break;\n}\niGameCount++;",
+      "choices": [
+        "8번째 라운드",
+        "9번째 라운드",
+        "10번째 라운드",
+        "1번째 라운드"
+      ],
+      "answer": 1,
+      "explain": "iGameCount는 0부터 시작하고 화면의 라운드 번호는 iGameCount + 1이다. iGameCount가 8일 때, 즉 화면상 Round 9를 틀리면 8 + 1 == 9가 성립해 'Game Over.'가 출력되고 break로 종료된다. 8번째 라운드에서는 iGameCount가 7이라 조건이 거짓이므로 iGameCount++ 후 다음 라운드로 넘어간다. 0 기반 카운터와 1 기반 표시를 오가는 전형적인 off-by-one 포인트이니 조건식에 +1이 붙은 이유를 정확히 이해해야 한다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "임시 변수 없이 교환을 시도한 다음 코드의 출력 결과는?",
+      "code": "#include <iostream>\nusing std::cout;\n\nint main()\n{\n    int arr[2] = { 10, 20 };\n    arr[0] = arr[1];\n    arr[1] = arr[0];\n    cout << arr[0] << \" \" << arr[1];\n    return 0;\n}",
+      "choices": [
+        "20 10",
+        "10 20",
+        "20 20",
+        "10 10"
+      ],
+      "answer": 2,
+      "explain": "arr[0] = arr[1]이 실행되는 순간 arr[0]에 있던 10은 20으로 덮어써져 사라진다. 다음 줄의 arr[1] = arr[0]은 이미 20이 된 arr[0]을 넣는 것이라 결국 둘 다 20이 되어 '20 20'이 출력된다. '20 10'은 임시 변수를 써서 올바르게 교환했을 때의 결과다. 이래서 스왑에는 반드시 iTemp 같은 보관용 변수가 필요하다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "판정 루프에서 표시된 break를 지우면 결과가 어떻게 되는가? (입력 3개는 중복 검사를 통과해 서로 다른 값이라고 가정)",
+      "code": "for (int i = 0; i < 3; i++)\n{\n    for (int j = 0; j < 3; j++)\n    {\n        if (iBaseball[i] == iInput[j])\n        {\n            if (i == j)\n                iStrike++;\n            else\n                iBall++;\n            break; // 이 줄을 지우면?\n        }\n    }\n}",
+      "choices": [
+        "스트라이크가 항상 3이 된다",
+        "볼이 중복으로 세어져 결과가 틀려진다",
+        "판정 결과는 같지만 불필요한 비교를 더 하게 된다",
+        "break 없이는 안쪽 for문이 끝나지 않아 컴파일 에러가 발생한다"
+      ],
+      "answer": 2,
+      "explain": "중복 검사를 통과한 입력은 세 값이 서로 다르므로, 정답 숫자 iBaseball[i] 하나와 일치할 수 있는 입력은 많아야 한 개다. 따라서 break가 없어도 카운트 결과는 같고, 일치를 찾은 뒤에도 남은 j를 계속 비교하는 낭비만 생긴다. 다만 입력에 중복이 허용되는 상황이라면 같은 값이 두 번 매칭되어 카운트가 달라질 수 있으므로, 사전 중복 검사와 break가 함께 프로그램을 안전하게 만든다. for문은 조건이 거짓이 되면 스스로 끝나므로 break가 필수 문법인 것은 아니다.",
+      "difficulty": "심화"
+    },
+    {
+      "q": "`srand((unsigned int)time(NULL));` 한 줄을 지우고 컴파일·실행하면 어떤 일이 일어나는가?",
+      "code": null,
+      "choices": [
+        "rand()가 항상 0만 반환한다",
+        "시드가 없어 컴파일 에러가 발생한다",
+        "난수가 아예 생성되지 않아 셔플이 멈춘다",
+        "실행할 때마다 같은 순서로 섞여 정답 숫자가 매번 똑같아진다"
+      ],
+      "answer": 3,
+      "explain": "srand를 호출하지 않으면 시드가 기본값 1로 고정되어 rand()가 매 실행 똑같은 의사난수 수열을 만들고, 셔플 결과와 정답 숫자도 매번 동일해진다. rand()는 시드에서 계산으로 수열을 뽑아내는 의사난수라서 시드가 같으면 결과도 같기 때문이다. 컴파일 에러가 나거나 난수 생성이 멈추는 것이 아니라, 정답을 외워버릴 수 있어 게임이 성립하지 않는 것이 문제다. 그래서 매 실행 값이 달라지는 time(NULL)을 시드로 쓴다.",
+      "difficulty": "심화"
+    }
+  ],
+  "coding": [
+    {
+      "title": "1부터 9까지 배열 채우기",
+      "prompt": "크기 9인 int 배열을 선언하고 0으로 초기화한 뒤, for문을 사용해 배열에 1부터 9까지 순서대로 저장하세요. 그다음 다시 for문으로 배열의 모든 원소를 공백으로 구분해 한 줄에 출력하세요. 숫자야구에서 정답 후보 숫자를 준비하는 첫 단계입니다.\n\n[출력 예시]\n1 2 3 4 5 6 7 8 9",
+      "starter": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    // TODO: 크기 9인 int 배열을 선언하고 0으로 초기화하세요.\n\n    // TODO: for문으로 배열에 1부터 9까지 순서대로 저장하세요. (힌트: i + 1)\n\n    // TODO: for문으로 배열의 모든 원소를 공백으로 구분해 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "int\\s+\\w+\\s*\\[\\s*9\\s*\\]", "desc": "크기 9인 int 배열을 선언했는지" },
+        { "pattern": "for\\s*\\(\\s*int\\s+i\\s*=\\s*0", "desc": "i를 0부터 시작하는 for문을 사용했는지" },
+        { "pattern": "\\[\\s*i\\s*\\]\\s*=\\s*i\\s*\\+\\s*1", "desc": "배열에 i + 1을 저장해 1~9를 채웠는지" },
+        { "pattern": "cout\\s*<<", "desc": "cout으로 결과를 출력했는지" }
+      ],
+      "solution": "#include <iostream>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    int iBaseball[9] = {};\n\n    for (int i = 0; i < 9; i++)\n    {\n        iBaseball[i] = i + 1;\n    }\n\n    for (int i = 0; i < 9; i++)\n    {\n        cout << iBaseball[i] << \" \";\n    }\n    cout << endl;\n\n    return 0;\n}",
+      "explain": "배열 인덱스는 0부터 시작하고 저장할 값은 1부터 시작하므로 arr[i] = i + 1로 어긋남을 맞추는 것이 핵심입니다. 채우기와 출력을 각각 별도의 for문으로 처리합니다. 실제 숫자야구 프로젝트에서 셔플 전에 정답 후보 1~9를 준비하는 코드와 동일합니다."
+    },
+    {
+      "title": "Fisher-Yates 셔플 구현",
+      "prompt": "1부터 9까지 채워진 배열을 Fisher-Yates 알고리즘으로 섞고 결과를 출력하세요.\n\n[요구사항]\n1. srand로 현재 시간을 시드로 설정합니다.\n2. i를 8부터 1까지 1씩 줄이면서 반복합니다.\n3. 각 반복에서 j = rand() % (i + 1)로 0~i 범위의 인덱스를 뽑습니다.\n4. 임시 변수를 사용해 iBaseball[i]와 iBaseball[j]를 교환합니다.\n5. 섞인 배열 전체를 공백으로 구분해 출력합니다.\n\n[출력 예시] (실행할 때마다 달라짐)\n3 7 1 9 5 2 8 4 6",
+      "starter": "#include <iostream>\n#include <cstdlib>\n#include <ctime>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    // TODO: srand로 현재 시간을 시드로 설정하세요.\n\n    int iBaseball[9] = {};\n    for (int i = 0; i < 9; i++)\n    {\n        iBaseball[i] = i + 1;\n    }\n\n    // TODO: Fisher-Yates 셔플 - i를 8부터 1까지 줄이면서\n    //       j = rand() % (i + 1) 로 인덱스를 뽑고\n    //       임시 변수로 iBaseball[i]와 iBaseball[j]를 교환하세요.\n\n    // TODO: 섞인 배열을 출력하세요.\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "srand\\s*\\(", "desc": "srand로 난수 시드를 설정했는지" },
+        { "pattern": "i\\s*>\\s*0\\s*;\\s*i\\s*--", "desc": "i를 감소시키며 0보다 클 때까지 도는 역방향 for문을 썼는지" },
+        { "pattern": "rand\\s*\\(\\s*\\)\\s*%\\s*\\(\\s*i\\s*\\+\\s*1\\s*\\)", "desc": "rand() % (i + 1)로 0~i 범위의 인덱스를 뽑았는지" },
+        { "pattern": "int\\s+\\w+\\s*=\\s*\\w+\\s*\\[\\s*i\\s*\\]", "desc": "임시 변수에 arr[i] 값을 보관했는지" },
+        { "pattern": "\\w+\\s*\\[\\s*j\\s*\\]\\s*=", "desc": "arr[j]에 값을 대입해 교환을 완성했는지" }
+      ],
+      "solution": "#include <iostream>\n#include <cstdlib>\n#include <ctime>\nusing std::cout;\nusing std::endl;\n\nint main()\n{\n    srand((unsigned int)time(NULL));\n\n    int iBaseball[9] = {};\n    for (int i = 0; i < 9; i++)\n    {\n        iBaseball[i] = i + 1;\n    }\n\n    for (int i = 8; i > 0; i--)\n    {\n        int j = rand() % (i + 1);\n\n        int iTemp = iBaseball[i];\n        iBaseball[i] = iBaseball[j];\n        iBaseball[j] = iTemp;\n    }\n\n    for (int i = 0; i < 9; i++)\n    {\n        cout << iBaseball[i] << \" \";\n    }\n    cout << endl;\n\n    return 0;\n}",
+      "explain": "뒤쪽 인덱스 i를 8부터 1까지 줄이면서 rand() % (i + 1)로 0~i 중 하나(j)를 골라 iBaseball[i]와 교환합니다. 자기 자신(j == i)이 뽑히면 교환해도 그대로라 문제없고, 오히려 그래야 모든 순서가 같은 확률로 나옵니다. 교환에는 임시 변수 iTemp가 반드시 필요합니다 — 없으면 한쪽 값이 덮어써져 사라집니다. srand(time(NULL))을 빼먹으면 매 실행 같은 결과가 나온다는 점도 기억하세요."
+    },
+    {
+      "title": "스트라이크 볼 판정기",
+      "prompt": "정답 배열 { 4, 7, 2 }가 코드에 미리 주어져 있습니다. 사용자에게 숫자 3개를 입력받아 다음 순서로 처리하세요.\n\n[요구사항]\n1. for문으로 숫자 3개를 iInput 배열에 입력받습니다.\n2. 중복 검사: 입력에 같은 숫자가 있으면 \"Duplicate\"를 출력하고 return 0;으로 종료합니다. (안쪽 루프는 j = i + 1부터)\n3. 판정: 정답의 각 숫자에 대해 입력을 비교하여 값과 자리가 모두 같으면 스트라이크, 값만 같으면 볼로 셉니다. 일치를 찾으면 break로 안쪽 루프를 빠져나옵니다.\n4. 출력: 3스트라이크면 \"You Win!\", 스트라이크와 볼이 모두 0이면 \"Out\", 그 외에는 \"X Strike Y Ball\" 형식으로 출력합니다.\n\n[입출력 예시] (정답이 4 7 2일 때)\n입력: 4 2 7  ->  출력: 1 Strike 2 Ball\n입력: 4 7 2  ->  출력: You Win!\n입력: 1 3 5  ->  출력: Out\n입력: 4 4 2  ->  출력: Duplicate",
+      "starter": "#include <iostream>\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    int iBaseball[3] = { 4, 7, 2 };\n    int iInput[3];\n\n    // TODO: for문으로 숫자 3개를 입력받으세요.\n\n    // TODO: 중복 검사 - 같은 숫자가 있으면 \"Duplicate\"를 출력하고 return 0;\n    //       (안쪽 루프는 j = i + 1 부터)\n\n    // TODO: 판정 - 값과 자리가 모두 같으면(i == j) 스트라이크, 값만 같으면 볼.\n    //       일치를 찾으면 break.\n\n    // TODO: 결과 출력 - 3스트라이크면 \"You Win!\", 0 스트라이크 0 볼이면 \"Out\",\n    //       그 외에는 \"X Strike Y Ball\" 형식으로 출력.\n\n    return 0;\n}",
+      "checks": [
+        { "pattern": "cin\\s*>>", "desc": "cin으로 사용자 입력을 받았는지" },
+        { "pattern": "j\\s*=\\s*i\\s*\\+\\s*1", "desc": "중복 검사의 안쪽 루프를 i + 1부터 시작했는지" },
+        { "pattern": "Duplicate", "desc": "중복일 때 Duplicate를 출력하는지" },
+        { "pattern": "if\\s*\\(\\s*i\\s*==\\s*j\\s*\\)", "desc": "인덱스 비교(i == j)로 스트라이크를 구분했는지" },
+        { "pattern": "break\\s*;", "desc": "일치를 찾은 뒤 break로 안쪽 루프를 빠져나오는지" },
+        { "pattern": "iStrike\\s*==\\s*3", "desc": "3스트라이크 승리 조건을 검사했는지" }
+      ],
+      "solution": "#include <iostream>\nusing std::cout;\nusing std::cin;\nusing std::endl;\n\nint main()\n{\n    int iBaseball[3] = { 4, 7, 2 };\n    int iInput[3];\n\n    for (int i = 0; i < 3; i++)\n    {\n        cout << \"Number \" << i + 1 << \": \";\n        cin >> iInput[i];\n    }\n\n    for (int i = 0; i < 3; i++)\n    {\n        for (int j = i + 1; j < 3; j++)\n        {\n            if (iInput[i] == iInput[j])\n            {\n                cout << \"Duplicate\" << endl;\n                return 0;\n            }\n        }\n    }\n\n    int iStrike = 0, iBall = 0;\n    for (int i = 0; i < 3; i++)\n    {\n        for (int j = 0; j < 3; j++)\n        {\n            if (iBaseball[i] == iInput[j])\n            {\n                if (i == j)\n                    iStrike++;\n                else\n                    iBall++;\n\n                break;\n            }\n        }\n    }\n\n    if (iStrike == 3)\n        cout << \"You Win!\" << endl;\n    else if (iStrike == 0 && iBall == 0)\n        cout << \"Out\" << endl;\n    else\n        cout << iStrike << \" Strike \" << iBall << \" Ball\" << endl;\n\n    return 0;\n}",
+      "explain": "먼저 이중 for문(j는 i + 1부터)으로 입력 중복을 걸러냅니다 — j를 0부터 돌리면 자기 자신과 비교해 항상 중복 판정이 나는 것에 주의하세요. 판정은 정답의 각 숫자에 대해 입력을 훑으며 값이 같을 때 인덱스 비교(i == j)로 스트라이크와 볼을 구분하고, 찾았으면 break로 안쪽 루프를 빠져나옵니다. 마지막으로 if - else if 사슬로 3스트라이크(승리), 0-0(아웃), 일반 결과를 순서대로 분기합니다. 실제 숫자야구 프로젝트의 판정부를 그대로 압축한 문제입니다."
+    }
+  ]
+}
